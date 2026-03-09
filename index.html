@@ -20,23 +20,35 @@
 <body>
 
 
-  <header class="navbar"> 
+ <header class="navbar">
 
-    <button class="menu-btn" id="menuBtn">
-      <i class="fa-solid fa-bars" style="color: #97FEED; margin-left:15px;"></i>
-    </button>
+  <div class="container-fluid">
+    <div class="row align-items-center w-100">
 
-    <!--Siam Section-->
-    <div class="row">
-      <div class="col-lg-4">
-        <img src="" alt="main_logo">
-        <h1 class="title"></h1>
+      <div class="col-4">
+        <button class="menu-btn" id="menuBtn">
+          <i class="fa-solid fa-bars" style="color:#97FEED;"></i>
+        </button>
       </div>
-      <div class="col-lg-4"></div>
-      <div class="col-lg-4"></div>
+
+      <div class="col-4 text-center">
+        <div class="search-section">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search games...">
+        </div>
+      </div>
+  <div class="col-4 d-flex justify-content-end">
+<div class="login-area">
+    <i class="fa-solid fa-user"></i>
+    <span>Login</span>
+</div>
 
     </div>
-  </header>
+  </div>
+
+</header>
+
+
   <nav class="sidebar" id="sidebar">
     <ul>
       <li><a href="#"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
