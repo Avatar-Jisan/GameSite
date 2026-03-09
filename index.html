@@ -16,10 +16,12 @@
             integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" href="css/variable.css">
+        <link rel="stylesheet" href="css/main.css">
+        
     </head>
 
     <body>
-        <div class="container">
         <header>
             <div class="container">
                 <div class="row">
@@ -37,9 +39,71 @@
         <nav>
             
         </nav>
-        <main>
+<main class="container mt-4">
 
-        </main>
+  <section class="slider position-relative">
+
+    <button class="nav prev">&#10094;</button>
+
+    <!-- Slide -->
+    <div class="slide active">
+      <div class="row ">
+
+        <!-- TEXT -->
+        <div class="col-md-6 slide-text">
+          <h1>Game Name</h1>
+          <p>
+            Short description about the game. You can write anything here later.
+          </p>
+          <button class="btn play-btn">Play Now</button>
+        </div>
+
+        <!-- IMAGE -->
+        <div class="col-md-6 slide-image">
+          <img src="assets/default_img.png" class="img-fluid" alt="game image">
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Second Slide -->
+    <div class="slide">
+      <div class="row ">
+
+        <div class="col-md-6 slide-text">
+          <h1>Another Game</h1>
+          <p>Another description.</p>
+          <button class="btn play-btn">Play Now</button>
+        </div>
+
+        <div class="col-md-6 slide-image">
+          <img src="assets/default_img.png" class="img-fluid" alt="game image">
+        </div>
+
+      </div>
+    </div>
+    <!--third slide-->
+        <div class="slide">
+      <div class="row ">
+
+        <div class="col-md-6 slide-text">
+          <h1>Another Game</h1>
+          <p>Another description.</p>
+          <button class="btn play-btn">Play Now</button>
+        </div>
+
+        <div class="col-md-6 slide-image">
+          <img src="assets/default_img.png" class="img-fluid" alt="game image">
+        </div>
+
+      </div>
+    </div>
+
+    <button class="nav next">&#10095;</button>
+
+  </section>
+
+</main>
         <footer>
             
         </footer>
@@ -56,5 +120,6 @@
             integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
             crossorigin="anonymous"
         ></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

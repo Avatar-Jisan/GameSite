@@ -1,0 +1,20 @@
+:root {
+
+  /* Main Colors */
+  --primary-color: #6366f1;
+  --secondary-color: #22c55e;
+  --accent-color: #f59e0b;
+
+  /* Background Colors */
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5f5;
+
+  /* Button Colors */
+  --btn-primary: #f163ef;
+  --btn-hover: #ae1ca9;
+
+}
