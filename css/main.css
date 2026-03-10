@@ -40,7 +40,7 @@
   margin-bottom: 20px;
 }
 .btn{
- background-color: var(--btn-primary);
+ background-color: var(--primary-color);
  font-weight: bold;
 }
 .play-btn {
@@ -51,8 +51,8 @@
 }
 .play-btn:hover{
   background-color: transparent;
-  border:2px solid var(--accent-color);
-  color:var(--accent-color);
+  border:2px solid var(--secondary-color);
+  color:var(--secondary-color);
 }
 
 .slide-image {
@@ -123,19 +123,19 @@ body{
 .category-btn{
   border-radius: 20px;
   padding: 6px 18px;
-  border: 2px solid var(--btn-hover);
+  border: 2px solid var(--primary-color);
   transition: 0.3s;
 }
 
 .category-btn:hover{
-  background: var(--accent-color);
-  color: white;
+  background: var(--secondary-color);
+  color: var(--text-primary);
 }
 
 .category-btn.active{
   background: transparent;
-  border: 2px solid var(--accent-color);
-  color: var(--accent-color);
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 /* Top picks */
