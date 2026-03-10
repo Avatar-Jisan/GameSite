@@ -16,5 +16,7 @@
   /* Button Colors */
   --btn-primary: #f163ef;
   --btn-hover: #ae1ca9;
-
+  /* Border Colors*/
+  --border: 2px solid black;
+  
 }
