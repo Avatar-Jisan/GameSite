@@ -8,6 +8,7 @@
 }
 
 .slide {
+  position: relative;
   display: none;
   z-index: 2;
 }
@@ -38,11 +39,15 @@
  font-weight: bold;
 }
 .play-btn {
-    
     width: 200px;
     border-radius: 25px;
     padding: 10px 25px;
     
+}
+.play-btn:hover{
+  background-color: transparent;
+  border:2px solid var(--accent-color);
+  color:var(--accent-color);
 }
 
 .slide-image {
@@ -124,4 +129,84 @@ body{
   background: transparent;
   border: 2px solid var(--accent-color);
   color: var(--accent-color);
+}
+
+/* Top picks */
+/* Top Picks */
+
+.top-picks{
+  margin-top: 40px;
+}
+/* Card */
+.game-card{
+  position: relative;
+  background: var(--bg-card);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: all 0.3s ease;
+}
+.game-card::after,
+.slider::after{
+  content:"";
+  position: absolute;
+  inset: 0;
+
+  background: rgba(255,255,255,0.08);
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+/* Hover effect */
+.game-card:hover::after,
+.slider:hover::after{
+  opacity: 0.4;
+}
+.game-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Image */
+
+.card-image{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Card Content */
+
+.card-content{
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Game title */
+
+.game-title{
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Play Button */
+
+.card-content button{
+  font-size: 14px;
+  width: 75px;
+  border-radius: 20px;
+}
+.section-title{
+  margin-top: 40px;
+}
+.card-r
+{
+  margin-top: 15px;
 }

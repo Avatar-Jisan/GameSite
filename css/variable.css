@@ -1,12 +1,12 @@
 :root {
 
   /* Main Colors */
-  --primary-color: #6366f1;
-  --secondary-color: #22c55e;
+  --primary-color: #00FFF5;
+  --secondary-color: #00ADB5;
   --accent-color: #f59e0b;
 
   /* Background Colors */
-  --bg-dark: #0f172a;
+  --bg-dark: #222831;
   --bg-card: #1e293b;
 
   /* Text Colors */
