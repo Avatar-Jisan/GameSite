@@ -1,12 +1,17 @@
 .slider {
   height: 30%;
   position: relative;
+  z-index: 3;
   background: #0f172a;
   border-radius: 10px;
   padding: 40px ;
   overflow: hidden;
+  transition: all 0.3s ease;
 }
-
+.slider:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
 .slide {
   position: relative;
   display: none;
@@ -82,6 +87,8 @@
   padding: 10px 16px;
   cursor: pointer;
   border-radius: 6px;
+
+  z-index: 5;
 }
 
 .prev {
@@ -150,20 +157,21 @@ body{
 
   transition: all 0.3s ease;
 }
-.game-card::after,
-.slider::after{
+.game-card::after
+{
   content:"";
   position: absolute;
   inset: 0;
-
+  z-index: 1;
   background: rgba(255,255,255,0.08);
 
   opacity: 0;
   transition: opacity 0.25s ease;
+  pointer-events: none;
 }
 /* Hover effect */
-.game-card:hover::after,
-.slider:hover::after{
+.game-card:hover::after
+{
   opacity: 0.4;
 }
 .game-card:hover{
