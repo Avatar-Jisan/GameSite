@@ -1,0 +1,226 @@
+main{
+  margin-top: 140px;
+}
+.slider {
+  height: 30%;
+  position: relative;
+  z-index: 3;
+  background: #0f172a;
+  border-radius: 10px;
+  padding: 40px ;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.slider:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.slide {
+  position: relative;
+  display: none;
+  z-index: 2;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slide-text{
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+}
+
+.slide-text h1 {
+  color: white;
+  font-size: 42px;
+  margin-bottom: 15px;
+}
+
+.slide-text p {
+  color: #cbd5f5;
+  margin-bottom: 20px;
+}
+.btn{
+ background-color: var(--primary-color);
+ font-weight: bold;
+}
+.play-btn {
+    width: 200px;
+    border-radius: 25px;
+    padding: 10px 25px;
+    
+}
+.play-btn:hover{
+  background-color: transparent;
+  border:2px solid var(--secondary-color);
+  color:var(--secondary-color);
+}
+
+.slide-image {
+  position: relative;
+}
+
+.slide-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+
+  /* fade into background */
+  mask-image: linear-gradient(
+    to left,
+    rgba(0,0,0,1),
+    rgba(0,0,0,0)
+  );
+}
+
+
+
+/* navigation buttons */
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255,255,255,0.1);
+  border: none;
+  color: white;
+  font-size: 28px;
+  padding: 10px 16px;
+  cursor: pointer;
+  border-radius: 6px;
+
+  z-index: 5;
+}
+
+.prev {
+  left: 10px;
+}
+
+.next {
+  right: 10px;
+}
+body{
+    background-color: var(--bg-dark);
+    color: #FFFFFF;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* Category */
+.category{
+  margin: 30px 0;
+}
+
+.section-title{
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.category-buttons{
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+.category-btn{
+  border-radius: 20px;
+  padding: 6px 18px;
+  border: 2px solid var(--primary-color);
+  transition: 0.3s;
+}
+
+.category-btn:hover{
+  background: var(--secondary-color);
+  color: var(--text-primary);
+}
+
+.category-btn.active{
+  background: transparent;
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+/* Top picks */
+/* Top Picks */
+
+.top-picks{
+  margin-top: 40px;
+}
+/* Card */
+.game-card{
+  position: relative;
+  background: var(--bg-card);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  border-radius: 12px;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  transition: all 0.3s ease;
+}
+.game-card::after
+{
+  content:"";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(255,255,255,0.08);
+
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+/* Hover effect */
+.game-card:hover::after
+{
+  opacity: 0.4;
+}
+.game-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+/* Image */
+
+.card-image{
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+/* Card Content */
+
+.card-content{
+  padding: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Game title */
+.all-games h2{
+  margin-bottom: -60px;
+}
+
+.game-title{
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Play Button */
+
+.card-content button{
+  font-size: 14px;
+  width: 75px;
+  border-radius: 20px;
+}
+.section-title{
+  margin-top: 40px;
+}
+.card-r
+{
+  margin-top: 15px;
+}

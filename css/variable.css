@@ -1,0 +1,23 @@
+:root {
+
+  /* Main Colors */
+  --primary-color: #00FFF5;
+  --secondary-color: #00ADB5;
+  --accent-color: #f59e0b;
+  --footer-color: #567b8c;
+
+  /* Background Colors */
+  --bg-dark: #222831;
+  --bg-card: #1e293b;
+
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5f5;
+
+  /* Button Colors */
+  --btn-primary: #f163ef;
+  --btn-hover: #ae1ca9;
+  /* Border Colors*/
+  --border: 2px solid black;
+  
+}
