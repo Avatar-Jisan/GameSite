@@ -200,6 +200,9 @@ body{
 }
 
 /* Game title */
+.all-games h2{
+  margin-bottom: -60px;
+}
 
 .game-title{
   font-size: 18px;
