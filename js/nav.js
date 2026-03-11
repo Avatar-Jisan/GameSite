@@ -4,5 +4,5 @@ const sidebar = document.getElementById("sidebar");
 menuBtn.addEventListener("click", () => {
 
     sidebar.classList.toggle("active");
-
+    menuBtn.classList.toggle("active");
 });

@@ -31,6 +31,11 @@
     outline:none;
     background: #066b8a;
 }
+.login-area button:hover{
+    background-color: transparent;
+    border:2px solid var(--secondary-color);
+    color:var(--secondary-color);
+}
 
 .login-area a{
     display:flex;
