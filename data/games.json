@@ -1,0 +1,87 @@
+[ 
+{
+    "id": "ludo",
+    "name": "Ludo",
+    "Category": ["Board", "Strategy", "Multiplayer"],
+    "image": "assets/games_img/ludo_img.avif",
+    "shortDescription": "Ludo is a classic board game. It is played with a square board divided into four colored sections, each containing a starting area and a home area.",
+    "longDescription": "Ludo is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a square board that is divided into four colored sections, each containing a starting area and a home area. The objective of the game is to move all of your pieces from the starting area to the home area before your opponents do. Players take turns rolling a dice to determine how many spaces they can move their pieces. Along the way, players can capture their opponents' pieces, sending them back to the starting area. Ludo is a game of strategy and luck, making it an exciting and engaging experience for players of all skill levels.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts with four pieces in their starting area.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "To move a piece out of the starting area, a player must roll a six. If they do not roll a six, they must wait for their next turn.",
+        "Once a piece is on the board, it can be moved according to the number rolled on the dice.",
+        "If a player lands on a space occupied by an opponent's piece, the opponent's piece is sent back to its starting area.",
+        "The first player to move all of their pieces to their home area wins the game."
+    ],
+    "path": "ludo"
+  },
+  {
+    "id":"snake-ladder",
+    "name":"Snake and Ladder",
+    "Category": ["Board", "Casual", "Multiplayer"],
+    "image": "assets/games_img/snake-ladder_img.avif",
+    "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
+    "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts at the bottom of the board.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "If a player lands on the bottom of a ladder, they climb up to the top.",
+        "If a player lands on the head of a snake, they slide down to the tail.",
+        "The first player to reach the end of the board wins the game."
+    ],
+    "path": "snake-ladder"
+  },
+  {
+    "id":"Adventure-Path",
+    "name":"Adventure Path",
+    "Category": ["Board", "Adventure", "Multiplayer"],
+    "image": "assets/games_img/adventure-path_img.avif",
+    "shortDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles.",
+    "longDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles. The game is played on a board with a series of interconnected paths, each presenting unique challenges and opportunities. Players must navigate their way through the board, collecting treasures and overcoming obstacles along the way. The objective of the game is to reach the end of the path with the most treasures.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts at the beginning of the path.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "If a player lands on a space with a treasure, they collect it.",
+        "If a player lands on a space with an obstacle, they must overcome it before continuing.",
+        "The first player to reach the end of the path wins the game."
+    ],
+    "path": "adventure-path"
+  },
+  {
+    "id":"card-battle",
+    "name":"Card Battle",
+    "Category": ["Card", "Strategy", "Multiplayer"],
+    "image": "assets/games_img/card-battle_img.avif",
+    "shortDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves.",
+    "longDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves. The game is played with a deck of cards, each representing a different unit or ability. Players must use their cards wisely to outmaneuver their opponents and achieve victory.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts with a hand of cards.",
+        "Players take turns playing cards from their hand.",
+        "Cards have different effects and can be used to attack or defend.",
+        "The first player to reduce their opponent's health to zero wins the game."
+    ],
+    "path": "card-battle"
+  },
+  {
+    "id":"memory-card",
+    "name":"Memory Card",
+    "Category": ["Card", "Puzzle", "Singleplayer"],
+    "image": "assets/games_img/memory-card_img.avif",
+    "shortDescription": "Memory Card is a classic matching game where players flip cards to find pairs.",
+    "longDescription": "Memory Card is a classic matching game where players flip cards to find pairs. The game is played on a board with a grid of cards, each showing a different image. Players take turns flipping two cards at a time to find matching pairs. The objective of the game is to find all the pairs with the fewest moves and in the shortest time.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts with a set of flipped cards.",
+        "Players take turns flipping two cards to reveal their images.",
+        "If the two cards match, they remain face up and the player gets another turn.",
+        "If the two cards do not match, they are flipped back over and the next player takes their turn.",
+        "The first player to find all the pairs wins the game."
+    ],
+    "path": "memory-card"
+  }
+]
