@@ -72,7 +72,9 @@ fetch("data/games.json")
           <img src="${game.image}" alt="${game.name}" class="card-image">
           <div class="card-content">
             <h3 class="game-title">${game.name}</h3>
-            <button class="btn play-btn">Play</button>
+            <a href="game.html?id=${game.id}" class="text-decoration-none">
+              <button class="btn play-btn">Play</button>
+            </a>
           </div>
         </div>
       </div>`;

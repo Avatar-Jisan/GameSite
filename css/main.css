@@ -213,6 +213,7 @@ body{
 /* Play Button */
 
 .card-content button{
+  
   font-size: 14px;
   width: 75px;
   border-radius: 20px;
@@ -224,3 +225,5 @@ body{
 {
   margin-top: 15px;
 }
+
+
