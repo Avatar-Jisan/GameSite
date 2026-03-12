@@ -61,3 +61,21 @@ slider.addEventListener("mouseenter", () => {
 slider.addEventListener("mouseleave", () => {
   startAutoSlide();
 });
+
+fetch("data/games.json")
+  .then(response => response.json())
+  .then(games => {
+    const gamesContainer=document.getElementById("gamesContainer");
+    games.forEach(game => {
+      const card=`<div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="game-card">
+          <img src="${game.image}" alt="${game.name}" class="card-image">
+          <div class="card-content">
+            <h3 class="game-title">${game.name}</h3>
+            <button class="btn play-btn">Play</button>
+          </div>
+        </div>
+      </div>`;
+      gamesContainer.innerHTML += card;
+    });
+  });
