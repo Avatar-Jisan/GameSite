@@ -79,14 +79,18 @@ body{
 
 .game-table th{
   color: var(--text-secondary);
+  font-size: 1.4rem;
+  font-weight: bold;
 }
 
 .game-table td{
   color: var(--text-primary);
+  font-size: 1.4rem;
 }
 
 .game-info ul{
   margin-left: 20px;
+  font-size: 1.4rem;
 }
 
 /* Sidebar */
@@ -98,6 +102,9 @@ body{
 }
 
 /* Small cards for sidebar */
+.other-games{
+  margin-top: 70px;
+}
 
 .related-card{
   display: flex;
