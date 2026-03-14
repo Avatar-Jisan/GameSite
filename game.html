@@ -56,7 +56,7 @@
 
   <nav class="sidebar" id="sidebar">
     <ul>
-      <li><a href="#"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
+      <li><a href="index.html"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
 
       <li><a href="#"><i class="fa-solid fa-clock" style="color: var(--accent-color)"></i> Recently Played</a></li>
 
@@ -76,37 +76,60 @@
     </ul>
   </nav>
 
-  <main class="container game-page mt-4">
+  <main class="container game-page ">
 
-    <div class="row">
+    <div class="row game-area">
 
       <!-- GAME AREA -->
-      <div class="col-lg-9">
+      <div class="col-lg-10">
 
         <div class="game-player">
 
           <iframe id="gameFrame" width="100%" height="500" frameborder="0">
+
           </iframe>
-
+          <div class="game-info-one">
+            <h2 id="gameTitle1">Game</h2>
+            <div class="game-info-button">
+              <button type="submit" class="fav-btn  fa-regular fa-heart fa-lg" style="color:var(--bg-card)"></button>
+              <button type="submit" class="full-btn fa-solid fa-maximize fa-lg" style="color:var(--bg-card)"></button>
+            </div>
+          </div>
         </div>
+        <div class="game-info mt-5">
+          <table class="table table-borderless game-table">
 
-        <div class="game-info mt-3">
+            <tr>
+              <th>Name:</th>
+              <td id="gameTitle"></td>
+            </tr>
 
-          <h2 id="gameTitle"></h2>
+            <tr>
+              <th>Developer:</th>
+              <td id="gameDeveloper"></td>
+            </tr>
 
-          <p id="gameDescription"></p>
+            <tr>
+              <th>Category:</th>
+              <td id="gameCategory"></td>
+            </tr>
 
-          <h4>Rules</h4>
+            <tr>
+              <th>Description:</th>
+              <td id="gameDescription"></td>
+            </tr>
+
+          </table>
+
+          <h4 class="mt-4">How to Play</h4>
+
           <ul id="gameRules"></ul>
-
-          <p id="gameDeveloper"></p>
-
         </div>
 
       </div>
 
       <!-- SIDEBAR -->
-      <div class="col-lg-3">
+      <div class="col-lg-2">
 
         <h4>Other Games</h4>
 
@@ -180,6 +203,9 @@
     </div>
 
   </footer>
+  <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

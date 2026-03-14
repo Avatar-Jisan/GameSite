@@ -2,7 +2,7 @@
 {
     "id": "ludo",
     "name": "Ludo",
-    "Category": ["Board", "Strategy", "Multiplayer"],
+    "category": ["Board", "Strategy", "Multiplayer"],
     "image": "assets/games_img/ludo_img.avif",
     "shortDescription": "Ludo is a classic board game. It is played with a square board divided into four colored sections, each containing a starting area and a home area.",
     "longDescription": "Ludo is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a square board that is divided into four colored sections, each containing a starting area and a home area. The objective of the game is to move all of your pieces from the starting area to the home area before your opponents do. Players take turns rolling a dice to determine how many spaces they can move their pieces. Along the way, players can capture their opponents' pieces, sending them back to the starting area. Ludo is a game of strategy and luck, making it an exciting and engaging experience for players of all skill levels.",
@@ -20,7 +20,7 @@
   {
     "id":"snake-ladder",
     "name":"Snake and Ladder",
-    "Category": ["Board", "Casual", "Multiplayer"],
+    "category": ["Board", "Casual", "Multiplayer"],
     "image": "assets/games_img/snake-ladder_img.avif",
     "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
     "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
@@ -37,7 +37,7 @@
   {
     "id":"Adventure-Path",
     "name":"Adventure Path",
-    "Category": ["Board", "Adventure", "Multiplayer"],
+    "category": ["Board", "Adventure", "Multiplayer"],
     "image": "assets/games_img/adventure-path_img.avif",
     "shortDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles.",
     "longDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles. The game is played on a board with a series of interconnected paths, each presenting unique challenges and opportunities. Players must navigate their way through the board, collecting treasures and overcoming obstacles along the way. The objective of the game is to reach the end of the path with the most treasures.",
@@ -54,7 +54,7 @@
   {
     "id":"card-battle",
     "name":"Card Battle",
-    "Category": ["Card", "Strategy", "Multiplayer"],
+    "category": ["Card", "Strategy", "Multiplayer"],
     "image": "assets/games_img/card-battle_img.avif",
     "shortDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves.",
     "longDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves. The game is played with a deck of cards, each representing a different unit or ability. Players must use their cards wisely to outmaneuver their opponents and achieve victory.",
@@ -70,7 +70,7 @@
   {
     "id":"memory-card",
     "name":"Memory Card",
-    "Category": ["Card", "Puzzle", "Singleplayer"],
+    "category": ["Card", "Puzzle", "Singleplayer"],
     "image": "assets/games_img/memory-card_img.avif",
     "shortDescription": "Memory Card is a classic matching game where players flip cards to find pairs.",
     "longDescription": "Memory Card is a classic matching game where players flip cards to find pairs. The game is played on a board with a grid of cards, each showing a different image. Players take turns flipping two cards at a time to find matching pairs. The objective of the game is to find all the pairs with the fewest moves and in the shortest time.",
@@ -87,7 +87,7 @@
   {
     "id": "bead-16",
     "name": "Bead 16",
-    "Category": ["Board", "Strategy", "Multiplayer"],
+    "category": ["Board", "Strategy", "Multiplayer"],
     "image": "assets/games_img/bead-16_img.png",
     "shortDescription": "A traditional strategy board game where you capture your opponent's pieces by jumping over them.",
     "longDescription": "Bead 16, also known as Sholo Guti, is a traditional and highly popular two-player strategy board game. Each player has 16 pieces (beads) and the goal is to capture all of the opponent's pieces by jumping over them on the game board's intersecting lines. It requires careful planning and tactical foresight to corner your opponent.",
@@ -104,7 +104,7 @@
   {
     "id": "hangman",
     "name": "Hangman",
-    "Category": ["Word", "Puzzle", "Singleplayer"],
+    "category": ["Word", "Puzzle", "Singleplayer"],
     "image": "assets/games_img/hangman_img.jpg",
     "shortDescription": "A classic word-guessing game where you must figure out the hidden word before the drawing is complete.",
     "longDescription": "Hangman is a classic word-guessing puzzle game. The player is presented with a series of blank spaces representing a hidden word. They must guess letters one by one to reveal the word. For every incorrect guess, a part of a stick figure is drawn. The goal is to guess the word correctly before the drawing is completed.",
@@ -122,7 +122,7 @@
   {
     "id": "rock-paper-scissors",
     "name": "Rock Paper Scissors",
-    "Category": ["Casual", "Action", "Multiplayer"],
+    "category": ["Casual", "Action", "Multiplayer"],
     "image": "assets/games_img/rps_img.png",
     "shortDescription": "A quick hand game where players simultaneously form one of three shapes to defeat their opponent.",
     "longDescription": "Rock Paper Scissors is a simple, universally known game usually played between two people. Players simultaneously choose one of three shapes: rock, paper, or scissors. It's often used as a quick decision-making tool, but can also be played competitively in rounds to test prediction and psychological tactics.",
@@ -140,7 +140,7 @@
   {
     "id": "2048",
     "name": "2048",
-    "Category": ["Puzzle", "Strategy", "Singleplayer"],
+    "category": ["Puzzle", "Strategy", "Singleplayer"],
     "image": "assets/games_img/2048_img.png",
     "shortDescription": "A sliding tile puzzle game where you combine matching numbers to reach the 2048 tile.",
     "longDescription": "2048 is an addictive single-player sliding block puzzle game. The objective is to slide numbered tiles on a 4x4 grid to combine them and create a tile with the number 2048. When two tiles with the same number touch, they merge into one tile with double the value, requiring deep strategic planning as the board fills up.",
