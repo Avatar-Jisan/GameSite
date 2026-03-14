@@ -33,12 +33,14 @@ main{
 }
 
 .slide-text h1 {
+  font: 1em Bangers, cursive;
   color: white;
   font-size: 42px;
   margin-bottom: 15px;
 }
 
 .slide-text p {
+  font-family: "Delius", cursive;
   color: #cbd5f5;
   margin-bottom: 20px;
 }
@@ -47,10 +49,11 @@ main{
  font-weight: bold;
 }
 .play-btn {
+  font-family: "Protest Riot", cursive;
     width: 200px;
     border-radius: 25px;
     padding: 10px 25px;
-    
+    font-size: 24px;
 }
 .play-btn:hover{
   background-color: transparent;
