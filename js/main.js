@@ -6,14 +6,12 @@ const slider = document.querySelector(".slider");
 let current = 0;
 let slideInterval;
 
-/* Show slide */
 
 function showSlide(index) {
   slides.forEach(slide => slide.classList.remove("active"));
   slides[index].classList.add("active");
 }
 
-/* Next slide */
 
 function nextSlide() {
   current++;
@@ -25,7 +23,6 @@ function nextSlide() {
   showSlide(current);
 }
 
-/* Previous slide */
 
 function prevSlide() {
   current--;
@@ -37,7 +34,6 @@ function prevSlide() {
   showSlide(current);
 }
 
-/* Button controls */
 
 nextBtn.addEventListener("click", nextSlide);
 prevBtn.addEventListener("click", prevSlide);
