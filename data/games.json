@@ -154,5 +154,25 @@
       "The game ends when the board is full and no valid moves or merges are possible."
     ],
     "path": "2048"
-  }
+  },
+  {
+  "id": "tic-tac-toe",
+  "name": "Tic Tac Toe",
+  "category": ["Board", "Strategy", "Two Player"],
+  "image": "assets/games_img/tictactoe.png",
+  "shortDescription": "A classic two-player strategy game where players take turns placing X and O on a 3x3 grid.",
+  "longDescription": "Tic Tac Toe is a simple yet strategic two-player board game played on a 3x3 grid. Players take turns marking a square with either X or O. The objective is to be the first player to align three of their symbols horizontally, vertically, or diagonally. The game requires quick thinking and strategy to block the opponent while creating winning opportunities.",
+  "developer": "Shahria Karim Siam",
+  "rules": [
+    "The game is played on a 3x3 grid.",
+    "Two players take turns placing their symbol (X or O) in an empty cell.",
+    "Player X usually starts the game first.",
+    "The first player to align three of their symbols horizontally, vertically, or diagonally wins the game.",
+    "If all 9 cells are filled and no player has three in a row, the game ends in a draw.",
+    "Players must place their symbol in an empty cell only."
+  ],
+  "path": "tic-tac-toe"
+}
+
+ 
 ]
