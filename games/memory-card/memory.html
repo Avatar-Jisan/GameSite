@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="memory.css" />
+    <link rel="stylesheet" href="../../css/variable.css">
+</head>
+
+<body>
+    <div class="overlay" id="startOverlay">
+
+        <div class="overlay-box">
+            <div class="overlay-text">
+            <h1 class="game-title">Memory Card Game</h1>
+
+            <p class="game-desc">
+                Test your memory skills with our Memory Card Game! Flip cards to find matching pairs and challenge yourself to remember their positions.
+            </p>
+            </div>
+            <!-- MODE SECTION -->
+            <div id="modeSection">
+                <button class="btn mode-btn" data-mode="pvp">
+                    <i class="fa-solid fa-user"></i> Player vs <i class="fa-solid fa-user"></i> Player
+                </button>
+
+                <button class="btn mode-btn" data-mode="ai">
+                    <i class="fa-solid fa-user"></i> Player vs <i class="fa-solid fa-robot"></i> AI
+                </button>
+            </div>
+
+            <!-- DIFFICULTY SECTION -->
+            <div id="difficultySection" style="display: none;">
+                <button class="btn diff-btn" data-diff="easy">Easy <sub>(3x4)</sub></button>
+                <button class="btn diff-btn" data-diff="medium">Medium <sub>(4x4)</sub></button>
+                <button class="btn diff-btn" data-diff="hard">Hard <sub>(4x5)</sub></button>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+        
+    <!-- Memory Game Script -->
+    <script src="memory.js"></script>
+</body>
+
+</html>
