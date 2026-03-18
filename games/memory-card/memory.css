@@ -38,6 +38,42 @@
   z-index: 1;
 }
 
+/* Result Overlay */
+
+.result-overlay{
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1000;
+}
+
+/* Blurred background image for result */
+
+.result-overlay::before{
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  filter: blur(10px);
+  transform: scale(1.1);
+
+  z-index: 0;
+}
+
+/* Dark overlay for result */
+
+.result-overlay::after{
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1;
+}
+
 /* Box */
 
 .overlay-box{
@@ -48,6 +84,19 @@
   border-radius: 15px;
   text-align: center;
   width: 400px;
+}
+
+/* Result Box */
+
+.result-box{
+  position: relative;
+  z-index: 2;
+
+  padding: 40px;
+  border-radius: 15px;
+  text-align: center;
+  width: 400px;
+  background: rgba(0,0,0,0.4);
 }
 
 /* Title */
@@ -121,4 +170,147 @@
     position: absolute;
     right: 20px;
     bottom: 15px;
+}
+
+/* Game Board */
+.game-container{
+    height: 100vh;
+    /* background: red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-area{
+    position: relative;
+    width: 800px;
+    padding:20px;
+    background: #53CBF3;
+}
+
+/* Game Board Cards */
+
+.card-box {
+  perspective: 1000px;
+}
+
+.memory-card {
+  width: 100%;
+  height: 100px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+  cursor: pointer;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  backface-visibility: hidden;
+}
+
+/* Back side (hidden initially) */
+.back {
+  background: var(--accent-color);
+  color: white;
+  border: 5px solid white;
+}
+
+/* Front side (icon) */
+.front {
+  background: #0b1f3f;
+  color: var(--accent-color);
+  transform: rotateY(180deg);
+  font-size: 30px;
+  border: 5px solid white;
+}
+
+/* Player UI */
+
+.player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+
+  padding: 10px 20px;
+  border-radius: 20px;
+  border:2px solid black;
+  font-size: 18px;
+  transition: 0.3s;
+}
+.player1{
+  position: absolute;
+  top:-50px;
+  left:0;
+}
+.player2{
+  position: absolute;
+  bottom: -50px;
+  right:0;
+}
+
+/* Default icon size */
+.player i {
+  font-size: 24px;
+  transition: 0.3s;
+}
+
+/* ACTIVE PLAYER */
+.player.active {
+  transform: scale(1.1);
+  font-weight: bold;
+  border: 5px solid #6FAF4F;;
+}
+
+/* Player 1 active (BLUE) */
+#player1.active {
+  background: rgba(80, 210, 253, 0.445); 
+  top: -60px;
+}
+
+#player1.active i {
+  color: #53CBF3;
+  font-size: 32px;
+}
+
+/* Player 2 active (RED) */
+#player2.active {
+  background: rgba(248, 112, 96, 0.2);
+  bottom: -60px;
+}
+
+#player2.active i {
+  color: #F87060;
+  font-size: 32px;
+}
+
+.result-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 2000;
+}
+
+.result-box {
+  background: #222;
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
 }
