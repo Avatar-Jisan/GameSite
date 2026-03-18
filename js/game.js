@@ -12,4 +12,7 @@ $.getJSON("data/games.json", function(games) {
     game.rules.forEach(element => {
         $("#gameRules").append(`<li>${element}</li>`);
     });
+
+    // Load the game in the iframe
+    $("#gameFrame").attr("src", game.path);
 });

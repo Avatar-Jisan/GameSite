@@ -82,7 +82,7 @@
         "If the two cards do not match, they are flipped back over and the next player takes their turn.",
         "The first player to find all the pairs wins the game."
     ],
-    "path": "memory-card"
+    "path": "games/memory-card/memory.html"
   },
   {
     "id": "bead-16",
