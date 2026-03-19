@@ -135,7 +135,7 @@
       "If both players choose the same shape, the round is a tie and must be replayed.",
       "The first player to reach a predefined number of points wins the match."
     ],
-    "path": "rock-paper-scissors"
+    "path": "games/rock-paper-scissors/rps.html"
   },
   {
     "id": "2048",
