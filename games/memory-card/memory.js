@@ -3,11 +3,24 @@ const diffBtns = document.querySelectorAll(".diff-btn");
 
 const modeSection = document.getElementById("modeSection");
 const diffSection = document.getElementById("difficultySection");
+const topControls = document.querySelector(".top-controls");
+const backBtn = document.getElementById("backBtn");
+const soundBtn = document.getElementById("soundBtn");
+const startOverlay = document.getElementById("startOverlay");
+const gameBoard = document.getElementById("gameBoard");
 
 let aiTurnRunning = false;
 let selectedMode = null;
 let selectedDifficulty = null;
 let currentPlayer = 1;
+let soundEnabled = true;
+
+const sounds={
+  flip: new Audio("../../assets/sounds/flip.mp3"),
+  success: new Audio("../../assets/sounds/success.mp3"),
+  winner: new Audio("../../assets/sounds/winner.mp3"),
+  wrong: new Audio("../../assets/sounds/wrong.mp3")
+}
 const icons = [
   "fa-cat",
   "fa-dog",
@@ -31,6 +44,15 @@ let player2Score = 0;
 
 let matchedPairs = 0;
 let totalPairs;
+
+function playSound(type){
+  if(!soundEnabled) return;
+  const sound=sounds[type];
+  if(sound){
+    sound.currentTime=0;
+    sound.play();
+  }
+}
 
 modeBtns.forEach(btn => {
   btn.addEventListener("click", () => {
@@ -62,6 +84,7 @@ diffBtns.forEach(btn => {
 
     /* hide overlay */
     document.getElementById("startOverlay").style.display = "none";
+    topControls.style.display = "flex";
 
     createBoard(selectedDifficulty);
     updateUI();
@@ -159,6 +182,7 @@ function clickHandler(isAi=false) {
   if(!isAi && selectedMode === "ai" && currentPlayer === 2) return;
   if (this === firstCard) return;
   this.classList.add("flip");
+  playSound("flip");
   saveAiMemory(this);
   if (!firstCard) {
     firstCard = this;
@@ -180,7 +204,7 @@ function checkMatch() {
 function handleMatch() {
   firstCard.removeEventListener("click", clickHandler);
   secondCard.removeEventListener("click", clickHandler);
-
+  playSound("success");
   matchedPairs++;
   updateScore();
   checkGameEnd();
@@ -204,6 +228,7 @@ function updateScore() {
 
 function handleMismatch() {
   lockBoard = true;
+  playSound("wrong");
   setTimeout(() => {
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
@@ -235,7 +260,7 @@ function showGameResult() {
   const overlay = document.getElementById("resultOverlay");
   const title = document.getElementById("resultTitle");
   const score = document.getElementById("resultScore");
-
+  playSound("winner");
   let resultText = "";
 
   if (player1Score > player2Score) {
@@ -366,3 +391,29 @@ function showTurnOverlay() {
     overlay.classList.remove("show");
   }, 800);
 }
+
+// Event Listeners for  top controls
+backBtn.addEventListener("click", () => {
+  startOverlay.style.display = "flex";
+  topControls.style.display = "none";
+  gameBoard.innerHTML = "";
+  player1Score = 0;
+  player2Score = 0;
+  matchedPairs = 0;
+  aiMemory={};
+  currentPlayer = 1;
+  document.getElementById("player1Score").innerText = 0;
+  document.getElementById("player2Score").innerText = 0;
+});
+
+soundBtn.addEventListener("click", () => {
+  soundEnabled = !soundEnabled;
+  const icon = document.getElementById("volume-icon");
+  if (soundEnabled) {
+    icon.classList.remove("fa-volume-slash");
+    icon.classList.add("fa-volume-high");
+  }else {
+    icon.classList.remove("fa-volume-high");
+    icon.classList.add("fa-volume-slash");
+  }
+});

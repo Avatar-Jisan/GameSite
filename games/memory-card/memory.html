@@ -51,6 +51,16 @@
 
     </div>
 
+    <div class="top-controls" style="display:none;">
+        <button id="backBtn" class="control-btn">
+            <i class="fa-solid fa-arrow-left fa-lg"></i>
+        </button>
+
+        <button id="soundBtn" class="control-btn">
+            <i id="volume-icon" class="fa-solid fa-volume-high fa-lg"></i>
+        </button>
+    </div>
+
 
     <section class="game-container">
         <div class="container game-area">
@@ -69,17 +79,17 @@
         </div>
     </section>
 
-<div id="resultOverlay" class="result-overlay" style="display: none;">
-  <div class="result-box text-center">
-    <h2 id="resultTitle"></h2>
-    <p id="resultScore"></p>
-    <button class="btn btn-primary" onclick="restartGame()">Play Again</button>
-  </div>
-</div>
+    <div id="resultOverlay" class="result-overlay" style="display: none;">
+        <div class="result-box text-center">
+            <h2 id="resultTitle"></h2>
+            <p id="resultScore"></p>
+            <button class="btn btn-primary" onclick="restartGame()">Play Again</button>
+        </div>
+    </div>
 
-<div id="turnOverlay" class="turn-overlay">
-  <h2 id="turnText"></h2>
-</div>
+    <div id="turnOverlay" class="turn-overlay">
+        <h2 id="turnText"></h2>
+    </div>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

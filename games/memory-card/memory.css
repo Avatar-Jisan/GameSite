@@ -369,3 +369,30 @@ body.turn-orange {
 .turn-orange {
   background: rgba(124, 89, 23, 0.5);
 }
+
+/* Control Buttons */
+.top-controls {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  gap: 15px;
+  z-index: 2000;
+}
+
+.control-btn {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.control-btn:hover {
+  background: white;
+  color: black;
+}
