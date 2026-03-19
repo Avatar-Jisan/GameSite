@@ -8,6 +8,7 @@ const backBtn = document.getElementById("backBtn");
 const soundBtn = document.getElementById("soundBtn");
 const startOverlay = document.getElementById("startOverlay");
 const gameBoard = document.getElementById("gameBoard");
+const exitBtn = document.getElementById("exitBtn");
 
 let aiTurnRunning = false;
 let selectedMode = null;
@@ -89,6 +90,7 @@ diffBtns.forEach(btn => {
     createBoard(selectedDifficulty);
     updateUI();
     showTurnOverlay();
+    lockBoard = false;
   });
 });
 
@@ -173,6 +175,7 @@ function switchTurn() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   updateUI();
   showTurnOverlay();
+  lockBoard = false;
 }
 
 // TODO: add click handler for cards, check for matches, update scores, and handle game logic.
@@ -318,10 +321,12 @@ function saveAiMemory(card) {
 function aiTurn() {
 
   aiTurnRunning = true;
+  lockBoard = true;
 
   let allCards = document.querySelectorAll(".memory-card:not(.flip)");
   if (allCards.length === 0) {
     aiTurnRunning = false;
+    lockBoard = false;
     return;
   }
 
@@ -330,27 +335,26 @@ function aiTurn() {
     aiTurnRunning = false;
     return;
   }
-
-  clickHandler.call(card1, true);
-
   setTimeout(() => {
-
-    let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
-
-    let card2 = getSmartChoice(updatedCards, card1);
-    if (!card2) {
-      aiTurnRunning = false;
-      return;
-    }
-
-    clickHandler.call(card2, true);
-
+    clickHandler.call(card1, true);
 
     setTimeout(() => {
-      aiTurnRunning = false;
-    }, 300);
 
-  }, 600);
+      let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
+
+      let card2 = getSmartChoice(updatedCards, card1);
+      if (!card2) {
+        aiTurnRunning = false;
+        return;
+      }
+      setTimeout(() => {
+        clickHandler.call(card2, true);
+            aiTurnRunning = false;
+            lockBoard = false;
+      }, 600);
+
+    }, 800);
+  }, 800);
 }
 
 function getSmartChoice(allCards, card1 = null) {
@@ -375,6 +379,7 @@ function getSmartChoice(allCards, card1 = null) {
 
 // Turn Overlay Logic
 function showTurnOverlay() {
+  lockBoard = true;
   const overlay = document.getElementById("turnOverlay");
   const text = document.getElementById("turnText");
 
@@ -397,6 +402,7 @@ function showTurnOverlay() {
 
   setTimeout(() => {
     overlay.classList.remove("show");
+    lockBoard = false;
   }, 800);
 }
 
@@ -404,6 +410,8 @@ function showTurnOverlay() {
 backBtn.addEventListener("click", () => {
   startOverlay.style.display = "flex";
   topControls.style.display = "none";
+  modeSection.style.display = "flex";
+  diffSection.style.display = "none";
   gameBoard.innerHTML = "";
   player1Score = 0;
   player2Score = 0;
@@ -424,4 +432,7 @@ soundBtn.addEventListener("click", () => {
     icon.classList.remove("fa-volume-high");
     icon.classList.add("fa-volume-slash");
   }
+});
+exitBtn.addEventListener("click", () => {
+
 });

@@ -360,6 +360,7 @@ html, body{
 
 .turn-overlay.show {
   opacity: 1;
+  pointer-events: auto;
 }
 
 .turn-overlay h2 {
