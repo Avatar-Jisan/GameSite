@@ -4,6 +4,7 @@ const diffBtns = document.querySelectorAll(".diff-btn");
 const modeSection = document.getElementById("modeSection");
 const diffSection = document.getElementById("difficultySection");
 
+let aiTurnRunning = false;
 let selectedMode = null;
 let selectedDifficulty = null;
 let currentPlayer = 1;
@@ -19,6 +20,8 @@ const icons = [
   "fa-otter",
   "fa-spider"
 ];
+
+let aiMemory={};
 
 let firstCard = null;
 let secondCard = null;
@@ -129,10 +132,12 @@ function switchTurn() {
 
 // TODO: add click handler for cards, check for matches, update scores, and handle game logic.
 
-function clickHandler() {
-  if (lockBoard) return;
+function clickHandler(isAi=false) {
+  if (this.classList.contains("flip") || lockBoard || (!isAi && aiTurnRunning)) return;
+  if(!isAi && selectedMode === "ai" && currentPlayer === 2) return;
   if (this === firstCard) return;
   this.classList.add("flip");
+  saveAiMemory(this);
   if (!firstCard) {
     firstCard = this;
     return;
@@ -158,6 +163,10 @@ function handleMatch() {
   updateScore();
   checkGameEnd();
   resetTurn();
+  if(selectedMode==="ai" && currentPlayer===2){
+    setTimeout(aiTurn,800);
+  }
+
 }
 
 function updateScore() {
@@ -178,7 +187,11 @@ function handleMismatch() {
     secondCard.classList.remove("flip");
     switchTurn();
     resetTurn();
+    if(selectedMode === "ai" && currentPlayer === 2){
+      setTimeout(aiTurn, 500);
+  }
   }, 1000);
+  
 }
 
 function resetTurn() {
@@ -225,6 +238,7 @@ function restartGame() {
   player1Score = 0;
   player2Score = 0;
   matchedPairs = 0;
+  aiMemory={};
 
   document.getElementById("player1Score").innerText = 0;
   document.getElementById("player2Score").innerText = 0;
@@ -233,4 +247,74 @@ function restartGame() {
   updateUI();
 
   createBoard(selectedDifficulty);
+}
+
+// AI Memory Logic
+
+function saveAiMemory(card) {
+  let icon= card.dataset.icon;
+  if(!aiMemory[icon]){
+    aiMemory[icon]=[];
+  }
+  if(!aiMemory[icon].includes(card)){
+    aiMemory[icon].push(card);
+  }
+}
+
+function aiTurn(){
+
+  aiTurnRunning = true; 
+
+  let allCards = document.querySelectorAll(".memory-card:not(.flip)");
+  if(allCards.length === 0) {
+    aiTurnRunning = false;
+    return;
+  }
+
+  let card1 = getSmartChoice(allCards);
+  if(!card1) {
+    aiTurnRunning = false;
+    return;
+  }
+
+  clickHandler.call(card1, true);
+
+  setTimeout(() => {
+
+    let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
+
+    let card2 = getSmartChoice(updatedCards, card1);
+    if(!card2) {
+      isAITurnRunning = false;
+      return;
+    }
+
+    clickHandler.call(card2, true);
+
+    // 🔥 unlock AFTER second click finishes
+    setTimeout(() => {
+      isAITurnRunning = false;
+    }, 300);
+
+  }, 600);
+}
+
+function getSmartChoice(allCards,card1=null){
+  for(let icon in aiMemory){
+    let knownCards=aiMemory[icon].filter(c=>!c.classList.contains("flip"));
+    if(knownCards.length>=2){
+      return knownCards[0];
+    }
+  }
+  if(card1){
+    let icon=card1.dataset.icon;
+
+    if(aiMemory[icon]){
+      let match=aiMemory[icon].find(c=>c!==card1 && !c.classList.contains("flip"));
+      if(match) return match;
+    }
+  }
+  
+  let randomIndex=Math.floor(Math.random()*allCards.length);
+  return allCards[randomIndex];
 }
