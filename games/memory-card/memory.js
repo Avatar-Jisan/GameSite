@@ -395,6 +395,8 @@ function showTurnOverlay() {
 // Event Listeners for  top controls
 backBtn.addEventListener("click", () => {
   startOverlay.style.display = "flex";
+  diffSection.style.display = "none";
+  modeSection.style.display = "flex";
   topControls.style.display = "none";
   gameBoard.innerHTML = "";
   player1Score = 0;
@@ -410,10 +412,10 @@ soundBtn.addEventListener("click", () => {
   soundEnabled = !soundEnabled;
   const icon = document.getElementById("volume-icon");
   if (soundEnabled) {
-    icon.classList.remove("fa-volume-slash");
+    icon.classList.remove("fa-volume-xmark");
     icon.classList.add("fa-volume-high");
   }else {
     icon.classList.remove("fa-volume-high");
-    icon.classList.add("fa-volume-slash");
+    icon.classList.add("fa-volume-xmark");
   }
 });
