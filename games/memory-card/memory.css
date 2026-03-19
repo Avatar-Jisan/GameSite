@@ -403,7 +403,36 @@ html, body{
   transition: 0.3s;
 }
 
-.control-btn:hover {
+.control-btn:hover,.exit-btn:hover {
   background: white;
   color: black;
+}
+
+.exit-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 40px;
+  z-index: 2000;
+
+  padding: 15px 25px;
+  border: none;
+  border-radius: 25px;
+
+  background: rgba(0,0,0,0.6);
+  color: white;
+  cursor: pointer;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+.wrong {
+  animation: shake 0.4s;
+  border: 5px solid red;
+  border-radius: 30px;
 }

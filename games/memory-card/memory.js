@@ -15,7 +15,7 @@ let selectedDifficulty = null;
 let currentPlayer = 1;
 let soundEnabled = true;
 
-const sounds={
+const sounds = {
   flip: new Audio("../../assets/sounds/flip.mp3"),
   success: new Audio("../../assets/sounds/success.mp3"),
   winner: new Audio("../../assets/sounds/winner.mp3"),
@@ -34,7 +34,7 @@ const icons = [
   "fa-spider"
 ];
 
-let aiMemory={};
+let aiMemory = {};
 
 let firstCard = null;
 let secondCard = null;
@@ -45,11 +45,11 @@ let player2Score = 0;
 let matchedPairs = 0;
 let totalPairs;
 
-function playSound(type){
-  if(!soundEnabled) return;
-  const sound=sounds[type];
-  if(sound){
-    sound.currentTime=0;
+function playSound(type) {
+  if (!soundEnabled) return;
+  const sound = sounds[type];
+  if (sound) {
+    sound.currentTime = 0;
     sound.play();
   }
 }
@@ -58,15 +58,15 @@ modeBtns.forEach(btn => {
   btn.addEventListener("click", () => {
 
     selectedMode = btn.dataset.mode;
-    const icon=document.getElementById("player2Icon");
-    if(selectedMode === "ai"){
+    const icon = document.getElementById("player2Icon");
+    if (selectedMode === "ai") {
       icon.classList.remove("fa-user");
       icon.classList.add("fa-robot");
-      icon.style.color="orange";
-    }else{
+      icon.style.color = "orange";
+    } else {
       icon.classList.remove("fa-robot");
       icon.classList.add("fa-user");
-      icon.style.color="#F87060";
+      icon.style.color = "#F87060";
     }
 
     /* switch UI */
@@ -113,7 +113,7 @@ function createBoard(diff) {
   board.innerHTML = "";
 
   let totalCards = getGridSize(diff);
-   totalPairs = totalCards / 2;
+  totalPairs = totalCards / 2;
 
   let selectedIcons = icons.slice(0, totalPairs);
 
@@ -148,7 +148,7 @@ function createBoard(diff) {
 function updateUI() {
   const p1 = document.getElementById("player1");
   const p2 = document.getElementById("player2");
-  const body= document.body;
+  const body = document.body;
 
   body.classList.remove("turn-blue", "turn-red", "turn-orange");
 
@@ -161,9 +161,9 @@ function updateUI() {
     p2.classList.add("active");
     p1.classList.remove("active");
 
-    if(selectedMode === "ai"){
+    if (selectedMode === "ai") {
       body.classList.add("turn-orange");
-    }else{
+    } else {
       body.classList.add("turn-red");
     }
   }
@@ -177,9 +177,9 @@ function switchTurn() {
 
 // TODO: add click handler for cards, check for matches, update scores, and handle game logic.
 
-function clickHandler(isAi=false) {
+function clickHandler(isAi = false) {
   if (this.classList.contains("flip") || lockBoard || (!isAi && aiTurnRunning)) return;
-  if(!isAi && selectedMode === "ai" && currentPlayer === 2) return;
+  if (!isAi && selectedMode === "ai" && currentPlayer === 2) return;
   if (this === firstCard) return;
   this.classList.add("flip");
   playSound("flip");
@@ -209,7 +209,7 @@ function handleMatch() {
   updateScore();
   checkGameEnd();
   resetTurn();
-  if(selectedMode==="ai" && currentPlayer===2){
+  if (selectedMode === "ai" && currentPlayer === 2) {
     setTimeout(aiTurn, 900);
   }
 
@@ -228,17 +228,24 @@ function updateScore() {
 
 function handleMismatch() {
   lockBoard = true;
-  playSound("wrong");
   setTimeout(() => {
+    playSound("wrong");
+    firstCard.classList.add("wrong");
+    secondCard.classList.add("wrong");
+  }, 400);
+
+  setTimeout(() => {
+    firstCard.classList.remove("wrong");
+    secondCard.classList.remove("wrong");
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
     switchTurn();
     resetTurn();
-    if(selectedMode === "ai" && currentPlayer === 2){
+    if (selectedMode === "ai" && currentPlayer === 2) {
       setTimeout(aiTurn, 900);
-  }
+    }
   }, 1000);
-  
+
 }
 
 function resetTurn() {
@@ -285,7 +292,7 @@ function restartGame() {
   player1Score = 0;
   player2Score = 0;
   matchedPairs = 0;
-  aiMemory={};
+  aiMemory = {};
 
   document.getElementById("player1Score").innerText = 0;
   document.getElementById("player2Score").innerText = 0;
@@ -299,27 +306,27 @@ function restartGame() {
 // AI Memory Logic
 
 function saveAiMemory(card) {
-  let icon= card.dataset.icon;
-  if(!aiMemory[icon]){
-    aiMemory[icon]=[];
+  let icon = card.dataset.icon;
+  if (!aiMemory[icon]) {
+    aiMemory[icon] = [];
   }
-  if(!aiMemory[icon].includes(card)){
+  if (!aiMemory[icon].includes(card)) {
     aiMemory[icon].push(card);
   }
 }
 
-function aiTurn(){
+function aiTurn() {
 
-  aiTurnRunning = true; 
+  aiTurnRunning = true;
 
   let allCards = document.querySelectorAll(".memory-card:not(.flip)");
-  if(allCards.length === 0) {
+  if (allCards.length === 0) {
     aiTurnRunning = false;
     return;
   }
 
   let card1 = getSmartChoice(allCards);
-  if(!card1) {
+  if (!card1) {
     aiTurnRunning = false;
     return;
   }
@@ -331,14 +338,14 @@ function aiTurn(){
     let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
 
     let card2 = getSmartChoice(updatedCards, card1);
-    if(!card2) {
+    if (!card2) {
       aiTurnRunning = false;
       return;
     }
 
     clickHandler.call(card2, true);
 
-    
+
     setTimeout(() => {
       aiTurnRunning = false;
     }, 300);
@@ -346,23 +353,23 @@ function aiTurn(){
   }, 600);
 }
 
-function getSmartChoice(allCards,card1=null){
-  for(let icon in aiMemory){
-    let knownCards=aiMemory[icon].filter(c=>!c.classList.contains("flip"));
-    if(knownCards.length>=2){
+function getSmartChoice(allCards, card1 = null) {
+  for (let icon in aiMemory) {
+    let knownCards = aiMemory[icon].filter(c => !c.classList.contains("flip"));
+    if (knownCards.length >= 2) {
       return knownCards[0];
     }
   }
-  if(card1){
-    let icon=card1.dataset.icon;
+  if (card1) {
+    let icon = card1.dataset.icon;
 
-    if(aiMemory[icon]){
-      let match=aiMemory[icon].find(c=>c!==card1 && !c.classList.contains("flip"));
-      if(match) return match;
+    if (aiMemory[icon]) {
+      let match = aiMemory[icon].find(c => c !== card1 && !c.classList.contains("flip"));
+      if (match) return match;
     }
   }
-  
-  let randomIndex=Math.floor(Math.random()*allCards.length);
+
+  let randomIndex = Math.floor(Math.random() * allCards.length);
   return allCards[randomIndex];
 }
 
@@ -375,11 +382,11 @@ function showTurnOverlay() {
   if (selectedMode === "ai" && currentPlayer === 2) {
     overlay.classList.add("turn-orange");
     text.innerText = "AI TURN 🤖";
-  } 
+  }
   else if (currentPlayer === 1) {
     overlay.classList.add("turn-blue");
     text.innerText = "Player 1 Turn";
-  } 
+  }
   else {
     overlay.classList.add("turn-red");
     text.innerText = "Player 2 Turn";
@@ -395,14 +402,12 @@ function showTurnOverlay() {
 // Event Listeners for  top controls
 backBtn.addEventListener("click", () => {
   startOverlay.style.display = "flex";
-  diffSection.style.display = "none";
-  modeSection.style.display = "flex";
   topControls.style.display = "none";
   gameBoard.innerHTML = "";
   player1Score = 0;
   player2Score = 0;
   matchedPairs = 0;
-  aiMemory={};
+  aiMemory = {};
   currentPlayer = 1;
   document.getElementById("player1Score").innerText = 0;
   document.getElementById("player2Score").innerText = 0;
@@ -412,10 +417,10 @@ soundBtn.addEventListener("click", () => {
   soundEnabled = !soundEnabled;
   const icon = document.getElementById("volume-icon");
   if (soundEnabled) {
-    icon.classList.remove("fa-volume-xmark");
+    icon.classList.remove("fa-volume-slash");
     icon.classList.add("fa-volume-high");
-  }else {
+  } else {
     icon.classList.remove("fa-volume-high");
-    icon.classList.add("fa-volume-xmark");
+    icon.classList.add("fa-volume-slash");
   }
 });
