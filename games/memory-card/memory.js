@@ -373,6 +373,7 @@ function getSmartChoice(allCards, card1 = null) {
   return allCards[randomIndex];
 }
 
+// Turn Overlay Logic
 function showTurnOverlay() {
   const overlay = document.getElementById("turnOverlay");
   const text = document.getElementById("turnText");
