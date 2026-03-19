@@ -16,3 +16,15 @@ $.getJSON("data/games.json", function(games) {
     // Load the game in the iframe
     $("#gameFrame").attr("src", game.path);
 });
+
+// Fullscreen functionality
+document.querySelector(".full-btn").addEventListener("click", function() {
+    const gameFrame = document.getElementById("gameFrame");
+    if (gameFrame.requestFullscreen) {
+        gameFrame.requestFullscreen();
+    } else if (gameFrame.webkitRequestFullscreen) {
+        gameFrame.webkitRequestFullscreen();
+    } else if (gameFrame.msRequestFullscreen) {
+        gameFrame.msRequestFullscreen();
+    }
+});

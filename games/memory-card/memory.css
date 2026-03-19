@@ -185,8 +185,13 @@ body.turn-orange {
 }
 
 /* Game Board */
+html, body{
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
 .game-container{
-    height: 100vh;
+    height: 100%;
     /* background: red; */
     display: flex;
     justify-content: center;
@@ -214,6 +219,12 @@ body.turn-orange {
   transform-style: preserve-3d;
   transition: transform 0.5s;
   cursor: pointer;
+}
+
+@media (max-width:800px){
+  .memory-card {
+    height: 80px;
+  }
 }
 
 .memory-card.flip {
