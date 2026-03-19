@@ -55,7 +55,7 @@
     <section class="game-container">
         <div class="container game-area">
             <div class="player1 player active" id="player1">
-                <i class="fa-solid fa-user" style="color:#53CBF3"></i>
+                <i class="fa-solid fa-user fa-lg" style="color:#53CBF3"></i>
                 <span id="player1Score" style="color:#53CBF3">0</span>
             </div>
 
@@ -63,8 +63,9 @@
 
             <div class="player2 player" id="player2">
                 <span id="player2Score" style="color:#F87060">0</span>
-                <i class="fa-solid fa-user" style="color:#F87060"></i>
+                <i id="player2Icon" class="fa-solid fa-user fa-lg" style="color:#F87060"></i>
             </div>
+
         </div>
     </section>
 
@@ -76,6 +77,9 @@
   </div>
 </div>
 
+<div id="turnOverlay" class="turn-overlay">
+  <h2 id="turnText"></h2>
+</div>
 
     <!-- Bootstrap JavaScript Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

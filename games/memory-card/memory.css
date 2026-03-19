@@ -1,5 +1,17 @@
-/* Overlay */
 
+body.turn-blue {
+  background: #53CBF3;
+}
+
+body.turn-red {
+  background: #F87060;
+}
+
+body.turn-orange {
+  background: orange;
+}
+
+/* Overlay */
 .overlay{
   position: fixed;
   inset: 0;
@@ -184,7 +196,9 @@
     position: relative;
     width: 800px;
     padding:20px;
-    background: #53CBF3;
+    background: #32b54c;
+    border-radius: 12px;
+    border: 4px dashed white;
 }
 
 /* Game Board Cards */
@@ -252,12 +266,12 @@
 }
 .player1{
   position: absolute;
-  top:-50px;
+  top:-55px;
   left:0;
 }
 .player2{
   position: absolute;
-  bottom: -50px;
+  bottom: -55px;
   right:0;
 }
 
@@ -271,13 +285,13 @@
 .player.active {
   transform: scale(1.1);
   font-weight: bold;
-  border: 5px solid #6FAF4F;;
+  border: 5px solid #588d3e;;
 }
 
 /* Player 1 active (BLUE) */
 #player1.active {
-  background: rgba(80, 210, 253, 0.445); 
-  top: -60px;
+  background: #111fa2; 
+  top: -65px;
 }
 
 #player1.active i {
@@ -287,8 +301,8 @@
 
 /* Player 2 active (RED) */
 #player2.active {
-  background: rgba(248, 112, 96, 0.2);
-  bottom: -60px;
+  background: rgb(116, 16, 16);
+  bottom: -65px;
 }
 
 #player2.active i {
@@ -313,4 +327,45 @@
   color: white;
   padding: 30px;
   border-radius: 15px;
+}
+
+/* Turn Overlay */
+
+.turn-overlay {
+  position: fixed;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 1500;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: 0.4s ease;
+}
+
+.turn-overlay.show {
+  opacity: 1;
+}
+
+.turn-overlay h2 {
+  color: white;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+/* Colors */
+.turn-blue {
+  background: rgba(51, 118, 140, 0.5);
+}
+
+.turn-red {
+  background: rgba(146, 65, 56, 0.5);
+}
+
+.turn-orange {
+  background: rgba(124, 89, 23, 0.5);
 }

@@ -36,7 +36,16 @@ modeBtns.forEach(btn => {
   btn.addEventListener("click", () => {
 
     selectedMode = btn.dataset.mode;
-    console.log("Mode selected:", selectedMode);
+    const icon=document.getElementById("player2Icon");
+    if(selectedMode === "ai"){
+      icon.classList.remove("fa-user");
+      icon.classList.add("fa-robot");
+      icon.style.color="orange";
+    }else{
+      icon.classList.remove("fa-robot");
+      icon.classList.add("fa-user");
+      icon.style.color="#F87060";
+    }
 
     /* switch UI */
     modeSection.style.display = "none";
@@ -56,6 +65,7 @@ diffBtns.forEach(btn => {
 
     createBoard(selectedDifficulty);
     updateUI();
+    showTurnOverlay();
   });
 });
 
@@ -115,19 +125,31 @@ function createBoard(diff) {
 function updateUI() {
   const p1 = document.getElementById("player1");
   const p2 = document.getElementById("player2");
+  const body= document.body;
+
+  body.classList.remove("turn-blue", "turn-red", "turn-orange");
 
   if (currentPlayer === 1) {
     p1.classList.add("active");
     p2.classList.remove("active");
+
+    body.classList.add("turn-blue");
   } else {
     p2.classList.add("active");
     p1.classList.remove("active");
+
+    if(selectedMode === "ai"){
+      body.classList.add("turn-orange");
+    }else{
+      body.classList.add("turn-red");
+    }
   }
 }
 
 function switchTurn() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   updateUI();
+  showTurnOverlay();
 }
 
 // TODO: add click handler for cards, check for matches, update scores, and handle game logic.
@@ -164,7 +186,7 @@ function handleMatch() {
   checkGameEnd();
   resetTurn();
   if(selectedMode==="ai" && currentPlayer===2){
-    setTimeout(aiTurn,800);
+    setTimeout(aiTurn, 900);
   }
 
 }
@@ -188,7 +210,7 @@ function handleMismatch() {
     switchTurn();
     resetTurn();
     if(selectedMode === "ai" && currentPlayer === 2){
-      setTimeout(aiTurn, 500);
+      setTimeout(aiTurn, 900);
   }
   }, 1000);
   
@@ -285,15 +307,15 @@ function aiTurn(){
 
     let card2 = getSmartChoice(updatedCards, card1);
     if(!card2) {
-      isAITurnRunning = false;
+      aiTurnRunning = false;
       return;
     }
 
     clickHandler.call(card2, true);
 
-    // 🔥 unlock AFTER second click finishes
+    
     setTimeout(() => {
-      isAITurnRunning = false;
+      aiTurnRunning = false;
     }, 300);
 
   }, 600);
@@ -317,4 +339,30 @@ function getSmartChoice(allCards,card1=null){
   
   let randomIndex=Math.floor(Math.random()*allCards.length);
   return allCards[randomIndex];
+}
+
+function showTurnOverlay() {
+  const overlay = document.getElementById("turnOverlay");
+  const text = document.getElementById("turnText");
+
+  overlay.classList.remove("turn-blue", "turn-red", "turn-orange");
+
+  if (selectedMode === "ai" && currentPlayer === 2) {
+    overlay.classList.add("turn-orange");
+    text.innerText = "AI TURN 🤖";
+  } 
+  else if (currentPlayer === 1) {
+    overlay.classList.add("turn-blue");
+    text.innerText = "Player 1 Turn";
+  } 
+  else {
+    overlay.classList.add("turn-red");
+    text.innerText = "Player 2 Turn";
+  }
+
+  overlay.classList.add("show");
+
+  setTimeout(() => {
+    overlay.classList.remove("show");
+  }, 800);
 }
