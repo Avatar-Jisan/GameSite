@@ -27,4 +27,14 @@ document.querySelector(".full-btn").addEventListener("click", function() {
     } else if (gameFrame.msRequestFullscreen) {
         gameFrame.msRequestFullscreen();
     }
+    gameFrame.contentWindow.postMessage("enterFullscreen", "*");
+});
+document.addEventListener("fullscreenchange", () => {
+
+  const gameFrame = document.getElementById("gameFrame");
+
+  if (!document.fullscreenElement) {
+    gameFrame.contentWindow.postMessage("exitFullscreen", "*");
+  }
+
 });

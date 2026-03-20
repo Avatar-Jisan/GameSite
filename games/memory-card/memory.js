@@ -56,6 +56,10 @@ function playSound(type) {
   }
 }
 
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 modeBtns.forEach(btn => {
   btn.addEventListener("click", () => {
 
@@ -175,14 +179,17 @@ function switchTurn() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   updateUI();
   showTurnOverlay();
+  if(!(selectedMode === "ai" && currentPlayer === 2)){
+    lockBoard=false;
+    gameBoard.classList.remove("no-click");
+  }
 }
 
 // TODO: add click handler for cards, check for matches, update scores, and handle game logic.
 
 function clickHandler(isAi = false) {
   if (this.classList.contains("flip")) return;
-  
-  if(!isAi && (lockBoard || aiTurnRunning)) return;
+  if (!isAi && (lockBoard || aiTurnRunning)) return;
   if (!isAi && selectedMode === "ai" && currentPlayer === 2) return;
   if (this === firstCard) return;
   this.classList.add("flip");
@@ -213,15 +220,12 @@ function handleMatch() {
   updateScore();
   checkGameEnd();
   resetTurn();
-   if (!(selectedMode === "ai" && currentPlayer === 2)) {
-     lockBoard = false; // allow the current player to continue after a successful match for non-AI or player turns
-   }
-   if (selectedMode === "ai" && currentPlayer === 2) {
-    setTimeout(aiTurn, 900);
-    aiTurnRunning = true;
-  } else {
-    aiTurnRunning = false;
-    lockBoard = false;
+  if(selectedMode === "ai" && currentPlayer === 2) {
+    lockBoard=true;
+    aiTurn();
+  } else{
+    lockBoard=false;
+    aiTurnRunning=false;
   }
 
 }
@@ -239,7 +243,7 @@ function updateScore() {
 
 function handleMismatch() {
   lockBoard = true;
-
+  gameBoard.classList.add("no-click");
   setTimeout(() => {
     playSound("wrong");
     firstCard.classList.add("wrong");
@@ -251,11 +255,12 @@ function handleMismatch() {
     secondCard.classList.remove("wrong");
     firstCard.classList.remove("flip");
     secondCard.classList.remove("flip");
+    gameBoard.classList.remove("no-click");
     switchTurn();
     resetTurn();
     aiTurnRunning = false;
     if (selectedMode === "ai" && currentPlayer === 2) {
-      setTimeout(aiTurn, 900);
+      aiTurn();
     }
   }, 1000);
 
@@ -327,35 +332,31 @@ function saveAiMemory(card) {
   }
 }
 
-function aiTurn() {
+async function aiTurn() {
+  if(matchedPairs === totalPairs) return;
   lockBoard = true;
   aiTurnRunning = true;
+  gameBoard.classList.add("no-click");
 
   let allCards = document.querySelectorAll(".memory-card:not(.flip)");
   if (allCards.length === 0) {
-   lockBoard = false;
+    lockBoard = false;
     aiTurnRunning = false;
+    gameBoard.classList.remove("no-click");
     return;
   }
-
+  await delay(1000); // small delay before AI makes its move
   let card1 = getSmartChoice(allCards);
+  clickHandler.call(card1, true);
 
-  setTimeout(() => {
-    clickHandler.call(card1, true);
 
-    setTimeout(() => {
+  await delay(1200); // delay between first and second card flip
+  let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
+  let card2 = getSmartChoice(updatedCards, card1);
 
-      let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
-
-      let card2 = getSmartChoice(updatedCards, card1);
-
-      setTimeout(() => {
-        clickHandler.call(card2, true);    
-       
-      }, 800);
-    }, 800);
-  }, 800);
+  clickHandler.call(card2, true);
 }
+
 
 function getSmartChoice(allCards, card1 = null) {
   for (let icon in aiMemory) {
@@ -380,6 +381,7 @@ function getSmartChoice(allCards, card1 = null) {
 // Turn Overlay Logic
 function showTurnOverlay() {
   lockBoard = true;
+  gameBoard.classList.add("no-click");
   const overlay = document.getElementById("turnOverlay");
   const text = document.getElementById("turnText");
 
@@ -402,9 +404,11 @@ function showTurnOverlay() {
 
   setTimeout(() => {
     overlay.classList.remove("show");
-    if(!(selectedMode === "ai" && currentPlayer === 2)) {
-      lockBoard = false;
-      aiTurnRunning = false;
+    if (currentPlayer === 1 || (selectedMode !== "ai" && currentPlayer === 2)) {
+      if (!aiTurnRunning) {
+        lockBoard = false;
+        gameBoard.classList.remove("no-click");
+      }
     }
   }, 800);
 }
@@ -416,6 +420,8 @@ backBtn.addEventListener("click", () => {
   modeSection.style.display = "flex";
   diffSection.style.display = "none";
   gameBoard.innerHTML = "";
+  firstCard = null;
+  secondCard = null;
   player1Score = 0;
   player2Score = 0;
   matchedPairs = 0;
@@ -437,5 +443,19 @@ soundBtn.addEventListener("click", () => {
   }
 });
 exitBtn.addEventListener("click", () => {
-  
+  if (window.parent.document.fullscreenElement) {
+    window.parent.document.exitFullscreen();
+  }
+
+});
+window.addEventListener("message", (event) => {
+
+  if (event.data === "enterFullscreen") {
+    exitBtn.style.display = "block";
+  }
+
+  if (event.data === "exitFullscreen") {
+    exitBtn.style.display = "none";
+  }
+
 });
