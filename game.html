@@ -1,29 +1,26 @@
 <!doctype html>
+<!--Name: Abdulla Al Jisan | id:1236-->
 <html lang="en">
 
 <head>
   <title>Title</title>
+  <!-- Required meta tags -->
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
+  <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="stylesheet" href="css/nav.css" />
   <link rel="stylesheet" href="css/variable.css">
-  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/game.css">
   <link rel="stylesheet" href="css/header.css">
   <link rel="stylesheet" href="css/footer.css">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Delius&family=Grand+Hotel&family=Protest+Riot&display=swap');
-  </style>
 </head>
 
 <body>
-
-
   <header class="navbar">
 
     <div class="container-fluid">
@@ -56,10 +53,10 @@
 
   </header>
 
-  <!-- Togglebar & Menu button done by Sadek Manir Sayed. ID: 1237-->
+
   <nav class="sidebar" id="sidebar">
     <ul>
-      <li><a href="#"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
+      <li><a href="index.html"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
 
       <li><a href="#"><i class="fa-solid fa-clock" style="color: var(--accent-color)"></i> Recently Played</a></li>
 
@@ -78,141 +75,69 @@
       <li><a href="#"><i class="fa-solid fa-ghost" style="color: var(--accent-color);"></i> Horror</a></li>
     </ul>
   </nav>
-
   <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
-  <main class="container">
+  <main class="container game-page ">
 
-    <section class="slider position-relative">
+    <div class="row game-area">
 
-      <button class="nav prev">&#10094;</button>
+      <!-- GAME AREA -->
+      <div class="col-lg-10">
 
-      <!-- Slide -->
-      <div class="slide active">
-        <div class="row ">
+        <div class="game-player">
 
-          <!-- TEXT -->
-          <div class="col-md-6 slide-text">
-            <h1>Game Name</h1>
-            <p>
-              Short description about the game. You can write anything here later.
-            </p>
-            <button class="btn play-btn">Play Now</button>
-          </div>
+          <iframe id="gameFrame" width="100%" height="800" frameborder="0" allow="fullscreen">
 
-          <!-- IMAGE -->
-          <div class="col-md-6 slide-image">
-            <img src="assets/default_img.png" class="img-fluid" alt="game image">
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Second Slide -->
-      <div class="slide">
-        <div class="row ">
-
-          <div class="col-md-6 slide-text">
-            <h1>Game 2</h1>
-            <p>Another description.</p>
-            <button class="btn play-btn">Play Now</button>
-          </div>
-
-          <div class="col-md-6 slide-image">
-            <img src="assets/default_img.png" class="img-fluid" alt="game image">
-          </div>
-
-        </div>
-      </div>
-      <!--third slide-->
-      <div class="slide">
-        <div class="row ">
-
-          <div class="col-md-6 slide-text">
-            <h1>Game 3</h1>
-            <p>Another description.</p>
-            <button class="btn play-btn">Play Now</button>
-          </div>
-
-          <div class="col-md-6 slide-image">
-            <img src="assets/default_img.png" class="img-fluid" alt="game image">
-          </div>
-
-        </div>
-      </div>
-
-      <button class="nav next">&#10095;</button>
-
-    </section>
-    <section class="category">
-      <h2 class="section-title">Category</h2>
-
-      <div class="category-buttons">
-        <button class="btn category-btn active">All</button>
-        <button class="btn category-btn">Board</button>
-        <button class="btn category-btn">Card</button>
-        <button class="btn category-btn">Puzzle</button>
-      </div>
-    </section>
-    <section class="top-picks">
-      <h2 class="section-title">Top Picks</h2>
-
-      <div class="row g-5">
-
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
-
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
+          </iframe>
+          <div class="game-info-one">
+            <h2 id="gameTitle1">Game</h2>
+            <div class="game-info-button">
+              <button type="submit" class="fav-btn  fa-regular fa-heart fa-lg" style="color:var(--bg-card)"></button>
+              <button type="submit" class="full-btn fa-solid fa-maximize fa-lg" style="color:var(--bg-card)"></button>
             </div>
           </div>
         </div>
+        <div class="game-info mt-5">
+          <table class="table table-borderless game-table">
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
+            <tr>
+              <th>Name:</th>
+              <td id="gameTitle"></td>
+            </tr>
 
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
-            </div>
-          </div>
-        </div>
+            <tr>
+              <th>Developer:</th>
+              <td id="gameDeveloper"></td>
+            </tr>
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
+            <tr>
+              <th>Category:</th>
+              <td id="gameCategory"></td>
+            </tr>
 
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
-            </div>
-          </div>
-        </div>
+            <tr>
+              <th>Description:</th>
+              <td id="gameDescription"></td>
+            </tr>
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
+          </table>
 
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
-            </div>
-          </div>
+          <h4 class="mt-4">How to Play</h4>
+
+          <ul id="gameRules"></ul>
         </div>
 
       </div>
-    </section>
-    <section class="all-games">
-      <h2 class="section-title">All Games</h2>
 
-      <div class="row g-5 card-r" id="gamesContainer">
+      <!-- SIDEBAR -->
+      <div class="col-lg-2 other-games">
 
+        <h4>Other Games</h4>
+
+        <div id="relatedGames"></div>
 
       </div>
 
-    </section>
+    </div>
 
   </main>
 
@@ -278,17 +203,20 @@
     </div>
 
   </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
-  <script src="js/main.js"></script>
-  <script src="js/nav.js"></script>
+  <!-- jQuery -->
+   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
     integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
     crossorigin="anonymous"></script>
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+
+  <script src="js/game.js"></script>
+  <script src="js/nav.js"></script>
 </body>
 
 </html>

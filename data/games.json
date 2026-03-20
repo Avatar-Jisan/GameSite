@@ -1,0 +1,178 @@
+[ 
+{
+    "id": "ludo",
+    "name": "Ludo",
+    "category": ["Board", "Strategy", "Multiplayer"],
+    "image": "assets/games_img/ludo_img.avif",
+    "shortDescription": "Ludo is a classic board game. It is played with a square board divided into four colored sections, each containing a starting area and a home area.",
+    "longDescription": "Ludo is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a square board that is divided into four colored sections, each containing a starting area and a home area. The objective of the game is to move all of your pieces from the starting area to the home area before your opponents do. Players take turns rolling a dice to determine how many spaces they can move their pieces. Along the way, players can capture their opponents' pieces, sending them back to the starting area. Ludo is a game of strategy and luck, making it an exciting and engaging experience for players of all skill levels.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts with four pieces in their starting area.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "To move a piece out of the starting area, a player must roll a six. If they do not roll a six, they must wait for their next turn.",
+        "Once a piece is on the board, it can be moved according to the number rolled on the dice.",
+        "If a player lands on a space occupied by an opponent's piece, the opponent's piece is sent back to its starting area.",
+        "The first player to move all of their pieces to their home area wins the game."
+    ],
+    "path": "ludo"
+  },
+  {
+    "id":"snake-ladder",
+    "name":"Snake and Ladder",
+    "category": ["Board", "Casual", "Multiplayer"],
+    "image": "assets/games_img/snake-ladder_img.avif",
+    "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
+    "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts at the bottom of the board.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "If a player lands on the bottom of a ladder, they climb up to the top.",
+        "If a player lands on the head of a snake, they slide down to the tail.",
+        "The first player to reach the end of the board wins the game."
+    ],
+    "path": "snake-ladder"
+  },
+  {
+    "id":"Adventure-Path",
+    "name":"Adventure Path",
+    "category": ["Board", "Adventure", "Multiplayer"],
+    "image": "assets/games_img/adventure-path_img.avif",
+    "shortDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles.",
+    "longDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles. The game is played on a board with a series of interconnected paths, each presenting unique challenges and opportunities. Players must navigate their way through the board, collecting treasures and overcoming obstacles along the way. The objective of the game is to reach the end of the path with the most treasures.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts at the beginning of the path.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "If a player lands on a space with a treasure, they collect it.",
+        "If a player lands on a space with an obstacle, they must overcome it before continuing.",
+        "The first player to reach the end of the path wins the game."
+    ],
+    "path": "adventure-path"
+  },
+  {
+    "id":"card-battle",
+    "name":"Card Battle",
+    "category": ["Card", "Strategy", "Multiplayer"],
+    "image": "assets/games_img/card-battle_img.avif",
+    "shortDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves.",
+    "longDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves. The game is played with a deck of cards, each representing a different unit or ability. Players must use their cards wisely to outmaneuver their opponents and achieve victory.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts with a hand of cards.",
+        "Players take turns playing cards from their hand.",
+        "Cards have different effects and can be used to attack or defend.",
+        "The first player to reduce their opponent's health to zero wins the game."
+    ],
+    "path": "card-battle"
+  },
+  {
+    "id":"memory-card",
+    "name":"Memory Card",
+    "category": ["Card", "Puzzle", "Singleplayer"],
+    "image": "assets/games_img/memory-card_img.avif",
+    "shortDescription": "Memory Card is a classic matching game where players flip cards to find pairs.",
+    "longDescription": "Memory Card is a classic matching game where players flip cards to find pairs. The game is played on a board with a grid of cards, each showing a different image. Players take turns flipping two cards at a time to find matching pairs. The objective of the game is to find all the pairs with the fewest moves and in the shortest time.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts with a set of flipped cards.",
+        "Players take turns flipping two cards to reveal their images.",
+        "If the two cards match, they remain face up and the player gets another turn.",
+        "If the two cards do not match, they are flipped back over and the next player takes their turn.",
+        "The first player to find all the pairs wins the game."
+    ],
+    "path": "games/memory-card/memory.html"
+  },
+  {
+    "id": "bead-16",
+    "name": "Bead 16",
+    "category": ["Board", "Strategy", "Multiplayer"],
+    "image": "assets/games_img/bead-16_img.png",
+    "shortDescription": "A traditional strategy board game where you capture your opponent's pieces by jumping over them.",
+    "longDescription": "Bead 16, also known as Sholo Guti, is a traditional and highly popular two-player strategy board game. Each player has 16 pieces (beads) and the goal is to capture all of the opponent's pieces by jumping over them on the game board's intersecting lines. It requires careful planning and tactical foresight to corner your opponent.",
+    "developer": "Sadek Manir Sayed",
+    "rules": [
+      "Each player starts with 16 beads placed on their respective sides of the board.",
+      "Players take turns moving one bead to an adjacent empty intersection along the lines.",
+      "A player can capture an opponent's bead by jumping over it into an empty space immediately beyond it.",
+      "Multiple captures in a single turn are allowed if consecutive jumps are possible.",
+      "The game ends when one player captures all 16 of the opponent's beads."
+    ],
+    "path": "bead-16"
+  },
+  {
+    "id": "hangman",
+    "name": "Hangman",
+    "category": ["Word", "Puzzle", "Singleplayer"],
+    "image": "assets/games_img/hangman_img.jpg",
+    "shortDescription": "A classic word-guessing game where you must figure out the hidden word before the drawing is complete.",
+    "longDescription": "Hangman is a classic word-guessing puzzle game. The player is presented with a series of blank spaces representing a hidden word. They must guess letters one by one to reveal the word. For every incorrect guess, a part of a stick figure is drawn. The goal is to guess the word correctly before the drawing is completed.",
+    "developer": "Sadek Manir Sayed",
+    "rules": [
+      "A hidden word is selected and represented by blank dashes.",
+      "The player guesses one letter at a time.",
+      "If the guessed letter is in the word, it is revealed in all its correct positions.",
+      "If the guessed letter is not in the word, a part of the hangman figure is drawn.",
+      "The player wins by guessing the entire word before the hangman is fully drawn.",
+      "The player loses if the hangman is completed before the word is guessed."
+    ],
+    "path": "hangman"
+  },
+  {
+    "id": "rock-paper-scissors",
+    "name": "Rock Paper Scissors",
+    "category": ["Casual", "Action", "Multiplayer"],
+    "image": "assets/games_img/rps_img.png",
+    "shortDescription": "A quick hand game where players simultaneously form one of three shapes to defeat their opponent.",
+    "longDescription": "Rock Paper Scissors is a simple, universally known game usually played between two people. Players simultaneously choose one of three shapes: rock, paper, or scissors. It's often used as a quick decision-making tool, but can also be played competitively in rounds to test prediction and psychological tactics.",
+    "developer": "Sadek Manir Sayed",
+    "rules": [
+      "Both players simultaneously choose Rock, Paper, or Scissors.",
+      "Rock crushes Scissors (Rock wins).",
+      "Scissors cuts Paper (Scissors wins).",
+      "Paper covers Rock (Paper wins).",
+      "If both players choose the same shape, the round is a tie and must be replayed.",
+      "The first player to reach a predefined number of points wins the match."
+    ],
+    "path": "games/rock-paper-scissors/rps.html"
+  },
+  {
+    "id": "2048",
+    "name": "2048",
+    "category": ["Puzzle", "Strategy", "Singleplayer"],
+    "image": "assets/games_img/2048_img.png",
+    "shortDescription": "A sliding tile puzzle game where you combine matching numbers to reach the 2048 tile.",
+    "longDescription": "2048 is an addictive single-player sliding block puzzle game. The objective is to slide numbered tiles on a 4x4 grid to combine them and create a tile with the number 2048. When two tiles with the same number touch, they merge into one tile with double the value, requiring deep strategic planning as the board fills up.",
+    "developer": "Sadek Manir Sayed",
+    "rules": [
+      "The game is played on a 4x4 grid.",
+      "Use swipe gestures or arrow keys to slide all tiles in a specific direction.",
+      "When two tiles with the same number collide during a move, they merge into a single tile with the sum of their values.",
+      "After every move, a new tile (valued 2 or 4) randomly appears in an empty spot on the board.",
+      "The player wins upon creating a tile with the value 2048.",
+      "The game ends when the board is full and no valid moves or merges are possible."
+    ],
+    "path": "2048"
+  },
+  {
+  "id": "tic-tac-toe",
+  "name": "Tic Tac Toe",
+  "category": ["Board", "Strategy", "Two Player"],
+  "image": "assets/games_img/tictactoe.png",
+  "shortDescription": "A classic two-player strategy game where players take turns placing X and O on a 3x3 grid.",
+  "longDescription": "Tic Tac Toe is a simple yet strategic two-player board game played on a 3x3 grid. Players take turns marking a square with either X or O. The objective is to be the first player to align three of their symbols horizontally, vertically, or diagonally. The game requires quick thinking and strategy to block the opponent while creating winning opportunities.",
+  "developer": "Shahria Karim Siam",
+  "rules": [
+    "The game is played on a 3x3 grid.",
+    "Two players take turns placing their symbol (X or O) in an empty cell.",
+    "Player X usually starts the game first.",
+    "The first player to align three of their symbols horizontally, vertically, or diagonally wins the game.",
+    "If all 9 cells are filled and no player has three in a row, the game ends in a draw.",
+    "Players must place their symbol in an empty cell only."
+  ],
+  "path": "tic-tac-toe"
+}
+
+ 
+]

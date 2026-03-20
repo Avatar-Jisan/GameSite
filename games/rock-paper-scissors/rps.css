@@ -1,0 +1,111 @@
+/* General Layout */
+body {
+    background-color: #0fedf5; /* */
+    color: var(--text-primary); /* */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    background: var(--bg-dark); /* */
+    padding: 30px;
+    border-radius: 20px;
+    border: var(--border); /* */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    max-width: 600px;
+    width: 90%;
+}
+
+.game-title {
+    color: var(--primary-color); /* */
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Score Board */
+.score-board {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    border-radius: 15px;
+    border: 1px solid var(--secondary-color); /* */
+}
+
+.player-score p, .computer-score p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-secondary); /* */
+}
+
+#user-score, #computer-score {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--accent-color); /* */
+}
+
+/* Choice Displays */
+.choice-show p {
+    margin-bottom: 10px;
+    color: var(--text-secondary); /* */
+}
+
+.fa-question {
+    color: var(--secondary-color); /* */
+    opacity: 0.5;
+}
+
+#result-text {
+    height: 40px;
+    font-size: 1.5rem;
+    color: var(--primary-color); /* */
+}
+
+/* Interactive Buttons */
+.selection-zone {
+    margin-top: 20px;
+}
+
+.choice-btn {
+    background: var(--bg-dark); /* */
+    color: white;
+    border: 2px solid var(--accent-color); /* */
+    border-radius: 15px;
+    padding: 15px 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    width: 110px;
+}
+
+.choice-btn:hover {
+    background: var(--accent-color); /* */
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+}
+
+.choice-btn i {
+    transition: transform 0.3s ease;
+}
+
+.choice-btn:active i {
+    transform: scale(0.9);
+}
+
+/* Reset Button */
+#reset-btn {
+    border-color: var(--secondary-color); /* */
+    color: var(--secondary-color); /* */
+}
+
+#reset-btn:hover {
+    background: var(--secondary-color); /* */
+    color: var(--bg-dark); /* */
+}

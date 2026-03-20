@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Paper Scissors - GameSite</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="../../css/variable.css">
+    <link rel="stylesheet" href="rps.css">
+</head>
+<body>
+
+    <div class="game-container container text-center">
+        <h1 class="game-title">Rock Paper Scissors</h1>
+
+        <div class="score-board d-flex justify-content-around my-4">
+            <div class="player-score">
+                <p>Player</p>
+                <span id="user-score">0</span>
+            </div>
+            <div class="computer-score">
+                <p>Computer</p>
+                <span id="computer-score">0</span>
+            </div>
+        </div>
+
+        <div class="game-area">
+            <div class="result-display">
+                <h2 id="result-text">Choose your move!</h2>
+            </div>
+            
+            <div class="choices-display d-flex justify-content-center gap-5 my-5">
+                <div class="choice-show">
+                    <p>You</p>
+                    <i id="user-choice-icon" class="fa-solid fa-question fa-3x"></i>
+                </div>
+                <div class="choice-show">
+                    <p>AI</p>
+                    <i id="computer-choice-icon" class="fa-solid fa-question fa-3x"></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="selection-zone d-flex justify-content-center gap-3">
+            <button class="choice-btn" id="rock" data-selection="rock">
+                <i class="fa-solid fa-hand-back-fist fa-2x"></i>
+                <span>Rock</span>
+            </button>
+            <button class="choice-btn" id="paper" data-selection="paper">
+                <i class="fa-solid fa-hand fa-2x"></i>
+                <span>Paper</span>
+            </button>
+            <button class="choice-btn" id="scissors" data-selection="scissors">
+                <i class="fa-solid fa-hand-scissors fa-2x"></i>
+                <span>Scissors</span>
+            </button>
+        </div>
+
+        <div class="mt-5">
+            <button id="reset-btn" class="btn btn-outline-light">Restart Game</button>
+        </div>
+    </div>
+
+    <script src="rps.js"></script>
+</body>
+</html>
