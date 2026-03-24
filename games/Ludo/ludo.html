@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Ludo</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../../css/variable.css">
+    <link rel="stylesheet" href="ludo.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="overlay" id="ludoStartOverlay">
+        <div class="overlay-box">
+            <div class="overlay-text">
+                <img src="../../assets/games_img/ludo_img.avif" alt="Ludo Game" class="game-logo" />
+                <h1 class="game-title">Ludo Game</h1>
+                <p class="game-desc">
+                    Experience the classic board game of Ludo in a digital format! Roll the dice, move your pieces, and
+                    strategize to be the first to get all your tokens to the center. Play against friends or challenge
+                    the computer for hours of fun!
+                </p>
+            </div>
+        
+
+
+        <div id="ludoModeSection">
+            <button class="btn mode-btn" data-mode="pvp">
+                <i class="fa-solid fa-user"></i> Player vs <i class="fa-solid fa-user"></i> Player
+            </button>
+
+            <button class="btn mode-btn" data-mode="ai">
+                <i class="fa-solid fa-user"></i> Player vs <i class="fa-solid fa-robot"></i> AI
+            </button>
+        </div>
+
+        <div id="playerNumberSection" style="display: none;">
+            <button class="btn player-num-btn" data-player-num="2">2 Players</button>
+            <button class="btn player-num-btn" data-player-num="3">3 Players</button>
+            <button class="btn player-num-btn" data-player-num="4">4 Players</button>
+
+        </div>
+        </div>
+    </div>
+
+    <!-- script -->
+    <script src="ludo.js"></script>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
