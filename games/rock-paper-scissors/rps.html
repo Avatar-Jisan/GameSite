@@ -3,67 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Paper Scissors - GameSite</title>
+    <title>Rock Paper Scissors</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
     
-    <link rel="stylesheet" href="../../css/variable.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="rps.css">
 </head>
 <body>
 
-    <div class="game-container container text-center">
-        <h1 class="game-title">Rock Paper Scissors</h1>
+    <div id="landing-page">
+        <div class="logo-placeholder">
+            <i class="fa-solid fa-hand-back-fist pink"></i>
+            <i class="fa-solid fa-hand orange"></i>
+            <i class="fa-solid fa-hand-scissors green"></i>
+        </div>
+        <div class="title-text">
+            <div class="pink">ROCK</div>
+            <div class="orange">PAPER</div>
+            <div class="green">SCISSOR</div>
+        </div>
+        <button class="btn" id="start-btn">
+            <i class="fa-solid fa-play"></i> Play Now
+        </button>
+    </div>
 
-        <div class="score-board d-flex justify-content-around my-4">
-            <div class="player-score">
-                <p>Player</p>
-                <span id="user-score">0</span>
+    <div id="game-page" class="hidden">
+        <button id="music-btn" class="btn-small">
+            <i class="fa-solid fa-volume-xmark"></i> Music
+        </button>
+        
+        <div class="scoreboard">
+            <div class="score-box">
+                <h2>Player</h2>
+                <p id="p-score">0</p>
             </div>
-            <div class="computer-score">
-                <p>Computer</p>
-                <span id="computer-score">0</span>
+            <div class="score-box">
+                <h2 style="color: var(--text-pink);">Target</h2>
+                <p style="color: var(--white);">10</p>
+            </div>
+            <div class="score-box">
+                <h2>System</h2>
+                <p id="c-score">0</p>
             </div>
         </div>
+
+        <div class="game-status" id="game-status">Choose your weapon!</div>
 
         <div class="game-area">
-            <div class="result-display">
-                <h2 id="result-text">Choose your move!</h2>
+            <div class="hand player-hand" id="player-hand">
+                <i class="fa-solid fa-hand-back-fist"></i>
             </div>
-            
-            <div class="choices-display d-flex justify-content-center gap-5 my-5">
-                <div class="choice-show">
-                    <p>You</p>
-                    <i id="user-choice-icon" class="fa-solid fa-question fa-3x"></i>
-                </div>
-                <div class="choice-show">
-                    <p>AI</p>
-                    <i id="computer-choice-icon" class="fa-solid fa-question fa-3x"></i>
-                </div>
+            <div class="hand computer-hand" id="computer-hand">
+                <i class="fa-solid fa-hand-back-fist"></i>
             </div>
         </div>
 
-        <div class="selection-zone d-flex justify-content-center gap-3">
-            <button class="choice-btn" id="rock" data-selection="rock">
-                <i class="fa-solid fa-hand-back-fist fa-2x"></i>
-                <span>Rock</span>
+        <div class="controls" id="controls">
+            <button class="control-btn" data-choice="rock">
+                <i class="fa-solid fa-hand-back-fist"></i>
             </button>
-            <button class="choice-btn" id="paper" data-selection="paper">
-                <i class="fa-solid fa-hand fa-2x"></i>
-                <span>Paper</span>
+            <button class="control-btn" data-choice="paper">
+                <i class="fa-solid fa-hand"></i>
             </button>
-            <button class="choice-btn" id="scissors" data-selection="scissors">
-                <i class="fa-solid fa-hand-scissors fa-2x"></i>
-                <span>Scissors</span>
+            <button class="control-btn" data-choice="scissors">
+                <i class="fa-solid fa-hand-scissors"></i>
             </button>
-        </div>
-
-        <div class="mt-5">
-            <button id="reset-btn" class="btn btn-outline-light">Restart Game</button>
         </div>
     </div>
 
+    <div id="result-modal" class="hidden">
+        <div class="modal-content">
+            <div class="title-text pink" id="final-result-title" style="font-size: 4rem; margin-bottom: 10px;">YOU WIN!</div>
+            <div class="modal-stats">
+                <p style="color: var(--text-green)">Won: <span id="stat-won">0</span></p>
+                <p style="color: var(--text-orange)">Tied: <span id="stat-tied">0</span></p>
+                <p style="color: var(--text-pink)">Lost: <span id="stat-lost">0</span></p>
+            </div>
+            <div class="modal-btn-group">
+                <button class="btn" id="restart-btn">
+                    <i class="fa-solid fa-rotate-right"></i> Restart
+                </button>
+                <button class="btn secondary-btn" id="menu-btn">
+                    <i class="fa-solid fa-house"></i> Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
     <script src="rps.js"></script>
 </body>
 </html>
