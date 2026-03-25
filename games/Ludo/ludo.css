@@ -1,3 +1,11 @@
+:root{
+    --red:#e74c3c;
+    --blue:#3498db;
+    --green:#27ae60;
+    --yellow:#f1c40f;
+}
+
+
 .overlay{
     position: fixed;
     inset: 0;
@@ -70,28 +78,14 @@
 }
 
 /* BOARD */
-.board {
+.ludo-board {
+    position: relative;
     display: grid;
     grid-template-columns: repeat(15, 40px);
     grid-template-rows: repeat(15, 40px);
-
-    position: relative;
+    border: 10px solid #fdfcfc;
 }
 
-.base {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-/* POSITION (this replaces your 4×4 cells cleanly) */
-.red    { grid-area: 1 / 1 / span 6 / span 6; background: #e74c3c; }
-.green  { grid-area: 1 / 10 / span 6 / span 6; background: #27ae60; }
-.yellow { grid-area: 10 / 1 / span 6 / span 6; background: #f1c40f; }
-.blue   { grid-area: 10 / 10 / span 6 / span 6; background: #3498db; }
-
-
-/* old */
 /* CELL */
 .cell {
     width: 40px;
@@ -155,7 +149,14 @@
     align-items: center;
 }
 
+.base-inner {
+    width: 80%;
+    height: 80%;
 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
 .red-arrow{
     position:relative
 }
@@ -209,20 +210,6 @@
 }
 
 /* SLOT (invisible container) */
-
-.base-inner {
-    display: grid;
-
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    
-    width: 100%;
-    height: 100%;
-    border:1px solid black;
-    background: white;
-
-    z-index: 2; /* stay above grid */
-}
 .token-slot {
     display: flex;
     justify-content: center;

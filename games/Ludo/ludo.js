@@ -2,6 +2,7 @@ const modeButtons = document.querySelectorAll(".mode-btn");
 const playerSection = document.getElementById("playerNumberSection");
 const overlay= document.getElementById("ludoStartOverlay");
 const modeSection = document.getElementById("ludoModeSection");
+const board = document.getElementById("board");
 
 let gameMode = null;
 let playerCount = null;
@@ -46,33 +47,23 @@ function getCell(row, col){
     return board.children[row * 15 + col];
 }
 // color bases
-function fillBase(baseId, color) {
-    const base = document.getElementById(baseId);
-
-    const inner = document.createElement("div");
-    inner.classList.add("base-inner");
-
-    for (let i = 0; i < 4; i++) {
-        const slot = document.createElement("div");
-        slot.classList.add("token-slot");
-
-        const token = document.createElement("div");
-        token.classList.add("token", color);
-
-        slot.appendChild(token);
-        inner.appendChild(slot);
+for(let r=0; r<6; r++){
+    for(let c=0; c<6; c++){
+        getCell(r,c).classList.add("base-red");
+        getCell(14-r, c).classList.add("base-blue");
+        getCell(r, 14-c).classList.add("base-green");
+        getCell(14-r, 14-c).classList.add("base-yellow");
     }
-
-    base.appendChild(inner);
 }
-
-// INIT
-fillBase("redBase", "red");
-fillBase("greenBase", "green");
-fillBase("yellowBase", "yellow");
-fillBase("blueBase", "blue");
-
-
+// inner white squares
+for(let r=1;r<=4;r++){
+    for(let c=1;c<=4;c++){
+        getCell(r,c).classList.add("white");
+        getCell(14-r, c).classList.add("white");
+        getCell(r, 14-c).classList.add("white");
+        getCell(14-r, 14-c).classList.add("white");
+    }
+}
 // Cross paths
 for(let i=0;i<15;i++){
     for(let j=6;j<9;j++){
@@ -127,8 +118,6 @@ function createBaseTokens(color, startRow, startCol) {
     const container = document.createElement("div");
     container.classList.add("base-inner");
 
-    container.style.gridRow = `${startRow+1}/span 4`;
-    container.style.gridColumn=`${startCol+1}/span 4`;
     // Create 4 slots
     for (let i = 0; i < 4; i++) {
         const slot = document.createElement("div");
@@ -145,24 +134,14 @@ function createBaseTokens(color, startRow, startCol) {
     const centerCell = getCell(startRow + 1, startCol + 1);
     centerCell.appendChild(container);
 }
-function hideWhiteCells(startRow, startCol){
-    for(let r=startRow;r<startRow+4;r++){
-        for(let c=startCol; c<startCol+4;c++){
-            if(r===startRow+1 && c===startCol+1) continue;
-            getCell(r,c).style.visibility="none";
-        }
-    }
-}
-
 // RED (top-left)
 createBaseTokens("red", 0, 0);
-hideWhiteCells(0,0);
+
 // GREEN (top-right)
 createBaseTokens("green", 0, 9);
-hideWhiteCells(0,9);
+
 // YELLOW (bottom-left)
 createBaseTokens("yellow", 9, 0);
-hideWhiteCells(9,0);
+
 // BLUE (bottom-right)
 createBaseTokens("blue", 9, 9);
-hideWhiteCells(9,9);
