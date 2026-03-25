@@ -134,6 +134,15 @@ function createBaseTokens(color, startRow, startCol) {
     const centerCell = getCell(startRow + 1, startCol + 1);
     centerCell.appendChild(container);
 }
+function hideWhiteCells(startRow, startCol){
+    for(let r=startRow;r<startRow+4;r++){
+        for(let c=startCol; c<startCol+4;c++){
+            if(r===startRow+1 && c===startCol+1) continue;
+            getCell(r,c).style.display="none";
+        }
+    }
+}
+
 // RED (top-left)
 createBaseTokens("red", 0, 0);
 
@@ -145,3 +154,4 @@ createBaseTokens("yellow", 9, 0);
 
 // BLUE (bottom-right)
 createBaseTokens("blue", 9, 9);
+
