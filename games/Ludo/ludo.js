@@ -37,10 +37,16 @@ function startGame(){
 
 // board setup
 // create grid
-for(let i=0; i<225;i++){
-    const cell = document.createElement("div");
-    cell.classList.add("cell");
-    board.appendChild(cell);
+for (let r = 0; r < 15; r++) {
+    for (let c = 0; c < 15; c++) {
+        const cell = document.createElement("div");
+        cell.classList.add("cell");
+
+        cell.style.gridRow = r + 1;
+        cell.style.gridColumn = c + 1;
+
+        board.appendChild(cell);
+    }
 }
 
 function getCell(row, col){
@@ -63,12 +69,13 @@ baseCoords.forEach(base =>{
     whiteBox.classList.add("white-base");
     whiteBox.style.gridRow = `${base.r + 2} / span 4`;
     whiteBox.style.gridColumn = `${base.c + 2} / span 4`;
+    whiteBox.style.zIndex="5";
     for(let i=0;i<4;i++){
         const slot = document.createElement("div");
         slot.classList.add("token-slot");
 
         const token = document.createElement("div");
-        token.classList.add(`token token-${base.color}`);
+        token.classList.add("token", `token-${base.color}`);
         slot.appendChild(token);
         whiteBox.appendChild(slot);
     }
@@ -96,15 +103,10 @@ centerWrapper.classList.add("center-wrapper");
 // Place wrapper at correct grid position
 centerWrapper.style.gridRow = "7 / span 3";  // rows 6–8
 centerWrapper.style.gridColumn = "7 / span 3"; // cols 6–8
-
+centerWrapper.style.zIndex="10";
 board.appendChild(centerWrapper);
 
-// REMOVE INNER CELLS VISUALLY
-for (let r = 6; r <= 8; r++) {
-    for (let c = 6; c <= 8; c++) {
-        getCell(r, c).style.display = "none";
-    }
-}
+
 // safe cells
 const safeCells = [
     [8,2],[2,6],[6,12],[12,8]
