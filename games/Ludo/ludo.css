@@ -4,7 +4,10 @@
     --green:#27ae60;
     --yellow:#f1c40f;
 }
-
+body{
+    margin:0;
+    overflow: hidden;
+}
 
 .overlay{
     position: fixed;
@@ -83,7 +86,9 @@
     display: grid;
     grid-template-columns: repeat(15, 40px);
     grid-template-rows: repeat(15, 40px);
+    background: white;
     border: 10px solid #fdfcfc;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
 }
 
 /* CELL */
@@ -94,11 +99,20 @@
 }
 
 /* BASE COLORS */
-.base-red { background: #e74c3c; }
-.base-green { background: #27ae60; }
-.base-yellow { background: #f1c40f; }
-.base-blue { background: #3498db; }
+.base-red { background: var(--red); }
+.base-green { background: var(--green); }
+.base-yellow { background: var(--yellow); }
+.base-blue { background: var(--blue); }
 
+.white-base{
+    grid-column: span 4;
+    grid-row: span 4;
+    background: white;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    padding: 5px;
+}
 /* PATH */
 .path {
     background: #f5f5f5;
@@ -107,10 +121,10 @@
 }
 
 /* HOME PATH */
-.home-red { background: #e74c3c; }
-.home-green { background: #27ae60; }
-.home-yellow { background: #f1c40f; }
-.home-blue { background: #3498db; }
+.home-red { background: var(--red); }
+.home-green { background: var(--green); }
+.home-yellow { background: var(--yellow); }
+.home-blue { background: var(--blue); }
 
 /* SAFE STAR */
 .safe {
@@ -128,8 +142,8 @@
 
 /* CENTER */
 .center-wrapper {
-    width: 120px;
-    height: 120px;
+    grid-column: span 3;
+    grid-row: span 3;
     background: conic-gradient(
         from 45deg,
         var(--yellow) 0deg 90deg,
@@ -140,23 +154,6 @@
     
 }
 
-/* INNER WHITE BASE */
-.white {
-    background: white !important;
-
-    display:flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.base-inner {
-    width: 80%;
-    height: 80%;
-
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-}
 .red-arrow{
     position:relative
 }
@@ -224,7 +221,7 @@
 }
 
 /* COLORS */
-.token.red { background: var(--red); }
-.token.green { background: var(--green); }
-.token.yellow { background: var(--yellow); }
-.token.blue { background: var(--blue); }
+.token-red { background: var(--red); }
+.token-green { background: var(--green); }
+.token-yellow { background: var(--yellow); }
+.token-blue { background: var(--blue); }

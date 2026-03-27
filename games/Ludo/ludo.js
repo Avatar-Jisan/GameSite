@@ -47,23 +47,34 @@ function getCell(row, col){
     return board.children[row * 15 + col];
 }
 // color bases
-for(let r=0; r<6; r++){
-    for(let c=0; c<6; c++){
-        getCell(r,c).classList.add("base-red");
-        getCell(14-r, c).classList.add("base-blue");
-        getCell(r, 14-c).classList.add("base-green");
-        getCell(14-r, 14-c).classList.add("base-yellow");
+const baseCoords =[
+    { r: 0, c: 0, color: 'red' },
+    { r: 0, c: 9, color: 'green' },
+    { r: 9, c: 0, color: 'yellow' },
+    { r: 9, c: 9, color: 'blue' }
+];
+baseCoords.forEach(base =>{
+    for(let r=base.r; r<base.r+6;r++){
+        for(let c=base.c; c<base.c+6; c++){
+            getCell(r,c).classList.add(`base-${base.color}`);
+        }
     }
-}
-// inner white squares
-for(let r=1;r<=4;r++){
-    for(let c=1;c<=4;c++){
-        getCell(r,c).classList.add("white");
-        getCell(14-r, c).classList.add("white");
-        getCell(r, 14-c).classList.add("white");
-        getCell(14-r, 14-c).classList.add("white");
+    const whiteBox = document.createElement("div");
+    whiteBox.classList.add("white-base");
+    whiteBox.style.gridRow = `${base.r + 2} / span 4`;
+    whiteBox.style.gridColumn = `${base.c + 2} / span 4`;
+    for(let i=0;i<4;i++){
+        const slot = document.createElement("div");
+        slot.classList.add("token-slot");
+
+        const token = document.createElement("div");
+        token.classList.add(`token token-${base.color}`);
+        slot.appendChild(token);
+        whiteBox.appendChild(slot);
     }
-}
+    board.appendChild(whiteBox);
+});
+
 // Cross paths
 for(let i=0;i<15;i++){
     for(let j=6;j<9;j++){
@@ -112,36 +123,4 @@ getCell(0,7).classList.add("green-arrow");
 getCell(7,14).classList.add("yellow-arrow");
 getCell(14,7).classList.add("blue-arrow");
 
-// Tokens
-function createBaseTokens(color, startRow, startCol) {
-    // Create container
-    const container = document.createElement("div");
-    container.classList.add("base-inner");
 
-    // Create 4 slots
-    for (let i = 0; i < 4; i++) {
-        const slot = document.createElement("div");
-        slot.classList.add("token-slot");
-
-        const token = document.createElement("div");
-        token.classList.add("token", color);
-
-        slot.appendChild(token);
-        container.appendChild(slot);
-    }
-
-    // Place container in CENTER of 4x4 white area
-    const centerCell = getCell(startRow + 1, startCol + 1);
-    centerCell.appendChild(container);
-}
-// RED (top-left)
-createBaseTokens("red", 0, 0);
-
-// GREEN (top-right)
-createBaseTokens("green", 0, 9);
-
-// YELLOW (bottom-left)
-createBaseTokens("yellow", 9, 0);
-
-// BLUE (bottom-right)
-createBaseTokens("blue", 9, 9);
