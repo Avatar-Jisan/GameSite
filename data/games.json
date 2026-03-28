@@ -15,7 +15,7 @@
         "If a player lands on a space occupied by an opponent's piece, the opponent's piece is sent back to its starting area.",
         "The first player to move all of their pieces to their home area wins the game."
     ],
-    "path": "ludo"
+    "path": "games/Ludo/ludo.html"
   },
   {
     "id":"snake-ladder",
