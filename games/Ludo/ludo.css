@@ -146,6 +146,7 @@ body{
 
 /* CENTER */
 .center-wrapper {
+    position: relative;
     grid-column: span 3;
     grid-row: span 3;
     background: conic-gradient(
@@ -156,6 +157,10 @@ body{
         var(--green) 270deg 360deg
     );
     
+}
+.center-wrapper .pin {
+    position: absolute !important;
+    transform: translate(-50%, -50%) !important;
 }
 
 .red-arrow{
@@ -251,6 +256,7 @@ body{
 
 .pin {
     position: absolute;
+    
     left:50%;
     font-size:18px;
     cursor: pointer;
@@ -352,21 +358,54 @@ body{
 .pin i {
     filter: drop-shadow(0 3px 3px rgba(0,0,0,0.5));
 }
-.fa-fade {
-    animation-duration: 1.5s !important;
-}
+
 /* COLORS */
 .pin[data-color="red"] i { color: var(--red); }
 .pin[data-color="green"] i { color: var(--green); }
 .pin[data-color="yellow"] i { color: var(--yellow); }
 .pin[data-color="blue"] i { color: var(--blue); }
+.pin[data-color="red"].active::before { color: var(--red); }
+.pin[data-color="green"].active::before { color: var(--green); }
+.pin[data-color="yellow"].active::before { color: var(--yellow); }
+.pin[data-color="blue"].active::before { color: var(--blue); }
 
 /* HOVER EFFECT */
 .pin:hover {
     transform: translateX(-50%) translateY(-5%) scale(1.15);
 }
 
+.pin.active::before {
+    content: "";
+    position: absolute;
+    
+    width: 1em;
+    height: 1em;
 
+    border-radius: 50%;
+    border: 3px dashed #25343F;
+
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    animation: spinCircle 1s linear infinite;
+
+    opacity: 0.9;
+}
+
+/* rotate animation */
+@keyframes spinCircle {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+.pin.active {
+    transform: translate(-50%, -10%) scale(1.2);
+    z-index: 50;
+}
+.cell .pin.active {
+    transform: translate(-50%, -90%) scale(1.2);
+    z-index: 50;
+}
 /* PLAYER INDICATOR */
 .player-indicator {
     position: absolute;
