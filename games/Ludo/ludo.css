@@ -149,6 +149,8 @@ body{
     position: relative;
     grid-column: span 3;
     grid-row: span 3;
+    width:120px;
+    height:120px;
     background: conic-gradient(
         from 45deg,
         var(--yellow) 0deg 90deg,
@@ -156,7 +158,8 @@ body{
         var(--red) 180deg 270deg,
         var(--green) 270deg 360deg
     );
-    
+    z-index: 10;
+    display: block;
 }
 .center-wrapper .pin {
     position: absolute !important;

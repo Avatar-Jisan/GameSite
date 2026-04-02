@@ -273,7 +273,7 @@ async function handleMove(color, diceValue) {
         const index = pin.dataset.index;
         const state = gameState[color][index];
         // ARROW → CENTER CONDITION
-        if (state.position === 51 && diceValue === 6) {
+        if (state.position === 50 && diceValue === 6) {
 
             pin.classList.add("active");
 
@@ -360,13 +360,38 @@ function moveOut(pin, color, index) {
 
 function movePin(pin, color, index, steps) {
     const state = gameState[color][index];
+    let oldPos = state.position;
+    let targetPos = oldPos + steps;
 
-    let pos = state.position;
-    pos += steps;
+    // 🧠 DEBUG LOG
+    console.log("MOVE DEBUG:", {
+        oldPos,
+        steps,
+        targetPos
+    });
+    console.log("STATE:", gameState[color][index]);
 
-    if (pos > 51) {
-        const homeStep = pos - 51;
-        if (homeStep > 5) return; // must be exact to enter home
+    if (targetPos > 50) {
+        const stepsIntoHome = targetPos - 50;
+
+        console.log("Enter home debug:",{
+            targetPos,
+            stepsIntoHome
+        });
+        if(oldPos===50 && steps===6){
+            moveToCenter(pin, color);
+            state.position = -2;
+            state.homeStep = 5;
+            console.log("Moved to CENTER directly from arrow!");
+            if (checkWin(color)) alert(color + " wins!");
+            clearSelection();
+            nextTurn();
+            return;
+        }
+        const homeStep = stepsIntoHome-1;
+        if (homeStep <0 || homeStep > 5){ 
+            console.log("Invalid home move, must be exact. Staying on last position.");
+            return; }// must be exact to enter home
         const [r, c] = homePaths[color][homeStep];
         const cell = getCell(r, c);
         const oldCell = pin.parentElement;
@@ -375,19 +400,20 @@ function movePin(pin, color, index, steps) {
 
         state.position = -2;
         state.homeStep = homeStep;
+        console.log("Moved to HOME:", homeStep);
         if (oldCell) updateCellLayout(oldCell);
         updateCellLayout(cell);
 
-        if (checkWin(color)) {
-            alert(color + " wins!");
-        }
+        if (homeStep === 5) moveToCenter(pin, color);
+        
+
         clearSelection();
         nextTurn();
         return;
     }
 
     const start = startIndex[color];
-    const realIndex = (start + pos) % 52;
+    const realIndex = (start + targetPos) % 52;
     const [r, c] = mainPath[realIndex];
     const cell = getCell(r, c);
     const oldCell = pin.parentElement;
@@ -399,12 +425,10 @@ function movePin(pin, color, index, steps) {
 
         checkKill(r, c, color);
     }
-    state.position = pos;
+    state.position = targetPos;
     if (oldCell) updateCellLayout(oldCell);
     updateCellLayout(cell);
-    if (checkWin(color)) {
-        alert(color + " wins!");
-    }
+
     clearSelection();
     nextTurn();
 }
@@ -416,12 +440,11 @@ function moveToCenter(pin, color) {
     pin.style.left = "";
     pin.style.transform = "";
     pin.style.position = "absolute";
-
     pin.classList.remove("active");
-
+    pin.style.zIndex = "999";
     center.appendChild(pin);
 
-    const pins = center.querySelectorAll(`.pin-${color}`);
+    const pins = center.querySelectorAll(`.pin[data-color="${color}"]`);
 
     pins.forEach((p, i) => {
 
@@ -660,4 +683,13 @@ function handleHomePin(pin, color, index, diceValue) {
     };
 
     return true; // means handled
+}
+
+function debugDice(color, value) {
+
+    console.log("DEBUG DICE:", color, value);
+
+    lastDiceValue = value;
+
+    handleMove(color, value);
 }
