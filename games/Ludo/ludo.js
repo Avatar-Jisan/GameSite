@@ -333,11 +333,11 @@ async function handleMove(color, diceValue) {
         nextTurn();
         return;
     }
-    
+
     const pins = document.querySelectorAll(`.pin-${color}`);
 
     pins.forEach(pin => {
-        if(pin.dataset.centered==="true") return;
+        if (pin.dataset.centered === "true") return;
         pin.classList.remove("active");
         const index = pin.dataset.index;
         const state = gameState[color][index];
@@ -378,7 +378,7 @@ async function handleMove(color, diceValue) {
                     return;
                 }
 
-                nextTurn();
+                updateTurnUI();
             };
 
             return;
@@ -393,13 +393,13 @@ async function handleMove(color, diceValue) {
                 moveOut(pin, color, index);
             };
         }
-        if(state.position === -2 && state.homeStep<0 && state.homeStep>5){
+        if (state.position === -2 && state.homeStep < 0 && state.homeStep > 5) {
             pin.classList.remove("active");
             pin.onclick = null;
         }
 
         // normal move (later)
-        else if ((state.position >= 0 || state.homeStep >= 0)&& state.homeStep!==5) {
+        else if ((state.position >= 0 || state.homeStep >= 0) && state.homeStep !== 5) {
             pin.classList.add("active");
             selectablePins.push(pin);
             pin.onclick = () => {
@@ -436,7 +436,9 @@ function moveOut(pin, color, index) {
     const [r, c] = mainPath[start];
     const cell = getCell(r, c);
 
-    cell.appendChild(pin);
+    if (pin.dataset.centered !== "true") {
+        cell.appendChild(pin);
+    }
     updateCellLayout(cell);
     gameState[color][index].position = 0;
     console.log(cell);
@@ -445,11 +447,11 @@ function moveOut(pin, color, index) {
 }
 
 async function movePin(pin, color, index, steps) {
-    if(pin.dataset.centered==="true") return;
+    if (pin.dataset.centered === "true") return;
     const state = gameState[color][index];
     let oldPos = state.position;
     let targetPos = oldPos + steps;
-    // 🧠 DEBUG LOG
+    // DEBUG LOG
     console.log("HOME DEBUG:", {
         oldPos,
         steps,
@@ -462,43 +464,19 @@ async function movePin(pin, color, index, steps) {
 
         const stepsIntoHome = targetPos - 50;
 
-        // ❌ must be exact
+        // must be exact
         if (stepsIntoHome > 6) {
             console.log("Invalid move: cannot overshoot center");
             return;
         }
 
-        // 🎯 animate EVERYTHING (including home)
+        // animate EVERYTHING (including home)
         await animateMove(pin, color, index, steps);
 
         const homeStep = stepsIntoHome - 1;
 
-        // 🎯 reached center
-        if (homeStep === 5) {
-            state.position = -2;
-            state.homeStep = 5;
-            moveToCenter(pin, color);
 
-            if (checkWin(color) && !finishedPlayers.includes(color)) {
-                finishedPlayers.push(color);
-                activePlayers = activePlayers.filter(p => p !== color);
-
-                await celebrationWin(color);
-
-                if (activePlayers.length === 1) {
-                    showResultModal();
-                    return;
-                }
-
-                nextTurn();
-                return;
-            }
-
-            updateTurnUI(); // extra turn
-            return;
-        }
-
-        // 🏠 normal home move
+        // normal home move
         state.position = -2;
         state.homeStep = homeStep;
 
@@ -525,12 +503,9 @@ async function movePin(pin, color, index, steps) {
     nextTurn();
 }
 
-function moveToCenter(pin, color) {
+async function moveToCenter(pin, color) {
 
     const center = document.querySelector(".center-wrapper");
-    document.querySelectorAll(".pin").forEach(p => {
-        p.classList.remove("active");
-    });
     pin.dataset.centered = "true";
     pin.style.pointerEvents = "none";
     pin.onclick = null;
@@ -544,53 +519,56 @@ function moveToCenter(pin, color) {
     pin.classList.remove("active");
     pin.style.zIndex = "1999";
     center.appendChild(pin);
-    console.log("CENTER CHILD COUNT:", center.children.length);
+    console.log("CENTER PIN COUNT:", center.querySelectorAll(".pin").length);
     const pins = center.querySelectorAll(`.pin[data-color="${color}"]`);
-
-    const centerX = 50;
-    const centerY = 50;
-
-    // 🔥 use pixel offset instead of %
-    const gap = 18;
 
     pins.forEach((p, i) => {
 
-        let offset = (i - (pins.length - 1) / 2) * gap;
+        const offset = (i - (pins.length - 1) / 2) * 10;
 
-        let x = centerX;
-        let y = centerY;
-
-        switch (color) {
-
-            case "red":
-                x = centerX - 15;
-                p.style.transform = `translate(calc(-50% + ${offset}px), -50%)`;
-                break;
-
-            case "green":
-                y = centerY - 8;
-                p.style.transform = `translate(-50%, calc(-50% + ${offset}px))`;
-                break;
-
-            case "yellow":
-                x = centerX + 15;
-                p.style.transform = `translate(calc(-50% + ${offset}px), -50%)`;
-                break;
-
-            case "blue":
-                y = centerY + 8;
-                p.style.transform = `translate(-50%, calc(-50% + ${offset}px))`;
-                break;
+        if (color === "red") {
+            p.style.left = "30%";
+            p.style.top = (50 + offset) + "%";
         }
 
-        p.style.left = x + "%";
-        p.style.top = y + "%";
-        p.style.transform="translate(-50%, -50%)";
+        if (color === "green") {
+            p.style.top = "30%";
+            p.style.left = (50 + offset) + "%";
+        }
 
+        if (color === "yellow") {
+            p.style.left = "70%";
+            p.style.top = (50 + offset) + "%";
+        }
+
+        if (color === "blue") {
+            p.style.top = "70%";
+            p.style.left = (50 + offset) + "%";
+        }
+
+        p.style.transform = "translate(-50%, -50%)";
         // 🔥 REMOVE ACTIVE PROPERLY
         p.classList.remove("active");
     });
     console.log("✅ Moved to center:", color);
+    if (pins.length === 4) {
+       await celebrationWin(color);
+    }
+    else if (checkWin(color) && !finishedPlayers.includes(color)) {
+        finishedPlayers.push(color);
+        activePlayers = activePlayers.filter(p => p !== color);
+
+        await celebrationWin(color);
+
+        if (activePlayers.length === 1) {
+            showResultModal();
+            return;
+        }
+
+        nextTurn();
+        return;
+    }
+    updateTurnUI();
 }
 
 function clearSelection() {
@@ -664,12 +642,8 @@ function sendToBase(pin, color, index) {
 }
 
 function updateCellLayout(cell) {
-    const pins = cell.querySelectorAll(".pin");
-    pins.forEach(p => {
-        if(p.dataset.centered === "true"){
-            return;
-        }
-    });
+    const pins = [...cell.querySelectorAll(".pin")].filter(p => p.dataset.centered !== "true");
+
     const count = pins.length;
 
     // remove old classes
@@ -686,7 +660,7 @@ function checkWin(color) {
 }
 
 async function animateMove(pin, color, index, steps) {
-    if(pin.dataset.centered==="true") return;
+    if (pin.dataset.centered === "true") return;
     let state = gameState[color][index];
     let currentPos;
     if (state.homeStep >= 0) {
@@ -720,13 +694,17 @@ async function animateMove(pin, color, index, steps) {
             });
             if (homeStep === 5) {
                 moveToCenter(pin, color);
+                updateTurnUI();
+                return;
             }
 
             const [r, c] = homePaths[color][homeStep];
             const cell = getCell(r, c);
 
             const oldCell = pin.parentElement;
-            cell.appendChild(pin);
+            if (pin.dataset.centered !== "true") {
+                cell.appendChild(pin);
+            }
 
             addCellGlow(cell, color);
             playStepSound();
@@ -746,7 +724,9 @@ async function animateMove(pin, color, index, steps) {
         const cell = getCell(r, c);
 
         const oldCell = pin.parentElement;
-        cell.appendChild(pin);
+        if (pin.dataset.centered !== "true") {
+            cell.appendChild(pin);
+        }
         addCellGlow(cell, color);
         playStepSound();
         if (oldCell) updateCellLayout(oldCell);
