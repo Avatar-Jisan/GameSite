@@ -271,8 +271,18 @@ function updateTurnUI() {
     document.querySelectorAll(`.base-${activeColor}-area`).forEach(b => {
         b.classList.add("base-glow");
     });
+
     const activePlayer = document.getElementById(`player-${activeColor}`);
     const activeDiceBox = activePlayer.querySelector(".dice-box");
+    if (finishedPlayers.includes(activeColor)) {
+
+        console.log("⛔ Skipping finished player:", activeColor);
+
+        currentTurn = (currentTurn + 1) % activePlayers.length;
+
+        updateTurnUI();
+        return;
+    }
     activePlayer.classList.add("active");
     activePlayer.classList.add("turn-glow");
     activeDiceBox.classList.remove("hidden");
@@ -365,11 +375,11 @@ async function handleMove(color, diceValue) {
 
                     // remove from activePlayers
                     activePlayers = activePlayers.filter(p => p !== color);
-
+                    currentTurn = currentTurn % activePlayers.length;
                     await celebrationWin(color);
 
                     // if game ending condition
-                    if (activePlayers.length === 1) {
+                    if (finishedPlayers.length === playerCount - 1) {
                         showResultModal();
                         return;
                     }
@@ -551,16 +561,22 @@ async function moveToCenter(pin, color) {
         p.classList.remove("active");
     });
     console.log("✅ Moved to center:", color);
-    if (pins.length === 4) {
-       await celebrationWin(color);
-    }
-    else if (checkWin(color) && !finishedPlayers.includes(color)) {
+    // 🎯 PLAYER FINISHED
+    if (pins.length === 4 && !finishedPlayers.includes(color)) {
+
         finishedPlayers.push(color);
+
         activePlayers = activePlayers.filter(p => p !== color);
+
+        // 🔥 FIX: adjust turn safely
+        if (currentTurn >= activePlayers.length) {
+            currentTurn = 0;
+        }
 
         await celebrationWin(color);
 
-        if (activePlayers.length === 1) {
+        // 🎯 GAME END
+        if (finishedPlayers.length === playerCount - 1) {
             showResultModal();
             return;
         }
@@ -568,7 +584,13 @@ async function moveToCenter(pin, color) {
         nextTurn();
         return;
     }
-    updateTurnUI();
+
+    // 🎯 EXTRA TURN (NOT FINISHED)
+    if (pins.length < 4) {
+        lastDiceValue = 6;
+        updateTurnUI();
+        return;
+    }
 }
 
 function clearSelection() {
@@ -581,7 +603,7 @@ function clearSelection() {
 
 function nextTurn() {
 
-    if (lastDiceValue === 6 && activePlayers.includes(activePlayers[currentTurn])) {
+    if (lastDiceValue === 6 ) {
         updateTurnUI();
         return;
     }
@@ -658,7 +680,7 @@ function updateCellLayout(cell) {
 function checkWin(color) {
     return gameState[color].every(p => p.homeStep === 5);
 }
-
+// ANIMATION FUNCTION: moves piece step by step with delay, handles both normal and home path animation
 async function animateMove(pin, color, index, steps) {
     if (pin.dataset.centered === "true") return;
     let state = gameState[color][index];
@@ -694,7 +716,6 @@ async function animateMove(pin, color, index, steps) {
             });
             if (homeStep === 5) {
                 moveToCenter(pin, color);
-                updateTurnUI();
                 return;
             }
 
@@ -958,11 +979,11 @@ function spawnConfetti() {
 function showResultModal() {
     const modal = document.getElementById("resultModal");
     const list = document.getElementById("resultList");
-
+    $(modal).show();
     modal.style.display = "flex"; // Show as flex to center
     list.innerHTML = ""; // Clear old content
     const winTxt = document.getElementById("win-txt");
-    winTxt.innerText = `${capitalize(finishedPlayers[0])} Wins!`;
+    winTxt.innerText = `${finishedPlayers[0]} Wins!`;
     // 1. Get complete rankings (finished players + the one remaining)
     const rankings = [...finishedPlayers];
     const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
