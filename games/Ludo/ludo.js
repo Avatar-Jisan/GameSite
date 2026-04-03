@@ -4,11 +4,23 @@ const overlay = document.getElementById("ludoStartOverlay");
 const modeSection = document.getElementById("ludoModeSection");
 const board = document.getElementById("board");
 const boardCells = document.getElementById("board-cells");
+const backBtn = document.getElementById("backBtn");
+const soundBtn = document.getElementById("soundBtn");
+const exitBtn = document.getElementById("exitBtn");
 
+let soundEnabled = true;
 let gameMode = null;
 let playerCount = null;
 let lastDiceValue = null;
+let activePlayers = [];
+let sixCount = 0;
 
+const sounds = {
+    dice: new Audio("../../assets/sounds/dice.mp3"),
+    move: new Audio("../../assets/sounds/move.mp3"),
+    kill: new Audio("../../assets/sounds/kill.mp3"),
+    win: new Audio("../../assets/sounds/winner.mp3")
+}
 const gameState = {
     red: [
         { position: -1, homeStep: -1 }, // -1 = inside base
@@ -64,6 +76,29 @@ const startIndex = {
     yellow: 26,
     blue: 39
 };
+
+backBtn.onclick = () => {
+    location.reload(); // easiest reset
+};
+
+soundBtn.onclick = () => {
+    soundEnabled = !soundEnabled;
+
+    const icon = document.getElementById("volume-icon");
+
+    icon.classList.toggle("fa-volume-high");
+    icon.classList.toggle("fa-volume-xmark");
+};
+
+function playSound(type) {
+    if (!soundEnabled) return;
+    const s = sounds[type];
+    if (s) {
+        s.currentTime = 0;
+        s.play();
+    }
+}
+
 function shouldEnterHome(color, pos) {
     return pos >= 51;
 }
@@ -91,12 +126,30 @@ playerButtons.forEach(btn => {
         startGame();
     });
 });
-
+let players = ["red", "green", "yellow", "blue"];
 function startGame() {
     console.log("Game Mode:", gameMode);
     console.log("Players:", playerCount || "AI Mode");
 
     overlay.style.display = "none";
+    $(".top-controls").show();
+    if (playerCount == 2) {
+        activePlayers = ["blue", "green"];
+    } else if (playerCount == 3) {
+        activePlayers = ["blue", "red", "green"];
+    } else {
+        activePlayers = ["blue", "red", "green", "yellow"];
+    }
+    players.forEach(color => {
+        if (!activePlayers.includes(color)) {
+            const player = document.getElementById(`player-${color}`);
+            player.style.opacity = "0.3";
+            player.style.pointerEvents = "none";
+        }
+    });
+    currentTurn = 0;
+    createdBoard();
+    updateTurnUI();
 }
 
 // board setup
@@ -123,96 +176,102 @@ const baseCoords = [
     { r: 9, c: 0, color: 'blue' },
     { r: 9, c: 9, color: 'yellow' }
 ];
-
-baseCoords.forEach(base => {
-    for (let r = base.r; r < base.r + 6; r++) {
-        for (let c = base.c; c < base.c + 6; c++) {
-            getCell(r, c).classList.add(`base-${base.color}`);
-        }
-    }
-    const whiteBox = document.createElement("div");
-    whiteBox.classList.add("white-base");
-    whiteBox.style.gridRow = `${base.r + 2} / span 4`;
-    whiteBox.style.gridColumn = `${base.c + 2} / span 4`;
-    whiteBox.style.zIndex = "5";
-    for (let i = 0; i < 4; i++) {
-        const slot = document.createElement("div");
-        slot.classList.add("token-slot");
-        slot.dataset.color = base.color;
-        const pin = document.createElement("div");
-        pin.classList.add("pin", `pin-${base.color}`);
-        pin.dataset.index = i;
-        pin.dataset.color = base.color;
-
-        pin.innerHTML = `<i class="fa-solid fa-location-dot fa-lg" style="color:#EAEFEF;"></i>`
-        slot.appendChild(pin);
-        whiteBox.appendChild(slot);
-    }
-    boardCells.appendChild(whiteBox);
-});
-
-// Cross paths
-for (let i = 0; i < 15; i++) {
-    for (let j = 6; j < 9; j++) {
-        getCell(i, j).classList.add("path");
-        getCell(j, i).classList.add("path");
-    }
-}
-// home paths
-for (let c = 1; c <= 5; c++) getCell(7, c).classList.add("home-red");
-for (let r = 1; r <= 5; r++) getCell(r, 7).classList.add("home-green");
-for (let c = 9; c <= 13; c++) getCell(7, c).classList.add("home-yellow");
-for (let r = 9; r <= 13; r++) getCell(r, 7).classList.add("home-blue");
-
-// center
-// CREATE CENTER WRAPPER
-const centerWrapper = document.createElement("div");
-centerWrapper.classList.add("center-wrapper");
-
-// Place wrapper at correct grid position
-centerWrapper.style.gridRow = "7 / span 3";  // rows 6–8
-centerWrapper.style.gridColumn = "7 / span 3"; // cols 6–8
-centerWrapper.style.zIndex = "10";
-boardCells.appendChild(centerWrapper);
-
-
-// safe cells
 const safeCells = [
     [8, 2], [2, 6], [6, 12], [12, 8]
 ];
 const homeCells = [
     [6, 1], [1, 8], [8, 13], [13, 6]
 ];
+function createdBoard() {
+    baseCoords.forEach(base => {
+        for (let r = base.r; r < base.r + 6; r++) {
+            for (let c = base.c; c < base.c + 6; c++) {
+                getCell(r, c).classList.add(`base-${base.color}`, `base-area`, `base-${base.color}-area`);
+            }
+        }
+        const whiteBox = document.createElement("div");
+        whiteBox.classList.add("white-base");
+        whiteBox.style.gridRow = `${base.r + 2} / span 4`;
+        whiteBox.style.gridColumn = `${base.c + 2} / span 4`;
+        whiteBox.style.zIndex = "5";
+        for (let i = 0; i < 4; i++) {
+            const slot = document.createElement("div");
+            slot.classList.add("token-slot");
+            slot.dataset.color = base.color;
+            if (activePlayers.includes(base.color)) {
+                const pin = document.createElement("div");
+                pin.classList.add("pin", `pin-${base.color}`);
+                pin.dataset.index = i;
+                pin.dataset.color = base.color;
 
-safeCells.forEach(([r, c]) => getCell(r, c).classList.add("safe"));
-getCell(6, 1).classList.add("home-red");
-getCell(1, 8).classList.add("home-green");
-getCell(8, 13).classList.add("home-yellow");
-getCell(13, 6).classList.add("home-blue");
-getCell(7, 0).classList.add("red-arrow");
-getCell(0, 7).classList.add("green-arrow");
-getCell(7, 14).classList.add("yellow-arrow");
-getCell(14, 7).classList.add("blue-arrow");
+                pin.innerHTML = `<i class="fa-solid fa-location-dot fa-lg" style="color:#EAEFEF;"></i>`
+                slot.appendChild(pin);
+            }
 
+            whiteBox.appendChild(slot);
+        }
+        boardCells.appendChild(whiteBox);
+    });
+
+    // Cross paths
+    for (let i = 0; i < 15; i++) {
+        for (let j = 6; j < 9; j++) {
+            getCell(i, j).classList.add("path");
+            getCell(j, i).classList.add("path");
+        }
+    }
+    // home paths
+    for (let c = 1; c <= 5; c++) getCell(7, c).classList.add("home-red");
+    for (let r = 1; r <= 5; r++) getCell(r, 7).classList.add("home-green");
+    for (let c = 9; c <= 13; c++) getCell(7, c).classList.add("home-yellow");
+    for (let r = 9; r <= 13; r++) getCell(r, 7).classList.add("home-blue");
+
+    // center
+    // CREATE CENTER WRAPPER
+    const centerWrapper = document.createElement("div");
+    centerWrapper.classList.add("center-wrapper");
+
+    // Place wrapper at correct grid position
+    centerWrapper.style.gridRow = "7 / span 3";  // rows 6–8
+    centerWrapper.style.gridColumn = "7 / span 3"; // cols 6–8
+    centerWrapper.style.zIndex = "10";
+    boardCells.appendChild(centerWrapper);
+
+
+    safeCells.forEach(([r, c]) => getCell(r, c).classList.add("safe"));
+    getCell(6, 1).classList.add("home-red");
+    getCell(1, 8).classList.add("home-green");
+    getCell(8, 13).classList.add("home-yellow");
+    getCell(13, 6).classList.add("home-blue");
+    getCell(7, 0).classList.add("red-arrow");
+    getCell(0, 7).classList.add("green-arrow");
+    getCell(7, 14).classList.add("yellow-arrow");
+    getCell(14, 7).classList.add("blue-arrow");
+}
 //turn system
-const players = ["red", "green", "yellow", "blue"];
-let currentTurn = 0;
-
 function updateTurnUI() {
     players.forEach(color => {
         const player = document.getElementById(`player-${color}`);
         const dice = player.querySelector(".dice-box");
 
         player.classList.remove("active");
+        player.classList.remove("turn-glow");
         dice.classList.add("hidden");
 
         dice.onclick = null;
     });
+    document.querySelectorAll(".base-area").forEach(b => {
+        b.classList.remove("base-glow");
+    });
 
-    const activeColor = players[currentTurn];
+    const activeColor = activePlayers[currentTurn];
+    document.querySelectorAll(`.base-${activeColor}-area`).forEach(b => {
+        b.classList.add("base-glow");
+    });
     const activePlayer = document.getElementById(`player-${activeColor}`);
     const activeDiceBox = activePlayer.querySelector(".dice-box");
     activePlayer.classList.add("active");
+    activePlayer.classList.add("turn-glow");
     activeDiceBox.classList.remove("hidden");
     activeDiceBox.onclick = async () => {
         activeDiceBox.style.pointerEvents = "none";
@@ -223,9 +282,6 @@ function updateTurnUI() {
     };
 }
 
-// start with red
-updateTurnUI();
-
 async function rollDice(playerColor) {
     const player = document.getElementById(`player-${playerColor}`);
     const dice = player.querySelector(".dice");
@@ -234,19 +290,27 @@ async function rollDice(playerColor) {
     if (dice.classList.contains("rolling")) return;
 
     dice.classList.add("rolling");
-
+    playSound("dice");
     // rolling animation with random faces
     for (let i = 0; i < 10; i++) {
         dice.setAttribute("data-value", Math.floor(Math.random() * 6) + 1);
         await sleep(80);
     }
-
+    let finalValue;
+    console.log("Six count before roll:", sixCount);
     // final result
-    const finalValue = Math.floor(Math.random() * 6) + 1;
+    if (sixCount === 2) {
+        finalValue = Math.floor(Math.random() * 5) + 1;
+    } else {
+        finalValue = Math.floor(Math.random() * 6) + 1;
+    }
     dice.setAttribute("data-value", finalValue);
-
     dice.classList.remove("rolling");
-
+    if (finalValue === 6) {
+        sixCount++;
+    } else {
+        sixCount = 0;
+    }
     console.log(playerColor, "rolled:", finalValue);
     lastDiceValue = finalValue;
     const activeDiceBox = document
@@ -260,7 +324,7 @@ async function rollDice(playerColor) {
 }
 
 async function handleMove(color, diceValue) {
-
+    let selectablePins = [];
     if (!canPlayerMove(color, diceValue)) {
         await sleep(500);
         nextTurn();
@@ -276,7 +340,7 @@ async function handleMove(color, diceValue) {
         if (state.position === 50 && diceValue === 6) {
 
             pin.classList.add("active");
-
+            selectablePins.push(pin);
             pin.onclick = () => {
                 clearSelection();
 
@@ -310,7 +374,7 @@ async function handleMove(color, diceValue) {
         // unlock condition
         if (state.position === -1 && diceValue === 6) {
             pin.classList.add("active");
-
+            selectablePins.push(pin);
             pin.onclick = () => {
                 clearSelection();
                 moveOut(pin, color, index);
@@ -320,13 +384,18 @@ async function handleMove(color, diceValue) {
         // normal move (later)
         else if (state.position >= 0) {
             pin.classList.add("active");
-
+            selectablePins.push(pin);
             pin.onclick = () => {
                 clearSelection();
                 movePin(pin, color, index, diceValue);
             };
         }
     });
+    if (selectablePins.length === 1) {
+        await sleep(300);
+        selectablePins[0].click();
+    }
+
 }
 
 function canPlayerMove(color, diceValue) {
@@ -358,11 +427,10 @@ function moveOut(pin, color, index) {
     nextTurn();
 }
 
-function movePin(pin, color, index, steps) {
+async function movePin(pin, color, index, steps) {
     const state = gameState[color][index];
     let oldPos = state.position;
     let targetPos = oldPos + steps;
-
     // 🧠 DEBUG LOG
     console.log("MOVE DEBUG:", {
         oldPos,
@@ -374,11 +442,11 @@ function movePin(pin, color, index, steps) {
     if (targetPos > 50) {
         const stepsIntoHome = targetPos - 50;
 
-        console.log("Enter home debug:",{
+        console.log("Enter home debug:", {
             targetPos,
             stepsIntoHome
         });
-        if(oldPos===50 && steps===6){
+        if (oldPos === 50 && steps === 6) {
             moveToCenter(pin, color);
             state.position = -2;
             state.homeStep = 5;
@@ -388,15 +456,16 @@ function movePin(pin, color, index, steps) {
             nextTurn();
             return;
         }
-        const homeStep = stepsIntoHome-1;
-        if (homeStep <0 || homeStep > 5){ 
+        const homeStep = stepsIntoHome - 1;
+        if (homeStep < 0 || homeStep > 5) {
             console.log("Invalid home move, must be exact. Staying on last position.");
-            return; }// must be exact to enter home
+            return;
+        }// must be exact to enter home
         const [r, c] = homePaths[color][homeStep];
         const cell = getCell(r, c);
         const oldCell = pin.parentElement;
 
-        cell.appendChild(pin);
+        await animateMove(pin, color, index, steps);
 
         state.position = -2;
         state.homeStep = homeStep;
@@ -405,7 +474,7 @@ function movePin(pin, color, index, steps) {
         updateCellLayout(cell);
 
         if (homeStep === 5) moveToCenter(pin, color);
-        
+
 
         clearSelection();
         nextTurn();
@@ -417,7 +486,7 @@ function movePin(pin, color, index, steps) {
     const [r, c] = mainPath[realIndex];
     const cell = getCell(r, c);
     const oldCell = pin.parentElement;
-    cell.appendChild(pin);
+    await animateMove(pin, color, index, steps);
     if (!cell.classList.contains("home-red") &&
         !cell.classList.contains("home-green") &&
         !cell.classList.contains("home-yellow") &&
@@ -487,7 +556,8 @@ function nextTurn() {
         updateTurnUI();
         return;
     }
-    currentTurn = (currentTurn + 1) % players.length;
+    currentTurn = (currentTurn + 1) % activePlayers.length;
+    sixCount = 0;
     updateTurnUI();
 }
 
@@ -508,7 +578,7 @@ function checkKill(r, c, currentColor) {
             const index = pin.dataset.index;
 
             console.log("Killed:", enemyColor);
-
+            playSound("kill");
             // send back to base
             sendToBase(pin, enemyColor, index);
         }
@@ -558,6 +628,57 @@ function updateCellLayout(cell) {
 function checkWin(color) {
     return gameState[color].every(p => p.homeStep === 5);
 }
+
+async function animateMove(pin, color, index, steps) {
+
+    let state = gameState[color][index];
+    let currentPos = state.position;
+
+    for (let i = 1; i <= steps; i++) {
+
+        await sleep(150); // speed control
+
+        let nextPos = currentPos + 1;
+
+        // ENTER HOME
+        if (nextPos > 50) {
+            const homeStep = nextPos - 51;
+
+            const [r, c] = homePaths[color][homeStep];
+            const cell = getCell(r, c);
+
+            const oldCell = pin.parentElement;
+            cell.appendChild(pin);
+            addCellGlow(cell, color);
+            playStepSound();
+            if (oldCell) updateCellLayout(oldCell);
+            updateCellLayout(cell);
+
+            currentPos = nextPos;
+            continue;
+        }
+
+        // NORMAL PATH
+        const start = startIndex[color];
+        const realIndex = (start + nextPos) % 52;
+
+        const [r, c] = mainPath[realIndex];
+        const cell = getCell(r, c);
+
+        const oldCell = pin.parentElement;
+        cell.appendChild(pin);
+        addCellGlow(cell, color);
+        playStepSound();
+        if (oldCell) updateCellLayout(oldCell);
+        updateCellLayout(cell);
+
+        currentPos = nextPos;
+    }
+
+    state.position = currentPos;
+}
+
+
 // debug function to move any piece to any cell (for testing purposes)
 function debugMove(color, index, row, col) {
 
@@ -692,4 +813,75 @@ function debugDice(color, value) {
     lastDiceValue = value;
 
     handleMove(color, value);
+}
+
+exitBtn.addEventListener("click", () => {
+    if (window.parent.document.fullscreenElement) {
+        window.parent.document.exitFullscreen();
+    }
+
+});
+window.addEventListener("message", (event) => {
+
+    if (event.data === "enterFullscreen") {
+        exitBtn.style.display = "block";
+    }
+
+    if (event.data === "exitFullscreen") {
+        exitBtn.style.display = "none";
+    }
+
+});
+
+/* Inside ludo.js */
+function autoScale() {
+    const container = document.getElementById('scaling-container');
+
+    const baseWidth = 900;
+    const baseHeight = 900;
+
+    const scale = Math.min(
+        window.innerWidth / baseWidth,
+        window.innerHeight / baseHeight
+    );
+
+    container.style.transform = `
+        translate(-50%, -50%) scale(${scale})
+    `;
+}
+
+// Call on load and whenever the window/iframe resizes
+window.addEventListener('load', autoScale);
+window.addEventListener('resize', autoScale);
+
+// Listen for the fullscreen message from game.js
+window.addEventListener("message", (event) => {
+    if (event.data === "enterFullscreen" || event.data === "exitFullscreen") {
+        setTimeout(autoScale, 100); // Small delay to let dimensions update
+    }
+});
+
+async function addCellGlow(cell, color) {
+    if (!cell.classList.contains("safe") &&
+        !cell.classList.contains("red-arrow") &&
+        !cell.classList.contains("green-arrow") &&
+        !cell.classList.contains("yellow-arrow") &&
+        !cell.classList.contains("blue-arrow")) {
+
+        cell.classList.add("cell-glow");
+
+        // dynamic color
+        cell.style.setProperty("--glow-color", "var(--" + color + ")");
+
+        await sleep(300);
+        cell.classList.remove("cell-glow");
+    }
+}
+
+function playStepSound() {
+    if (!soundEnabled) return;
+
+    const s = sounds.move.cloneNode(); // 🔥 key trick
+    s.volume = 0.4;
+    s.play();
 }
