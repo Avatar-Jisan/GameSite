@@ -14,12 +14,14 @@ let playerCount = null;
 let lastDiceValue = null;
 let activePlayers = [];
 let sixCount = 0;
+let finishedPlayers = [];
 
 const sounds = {
     dice: new Audio("../../assets/sounds/dice.mp3"),
     move: new Audio("../../assets/sounds/move.mp3"),
     kill: new Audio("../../assets/sounds/kill.mp3"),
-    win: new Audio("../../assets/sounds/winner.mp3")
+    win: new Audio("../../assets/sounds/winner.mp3"),
+    confetti: new Audio("../../assets/sounds/confetti.mp3")
 }
 const gameState = {
     red: [
@@ -132,6 +134,7 @@ function startGame() {
     console.log("Players:", playerCount || "AI Mode");
 
     overlay.style.display = "none";
+
     $(".top-controls").show();
     if (playerCount == 2) {
         activePlayers = ["blue", "green"];
@@ -330,9 +333,11 @@ async function handleMove(color, diceValue) {
         nextTurn();
         return;
     }
+    
     const pins = document.querySelectorAll(`.pin-${color}`);
 
     pins.forEach(pin => {
+        if(pin.dataset.centered==="true") return;
         pin.classList.remove("active");
         const index = pin.dataset.index;
         const state = gameState[color][index];
@@ -341,12 +346,12 @@ async function handleMove(color, diceValue) {
 
             pin.classList.add("active");
             selectablePins.push(pin);
-            pin.onclick = () => {
+            pin.onclick = async () => {
                 clearSelection();
 
                 const oldCell = pin.parentElement;
                 pin.classList.remove("active");
-
+                await animateMove(pin, color, index, diceValue);
                 moveToCenter(pin, color);
 
                 state.position = -2;
@@ -354,21 +359,29 @@ async function handleMove(color, diceValue) {
 
                 if (oldCell) updateCellLayout(oldCell);
 
-                if (checkWin(color)) {
-                    alert(color + " wins!");
+                if (checkWin(color) && !finishedPlayers.includes(color)) {
+
+                    finishedPlayers.push(color);
+
+                    // remove from activePlayers
+                    activePlayers = activePlayers.filter(p => p !== color);
+
+                    await celebrationWin(color);
+
+                    // if game ending condition
+                    if (activePlayers.length === 1) {
+                        showResultModal();
+                        return;
+                    }
+
+                    nextTurn();
+                    return;
                 }
 
                 nextTurn();
             };
 
             return;
-        }
-        // HANDLE HOME LOGIC FIRST
-        if (state.homeStep >= 0) {
-
-            const handled = handleHomePin(pin, color, index, diceValue);
-
-            if (handled) return;
         }
 
         // unlock condition
@@ -380,9 +393,13 @@ async function handleMove(color, diceValue) {
                 moveOut(pin, color, index);
             };
         }
+        if(state.position === -2 && state.homeStep<0 && state.homeStep>5){
+            pin.classList.remove("active");
+            pin.onclick = null;
+        }
 
         // normal move (later)
-        else if (state.position >= 0) {
+        else if ((state.position >= 0 || state.homeStep >= 0)&& state.homeStep!==5) {
             pin.classList.add("active");
             selectablePins.push(pin);
             pin.onclick = () => {
@@ -428,53 +445,62 @@ function moveOut(pin, color, index) {
 }
 
 async function movePin(pin, color, index, steps) {
+    if(pin.dataset.centered==="true") return;
     const state = gameState[color][index];
     let oldPos = state.position;
     let targetPos = oldPos + steps;
     // 🧠 DEBUG LOG
-    console.log("MOVE DEBUG:", {
+    console.log("HOME DEBUG:", {
         oldPos,
         steps,
-        targetPos
+        targetPos,
+        stepsIntoHome: targetPos - 50
     });
     console.log("STATE:", gameState[color][index]);
 
     if (targetPos > 50) {
+
         const stepsIntoHome = targetPos - 50;
 
-        console.log("Enter home debug:", {
-            targetPos,
-            stepsIntoHome
-        });
-        if (oldPos === 50 && steps === 6) {
-            moveToCenter(pin, color);
-            state.position = -2;
-            state.homeStep = 5;
-            console.log("Moved to CENTER directly from arrow!");
-            if (checkWin(color)) alert(color + " wins!");
-            clearSelection();
-            nextTurn();
+        // ❌ must be exact
+        if (stepsIntoHome > 6) {
+            console.log("Invalid move: cannot overshoot center");
             return;
         }
-        const homeStep = stepsIntoHome - 1;
-        if (homeStep < 0 || homeStep > 5) {
-            console.log("Invalid home move, must be exact. Staying on last position.");
-            return;
-        }// must be exact to enter home
-        const [r, c] = homePaths[color][homeStep];
-        const cell = getCell(r, c);
-        const oldCell = pin.parentElement;
 
+        // 🎯 animate EVERYTHING (including home)
         await animateMove(pin, color, index, steps);
 
+        const homeStep = stepsIntoHome - 1;
+
+        // 🎯 reached center
+        if (homeStep === 5) {
+            state.position = -2;
+            state.homeStep = 5;
+            moveToCenter(pin, color);
+
+            if (checkWin(color) && !finishedPlayers.includes(color)) {
+                finishedPlayers.push(color);
+                activePlayers = activePlayers.filter(p => p !== color);
+
+                await celebrationWin(color);
+
+                if (activePlayers.length === 1) {
+                    showResultModal();
+                    return;
+                }
+
+                nextTurn();
+                return;
+            }
+
+            updateTurnUI(); // extra turn
+            return;
+        }
+
+        // 🏠 normal home move
         state.position = -2;
         state.homeStep = homeStep;
-        console.log("Moved to HOME:", homeStep);
-        if (oldCell) updateCellLayout(oldCell);
-        updateCellLayout(cell);
-
-        if (homeStep === 5) moveToCenter(pin, color);
-
 
         clearSelection();
         nextTurn();
@@ -485,7 +511,6 @@ async function movePin(pin, color, index, steps) {
     const realIndex = (start + targetPos) % 52;
     const [r, c] = mainPath[realIndex];
     const cell = getCell(r, c);
-    const oldCell = pin.parentElement;
     await animateMove(pin, color, index, steps);
     if (!cell.classList.contains("home-red") &&
         !cell.classList.contains("home-green") &&
@@ -495,8 +520,6 @@ async function movePin(pin, color, index, steps) {
         checkKill(r, c, color);
     }
     state.position = targetPos;
-    if (oldCell) updateCellLayout(oldCell);
-    updateCellLayout(cell);
 
     clearSelection();
     nextTurn();
@@ -505,41 +528,69 @@ async function movePin(pin, color, index, steps) {
 function moveToCenter(pin, color) {
 
     const center = document.querySelector(".center-wrapper");
+    document.querySelectorAll(".pin").forEach(p => {
+        p.classList.remove("active");
+    });
+    pin.dataset.centered = "true";
+    pin.style.pointerEvents = "none";
+    pin.onclick = null;
+    pin.style.position = "absolute";
     pin.style.top = "";
     pin.style.left = "";
+    pin.style.bottom = "";
+    pin.style.right = "";
+    pin.homeStep = -2;
     pin.style.transform = "";
-    pin.style.position = "absolute";
     pin.classList.remove("active");
-    pin.style.zIndex = "999";
+    pin.style.zIndex = "1999";
     center.appendChild(pin);
-
+    console.log("CENTER CHILD COUNT:", center.children.length);
     const pins = center.querySelectorAll(`.pin[data-color="${color}"]`);
+
+    const centerX = 50;
+    const centerY = 50;
+
+    // 🔥 use pixel offset instead of %
+    const gap = 18;
 
     pins.forEach((p, i) => {
 
-        // COLOR BASED POSITIONING
-        if (color === "red") {
-            p.style.left = "20%";
-            p.style.top = (30 + i * 20) + "%";
+        let offset = (i - (pins.length - 1) / 2) * gap;
+
+        let x = centerX;
+        let y = centerY;
+
+        switch (color) {
+
+            case "red":
+                x = centerX - 15;
+                p.style.transform = `translate(calc(-50% + ${offset}px), -50%)`;
+                break;
+
+            case "green":
+                y = centerY - 8;
+                p.style.transform = `translate(-50%, calc(-50% + ${offset}px))`;
+                break;
+
+            case "yellow":
+                x = centerX + 15;
+                p.style.transform = `translate(calc(-50% + ${offset}px), -50%)`;
+                break;
+
+            case "blue":
+                y = centerY + 8;
+                p.style.transform = `translate(-50%, calc(-50% + ${offset}px))`;
+                break;
         }
 
-        if (color === "green") {
-            p.style.top = "20%";
-            p.style.left = (30 + i * 20) + "%";
-        }
+        p.style.left = x + "%";
+        p.style.top = y + "%";
+        p.style.transform="translate(-50%, -50%)";
 
-        if (color === "yellow") {
-            p.style.left = "80%";
-            p.style.top = (30 + i * 20) + "%";
-        }
-
-        if (color === "blue") {
-            p.style.top = "80%";
-            p.style.left = (30 + i * 20) + "%";
-        }
-
-        p.style.transform = "translate(-50%, -50%)";
+        // 🔥 REMOVE ACTIVE PROPERLY
+        p.classList.remove("active");
     });
+    console.log("✅ Moved to center:", color);
 }
 
 function clearSelection() {
@@ -552,7 +603,7 @@ function clearSelection() {
 
 function nextTurn() {
 
-    if (lastDiceValue === 6) {
+    if (lastDiceValue === 6 && activePlayers.includes(activePlayers[currentTurn])) {
         updateTurnUI();
         return;
     }
@@ -614,6 +665,11 @@ function sendToBase(pin, color, index) {
 
 function updateCellLayout(cell) {
     const pins = cell.querySelectorAll(".pin");
+    pins.forEach(p => {
+        if(p.dataset.centered === "true"){
+            return;
+        }
+    });
     const count = pins.length;
 
     // remove old classes
@@ -630,27 +686,51 @@ function checkWin(color) {
 }
 
 async function animateMove(pin, color, index, steps) {
-
+    if(pin.dataset.centered==="true") return;
     let state = gameState[color][index];
-    let currentPos = state.position;
-
+    let currentPos;
+    if (state.homeStep >= 0) {
+        currentPos = 50 + state.homeStep + 1;
+    } else {
+        currentPos = state.position;
+    }
     for (let i = 1; i <= steps; i++) {
 
         await sleep(150); // speed control
 
         let nextPos = currentPos + 1;
-
+        console.log({
+            currentPos,
+            nextPos,
+            homeStep: nextPos > 50 ? nextPos - 51 : null
+        });
         // ENTER HOME
         if (nextPos > 50) {
+
             const homeStep = nextPos - 51;
+            if (homeStep < 0 || homeStep > 5) {
+                console.log("❌ INVALID HOME STEP:", homeStep);
+                break;
+            }
+            console.log("ANIMATE DEBUG:", {
+                state,
+                currentPos,
+                nextPos,
+                homeStep: nextPos > 50 ? nextPos - 51 : null
+            });
+            if (homeStep === 5) {
+                moveToCenter(pin, color);
+            }
 
             const [r, c] = homePaths[color][homeStep];
             const cell = getCell(r, c);
 
             const oldCell = pin.parentElement;
             cell.appendChild(pin);
+
             addCellGlow(cell, color);
             playStepSound();
+
             if (oldCell) updateCellLayout(oldCell);
             updateCellLayout(cell);
 
@@ -680,7 +760,7 @@ async function animateMove(pin, color, index, steps) {
 
 
 // debug function to move any piece to any cell (for testing purposes)
-function debugMove(color, index, row, col) {
+async function debugMove(color, index, row, col) {
 
     const pin = document.querySelector(
         `.pin[data-color="${color}"][data-index="${index}"]`
@@ -718,7 +798,10 @@ function debugMove(color, index, row, col) {
 
         //  if center
         if (homeIndex === 5) {
+            await animateMove(pin, color, index, 1);
             moveToCenter(pin, color);
+            updateTurnUI();
+            return;
         }
 
         console.log("Moved to HOME:", homeIndex);
@@ -748,62 +831,6 @@ function debugMove(color, index, row, col) {
     state.homeStep = -1;
 
     console.log("Moved to BASE");
-}
-
-function handleHomePin(pin, color, index, diceValue) {
-
-    const state = gameState[color][index];
-
-    // already finished → ignore
-    if (state.homeStep === 5) return false;
-
-    const targetStep = state.homeStep + diceValue;
-
-    // invalid move (must be exact)
-    if (targetStep > 5) return false;
-
-    //make selectable
-    pin.classList.add("active");
-
-    pin.onclick = () => {
-
-        clearSelection();
-
-        const oldCell = pin.parentElement;
-
-        // CENTER CASE
-        if (targetStep === 5) {
-
-            moveToCenter(pin, color);
-
-            state.homeStep = 5;
-            state.position = -2;
-
-            if (oldCell) updateCellLayout(oldCell);
-
-            if (checkWin(color)) {
-                alert(color + " wins!");
-            }
-
-            nextTurn();
-            return;
-        }
-
-        // NORMAL HOME MOVE
-        const [r, c] = homePaths[color][targetStep];
-        const cell = getCell(r, c);
-
-        cell.appendChild(pin);
-
-        state.homeStep = targetStep;
-
-        if (oldCell) updateCellLayout(oldCell);
-        updateCellLayout(cell);
-
-        nextTurn();
-    };
-
-    return true; // means handled
 }
 
 function debugDice(color, value) {
@@ -885,3 +912,117 @@ function playStepSound() {
     s.volume = 0.4;
     s.play();
 }
+
+
+
+function resetGameState() {
+    boardCells.innerHTML = "";
+    finishedPlayers = [];
+    sixCount = 0;
+    currentTurn = 0;
+
+    for (let color in gameState) {
+        gameState[color].forEach(p => {
+            p.position = -1;
+            p.homeStep = -1;
+        });
+    }
+}
+
+function startGameWithSameSettings() {
+    createdBoard();
+    updateTurnUI();
+}
+
+async function celebrationWin(color) {
+    playSound("win");
+    const bases = document.querySelectorAll(`.base-${color}-area`);
+    bases.forEach(b => {
+        b.classList.add("win-glow");
+    });
+    addCrown(color);
+    spawnConfetti();
+    await sleep(2000);
+    bases.forEach(b => {
+        b.classList.remove("win-glow");
+    });
+}
+function addCrown(color) {
+    const player = document.getElementById(`player-${color}`);
+
+    const crown = document.createElement("div");
+    crown.className = "crown";
+    crown.innerText = "👑";
+
+    player.appendChild(crown);
+}
+function spawnConfetti() {
+    playSound("confetti"); // 🔥 NEW
+
+    for (let i = 0; i < 80; i++) {
+        const conf = document.createElement("div");
+        conf.className = "confetti";
+
+        conf.style.left = Math.random() * 100 + "vw";
+        conf.style.background = `hsl(${Math.random() * 360},100%,60%)`;
+        conf.style.animationDuration = (1 + Math.random()) + "s";
+        conf.style.width = "8px";
+        conf.style.height = "8px";
+
+        document.body.appendChild(conf);
+
+        setTimeout(() => conf.remove(), 2000);
+    }
+}
+// --- Update showResultModal to populate the new design ---
+function showResultModal() {
+    const modal = document.getElementById("resultModal");
+    const list = document.getElementById("resultList");
+
+    modal.style.display = "flex"; // Show as flex to center
+    list.innerHTML = ""; // Clear old content
+    const winTxt = document.getElementById("win-txt");
+    winTxt.innerText = `${capitalize(finishedPlayers[0])} Wins!`;
+    // 1. Get complete rankings (finished players + the one remaining)
+    const rankings = [...finishedPlayers];
+    const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
+    rankings.push(lastPlayer);
+
+    // 2. Clear visual highlights from the game board
+    players.forEach(color => {
+        const p_indicator = document.getElementById(`player-${color}`);
+        p_indicator.classList.remove("active", "turn-glow");
+    });
+
+    // 3. Map colors to their display names and avatar icons (from player indicators)
+    const playerMap = {
+        red: { name: "Red Player", icon: "fa-chess-pawn" },
+        green: { name: "Green Player", icon: "fa-leaf" },
+        yellow: { name: "Yellow Player", icon: "fa-sun" },
+        blue: { name: "Blue Player", icon: "fa-droplet" }
+    };
+
+    // 4. Generate ranking rows dynamically
+    rankings.forEach((color, index) => {
+        const playerData = playerMap[color];
+        const row = document.createElement("div");
+        row.className = "ranking-row";
+
+        // Create HTML for one row
+        row.innerHTML = `
+            <div class="rank-number">${index + 1}.</div>
+            <div class="player-avatar" style="background-color: var(--${color});">
+                <i class="fa-solid ${playerData.icon}"></i>
+            </div>
+            <div class="player-name">${playerData.name}</div>
+        `;
+
+        list.appendChild(row);
+    });
+}
+$("#resultModal .close-icon").click(() => {
+    window.location.reload(); // Simple way to reset everything
+});
+$("#restartBtn").click(() => {
+    window.location.reload(); // Simple way to reset everything
+});

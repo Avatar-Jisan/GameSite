@@ -829,3 +829,245 @@ body {
         transform: scale(1.5);
     }
 }
+
+.win-glow {
+    animation: winPulse 0.5s infinite alternate;
+}
+
+@keyframes winPulse {
+    from { filter: brightness(1); }
+    to { filter: brightness(1.8); }
+}
+
+.crown {
+    position: absolute;
+    top: -35px;
+    right: -35px;
+    font-size: 50px;
+    rotate: 45deg;
+}
+
+.confetti {
+    position: fixed;
+    top: -10px;
+    border-radius: 2px;
+
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* --- Result Overlay (Leaderboard) --- */
+.result-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000; /* High z-index to be on top */
+}
+
+.result-box {
+    width: 350px;
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+#win-txt {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+/* Close Icon */
+.close-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Leaderboard Header (Purple section) */
+.leaderboard-header {
+    background: #8e44ad; /* Purple gradient/color from ref */
+    background: linear-gradient(180deg, #9b59b6 0%, #8e44ad 100%);
+    padding: 30px 20px 60px; /* Extra bottom padding for medals */
+    color: #fff;
+    text-align: center;
+    position: relative;
+}
+
+.header-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    margin-bottom: 25px;
+}
+
+/* Medals Container and Styles */
+.medals-container {
+    position: relative;
+    height: 100px; /* Space for the medals to sit */
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.medal-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.medal-circle .user-icon {
+    font-size: 30px;
+    color: #fff;
+}
+
+/* Specific Medal Colors */
+.gold { background-color: #f1c40f; } /* Yellow */
+.silver { background-color: #bdc3c7; } /* Gray */
+.bronze { background-color: #e67e22; } /* Orange */
+
+/* Large Gold Medal (Rank 1) */
+.gold-medal-large {
+    z-index: 5;
+    position: absolute;
+    bottom: -40px; /* Hangs over the purple section */
+}
+
+.gold-medal-large .medal-circle {
+    width: 90px;
+    height: 90px;
+    border: 6px solid #fff;
+}
+
+.gold-medal-large .user-icon {
+    font-size: 40px;
+}
+
+.crown-icon {
+    position: absolute;
+    top: -20px;
+    color: #f1c40f;
+    font-size: 25px;
+}
+
+/* Ribbon below Gold Medal */
+.ribbon {
+    background: #e74c3c;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: -10px;
+    position: relative;
+    z-index: 6;
+    display: inline-block;
+}
+
+/* Secondary Medals (Rank 2 & 3) */
+.secondary-medal {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    bottom: -20px; /* Less hang than gold */
+}
+
+.left { left: 40px; }
+.right { right: 40px; }
+
+/* Ranked List Section (White section) */
+.result-list {
+    background: #fff;
+    padding: 50px 20px 20px; /* Top padding makes space for hanging medals */
+    flex-grow: 1;
+}
+
+/* Ranking Row Styling */
+.ranking-row {
+    display: flex;
+    align-items: center;
+    background: #f4f7f6; /* Light gray from ref */
+    border-radius: 15px;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.rank-number {
+    font-weight: 700;
+    font-size: 1.1rem;
+    margin-right: 15px;
+    width: 25px;
+    text-align: center;
+}
+
+.player-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #ddd; /* Default color */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.player-avatar i {
+    color: #fff;
+    font-size: 16px;
+}
+
+.player-name {
+    font-weight: 600;
+    flex-grow: 1;
+}
+
+/* Working Button styling */
+.restart-btn {
+    background: #8e44ad; /* Purple to match header */
+    color: #fff;
+    border: none;
+    padding: 15px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    margin: 10px 20px 20px; /* Margins for spacing */
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.restart-btn:hover {
+    background: #9b59b6;
+}
+
+/* --- Ensure other overlays don't clash --- */
+#ludoStartOverlay {
+    z-index: 2000; /* Game start on top of board */
+}
