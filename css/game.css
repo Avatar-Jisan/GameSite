@@ -1,72 +1,77 @@
 /* Game Page Layout */
-body{
+body {
   background: var(--bg-dark);
   color: var(--text-primary);
-  
+
 }
 
-.game-page{
+.game-page {
   margin-top: 30px;
 }
-.game-area{
+
+.game-area {
   margin-left: -60px;
 }
+
 /* Game player container */
 
-.game-player{
+.game-player {
   width: 100%;
- height: 80vh;
+  height: 80vh;
   background: var(--bg-card);
   border-radius: 12px;
   overflow: hidden;
-  margin-top:80px;
+  margin-top: 80px;
 }
-#gameFrame{
+
+#gameFrame {
   border: none;
   width: 100%;
   height: 93%;
 }
+
 /* iframe styling */
 
-.game-player iframe{
+.game-player iframe {
   width: 100%;
-  height: 500px;
-  
+  height: 100%;
   background: var(--footer-color);
 
 }
 
-.game-info-one{
+.game-info-one {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding-left: 20px;
 }
-.game-info-button{
+
+.game-info-button {
   display: flex;
   gap: 15px;
 }
 
-.game-info-button button{
+.game-info-button button {
   position: relative;
   border: none;
   padding: 20px;
   background-color: var(--accent-color);
   border-radius: 30px;
 }
-.game-info-button button::after{
+
+.game-info-button button::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
   border-radius: 30px;
-  background-color: rgba(255,255,255,0.5);
+  background-color: rgba(255, 255, 255, 0.5);
   opacity: 0;
   transition: opacity 0.25s ease;
   pointer-events: none;
 }
 
-.game-info-button button:hover::after{
+.game-info-button button:hover::after {
   opacity: 0.5;
 }
 
@@ -74,46 +79,48 @@ body{
 
 /* Game information section */
 
-.game-info{
+.game-info {
   background: var(--bg-card);
   padding: 20px;
   border-radius: 12px;
 }
 
-.game-table, .game-table th, .game-table td{
+.game-table,
+.game-table th,
+.game-table td {
   background: transparent !important;
 }
 
-.game-table th{
+.game-table th {
   color: var(--text-secondary);
   font-size: 1.4rem;
   font-weight: bold;
 }
 
-.game-table td{
+.game-table td {
   color: var(--text-primary);
   font-size: 1.4rem;
 }
 
-.game-info ul{
+.game-info ul {
   margin-left: 20px;
   font-size: 1.4rem;
 }
 
 /* Sidebar */
 
-#relatedGames{
+#relatedGames {
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
 
 /* Small cards for sidebar */
-.other-games{
+.other-games {
   margin-top: 70px;
 }
 
-.related-card{
+.related-card {
   display: flex;
   gap: 10px;
   background: var(--bg-card);
@@ -122,7 +129,7 @@ body{
   cursor: pointer;
 }
 
-.related-card img{
+.related-card img {
   width: 80px;
   height: 60px;
   object-fit: cover;

@@ -2,54 +2,58 @@
 <html lang="en">
 
 <head>
-    <title>Ludo</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Ludo</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="../../css/variable.css">
-    <link rel="stylesheet" href="ludo.css" />
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- CSS -->
+  <link rel="stylesheet" href="../../css/variable.css" />
+  <link rel="stylesheet" href="ludo.css" />
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
 
 <body>
-    <div class="overlay" id="ludoStartOverlay">
-        <div class="overlay-box">
-            <div class="overlay-text">
-                <img src="../../assets/games_img/ludo_img.avif" alt="Ludo Game" class="game-logo" />
-                <h1 class="game-title">Ludo Game</h1>
-                <p class="game-desc">
-                    Experience the classic board game of Ludo in a digital format! Roll the dice, move your pieces, and
-                    strategize to be the first to get all your tokens to the center. Play against friends or challenge
-                    the computer for hours of fun!
-                </p>
-            </div>
-        
+  <div class="top-controls" style="display: none">
+    <button id="backBtn" class="control-btn">
+      <i class="fa-solid fa-arrow-left"></i>
+    </button>
 
+    <button id="soundBtn" class="control-btn">
+      <i id="volume-icon" class="fa-solid fa-volume-high"></i>
+    </button>
+  </div>
 
-        <div id="ludoModeSection">
-            <button class="btn mode-btn" data-mode="pvp">
-                <i class="fa-solid fa-user"></i> Player vs <i class="fa-solid fa-user"></i> Player
-            </button>
+  <button id="exitBtn" class="exit-btn" style="display: none">
+    <i class="fa-solid fa-compress"></i>
+  </button>
+  <div id="resultModal" class="result-overlay" style="display: none;">
+  <div class="result-box">
+    <i class="fa-solid fa-xmark close-icon"></i>
 
-            <button class="btn mode-btn" data-mode="ai">
-                <i class="fa-solid fa-user"></i> Player vs <i class="fa-solid fa-robot"></i> AI
-            </button>
+    <div class="leaderboard-header">
+      <div class="header-text">LEADERBOARD</div>
+      <div class="medals-container">
+        <div class="gold-medal-large">
+          <div class="medal-circle gold">
+            <i class="fa-solid fa-crown crown-icon"></i>
+            <i class="fa-solid fa-user user-icon"></i>
+          </div>
+          <div class="ribbon">TOP RANK</div>
+          <div id="win-txt"></div>
         </div>
-
-        <div id="playerNumberSection" style="display: none;">
-            <button class="btn player-num-btn" data-player-num="2">2 Players</button>
-            <button class="btn player-num-btn" data-player-num="3">3 Players</button>
-            <button class="btn player-num-btn" data-player-num="4">4 Players</button>
-
+        <div class="medal-circle silver secondary-medal left">
+          <i class="fa-solid fa-user user-icon"></i>
         </div>
+        <div class="medal-circle bronze secondary-medal right">
+          <i class="fa-solid fa-user user-icon"></i>
         </div>
+      </div>
     </div>
 
     <div class="ludo-container">
@@ -63,9 +67,195 @@
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-        integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-        crossorigin="anonymous"></script>
+    <button id="restartBtn" class="restart-btn">Play Again</button>
+  </div>
+</div>
+
+  <div class="overlay" id="ludoStartOverlay">
+    <div class="overlay-box">
+      <div class="overlay-text">
+        <img src="../../assets/games_img/ludo_img.avif" alt="Ludo Game" class="game-logo" />
+        <h1 class="game-title">Ludo Game</h1>
+        <p class="game-desc">
+          Experience the classic board game of Ludo in a digital format!
+          Roll the dice, move your pieces, and strategize to be the first to
+          get all your tokens to the center. Play against friends or
+          challenge the computer for hours of fun!
+        </p>
+      </div>
+
+      <div id="ludoModeSection">
+        <button class="btn mode-btn" data-mode="pvp">
+          <i class="fa-solid fa-user"></i> Player vs
+          <i class="fa-solid fa-user"></i> Player
+        </button>
+
+        <button class="btn mode-btn" data-mode="ai" style="display: none;">
+          <i class="fa-solid fa-user"></i> Player vs
+          <i class="fa-solid fa-robot"></i> AI
+        </button>
+      </div>
+
+      <div id="playerNumberSection" style="display: none">
+        <button class="btn player-num-btn" data-player-num="2">
+          2 Players
+        </button>
+        <button class="btn player-num-btn" data-player-num="3">
+          3 Players
+        </button>
+        <button class="btn player-num-btn" data-player-num="4">
+          4 Players
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="scaling-container">
+    <div class="game-wrapper">
+      <div class="ludo-container">
+        <div class="ludo-board" id="board">
+          <div class="board-cells" id="board-cells"></div>
+          <div class="player-indicator red" id="player-red">
+            <div class="avatar">
+              <i class="fa-solid fa-chess-pawn"></i>
+            </div>
+            <div class="dice-holder">
+              <div class="dice-box hidden">
+                <div class="dice" data-value="1">
+                  <div class="dot"></div>
+                  <!-- 1 -->
+                  <div class="dot"></div>
+                  <!-- 2 -->
+                  <div class="dot"></div>
+                  <!-- 3 -->
+
+                  <div class="dot"></div>
+                  <!-- 4 -->
+                  <div class="dot"></div>
+                  <!-- 5 (CENTER) -->
+                  <div class="dot"></div>
+                  <!-- 6 -->
+
+                  <div class="dot"></div>
+                  <!-- 7 -->
+                  <div class="dot"></div>
+                  <!-- 8 -->
+                  <div class="dot"></div>
+                  <!-- 9 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="player-indicator green" id="player-green">
+            <div class="avatar">
+              <i class="fa-solid fa-leaf"></i>
+            </div>
+            <div class="dice-holder">
+              <div class="dice-box hidden">
+                <div class="dice" data-value="1">
+                  <div class="dot"></div>
+                  <!-- 1 -->
+                  <div class="dot"></div>
+                  <!-- 2 -->
+                  <div class="dot"></div>
+                  <!-- 3 -->
+
+                  <div class="dot"></div>
+                  <!-- 4 -->
+                  <div class="dot"></div>
+                  <!-- 5 (CENTER) -->
+                  <div class="dot"></div>
+                  <!-- 6 -->
+
+                  <div class="dot"></div>
+                  <!-- 7 -->
+                  <div class="dot"></div>
+                  <!-- 8 -->
+                  <div class="dot"></div>
+                  <!-- 9 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="player-indicator yellow" id="player-yellow">
+            <div class="avatar">
+              <i class="fa-solid fa-sun"></i>
+            </div>
+            <div class="dice-holder">
+              <div class="dice-box hidden">
+                <div class="dice" data-value="1">
+                  <div class="dot"></div>
+                  <!-- 1 -->
+                  <div class="dot"></div>
+                  <!-- 2 -->
+                  <div class="dot"></div>
+                  <!-- 3 -->
+
+                  <div class="dot"></div>
+                  <!-- 4 -->
+                  <div class="dot"></div>
+                  <!-- 5 (CENTER) -->
+                  <div class="dot"></div>
+                  <!-- 6 -->
+
+                  <div class="dot"></div>
+                  <!-- 7 -->
+                  <div class="dot"></div>
+                  <!-- 8 -->
+                  <div class="dot"></div>
+                  <!-- 9 -->
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="player-indicator blue" id="player-blue">
+            <div class="avatar">
+              <i class="fa-solid fa-droplet"></i>
+            </div>
+            <div class="dice-holder">
+              <div class="dice-box hidden">
+                <div class="dice" data-value="1">
+                  <div class="dot"></div>
+                  <!-- 1 -->
+                  <div class="dot"></div>
+                  <!-- 2 -->
+                  <div class="dot"></div>
+                  <!-- 3 -->
+
+                  <div class="dot"></div>
+                  <!-- 4 -->
+                  <div class="dot"></div>
+                  <!-- 5 (CENTER) -->
+                  <div class="dot"></div>
+                  <!-- 6 -->
+
+                  <div class="dot"></div>
+                  <!-- 7 -->
+                  <div class="dot"></div>
+                  <!-- 8 -->
+                  <div class="dot"></div>
+                  <!-- 9 -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- script -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="ludo.js"></script>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>
