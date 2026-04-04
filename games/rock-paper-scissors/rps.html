@@ -30,9 +30,14 @@
     </div>
 
     <div id="game-page" class="hidden">
-        <button id="music-btn" class="btn-small">
-            <i class="fa-solid fa-volume-xmark"></i> Music
-        </button>
+        <div class="top-controls">
+            <button id="back-btn" class="btn-small" style="border-color: var(--text-orange); box-shadow: 0 4px 0 var(--text-orange);">
+                <i class="fa-solid fa-arrow-left"></i> Back
+            </button>
+            <button id="music-btn" class="btn-small">
+                <i class="fa-solid fa-volume-xmark"></i> Music
+            </button>
+        </div>
         
         <div class="scoreboard">
             <div class="score-box">
@@ -44,7 +49,7 @@
                 <p style="color: var(--white);">10</p>
             </div>
             <div class="score-box">
-                <h2>System</h2>
+                <h2>Computer</h2>
                 <p id="c-score">0</p>
             </div>
         </div>

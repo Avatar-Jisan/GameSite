@@ -41,6 +41,7 @@ $(document).ready(function() {
     }
 
     function playSFX(type) {
+        if (!isMusicPlaying) return;
         initAudio();
         if(type === 'shake') {
             playTone(200, 'triangle', 0.1, 0.1); 
@@ -59,6 +60,12 @@ $(document).ready(function() {
         $('#landing-page').addClass('hidden');
         $('#game-page').removeClass('hidden');
         initAudio(); 
+        resetStats();
+    });
+    // this listener for the Back button
+    $('#back-btn').on('click', function() {
+        $('#result-modal, #game-page').addClass('hidden');
+        $('#landing-page').removeClass('hidden');
         resetStats();
     });
 
@@ -153,7 +160,7 @@ $(document).ready(function() {
         let statusElement = $('#game-status');
         
         if (player === computer) {
-            statusElement.text("It's a TIE!").css('color', 'var(--white)');
+            statusElement.text("It's a TIE!").css('color', 'var(--dark-blue)');
             roundsTied++;
             playSFX('tie');
         } else if (
