@@ -201,7 +201,7 @@ html, body{
     position: relative;
     width: 800px;
     padding:20px;
-    background: #32b54c;
+    background: #b032b9;
     border-radius: 12px;
     border: 4px dashed white;
 }
@@ -371,15 +371,15 @@ html, body{
 
 /* Colors */
 .turn-blue {
-  background: rgba(51, 118, 140, 0.5);
+  background: rgba(51, 118, 140, 0.9);
 }
 
 .turn-red {
-  background: rgba(146, 65, 56, 0.5);
+  background: rgba(146, 65, 56, 0.9);
 }
 
 .turn-orange {
-  background: rgba(124, 89, 23, 0.5);
+  background: rgba(124, 89, 23, 0.9);
 }
 
 /* Control Buttons */

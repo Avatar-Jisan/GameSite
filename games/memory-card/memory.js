@@ -16,6 +16,7 @@ let selectedDifficulty = null;
 let currentPlayer = 1;
 let soundEnabled = true;
 
+
 const sounds = {
   flip: new Audio("../../assets/sounds/flip.mp3"),
   success: new Audio("../../assets/sounds/success.mp3"),
@@ -318,6 +319,9 @@ function restartGame() {
   updateUI();
 
   createBoard(selectedDifficulty);
+  gameBoard.classList.remove("no-click");
+  lockBoard = false;
+  aiTurnRunning = false;
 }
 
 // AI Memory Logic
@@ -427,6 +431,9 @@ backBtn.addEventListener("click", () => {
   matchedPairs = 0;
   aiMemory = {};
   currentPlayer = 1;
+  gameBoard.classList.remove("no-click");
+  lockBoard = false;
+  aiTurnRunning = false;
   document.getElementById("player1Score").innerText = 0;
   document.getElementById("player2Score").innerText = 0;
 });
