@@ -66,7 +66,7 @@ $(document).ready(function () {
           </div>
 
           <div class="col-md-6 slide-image">
-            <img src="${game.image}" class="img-fluid">
+            <img src="${game.image}" class="slide-img">
           </div>
         </div>
       </div>`;
