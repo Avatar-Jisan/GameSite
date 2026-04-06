@@ -117,7 +117,7 @@
       "The player wins by guessing the entire word before the hangman is fully drawn.",
       "The player loses if the hangman is completed before the word is guessed."
     ],
-    "path": "hangman"
+    "path": "games/Hangman/index.html"
   },
   {
     "id": "rock-paper-scissors",

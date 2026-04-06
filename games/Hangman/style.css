@@ -1,0 +1,378 @@
+/* style.css */
+
+:root {
+    --bg-color: #a9c9ba;
+    --text-color: #334d40;
+    --accent-color: #e8f3ee;
+    --accent-color-hover: #d1e6db;
+    --font-heading: 'Luckiest Guy', cursive;
+    --font-body: 'Poppins', sans-serif;
+    --shadow-small: 0 2px 5px rgba(0,0,0,0.1);
+    --shadow-medium: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    font-family: var(--font-body);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 90%;
+    max-width: 800px;
+    height: 90vh;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-medium);
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Screen Management */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* Hide by default */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.screen.visible {
+    display: flex;
+    opacity: 1;
+    z-index: 10;
+}
+
+/* Landing Page Styling */
+#landing-page {
+    text-align: center;
+}
+
+.main-heading {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.landing-image {
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 30px;
+}
+
+.main-btn {
+    background-color: var(--text-color);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: var(--shadow-small);
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.main-btn:hover {
+    background-color: #26382f;
+    transform: translateY(-2px);
+}
+
+/* Level Selection Styling */
+#level-selection-page {
+    justify-content: start;
+    padding-top: 50px;
+}
+
+.sub-heading {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+}
+
+.level-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.level-btn {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    padding: 12px;
+    font-size: 1.1rem;
+    border-radius: 15px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.level-btn:hover {
+    background-color: var(--accent-color-hover);
+}
+
+/* Gameplay Styling */
+#gameplay-page {
+    justify-content: start;
+    padding: 0;
+    flex-direction: row;
+}
+
+.game-header {
+    width: 100%;
+    padding: 15px 20px;
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 20;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.score-display {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+}
+
+.game-main {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row; /* Layout specific to gameplay */
+    box-sizing: border-box;
+}
+
+.word-section {
+    flex: 2; /* 2/3 width */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-top: 50px; /* Account for header */
+}
+
+.word-display {
+    font-size: 2.5rem;
+    letter-spacing: 15px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+.attempts-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.keyboard {
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.key-row {
+    display: flex;
+    gap: 8px;
+}
+
+.key {
+    background-color: var(--accent-color);
+    border: 1px solid rgba(0,0,0,0.1);
+    color: var(--text-color);
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.key:hover {
+    background-color: var(--accent-color-hover);
+}
+
+.key.correct {
+    background-color: #8bc34a; /* Light green */
+    color: white;
+}
+
+.key.incorrect {
+    background-color: #e57373; /* Light red */
+    color: white;
+}
+
+.key:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.image-section {
+    flex: 1; /* 1/3 width */
+    background-color: var(--accent-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 50px; /* Account for header */
+}
+
+.game-image {
+    max-width: 100%;
+    height: auto;
+    transition: opacity 0.5s ease; /* Transition between images */
+}
+
+/* Result Popup Styling */
+.modal-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    display: none; /* Hide by default */
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.modal-overlay.visible {
+    display: flex;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow-medium);
+    max-width: 300px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    font-family: var(--font-heading);
+    font-size: 2.2rem;
+    color: #c62828; /* Dark Red */
+    margin-bottom: 10px;
+}
+
+.popup-btns {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.popup-btn {
+    background-color: var(--text-color);
+    color: white;
+    border: none;
+    padding: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.popup-btn-secondary {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+}
+/* --- NEW STYLES FOR CATEGORY AND ICONS --- */
+
+.category-box {
+    background-color: var(--accent-color);
+    color: var(--text-color);
+    border: 2px solid var(--text-color);
+    padding: 8px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    box-shadow: var(--shadow-small);
+}
+
+/* Ensure keys are positioned relative for the icons */
+.key {
+    position: relative; 
+}
+
+/* Hide the original letter and show the checkmark */
+.key.correct {
+    background-color: #8bc34a; 
+    color: transparent; /* Hides the letter */
+}
+
+.key.correct::after {
+    content: '\f00c'; /* FontAwesome checkmark icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+}
+
+/* Hide the original letter and show the cross */
+.key.incorrect {
+    background-color: #e57373;
+    color: transparent; /* Hides the letter */
+}
+
+.key.incorrect::after {
+    content: '\f00d'; /* FontAwesome times (cross) icon */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.2rem;
+}

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div id="landing-page" class="screen visible">
+            <h1 class="main-heading">Hangman</h1>
+            <img src="images/hangman_landing.png" alt="Happy Stickman" class="landing-image">
+            <button id="play-now-btn" class="main-btn">Play Now</button>
+        </div>
+
+        <div id="level-selection-page" class="screen">
+            <h2 class="sub-heading">Select Difficulty</h2>
+            <div class="level-btns">
+                <button class="level-btn" data-level="easy">Easy (3-4 Letters)</button>
+                <button class="level-btn" data-level="medium">Medium (4-5 Letters)</button>
+                <button class="level-btn" data-level="hard">Hard (6-7 Letters)</button>
+            </div>
+        </div>
+
+        <div id="gameplay-page" class="screen">
+            <header class="game-header">
+                <button id="back-btn" class="icon-btn"><i class="fas fa-chevron-left"></i></button>
+                <div class="score-display">Score: <span id="current-score">0</span></div>
+            </header>
+            
+            <div class="game-main">
+                <div class="word-section">
+                    <div id="word-category" class="category-box">Category</div>
+                    
+                    <div id="word-display" class="word-display">_ _ _ _ _</div>
+                    <p id="attempts-left-text" class="attempts-text">Attempts left: 5</p>
+                    <div id="keyboard" class="keyboard">
+                        <div class="key-row">
+                            <button class="key" data-key="q">Q</button><button class="key" data-key="w">W</button><button class="key" data-key="e">E</button><button class="key" data-key="r">R</button><button class="key" data-key="t">T</button><button class="key" data-key="y">Y</button><button class="key" data-key="u">U</button><button class="key" data-key="i">I</button><button class="key" data-key="o">O</button><button class="key" data-key="p">P</button>
+                        </div>
+                        <div class="key-row">
+                            <button class="key" data-key="a">A</button><button class="key" data-key="s">S</button><button class="key" data-key="d">D</button><button class="key" data-key="f">F</button><button class="key" data-key="g">G</button><button class="key" data-key="h">H</button><button class="key" data-key="j">J</button><button class="key" data-key="k">K</button><button class="key" data-key="l">L</button>
+                        </div>
+                        <div class="key-row">
+                            <button class="key" data-key="z">Z</button><button class="key" data-key="x">X</button><button class="key" data-key="c">C</button><button class="key" data-key="v">V</button><button class="key" data-key="b">B</button><button class="key" data-key="n">N</button><button class="key" data-key="m">M</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="image-section">
+                    <img id="game-image" src="images/hangman_start.png" alt="Hiding Stickman" class="game-image">
+                </div>
+            </div>
+        </div>
+
+        <div id="result-popup" class="modal-overlay">
+            <div class="modal-content">
+                <h2>Game Over</h2>
+                <p>Final Score: <span id="final-score">0</span></p>
+                <div class="popup-btns">
+                    <button id="restart-btn" class="popup-btn">Restart</button>
+                    <button id="home-btn" class="popup-btn popup-btn-secondary">Home</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
