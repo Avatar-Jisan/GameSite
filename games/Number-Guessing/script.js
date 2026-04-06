@@ -6,6 +6,15 @@ const canvas=document.getElementById("confettiCanvas");
 const ctx=canvas.getContext("2d");
 let confettiParticles=[];
 
+// Start Game from Start Screen
+function startGame(){
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("gameContainer").style.display="block";
+    setDifficulty();
+    showLeaderboard();
+    restartGame();
+}
+
 // Difficulty
 function setDifficulty(){
     const diff=document.getElementById("difficulty").value;
@@ -146,6 +155,5 @@ function updateConfetti(){
 }
 
 // Init
-setDifficulty();
 showLeaderboard();
 window.addEventListener('resize',resizeCanvas);
