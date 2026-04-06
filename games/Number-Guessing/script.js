@@ -1,117 +1,159 @@
-let randomNumber;
-let attempts;
-let maxAttempts;
-let maxRange;
-let startTime;
-let timerInterval;
+let randomNumber, attempts, maxAttempts, maxRange;
+let currentPlayer=1;
+let startTime, timerInterval, timeLeft=60;
 
-function setDifficulty() {
-    let difficulty = document.getElementById("difficulty").value;
+const canvas=document.getElementById("confettiCanvas");
+const ctx=canvas.getContext("2d");
+let confettiParticles=[];
 
-    if (difficulty === "easy") {
-        maxRange = 50;
-        maxAttempts = 10;
-    } else if (difficulty === "medium") {
-        maxRange = 100;
-        maxAttempts = 7;
-    } else {
-        maxRange = 200;
-        maxAttempts = 5;
-    }
-
-    document.getElementById("rangeText").textContent =
-        `Guess a number between 1 and ${maxRange}`;
-
+// Start Game from Start Screen
+function startGame(){
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("gameContainer").style.display="block";
+    setDifficulty();
+    showLeaderboard();
     restartGame();
 }
 
-function restartGame() {
-    randomNumber = Math.floor(Math.random() * maxRange) + 1;
-    attempts = 0;
+// Difficulty
+function setDifficulty(){
+    const diff=document.getElementById("difficulty").value;
+    if(diff==="easy"){ maxRange=50; maxAttempts=10;}
+    else if(diff==="medium"){ maxRange=100; maxAttempts=7;}
+    else{ maxRange=200; maxAttempts=5;}
+    document.getElementById("rangeText").textContent=`Guess a number between 1 and ${maxRange}`;
+    restartGame();
+}
 
-    startTime = Date.now();
+// Restart
+function restartGame(){
+    randomNumber=Math.floor(Math.random()*maxRange)+1;
+    attempts=0;
+    currentPlayer=1;
+    timeLeft=60;
+    startTime=Date.now();
     clearInterval(timerInterval);
-    timerInterval = setInterval(updateTimer, 1000);
-
-    document.getElementById("message").textContent = "";
-    document.getElementById("attempts").textContent = "";
-    document.getElementById("guessInput").value = "";
+    timerInterval=setInterval(updateTimer,1000);
+    document.getElementById("message").textContent="";
+    document.getElementById("attempts").textContent="";
+    document.getElementById("guessInput").value="";
+    updateTimer();
 }
 
-function updateTimer() {
-    let seconds = Math.floor((Date.now() - startTime) / 1000);
-    document.getElementById("timer").textContent = `⏱ Time: ${seconds}s`;
+// Timer
+function updateTimer(){
+    document.getElementById("overlayTimer").textContent=`${timeLeft}s`;
+    if(timeLeft<=0){
+        clearInterval(timerInterval);
+        playSound('lose');
+        showResultOverlay("Time's up!","Game Over! Number was "+randomNumber);
+    }
+    timeLeft--;
 }
 
-function checkGuess() {
-    let userGuess = Number(document.getElementById("guessInput").value);
-    let playerName = document.getElementById("playerName").value.trim();
-    let message = document.getElementById("message");
-
-    if (!playerName) {
-        message.textContent = "❌ Enter your name!";
-        return;
-    }
-
-    if (!userGuess) {
-        message.textContent = "❌ Enter a number!";
-        return;
-    }
+// Check Guess
+function checkGuess(){
+    const guess=Number(document.getElementById("guessInput").value);
+    const p1=document.getElementById("player1Name").value.trim();
+    const p2=document.getElementById("player2Name").value.trim();
+    const message=document.getElementById("message");
+    if(!p1 || !p2){ message.textContent="❌ Enter both player names!"; return;}
+    if(!guess){ message.textContent="❌ Enter a number!"; return;}
 
     attempts++;
-
-    if (userGuess < randomNumber) {
-        message.textContent = "📉 Too low!";
-    } else if (userGuess > randomNumber) {
-        message.textContent = "📈 Too high!";
-    } else {
-        let timeTaken = Math.floor((Date.now() - startTime) / 1000);
-        message.textContent = `🎉 ${playerName} wins in ${attempts} tries & ${timeTaken}s!`;
-        message.classList.add("win");
+    if(guess<randomNumber){ message.textContent=`📉 Player ${currentPlayer} too low!`; playSound('wrong'); nextPlayer();}
+    else if(guess>randomNumber){ message.textContent=`📈 Player ${currentPlayer} too high!`; playSound('wrong'); nextPlayer();}
+    else{
         clearInterval(timerInterval);
-        saveScore(playerName, attempts, timeTaken);
+        const timeTaken=60-timeLeft;
+        const winner=currentPlayer===1?p1:p2;
+        saveScore(winner,attempts,timeTaken);
+        playSound('win');
+        showResultOverlay(`${winner} wins!`,`Tries: ${attempts} | Time: ${timeTaken}s`);
+        startConfetti();
         return;
     }
 
-    if (attempts >= maxAttempts) {
-        message.textContent = `💀 Game Over! Number was ${randomNumber}`;
+    if(attempts>=maxAttempts){
         clearInterval(timerInterval);
+        playSound('lose');
+        showResultOverlay("Max attempts reached!","Number was "+randomNumber);
     }
-
-    document.getElementById("attempts").textContent =
-        `Attempts: ${attempts}/${maxAttempts}`;
+    document.getElementById("attempts").textContent=`Attempts: ${attempts}/${maxAttempts}`;
 }
 
-function saveScore(name, attempts, time) {
-    let scores = JSON.parse(localStorage.getItem("scores")) || [];
-    scores.push({ name, attempts, time });
+// Switch player
+function nextPlayer(){ currentPlayer=currentPlayer===1?2:1; }
 
-    scores.sort((a, b) => {
-        if (a.attempts === b.attempts) {
-            return a.time - b.time;
-        }
-        return a.attempts - b.attempts;
-    });
+// Sounds
+function playSound(type){
+    if(type==='win') document.getElementById("winSound").play();
+    else if(type==='lose') document.getElementById("loseSound").play();
+    else document.getElementById("wrongSound").play();
+}
 
-    scores = scores.slice(0, 5);
+// Result Overlay
+function showResultOverlay(title,info){
+    document.getElementById("resultMessage").textContent=title;
+    document.getElementById("resultInfo").textContent=info;
+    document.getElementById("resultOverlay").classList.add("show");
+}
+function closeResultOverlay(){
+    document.getElementById("resultOverlay").classList.remove("show");
+}
 
-    localStorage.setItem("scores", JSON.stringify(scores));
+// Leaderboard
+function saveScore(name,attempts,time){
+    let scores=JSON.parse(localStorage.getItem("scores"))||[];
+    scores.push({name,attempts,time});
+    scores.sort((a,b)=> a.attempts===b.attempts? a.time-b.time : a.attempts-b.attempts);
+    scores=scores.slice(0,5);
+    localStorage.setItem("scores",JSON.stringify(scores));
     showLeaderboard();
 }
-
-function showLeaderboard() {
-    let scores = JSON.parse(localStorage.getItem("scores")) || [];
-    let list = document.getElementById("leaderboard");
-    list.innerHTML = "";
-
-    scores.forEach((player, index) => {
-        let li = document.createElement("li");
-        li.textContent =
-            `#${index + 1} - ${player.name} | ${player.attempts} tries | ${player.time}s`;
+function showLeaderboard(){
+    const scores=JSON.parse(localStorage.getItem("scores"))||[];
+    const list=document.getElementById("leaderboard");
+    list.innerHTML="";
+    scores.forEach(p=>{
+        const li=document.createElement("li");
+        li.textContent=`${p.name} | ${p.attempts} tries | ${p.time}s`;
         list.appendChild(li);
     });
 }
 
-// Start
-setDifficulty();
+// Confetti
+function startConfetti(){
+    resizeCanvas();
+    confettiParticles=[];
+    for(let i=0;i<200;i++){
+        confettiParticles.push({
+            x:Math.random()*canvas.width,
+            y:Math.random()*canvas.height-canvas.height,
+            r:Math.random()*6+4,
+            d:Math.random()*50+10,
+            color:`hsl(${Math.random()*360},100%,50%)`,
+            tilt:Math.random()*10-10
+        });
+    }
+    requestAnimationFrame(updateConfetti);
+}
+function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
+function updateConfetti(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    confettiParticles.forEach(p=>{
+        ctx.beginPath();
+        ctx.lineWidth=p.r;
+        ctx.strokeStyle=p.color;
+        ctx.moveTo(p.x+p.tilt+p.r/2,p.y);
+        ctx.lineTo(p.x+p.tilt,p.y+p.tilt+p.r/2);
+        ctx.stroke();
+        p.y+=2; p.tilt+=0.1;
+        if(p.y>canvas.height){ p.y=0; p.x=Math.random()*canvas.width;}
+    });
+    requestAnimationFrame(updateConfetti);
+}
+
+// Init
 showLeaderboard();
+window.addEventListener('resize',resizeCanvas);
