@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maze Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== MENU ===== -->
+<div id="menu" class="container">
+  <div class="card">
+    <div class="logo">
+      <img src="maze.png" alt="Maze Game Logo">
+    </div>
+    <h1>Maze Game</h1>
+
+    <p>
+      Welcome to the Maze Challenge! Choose your difficulty and find your way
+      through the maze to reach the exit.
+    </p>
+
+    <div class="buttons">
+      <button onclick="startGame('easy')">🟢 Easy</button>
+      <button onclick="startGame('medium')">🟡 Medium</button>
+      <button onclick="startGame('hard')">🔴 Hard</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== GAME ===== -->
+<div id="gameScreen" class="hidden">
+  <div id="message"></div>
+  <div id="game"></div>
+
+  <div id="controls">
+    <div></div>
+    <button onclick="movePlayer(0,-1)">⬆️</button>
+    <div></div>
+
+    <button onclick="movePlayer(-1,0)">⬅️</button>
+    <div></div>
+    <button onclick="movePlayer(1,0)">➡️</button>
+
+    <div></div>
+    <button onclick="movePlayer(0,1)">⬇️</button>
+    <div></div>
+  </div>
+
+  <button class="backBtn" onclick="goBack()">⬅ Back</button>
+</div>
+
+<!-- 🔊 SOUND FILES (FIXED PATH) -->
+<audio id="moveSound" src="click.wav"></audio>
+<audio id="winSound" src="win.mp3"></audio>
+<audio id="clickSound" src="click.wav"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>

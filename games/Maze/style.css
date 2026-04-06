@@ -1,0 +1,106 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+}
+
+.container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 400px;
+  padding: 40px;
+  text-align: center;
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.logo img {
+  width: 140px;
+  filter: drop-shadow(0 0 10px rgb(62, 125, 180));
+}
+
+.buttons {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.hidden {
+  display: none;
+}
+
+#gameScreen {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#game {
+  width: 70vmin;
+  height: 70vmin;
+  display: grid;
+  gap: 2px;
+  background: black;
+  padding: 5px;
+}
+
+.cell { background: white; }
+.wall { background: black; }
+.player { background: limegreen; }
+.exit { background: red; }
+
+/* 🎮 Controls */
+#controls {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(3, 50px);
+  gap: 8px;
+}
+
+/* 🎉 Message */
+#message {
+  margin-bottom: 8px;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  padding: 8px 15px;
+  border-radius: 10px;
+}
+
+/* WIN EFFECT */
+.win {
+  color: #00ffcc;
+  background: rgba(0,255,200,0.1);
+  box-shadow: 0 0 15px #00ffcc;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.backBtn {
+  margin-top: 10px;
+}
