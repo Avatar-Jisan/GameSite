@@ -117,7 +117,7 @@
       "The player wins by guessing the entire word before the hangman is fully drawn.",
       "The player loses if the hangman is completed before the word is guessed."
     ],
-    "path": "hangman"
+    "path": "games/Hangman/index.html"
   },
   {
     "id": "rock-paper-scissors",
@@ -171,8 +171,27 @@
     "If all 9 cells are filled and no player has three in a row, the game ends in a draw.",
     "Players must place their symbol in an empty cell only."
   ],
-  "path": "tic-tac-toe"
+  "path": "games/Tictaktoe/index.html"
 }
-
+,
+{
+  "id": "maze-game",
+  "name": "Maze Game",
+  "category": ["Puzzle", "Adventure", "Strategy"],
+  "image": "assets/games_img/maze.png",
+  "shortDescription": "Navigate through challenging mazes and find your way to the exit.",
+  "longDescription": "Maze Game is an engaging puzzle adventure where players must navigate through complex labyrinths to reach the exit point. Each level increases in difficulty, featuring intricate paths, misleading turns, and dead ends that challenge memory, logic, and decision-making skills. Players must carefully explore, avoid traps, and find the correct route to escape the maze.",
+  "developer": "Shahria Karim Siam",
+  "rules": [
+    "The player starts at the green cell and must reach the red exit.",
+    "Use arrow keys or on-screen buttons to move the player.",
+    "You cannot move through walls (black cells).",
+    "Choose a difficulty level: Easy, Medium, or Hard.",
+    "Hard levels contain misleading paths and dead ends.",
+    "The goal is to reach the exit in the shortest path possible.",
+    "You can restart or go back to the menu anytime."
+  ],
+  "path": "games/maze/maze.html"
+}
  
 ]
