@@ -982,8 +982,8 @@ function showResultModal() {
     $(modal).show();
     modal.style.display = "flex"; // Show as flex to center
     list.innerHTML = ""; // Clear old content
-    const winTxt = document.getElementById("win-txt");
-    winTxt.innerText = `${finishedPlayers[0]} Wins!`;
+    // const winTxt = document.getElementById("win-txt");
+    // winTxt.innerText = `${finishedPlayers[0]} Wins!`;
     // 1. Get complete rankings (finished players + the one remaining)
     const rankings = [...finishedPlayers];
     const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
