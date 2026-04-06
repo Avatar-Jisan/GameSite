@@ -196,17 +196,18 @@
 {
   "id":"number-guessing",
   "name":"Number Guessing",
-  "category": ["Puzzle", "Singleplayer"],
-  "image": "assets/games_img/number-pic.jpg",
+  "category": ["Logic Game", "Doubleplayer"],
+  "image": "assets/games_img/guessingimage.png",
   "shortDescription": "Guess the hidden number within a limited number of attempts.",
   "longDescription": "Number Guessing is a simple yet engaging single-player puzzle game where players must guess a hidden number within a specified range. Players receive feedback after each guess, indicating whether the guessed number is too high or too low. The game challenges players to use logic and deduction to find the correct number in the fewest attempts possible.",
   "developer": "Chayanika Nath",
   "rules": [
-    "The computer generates a random number within a specified range.",
-    "Players must guess the hidden number within a limited number of attempts.",
-    "After each guess, players receive feedback indicating if their guess is too high or too low.",
-    "The game ends when the player guesses the correct number or runs out of attempts.",
-    "Players can choose different difficulty levels with varying ranges and attempt limits."
+    "1.Start the game.",
+    "2.The computer randomly selects a hidden number within a specified range (e.g., 1 to 100).",
+    "3.Enter your guess in the input box.",
+    "4.After each guess, the game will provide feedback: 'Too High', 'Too Low', or 'Correct'.",
+    "5.Continue guessing until you find the correct number or exhaust your attempts.",
+    "6.You can choose to play again after the game ends."
   ],
   "path": "games/Number-Guessing/number.html"
 
