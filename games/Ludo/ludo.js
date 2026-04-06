@@ -353,12 +353,12 @@ async function handleMove(color, diceValue) {
         const state = gameState[color][index];
         const homeStep = state.homeStep;
         const targetHomeStep = homeStep >= 0 ? homeStep + diceValue : null;
-        if(targetHomeStep !== null && targetHomeStep > 5){ 
+        if (targetHomeStep !== null && targetHomeStep > 5) {
             pin.classList.remove("active");
             pin.onclick = null;
             return;
         }
-        
+
         // ARROW → CENTER CONDITION
         if (state.position === 50 && diceValue === 6) {
 
@@ -488,7 +488,7 @@ async function movePin(pin, color, index, steps) {
             return;
         }
         const homeStep = stepsIntoHome - 1;
-        if(homeStep >=5){
+        if (homeStep >= 5) {
             console.log("Invalid move: homeStep out of bounds", homeStep);
             return;
         }
@@ -514,6 +514,11 @@ async function movePin(pin, color, index, steps) {
         !cell.classList.contains("home-blue")) {
 
         checkKill(r, c, color);
+        if (lastDiceValue === 6) {
+            clearSelection();
+            nextTurn();
+            return;
+        }
     }
     state.position = targetPos;
 
@@ -568,14 +573,14 @@ async function moveToCenter(pin, color) {
         p.classList.remove("active");
     });
     console.log("✅ Moved to center:", color);
-    
+
     if (pins.length === 4 && !finishedPlayers.includes(color)) {
 
         finishedPlayers.push(color);
 
         activePlayers = activePlayers.filter(p => p !== color);
 
-        
+
         if (currentTurn >= activePlayers.length) {
             currentTurn = 0;
         }
@@ -608,7 +613,7 @@ function clearSelection() {
 
 function nextTurn() {
 
-    if (lastDiceValue === 6 ) {
+    if (lastDiceValue === 6) {
         updateTurnUI();
         return;
     }
@@ -632,7 +637,7 @@ function checkKill(r, c, currentColor) {
             if ($(cell).hasClass("safe")) return;
 
             const index = pin.dataset.index;
-
+            lastDiceValue = 6;
             console.log("Killed:", enemyColor);
             playSound("kill");
             // send back to base
@@ -696,8 +701,8 @@ async function animateMove(pin, color, index, steps) {
         currentPos = state.position;
     }
     const currentHomeStep = currentPos > 50 ? currentPos - 50 : null;
-    const targetHomeStep = currentHomeStep !== null ? currentHomeStep + steps : null;  
-    if(targetHomeStep !== null && targetHomeStep > 6) return;
+    const targetHomeStep = currentHomeStep !== null ? currentHomeStep + steps : null;
+    if (targetHomeStep !== null && targetHomeStep > 6) return;
     for (let i = 1; i <= steps; i++) {
 
         await sleep(150); // speed control
@@ -892,7 +897,7 @@ window.addEventListener('resize', autoScale);
 
 window.addEventListener("message", (event) => {
     if (event.data === "enterFullscreen" || event.data === "exitFullscreen") {
-        setTimeout(autoScale, 100); 
+        setTimeout(autoScale, 100);
     }
 });
 
@@ -916,7 +921,7 @@ async function addCellGlow(cell, color) {
 function playStepSound() {
     if (!soundEnabled) return;
 
-    const s = sounds.move.cloneNode(); 
+    const s = sounds.move.cloneNode();
     s.volume = 0.4;
     s.play();
 }
@@ -991,18 +996,18 @@ function showResultModal() {
     list.innerHTML = ""; // Clear old content
     // const winTxt = document.getElementById("win-txt");
     // winTxt.innerText = `${finishedPlayers[0]} Wins!`;
-   
+
     const rankings = [...finishedPlayers];
     const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
     rankings.push(lastPlayer);
 
-    
+
     players.forEach(color => {
         const p_indicator = document.getElementById(`player-${color}`);
         p_indicator.classList.remove("active", "turn-glow");
     });
 
-    
+
     const playerMap = {
         red: { name: "Red Player", icon: "fa-chess-pawn" },
         green: { name: "Green Player", icon: "fa-leaf" },
@@ -1010,7 +1015,7 @@ function showResultModal() {
         blue: { name: "Blue Player", icon: "fa-droplet" }
     };
 
-    
+
     rankings.forEach((color, index) => {
         const playerData = playerMap[color];
         const row = document.createElement("div");
@@ -1028,7 +1033,7 @@ function showResultModal() {
     });
 }
 $("#resultModal .close-icon").click(() => {
-    window.location.reload(); 
+    window.location.reload();
 });
 $("#restartBtn").click(() => {
     window.location.reload();
