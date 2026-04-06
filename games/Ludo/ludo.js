@@ -276,7 +276,7 @@ function updateTurnUI() {
     const activeDiceBox = activePlayer.querySelector(".dice-box");
     if (finishedPlayers.includes(activeColor)) {
 
-        console.log("⛔ Skipping finished player:", activeColor);
+        console.log(" Skipping finished player:", activeColor);
 
         currentTurn = (currentTurn + 1) % activePlayers.length;
 
@@ -351,6 +351,14 @@ async function handleMove(color, diceValue) {
         pin.classList.remove("active");
         const index = pin.dataset.index;
         const state = gameState[color][index];
+        const homeStep = state.homeStep;
+        const targetHomeStep = homeStep >= 0 ? homeStep + diceValue : null;
+        if(targetHomeStep !== null && targetHomeStep > 5){ 
+            pin.classList.remove("active");
+            pin.onclick = null;
+            return;
+        }
+        
         // ARROW → CENTER CONDITION
         if (state.position === 50 && diceValue === 6) {
 
@@ -479,14 +487,14 @@ async function movePin(pin, color, index, steps) {
             console.log("Invalid move: cannot overshoot center");
             return;
         }
+        const homeStep = stepsIntoHome - 1;
+        if(homeStep >=5){
+            console.log("Invalid move: homeStep out of bounds", homeStep);
+            return;
+        }
 
-        // animate EVERYTHING (including home)
         await animateMove(pin, color, index, steps);
 
-        const homeStep = stepsIntoHome - 1;
-
-
-        // normal home move
         state.position = -2;
         state.homeStep = homeStep;
 
@@ -557,25 +565,23 @@ async function moveToCenter(pin, color) {
         }
 
         p.style.transform = "translate(-50%, -50%)";
-        // 🔥 REMOVE ACTIVE PROPERLY
         p.classList.remove("active");
     });
     console.log("✅ Moved to center:", color);
-    // 🎯 PLAYER FINISHED
+    
     if (pins.length === 4 && !finishedPlayers.includes(color)) {
 
         finishedPlayers.push(color);
 
         activePlayers = activePlayers.filter(p => p !== color);
 
-        // 🔥 FIX: adjust turn safely
+        
         if (currentTurn >= activePlayers.length) {
             currentTurn = 0;
         }
 
         await celebrationWin(color);
 
-        // 🎯 GAME END
         if (finishedPlayers.length === playerCount - 1) {
             showResultModal();
             return;
@@ -585,7 +591,6 @@ async function moveToCenter(pin, color) {
         return;
     }
 
-    // 🎯 EXTRA TURN (NOT FINISHED)
     if (pins.length < 4) {
         lastDiceValue = 6;
         updateTurnUI();
@@ -690,6 +695,9 @@ async function animateMove(pin, color, index, steps) {
     } else {
         currentPos = state.position;
     }
+    const currentHomeStep = currentPos > 50 ? currentPos - 50 : null;
+    const targetHomeStep = currentHomeStep !== null ? currentHomeStep + steps : null;  
+    if(targetHomeStep !== null && targetHomeStep > 6) return;
     for (let i = 1; i <= steps; i++) {
 
         await sleep(150); // speed control
@@ -705,7 +713,7 @@ async function animateMove(pin, color, index, steps) {
 
             const homeStep = nextPos - 51;
             if (homeStep < 0 || homeStep > 5) {
-                console.log("❌ INVALID HOME STEP:", homeStep);
+                console.log("INVALID HOME STEP:", homeStep);
                 break;
             }
             console.log("ANIMATE DEBUG:", {
@@ -882,10 +890,9 @@ function autoScale() {
 window.addEventListener('load', autoScale);
 window.addEventListener('resize', autoScale);
 
-// Listen for the fullscreen message from game.js
 window.addEventListener("message", (event) => {
     if (event.data === "enterFullscreen" || event.data === "exitFullscreen") {
-        setTimeout(autoScale, 100); // Small delay to let dimensions update
+        setTimeout(autoScale, 100); 
     }
 });
 
@@ -909,7 +916,7 @@ async function addCellGlow(cell, color) {
 function playStepSound() {
     if (!soundEnabled) return;
 
-    const s = sounds.move.cloneNode(); // 🔥 key trick
+    const s = sounds.move.cloneNode(); 
     s.volume = 0.4;
     s.play();
 }
@@ -958,7 +965,7 @@ function addCrown(color) {
     player.appendChild(crown);
 }
 function spawnConfetti() {
-    playSound("confetti"); // 🔥 NEW
+    playSound("confetti");
 
     for (let i = 0; i < 80; i++) {
         const conf = document.createElement("div");
@@ -975,27 +982,27 @@ function spawnConfetti() {
         setTimeout(() => conf.remove(), 2000);
     }
 }
-// --- Update showResultModal to populate the new design ---
+// Update showResultModal to populate the new design
 function showResultModal() {
     const modal = document.getElementById("resultModal");
     const list = document.getElementById("resultList");
     $(modal).show();
-    modal.style.display = "flex"; // Show as flex to center
+    modal.style.display = "flex";
     list.innerHTML = ""; // Clear old content
     // const winTxt = document.getElementById("win-txt");
     // winTxt.innerText = `${finishedPlayers[0]} Wins!`;
-    // 1. Get complete rankings (finished players + the one remaining)
+   
     const rankings = [...finishedPlayers];
     const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
     rankings.push(lastPlayer);
 
-    // 2. Clear visual highlights from the game board
+    
     players.forEach(color => {
         const p_indicator = document.getElementById(`player-${color}`);
         p_indicator.classList.remove("active", "turn-glow");
     });
 
-    // 3. Map colors to their display names and avatar icons (from player indicators)
+    
     const playerMap = {
         red: { name: "Red Player", icon: "fa-chess-pawn" },
         green: { name: "Green Player", icon: "fa-leaf" },
@@ -1003,13 +1010,12 @@ function showResultModal() {
         blue: { name: "Blue Player", icon: "fa-droplet" }
     };
 
-    // 4. Generate ranking rows dynamically
+    
     rankings.forEach((color, index) => {
         const playerData = playerMap[color];
         const row = document.createElement("div");
         row.className = "ranking-row";
 
-        // Create HTML for one row
         row.innerHTML = `
             <div class="rank-number">${index + 1}.</div>
             <div class="player-avatar" style="background-color: var(--${color});">
@@ -1022,8 +1028,8 @@ function showResultModal() {
     });
 }
 $("#resultModal .close-icon").click(() => {
-    window.location.reload(); // Simple way to reset everything
+    window.location.reload(); 
 });
 $("#restartBtn").click(() => {
-    window.location.reload(); // Simple way to reset everything
+    window.location.reload();
 });
