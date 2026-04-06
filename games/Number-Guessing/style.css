@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    text-align: center;
+}
+
+.container {
+    margin-top: 60px;
+    background: rgba(0,0,0,0.5);
+    padding: 30px;
+    border-radius: 15px;
+    width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+input, select {
+    padding: 10px;
+    margin: 8px;
+    width: 80%;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #ff9800;
+    color: white;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #e68900;
+}
+
+#message {
+    font-size: 18px;
+    margin-top: 15px;
+}
+
+.win {
+    color: #00ffcc;
+    font-weight: bold;
+    animation: glow 1s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 5px #00ffcc; }
+    to { text-shadow: 0 0 20px #00ffcc; }
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: rgba(255,255,255,0.1);
+    margin: 5px;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+/* Top 3 highlight */
+li:nth-child(1) {
+    background: gold;
+    color: black;
+}
+li:nth-child(2) {
+    background: silver;
+    color: black;
+}
+li:nth-child(3) {
+    background: #cd7f32; /* bronze */
+    color: black;
+}

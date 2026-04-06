@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Number Guessing Game Pro</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>🎯 Guess The Number</h1>
+
+    <input type="text" id="playerName" placeholder="Enter your name">
+
+    <select id="difficulty" onchange="setDifficulty()">
+        <option value="easy">Easy (1-50)</option>
+        <option value="medium" selected>Medium (1-100)</option>
+        <option value="hard">Hard (1-200)</option>
+    </select>
+
+    <p id="rangeText">Guess a number between 1 and 100</p>
+    <p id="timer">⏱ Time: 0s</p>
+
+    <input type="number" id="guessInput" placeholder="Enter number">
+    <button onclick="checkGuess()">Guess</button>
+    <button onclick="restartGame()">Restart</button>
+
+    <p id="message"></p>
+    <p id="attempts"></p>
+
+    <h2>🏆 Leaderboard</h2>
+    <ul id="leaderboard"></ul>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
