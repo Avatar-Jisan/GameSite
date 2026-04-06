@@ -23,7 +23,7 @@ $(document).ready(function () {
         gamesContainer.append(card);
       });
 
-      const pickedGames = ["ludo", "rock-paper-scissors", "tic-tac-toe", "memory-card"];
+      const pickedGames = ["ludo", "rock-paper-scissors", "tic-tac-toe", "number-guessing"];
 
       const selectedGames = games.filter(game =>
         pickedGames.includes(game.id)
