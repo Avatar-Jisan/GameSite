@@ -1,224 +1,297 @@
 <!doctype html>
 <!--Name: Abdulla Al Jisan | id:1236-->
 <html lang="en">
+  <head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <title>Title</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Honk:MORF@15&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/variable.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/game.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+  </head>
 
-  <!-- Bootstrap CSS v5.2.1 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Honk:MORF@15&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap"
-    rel="stylesheet">
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="css/nav.css" />
-  <link rel="stylesheet" href="css/variable.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/game.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/footer.css">
-</head>
-
-<body>
-  <header class="navbar">
-
-    <div class="container-fluid">
-      <div class="row align-items-center w-100">
-
-        <div class="col-4">
-          <button class="menu-btn" id="menuBtn">
-            <i class="fa-solid fa-bars fa-lg" style="color:#97FEED;"></i>
-          </button>
-          <a href="index.html"><img src="assets/games_img/game_logo_bg.png" alt="Game Site Logo" class="logo"
-              height="40vh" width="150vw"></a>
-        </div>
-
-        <div class="col-4 text-center">
-          <div class="search-section">
-            <i class="fas fa-search" style="color:#97FEED;"></i>
-            <input type="text" placeholder="Search games...">
+  <body>
+    <header class="navbar">
+      <div class="container-fluid">
+        <div
+          class="header-top-wrapper d-flex align-items-center justify-content-between w-100"
+        >
+          <div class="d-flex align-items-center">
+            <button class="menu-btn" id="menuBtn">
+              <i class="fa-solid fa-bars fa-lg" style="color: #97feed"></i>
+            </button>
+            <a href="index.html">
+              <img
+                src="assets/games_img/game_logo_bg.png"
+                alt="Logo"
+                class="logo"
+              />
+            </a>
           </div>
-        </div>
-        <div class="col-4 d-flex justify-content-end">
+          <div class="search-section desktop-search">
+            <i class="fas fa-search" style="color: #97feed"></i>
+            <input type="text" placeholder="Search games..." />
+          </div>
           <div class="login-area">
             <button class="login-btn">
-              <a href="#"><i class="fa-solid fa-user" style="color:#97FEED;"></i>
-                Login</a>
-
+              <a href="#"
+                ><i class="fa-solid fa-user" style="color: #97feed"></i>
+                <span>Login</span></a
+              >
             </button>
-
           </div>
+        </div>
 
+        <div class="header-bottom-wrapper w-100 mt-2">
+          <div class="search-section">
+            <i class="fas fa-search" style="color: #97feed"></i>
+            <input type="text" placeholder="Search games..." />
+          </div>
         </div>
       </div>
+    </header>
 
-  </header>
+    <nav class="sidebar" id="sidebar">
+      <ul>
+        <li>
+          <a href="index.html"
+            ><i
+              class="fa-solid fa-house"
+              style="color: var(--accent-color)"
+            ></i>
+            Home</a
+          >
+        </li>
 
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-clock"
+              style="color: var(--accent-color)"
+            ></i>
+            Recently Played</a
+          >
+        </li>
 
-  <nav class="sidebar" id="sidebar">
-    <ul>
-      <li><a href="index.html"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
+        <li>
+          <a href="#"
+            ><i class="fa-solid fa-fire" style="color: var(--accent-color)"></i>
+            Popular Games</a
+          >
+        </li>
 
-      <li><a href="#"><i class="fa-solid fa-clock" style="color: var(--accent-color)"></i> Recently Played</a></li>
+        <li>
+          <a href="#"
+            ><i class="fa-solid fa-bolt" style="color: var(--accent-color)"></i>
+            Action</a
+          >
+        </li>
 
-      <li><a href="#"><i class="fa-solid fa-fire" style="color: var(--accent-color);"></i> Popular Games</a></li>
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-mountain"
+              style="color: var(--accent-color)"
+            ></i>
+            Adventure</a
+          >
+        </li>
 
-      <li><a href="#"><i class="fa-solid fa-bolt" style="color: var(--accent-color);"></i> Action</a></li>
+        <li>
+          <a href="#"
+            ><i class="fa-solid fa-car" style="color: var(--accent-color)"></i>
+            Car</a
+          >
+        </li>
 
-      <li><a href="#"><i class="fa-solid fa-mountain" style="color: var(--accent-color);"></i> Adventure</a></li>
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-basketball"
+              style="color: var(--accent-color)"
+            ></i>
+            Basketball</a
+          >
+        </li>
 
-      <li><a href="#"><i class="fa-solid fa-car" style="color: var(--accent-color);"></i> Car</a></li>
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-puzzle-piece"
+              style="color: var(--accent-color)"
+            ></i>
+            Puzzle</a
+          >
+        </li>
 
-      <li><a href="#"><i class="fa-solid fa-basketball" style="color: var(--accent-color);"></i> Basketball</a></li>
-
-      <li><a href="#"><i class="fa-solid fa-puzzle-piece" style="color: var(--accent-color);"></i> Puzzle</a></li>
-
-      <li><a href="#"><i class="fa-solid fa-ghost" style="color: var(--accent-color);"></i> Horror</a></li>
-    </ul>
-  </nav>
-  <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
-  <main class="container game-page ">
-
-    <div class="row g-5 game-area">
-
-      <!-- GAME AREA -->
-      <div class="col-lg-10">
-
-        <div class="game-player">
-
-          <iframe id="gameFrame" frameborder="0" allow="fullscreen">
-
-          </iframe>
-          <div class="game-info-one">
-            <h2 id="gameTitle1">Game</h2>
-            <div class="game-info-button">
-              <button type="submit" class="fav-btn  fa-regular fa-heart fa-lg" style="color:var(--bg-card)"></button>
-              <button type="submit" class="full-btn fa-solid fa-maximize fa-lg" style="color:var(--bg-card)"></button>
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-ghost"
+              style="color: var(--accent-color)"
+            ></i>
+            Horror</a
+          >
+        </li>
+      </ul>
+    </nav>
+    <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
+    <main class="container game-page">
+      <div class="row g-5 game-area">
+        <!-- GAME AREA -->
+        <div class="col-lg-10">
+          <div class="game-player">
+            <iframe id="gameFrame" frameborder="0" allow="fullscreen"> </iframe>
+            <div class="game-info-one">
+              <h2 id="gameTitle1">Game</h2>
+              <div class="game-info-button">
+                <button
+                  type="submit"
+                  class="fav-btn fa-regular fa-heart fa-lg"
+                  style="color: var(--bg-card)"
+                ></button>
+                <button
+                  type="submit"
+                  class="full-btn fa-solid fa-maximize fa-lg"
+                  style="color: var(--bg-card)"
+                ></button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="game-info mt-5">
-          <table class="table table-borderless game-table">
+          <div class="game-info mt-5">
+            <table class="table table-borderless game-table">
+              <tr>
+                <th>Name:</th>
+                <td id="gameTitle"></td>
+              </tr>
 
-            <tr>
-              <th>Name:</th>
-              <td id="gameTitle"></td>
-            </tr>
+              <tr>
+                <th>Developer:</th>
+                <td id="gameDeveloper"></td>
+              </tr>
 
-            <tr>
-              <th>Developer:</th>
-              <td id="gameDeveloper"></td>
-            </tr>
+              <tr>
+                <th>Category:</th>
+                <td id="gameCategory"></td>
+              </tr>
 
-            <tr>
-              <th>Category:</th>
-              <td id="gameCategory"></td>
-            </tr>
+              <tr>
+                <th>Description:</th>
+                <td id="gameDescription"></td>
+              </tr>
+            </table>
 
-            <tr>
-              <th>Description:</th>
-              <td id="gameDescription"></td>
-            </tr>
+            <h4 class="mt-4">How to Play</h4>
 
-          </table>
-
-          <h4 class="mt-4">How to Play</h4>
-
-          <ul id="gameRules"></ul>
+            <ul id="gameRules"></ul>
+          </div>
         </div>
 
+        <!-- SIDEBAR -->
+        <div class="col-lg-2 other-games">
+          <h4>Other Games</h4>
+
+          <div id="relatedGames"></div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-box">
+          <h2 class="logo">MiniGames</h2>
+          <p>
+            Play fun mini games online. Enjoy puzzles, memory games and more.
+          </p>
+        </div>
+
+        <div class="footer-box">
+          <h3>Explore Games</h3>
+          <ul>
+            <li><a href="#">Puzzle Game</a></li>
+            <li><a href="#">Memory Game</a></li>
+            <li><a href="#">Guess Number</a></li>
+            <li><a href="#">Tic Tac Toe</a></li>
+            <li><a href="#">Dice Game</a></li>
+            <li><a href="#">Ludo Game</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-box">
+          <h3>Overview</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-box">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="#">Game Forum</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
       </div>
 
-      <!-- SIDEBAR -->
-      <div class="col-lg-2 other-games">
-
-        <h4>Other Games</h4>
-
-        <div id="relatedGames"></div>
-
+      <div class="social">
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
       </div>
 
-    </div>
-
-  </main>
-
-  <footer class="footer">
-
-    <div class="footer-container">
-
-      <div class="footer-box">
-        <h2 class="logo">MiniGames</h2>
-        <p>Play fun mini games online. Enjoy puzzles, memory games and more.</p>
+      <div class="copyright">
+        <p>© 2026 MiniGames. All Rights Reserved.</p>
       </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-      <div class="footer-box">
-        <h3>Explore Games</h3>
-        <ul>
-          <li><a href="#">Puzzle Game</a></li>
-          <li><a href="#">Memory Game</a></li>
-          <li><a href="#">Guess Number</a></li>
-          <li><a href="#">Tic Tac Toe</a></li>
-          <li><a href="#">Dice Game</a></li>
-          <li><a href="#">Ludo Game</a></li>
-        </ul>
-      </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
 
-      <div class="footer-box">
-        <h3>Overview</h3>
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
-      </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
 
-      <div class="footer-box">
-        <h3>Community</h3>
-        <ul>
-          <li><a href="#">Game Forum</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Help Center</a></li>
-        </ul>
-      </div>
-
-
-    </div>
-
-    <div class="social">
-      <a href="#">Facebook</a>
-      <a href="#">YouTube</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-    </div>
-
-    <div class="copyright">
-      <p>© 2026 MiniGames. All Rights Reserved.</p>
-    </div>
-
-  </footer>
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
-
-  <script src="js/game.js"></script>
-  <script src="js/nav.js"></script>
-</body>
-
+    <script src="js/game.js"></script>
+    <script src="js/nav.js"></script>
+  </body>
 </html>
