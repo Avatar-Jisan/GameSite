@@ -1,48 +1,135 @@
-.search-section{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    width:100%;
+.search-section {
+  background: #d7dce4;
+  border-radius: 12px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  /* Default to full width of container */
 }
 
-.search-section input{
-    width:100%;
-    padding:8px 20px;
-    border-radius:12px;
-    border:none;
-    outline:none;
-    background:#d7dce4;
-    color:rgb(5, 5, 5);
+header {
+  height: auto;
+  /* Allow header to grow with content */
+  min-height: 8vh;
+  padding: 10px 0;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+  /* Stack the wrappers */
 }
 
-.search-section input::placeholder{
-    color:#618bca;
-    font-weight: 600;
+.header-top-wrapper {
+  display: flex;
+  width: 100%;
 }
 
-.search-section i{
-    font-size:16px;
+.logo {
+  height: 40px;
+  width: auto;
 }
 
-.login-area button{
-    padding:6px 10px;
-    border-radius:18px;
-    border:none;
-    outline:none;
-    background: #066b8a;
-}
-.login-area button:hover{
-    background-color: transparent;
-    border:2px solid var(--secondary-color);
-    color:var(--secondary-color);
+.search-section input {
+  width: 100%;
+  max-width: 200px;
+  padding: 8px 20px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: rgb(5, 5, 5);
 }
 
-.login-area a{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    color:white;
-    cursor:pointer;
-    text-decoration: none;
+.search-section input::placeholder {
+  color: #618bca;
+  font-weight: 600;
 }
 
+.search-section i {
+  font-size: 16px;
+}
+
+.login-area button {
+  padding: 6px 10px;
+  border-radius: 18px;
+  border: none;
+  outline: none;
+  background: #066b8a;
+}
+
+.login-area button:hover {
+  background-color: transparent;
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
+}
+
+.login-area a {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  header {
+    padding: 10px 5px;
+    height: auto !important;
+  }
+
+  header .row {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .search-section input {
+    width: 90%;
+    
+  }
+  .header-top-wrapper{
+    margin-top: 10px;
+    margin-left: -15px;
+  }
+  .header-bottom-wrapper {
+    margin-top: 10px;
+    /* Space between rows */
+  }
+
+  .search-section {
+    width: 95%;
+    margin-bottom: 10px;
+  }
+
+  .login-area {
+    display: flex;
+    justify-content: center;
+  }
+
+  .login-btn {
+    width: 100%;
+    max-width: 200px;
+    border-radius: 50% !important;
+  }
+
+  .login-btn span {
+    display: none;
+    /* Hide 'Login' text on mobile, keep icon */
+  }
+
+  .logo {
+    height: 35px;
+    width: auto;
+  }
+}
+@media (min-width: 769px) {
+    header .container-fluid {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .header-top-wrapper { width: auto; }
+    .header-bottom-wrapper { width: 300px; margin-top: 0; }
+}

@@ -442,11 +442,11 @@ soundBtn.addEventListener("click", () => {
   soundEnabled = !soundEnabled;
   const icon = document.getElementById("volume-icon");
   if (soundEnabled) {
-    icon.classList.remove("fa-volume-slash");
+    icon.classList.remove("fa-volume-xmark");
     icon.classList.add("fa-volume-high");
   } else {
     icon.classList.remove("fa-volume-high");
-    icon.classList.add("fa-volume-slash");
+    icon.classList.add("fa-volume-xmark");
   }
 });
 exitBtn.addEventListener("click", () => {

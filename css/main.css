@@ -1,31 +1,44 @@
-main{
+main {
   margin-top: 140px;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 .slider {
   height: clamp(280px, 35vw, 520px);
   position: relative;
   z-index: 3;
   background: var(--bg-card);
   border-radius: 10px;
-  padding: 40px ;
+  padding: 0;
   overflow: hidden;
   transition: all 0.3s ease;
 }
 
 
-.slider:hover{
+.slider:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
+
 .slide {
   position: relative;
   display: none;
   z-index: 2;
   height: 100%;
 }
+
 .slide .row {
   height: 100%;
 }
+
 .slide-image {
   height: 100%;
   display: flex;
@@ -34,7 +47,8 @@ main{
 
 .slide-image img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-height: 100%;
   object-fit: cover;
 }
 
@@ -42,17 +56,22 @@ main{
   display: block;
 }
 
-.slide-text{
-    
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
+.slide-text {
+  padding: clamp(20px, 3vw, 40px);
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  position: relative;
+  bottom: 20px;
+  left: 20px;
+  z-index: 2;
+  max-width: 40%;
 }
 
 .slide-text h1 {
   font-family: "Anton SC", cursive;
   color: white;
-  font-size: 42px;
+  font-size: clamp(18px, 3vw, 36px);
   margin-bottom: 15px;
 }
 
@@ -60,27 +79,38 @@ main{
   font-family: "Noto Sans", cursive;
   color: #cbd5f5;
   margin-bottom: 20px;
+  font-size: clamp(12px, 1.5vw, 16px);
 }
-.btn{
- background-color: var(--primary-color);
- font-weight: bold;
+
+.slide-text .play-btn {
+  width: auto;
+  padding: 8px 16px;
 }
+
+.btn {
+  background-color: var(--primary-color);
+  font-weight: bold;
+  font-size: clamp(12px, 1.5vw, 16px);
+}
+
 .play-btn {
   font-family: "Russo One", cursive;
-    width: 200px;
-    border-radius: 25px;
-    padding: 10px 25px;
-    font-size: 24px;
+  width: 200px;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: clamp(14px, 2vw, 22px);
 }
-.slide-text button{
+
+.slide-text button {
   padding: 5px;
   font-family: "Honk", cursive;
   font-size: 2rem;
 }
-.play-btn:hover{
+
+.play-btn:hover {
   background-color: transparent;
-  border:2px solid var(--secondary-color);
-  color:var(--secondary-color);
+  border: 2px solid var(--secondary-color);
+  color: var(--secondary-color);
 }
 
 .slide-image {
@@ -93,22 +123,20 @@ main{
   object-fit: cover;
 
   /* fade into background */
-  mask-image: linear-gradient(
-    to left,
-    rgba(0,0,0,1),
-    rgba(0,0,0,0)
-  );
+  mask-image: linear-gradient(to left,
+      rgba(0, 0, 0, 1),
+      rgba(0, 0, 0, 0));
 }
 
 
 
 /* navigation buttons */
 
-.nav {
+.slide-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255,255,255,0.1);
+  background: rgba(34, 34, 33, 0.1);
   border: none;
   color: white;
   font-size: 28px;
@@ -119,48 +147,56 @@ main{
   z-index: 5;
 }
 
+.slide-nav:hover {
+  background: rgba(34, 34, 33, 0.6);
+}
+
 .prev {
   left: 10px;
 }
 
+
 .next {
   right: 10px;
 }
-body{
-    background-color: var(--bg-dark);
-    color: #FFFFFF;
-    font-family: Arial, Helvetica, sans-serif;
+
+body {
+  background-color: var(--bg-dark);
+  color: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 /* Category */
-.category{
+.category {
   margin: 30px 0;
 }
 
-.section-title{
-  font-size: 24px;
+.section-title {
+  font-size: clamp(18px, 2.5vw, 26px);
   font-weight: 600;
 }
 
-.category-buttons{
+.category-buttons {
   display: flex;
   gap: 10px;
   margin-top: 15px;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
-.category-btn{
+.category-btn {
   border-radius: 20px;
   padding: 6px 18px;
   border: 2px solid var(--primary-color);
   transition: 0.3s;
 }
 
-.category-btn:hover{
+.category-btn:hover {
   background: var(--secondary-color);
   color: var(--text-primary);
 }
 
-.category-btn.active{
+.category-btn.active {
   background: transparent;
   border: 2px solid var(--secondary-color);
   color: var(--secondary-color);
@@ -169,47 +205,50 @@ body{
 /* Top picks */
 /* Top Picks */
 
-.top-picks{
-  margin-top: 40px;
+.top-picks {
+  margin-top: 10px;
+  margin-bottom: 5px;
 }
+
 /* Card */
-.game-card{
+.game-card {
   position: relative;
   background: var(--bg-card);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   overflow: hidden;
-
+  height: 100%;
   display: flex;
   flex-direction: column;
 
   transition: all 0.3s ease;
 }
-.game-card::after
-{
-  content:"";
+
+.game-card::after {
+  content: "";
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.08);
 
   opacity: 0;
   transition: opacity 0.25s ease;
   pointer-events: none;
 }
+
 /* Hover effect */
-.game-card:hover::after
-{
+.game-card:hover::after {
   opacity: 0.4;
 }
-.game-card:hover{
+
+.game-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Image */
 
-.card-image{
+.card-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
@@ -217,46 +256,95 @@ body{
 
 /* Card Content */
 
-.card-content{
+.card-content {
   padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.game-title{
+
+.game-title {
   font-family: "Anton SC", cursive;
   font-size: 20px;
   letter-spacing: 1.15px;
 }
+
 /* Game title */
-.all-games h2{
+.all-games h2 {
   margin-bottom: -60px;
 }
 
-.login-btn{
+.login-btn {
   font-family: "Noto Sans", cursive;
   letter-spacing: 1.2px;
   font-weight: bold;
 }
 
 /* Play Button */
-.category-buttons button{
+.category-buttons button {
   border-radius: 15px;
   font-family: "Noto Sans", cursive;
+
 }
-.card-content button{
-  
+
+.card-content button {
+
   font-size: 14px;
   width: 75px;
   border-radius: 20px;
 }
-.section-title{
+
+.section-title {
   margin-top: 40px;
 }
-.card-r
-{
+
+.card-r {
   margin-top: 15px;
 }
 
+@media (max-width: 768px) {
+
+  main {
+    margin-top: 160px;
+  }
+  .category{
+    margin-top: -10px;
+  }
+  .slider {
+    display: none;
+  }
+
+ 
+    .play-btn {
+    width: 100%;
+  }
+
+  .nav {
+    font-size: 20px;
+    padding: 6px 10px;
+  }
+
+  .category-buttons {
+    justify-content: center;
+  }
+
+  .card-image {
+    height: 120px;
+  }
+}
 
 
+@media (max-width: 1024px) {
+
+  .slide-text h1 {
+    font-size: clamp(24px, 3vw, 36px);
+  }
+
+  .play-btn {
+    width: 150px;
+  }
+
+  .card-image {
+    height: 160px;
+  }
+}

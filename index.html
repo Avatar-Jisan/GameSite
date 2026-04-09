@@ -30,39 +30,34 @@
 <body>
 
 
-  <header class="navbar">
-
-    <div class="container-fluid">
-      <div class="row align-items-center w-100">
-
-        <div class="col-4">
-          <button class="menu-btn" id="menuBtn">
-            <i class="fa-solid fa-bars fa-lg" style="color:#97FEED;"></i>
-          </button>
-          <a href="index.html"><img src="assets/games_img/game_logo_bg.png" alt="Game Site Logo" class="logo"
-              height="40vh" width="150vw"></a>
-        </div>
-
-        <div class="col-4 text-center">
-          <div class="search-section">
-            <i class="fas fa-search" style="color:#97FEED;"></i>
-            <input type="text" placeholder="Search games...">
-          </div>
-        </div>
-        <div class="col-4 d-flex justify-content-end">
-          <div class="login-area">
-            <button class="login-btn">
-              <a href="#"><i class="fa-solid fa-user" style="color:#97FEED;"></i>
-                Login</a>
-
-            </button>
-
-          </div>
-
-        </div>
+<header class="navbar">
+  <div class="container-fluid">
+    <div class="header-top-wrapper d-flex align-items-center justify-content-between w-100">
+      
+      <div class="d-flex align-items-center">
+        <button class="menu-btn" id="menuBtn">
+          <i class="fa-solid fa-bars fa-lg" style="color:#97FEED;"></i>
+        </button>
+        <a href="index.html">
+          <img src="assets/games_img/game_logo_bg.png" alt="Logo" class="logo">
+        </a>
       </div>
 
-  </header>
+      <div class="login-area">
+        <button class="login-btn">
+          <a href="#"><i class="fa-solid fa-user" style="color:#97FEED;"></i> <span>Login</span></a>
+        </button>
+      </div>
+    </div>
+
+    <div class="header-bottom-wrapper w-100 mt-2">
+      <div class="search-section">
+        <i class="fas fa-search" style="color:#97FEED;"></i>
+        <input type="text" placeholder="Search games...">
+      </div>
+    </div>
+  </div>
+</header>
 
   <!-- Togglebar & Menu button done by Sadek Manir Sayed. ID: 1237-->
   <nav class="sidebar" id="sidebar">
@@ -93,7 +88,7 @@
 
     <section class="slider position-relative">
 
-      <button class="nav prev">&#10094;</button>
+      <button class="slide-nav prev">&#10094;</button>
 
       <!-- Slide -->
       <div class="slide active">
@@ -149,7 +144,7 @@
         </div>
       </div>
 
-      <button class="nav next">&#10095;</button>
+      <button class="slide-nav next">&#10095;</button>
 
     </section>
     <section class="category">
