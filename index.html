@@ -1,342 +1,435 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-<head>
-  <title>Title</title>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="stylesheet" href="css/nav.css" />
+    <link rel="stylesheet" href="css/variable.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Honk:MORF@15&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Bangers&family=Delius&family=Grand+Hotel&family=Protest+Riot&display=swap");
+    </style>
+  </head>
 
-  <link rel="stylesheet" href="css/nav.css" />
-  <link rel="stylesheet" href="css/variable.css">
-  <link rel="stylesheet" href="css/main.css">
-  <link rel="stylesheet" href="css/header.css">
-  <link rel="stylesheet" href="css/footer.css">
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Honk:MORF@15&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap"
-    rel="stylesheet">
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Delius&family=Grand+Hotel&family=Protest+Riot&display=swap');
-  </style>
-</head>
-
-<body>
-
-
-<header class="navbar">
-  <div class="container-fluid">
-    <div class="header-top-wrapper d-flex align-items-center justify-content-between w-100">
-      
-      <div class="d-flex align-items-center">
-        <button class="menu-btn" id="menuBtn">
-          <i class="fa-solid fa-bars fa-lg" style="color:#97FEED;"></i>
-        </button>
-        <a href="index.html">
-          <img src="assets/games_img/game_logo_bg.png" alt="Logo" class="logo">
-        </a>
-      </div>
-
-      <div class="login-area">
-        <button class="login-btn">
-          <a href="#"><i class="fa-solid fa-user" style="color:#97FEED;"></i> <span>Login</span></a>
-        </button>
-      </div>
-    </div>
-
-    <div class="header-bottom-wrapper w-100 mt-2">
-      <div class="search-section">
-        <i class="fas fa-search" style="color:#97FEED;"></i>
-        <input type="text" placeholder="Search games...">
-      </div>
-    </div>
-  </div>
-</header>
-
-  <!-- Togglebar & Menu button done by Sadek Manir Sayed. ID: 1237-->
-  <nav class="sidebar" id="sidebar">
-    <ul>
-      <li><a href="#"><i class="fa-solid fa-house" style="color: var(--accent-color);"></i> Home</a></li>
-
-      <li><a href="#"><i class="fa-solid fa-heart" style="color: var(--accent-color)"></i> Favorites</a></li>
-
-      <li><a href="#"><i class="fa-solid fa-fire" style="color: var(--accent-color);"></i> Popular Games</a></li>
-      <hr>
-
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="All">
-          <i class="fa-solid fa-gamepad" style="color: var(--accent-color);"></i> All
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Board">
-          <i class="fa-solid fa-chess-board" style="color: var(--accent-color);"></i> Board
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Strategy">
-          <i class="fa-solid fa-chess-pawn" style="color: var(--accent-color);"></i> Strategy
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
-          <i class="fa-solid fa-people-group" style="color: var(--accent-color);"></i> Multiplayer
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Card">
-          <i class="fa-solid fa-diamond" style="color: var(--accent-color);"></i> Card
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Puzzle">
-          <i class="fa-solid fa-puzzle-piece" style="color: var(--accent-color);"></i> Puzzle
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
-          <i class="fa-solid fa-child-reaching" style="color: var(--accent-color);"></i> Single Player
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Casual">
-          <i class="fa-solid fa-chess-board" style="color: var(--accent-color);"></i> Casual
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Word">
-          <i class="fa-solid fa-w" style="color: var(--accent-color);"></i> Word
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Two Player">
-          <i class="fa-solid fa-user-group" style="color: var(--accent-color);"></i> Two Player
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Adventure">
-          <i class="fa-solid fa-space-awesome" style="color: var(--accent-color);"></i> Adventure
-        </a>
-      </li>
-      <li>
-        <a href="#" class="sidebar-cat-link" data-category="Logic Game">
-          <i class="fa-solid fa-brain" style="color: var(--accent-color);"></i> Logic Game
-        </a>
-      </li>
-      
-    
-    </ul>
-  </nav>
-
-  <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
-  <main class="container">
-
-    <section class="slider position-relative">
-
-      <button class="slide-nav prev">&#10094;</button>
-
-      <!-- Slide -->
-      <div class="slide active">
-        <div class="row ">
-
-          <!-- TEXT -->
-          <div class="col-md-6 slide-text">
-            <h1>Game Name</h1>
-            <p>
-              Short description about the game. You can write anything here later.
-            </p>
-            <button class="btn play-btn">Play Now</button>
+  <body>
+    <header class="navbar">
+      <div class="container-fluid">
+        <div
+          class="header-top-wrapper d-flex align-items-center justify-content-between w-100"
+        >
+          <div class="d-flex align-items-center">
+            <button class="menu-btn" id="menuBtn">
+              <i class="fa-solid fa-bars fa-lg" style="color: #97feed"></i>
+            </button>
+            <a href="index.html">
+              <img
+                src="assets/games_img/game_logo_bg.png"
+                alt="Logo"
+                class="logo"
+              />
+            </a>
           </div>
-
-          <!-- IMAGE -->
-          <div class="col-md-6 slide-image">
-            <img src="assets/default_img.png" class="img-fluid" alt="game image">
+          <div class="search-section desktop-search">
+            <i class="fas fa-search" style="color: #97feed"></i>
+            <input type="text" placeholder="Search games..." />
           </div>
+          <div class="login-area">
+            <button class="login-btn">
+              <a href="#"
+                ><i class="fa-solid fa-user" style="color: #97feed"></i>
+                <span>Login</span></a
+              >
+            </button>
+          </div>
+        </div>
 
+        <div class="header-bottom-wrapper w-100 mt-2">
+          <div class="search-section">
+            <i class="fas fa-search" style="color: #97feed"></i>
+            <input type="text" placeholder="Search games..." />
+          </div>
         </div>
       </div>
+    </header>
 
-      <!-- Second Slide -->
-      <div class="slide">
-        <div class="row ">
+    <!-- Togglebar & Menu button done by Sadek Manir Sayed. ID: 1237-->
+    <nav class="sidebar" id="sidebar">
+      <ul>
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-house"
+              style="color: var(--accent-color)"
+            ></i>
+            Home</a
+          >
+        </li>
 
-          <div class="col-md-6 slide-text">
-            <h1>Game 2</h1>
-            <p>Another description.</p>
-            <button class="btn play-btn">Play Now</button>
-          </div>
+        <li>
+          <a href="#"
+            ><i
+              class="fa-solid fa-heart"
+              style="color: var(--accent-color)"
+            ></i>
+            Favorites</a
+          >
+        </li>
 
-          <div class="col-md-6 slide-image">
-            <img src="assets/default_img.png" class="img-fluid" alt="game image">
-          </div>
+        <li>
+          <a href="#"
+            ><i class="fa-solid fa-fire" style="color: var(--accent-color)"></i>
+            Popular Games</a
+          >
+        </li>
+        <hr />
 
-        </div>
-      </div>
-      <!--third slide-->
-      <div class="slide">
-        <div class="row ">
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="All">
+            <i
+              class="fa-solid fa-gamepad"
+              style="color: var(--accent-color)"
+            ></i>
+            All
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Board">
+            <i
+              class="fa-solid fa-chess-board"
+              style="color: var(--accent-color)"
+            ></i>
+            Board
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Strategy">
+            <i
+              class="fa-solid fa-chess-pawn"
+              style="color: var(--accent-color)"
+            ></i>
+            Strategy
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
+            <i
+              class="fa-solid fa-people-group"
+              style="color: var(--accent-color)"
+            ></i>
+            Multiplayer
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Card">
+            <i
+              class="fa-solid fa-diamond"
+              style="color: var(--accent-color)"
+            ></i>
+            Card
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Puzzle">
+            <i
+              class="fa-solid fa-puzzle-piece"
+              style="color: var(--accent-color)"
+            ></i>
+            Puzzle
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
+            <i
+              class="fa-solid fa-child-reaching"
+              style="color: var(--accent-color)"
+            ></i>
+            Single Player
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Casual">
+            <i
+              class="fa-solid fa-chess-board"
+              style="color: var(--accent-color)"
+            ></i>
+            Casual
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Word">
+            <i class="fa-solid fa-w" style="color: var(--accent-color)"></i>
+            Word
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Two Player">
+            <i
+              class="fa-solid fa-user-group"
+              style="color: var(--accent-color)"
+            ></i>
+            Two Player
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Adventure">
+            <i
+              class="fa-solid fa-space-awesome"
+              style="color: var(--accent-color)"
+            ></i>
+            Adventure
+          </a>
+        </li>
+        <li>
+          <a href="#" class="sidebar-cat-link" data-category="Logic Game">
+            <i class="fa-solid fa-brain" style="color: var(--accent-color)"></i>
+            Logic Game
+          </a>
+        </li>
+      </ul>
+    </nav>
 
-          <div class="col-md-6 slide-text">
-            <h1>Game 3</h1>
-            <p>Another description.</p>
-            <button class="btn play-btn">Play Now</button>
-          </div>
+    <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
+    <main class="container">
+      <section class="slider position-relative">
+        <button class="slide-nav prev">&#10094;</button>
 
-          <div class="col-md-6 slide-image">
-            <img src="assets/default_img.png" class="img-fluid" alt="game image">
-          </div>
+        <!-- Slide -->
+        <div class="slide active">
+          <div class="row g-0">
+            <!-- TEXT -->
+            <div class="col-md-5 slide-text">
+              <h1>Game Name</h1>
+              <p>
+                Short description about the game. You can write anything here
+                later.
+              </p>
+              <button class="btn play-btn">Play Now</button>
+            </div>
 
-        </div>
-      </div>
-
-      <button class="slide-nav next">&#10095;</button>
-
-    </section>
-    <section class="category">
-      <h2 class="section-title">Category</h2>
-
-      <div class="category-buttons">
-        <button class="btn category-btn active">All</button>
-        <button class="btn category-btn">Board</button>
-        <button class="btn category-btn">Card</button>
-        <button class="btn category-btn">Puzzle</button>
-      </div>
-    </section>
-    <section class="top-picks">
-      <h2 class="section-title">Top Picks</h2>
-
-      <div class="row g-5">
-
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
-
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
+            <!-- IMAGE -->
+            <div class="col-md-7 slide-image">
+              <img
+                src="assets/default_img.png"
+                class="img-fluid"
+                alt="game image"
+              />
             </div>
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
+        <!-- Second Slide -->
+        <div class="slide">
+          <div class="row">
+            <div class="col-md-6 slide-text">
+              <h1>Game 2</h1>
+              <p>Another description.</p>
+              <button class="btn play-btn">Play Now</button>
+            </div>
 
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
+            <div class="col-md-6 slide-image">
+              <img
+                src="assets/default_img.png"
+                class="img-fluid"
+                alt="game image"
+              />
+            </div>
+          </div>
+        </div>
+        <!--third slide-->
+        <div class="slide">
+          <div class="row">
+            <div class="col-md-6 slide-text">
+              <h1>Game 3</h1>
+              <p>Another description.</p>
+              <button class="btn play-btn">Play Now</button>
+            </div>
+
+            <div class="col-md-6 slide-image">
+              <img
+                src="assets/default_img.png"
+                class="img-fluid"
+                alt="game image"
+              />
             </div>
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
+        <button class="slide-nav next">&#10095;</button>
+      </section>
+      <section class="category">
+        <h2 class="section-title">Category</h2>
 
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
+        <div class="category-buttons">
+          <button class="btn category-btn active">All</button>
+          <button class="btn category-btn">Board</button>
+          <button class="btn category-btn">Card</button>
+          <button class="btn category-btn">Puzzle</button>
+        </div>
+      </section>
+      <section class="top-picks">
+        <h2 class="section-title">Top Picks</h2>
+
+        <div class="row g-5">
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="game-card">
+              <img
+                src="assets/default_img.png"
+                alt="Game Image"
+                class="card-image"
+              />
+
+              <div class="card-content">
+                <h3 class="game-title">Game Name</h3>
+                <button class="btn play-btn">Play</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="game-card">
+              <img
+                src="assets/default_img.png"
+                alt="Game Image"
+                class="card-image"
+              />
+
+              <div class="card-content">
+                <h3 class="game-title">Game Name</h3>
+                <button class="btn play-btn">Play</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="game-card">
+              <img
+                src="assets/default_img.png"
+                alt="Game Image"
+                class="card-image"
+              />
+
+              <div class="card-content">
+                <h3 class="game-title">Game Name</h3>
+                <button class="btn play-btn">Play</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="game-card">
+              <img
+                src="assets/default_img.png"
+                alt="Game Image"
+                class="card-image"
+              />
+
+              <div class="card-content">
+                <h3 class="game-title">Game Name</h3>
+                <button class="btn play-btn">Play</button>
+              </div>
             </div>
           </div>
         </div>
+      </section>
+      <section class="all-games">
+        <h2 class="section-title">All Games</h2>
 
-        <div class="col-lg-3 col-md-4 col-sm-6">
-          <div class="game-card">
-            <img src="assets/default_img.png" alt="Game Image" class="card-image">
+        <div class="row g-5 card-r" id="gamesContainer"></div>
+      </section>
+    </main>
 
-            <div class="card-content">
-              <h3 class="game-title">Game Name</h3>
-              <button class="btn play-btn">Play</button>
-            </div>
-          </div>
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-box one">
+          <h2 class="logo">MiniGames</h2>
+          <p>
+            Play fun mini games online. Enjoy puzzles, memory games and more.
+          </p>
         </div>
 
-      </div>
-    </section>
-    <section class="all-games">
-      <h2 class="section-title">All Games</h2>
+        <div class="footer-box two">
+          <h3>Explore Games</h3>
+          <ul>
+            <li><a href="#">Puzzle Game</a></li>
+            <li><a href="#">Memory Game</a></li>
+            <li><a href="#">Guess Number</a></li>
+            <li><a href="#">Tic Tac Toe</a></li>
+            <li><a href="#">Dice Game</a></li>
+            <li><a href="#">Ludo Game</a></li>
+          </ul>
+        </div>
 
-      <div class="row g-5 card-r" id="gamesContainer">
+        <div class="footer-box three">
+          <h3>Overview</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
 
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <footer class="footer">
-
-    <div class="footer-container">
-
-      <div class="footer-box one">
-        <h2 class="logo">MiniGames</h2>
-        <p>Play fun mini games online. Enjoy puzzles, memory games and more.</p>
-      </div>
-
-      <div class="footer-box two">
-        <h3>Explore Games</h3>
-        <ul>
-          <li><a href="#">Puzzle Game</a></li>
-          <li><a href="#">Memory Game</a></li>
-          <li><a href="#">Guess Number</a></li>
-          <li><a href="#">Tic Tac Toe</a></li>
-          <li><a href="#">Dice Game</a></li>
-          <li><a href="#">Ludo Game</a></li>
-        </ul>
+        <div class="footer-box four">
+          <h3>Community</h3>
+          <ul>
+            <li><a href="#">Game Forum</a></li>
+            <li><a href="#">Support</a></li>
+            <li><a href="#">Help Center</a></li>
+          </ul>
+        </div>
       </div>
 
-      <div class="footer-box three">
-        <h3>Overview</h3>
-        <ul>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">Privacy Policy</a></li>
-          <li><a href="#">Terms of Use</a></li>
-        </ul>
+      <div class="social">
+        <a href="#">Facebook</a>
+        <a href="#">YouTube</a>
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
       </div>
 
-      <div class="footer-box four">
-        <h3>Community</h3>
-        <ul>
-          <li><a href="#">Game Forum</a></li>
-          <li><a href="#">Support</a></li>
-          <li><a href="#">Help Center</a></li>
-        </ul>
+      <div class="copyright">
+        <p>© 2026 MiniGames. All Rights Reserved.</p>
       </div>
+    </footer>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/nav.js"></script>
 
-    </div>
-
-    <div class="social">
-      <a href="#">Facebook</a>
-      <a href="#">YouTube</a>
-      <a href="#">Instagram</a>
-      <a href="#">LinkedIn</a>
-    </div>
-
-    <div class="copyright">
-      <p>© 2026 MiniGames. All Rights Reserved.</p>
-    </div>
-
-  </footer>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-    crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/nav.js"></script>
-
-  <!-- Bootstrap JavaScript Libraries -->
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-    crossorigin="anonymous"></script>
-
-</body>
-
+    <!-- Bootstrap JavaScript Libraries -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

@@ -20,6 +20,7 @@ img {
   padding: 0;
   overflow: hidden;
   transition: all 0.3s ease;
+  width:100%;
 }
 
 
@@ -36,20 +37,28 @@ img {
 }
 
 .slide .row {
+  margin:0;
   height: 100%;
+  width: 100%;
 }
-
+.slide .col-md-6 {
+  padding: 0;
+}
 .slide-image {
   height: 100%;
+ padding: 0 !important;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .slide-image img {
   width: 100%;
-  height: auto;
-  max-height: 100%;
+  height: 100%;
   object-fit: cover;
+  display: block;
+  /* This ensures the image stays pinned to the right */
+  mask-image: linear-gradient(to left, rgba(0, 0, 0, 1) 70%, rgba(0, 0, 0, 0));
 }
 
 .slide.active {
