@@ -20,8 +20,8 @@ $.getJSON("data/games.json", function (games) {
       <div class="related-card mb-3">
         <div class="d-flex align-items-center">
           <img src="${game.image}" class="related-img me-2"  object-fit:cover;">
-          <div>
-            <h6 class="mb-0 text-white">${game.name}</h6>
+          <div class="game-txt">
+            <h5 class="mb-0 text-white game-name">${game.name}</h5>
             
           </div>
         </div>
