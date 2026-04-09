@@ -1,5 +1,34 @@
 
 $(document).ready(function () {
+
+  //SIDEBAR -------------
+  $(".sidebar-cat-link").on("click", function (e) {
+    e.preventDefault();
+
+    // REMOVE previous active
+    $(".sidebar-cat-link").removeClass("active");
+
+    // ADD active to clicked one
+    $(this).addClass("active");
+
+    // Get category
+    const selectedCat = $(this).data("category");
+
+    // Trigger main category button
+    $(`.category-btn[data-category="${selectedCat}"]`).click();
+
+    // Close sidebar
+    $("#sidebar").removeClass("active");
+    $("#menuBtn").removeClass("active");
+
+    // Scroll
+    document.querySelector('.category').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  });
+  //------------------------
+
   $.ajax({
     url: "data/games.json",
     method: "GET",
@@ -24,6 +53,7 @@ $(document).ready(function () {
           `<button class="btn category-btn" data-category="${cat}">${cat}</button>`
         );
       });
+
       renderGames(games);
       $(".top-picks").show();
       $(".category-buttons").on("click", ".category-btn", function () {
@@ -32,6 +62,8 @@ $(document).ready(function () {
         $(this).addClass("active");
 
         const selectedCategory = $(this).data("category");
+        $(".sidebar-cat-link").removeClass("active");
+        $(`.sidebar-cat-link[data-category="${selectedCategory}"]`).addClass("active");
 
         if (selectedCategory === "All") {
           $("#gamesContainer").fadeOut(150, function () {
