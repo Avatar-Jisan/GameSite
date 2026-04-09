@@ -50,14 +50,14 @@ main{
 }
 
 .slide-text h1 {
-  font: 1em Bangers, cursive;
+  font-family: "Anton SC", cursive;
   color: white;
   font-size: 42px;
   margin-bottom: 15px;
 }
 
 .slide-text p {
-  font-family: "Delius", cursive;
+  font-family: "Noto Sans", cursive;
   color: #cbd5f5;
   margin-bottom: 20px;
 }
@@ -66,11 +66,16 @@ main{
  font-weight: bold;
 }
 .play-btn {
-  font-family: "Protest Riot", cursive;
+  font-family: "Russo One", cursive;
     width: 200px;
     border-radius: 25px;
     padding: 10px 25px;
     font-size: 24px;
+}
+.slide-text button{
+  padding: 5px;
+  font-family: "Honk", cursive;
+  font-size: 2rem;
 }
 .play-btn:hover{
   background-color: transparent;
@@ -218,20 +223,27 @@ body{
   justify-content: space-between;
   align-items: center;
 }
-
+.game-title{
+  font-family: "Anton SC", cursive;
+  font-size: 20px;
+  letter-spacing: 1.15px;
+}
 /* Game title */
 .all-games h2{
   margin-bottom: -60px;
 }
 
-.game-title{
-  font-size: 18px;
-  font-weight: 600;
-  margin: 0;
+.login-btn{
+  font-family: "Noto Sans", cursive;
+  letter-spacing: 1.2px;
+  font-weight: bold;
 }
 
 /* Play Button */
-
+.category-buttons button{
+  border-radius: 15px;
+  font-family: "Noto Sans", cursive;
+}
 .card-content button{
   
   font-size: 14px;
@@ -245,5 +257,6 @@ body{
 {
   margin-top: 15px;
 }
+
 
 

@@ -45,7 +45,9 @@ body {
   align-items: center;
   padding-left: 20px;
 }
-
+#gameTitle1{
+  font-family: "Anton SC", cursive;
+}
 .game-info-button {
   display: flex;
   gap: 15px;
