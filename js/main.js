@@ -5,22 +5,51 @@ $(document).ready(function () {
     method: "GET",
     dataType: "json",
     success: function (games) {
-
-      const gamesContainer = $("#gamesContainer");
+      // Extract unique categories
+      let categories = new Set();
 
       games.forEach(game => {
-        const card = `<div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="game-card">
-          <img src="${game.image}" alt="${game.name}" class="card-image">
-          <div class="card-content">
-            <h3 class="game-title">${game.name}</h3>
-            <a href="game.html?id=${game.id}" class="text-decoration-none">
-              <button class="btn play-btn">Play</button>
-            </a>
-          </div>
-        </div>
-      </div>`;
-        gamesContainer.append(card);
+        game.category.forEach(cat => categories.add(cat));
+      });
+
+      const categoryContainer = $(".category-buttons");
+      categoryContainer.empty();
+
+      // Add "All" button first
+      categoryContainer.append(`<button class="btn category-btn active" data-category="All">All</button>`);
+
+      // Add dynamic categories
+      categories.forEach(cat => {
+        categoryContainer.append(
+          `<button class="btn category-btn" data-category="${cat}">${cat}</button>`
+        );
+      });
+      renderGames(games);
+      $(".top-picks").show();
+      $(".category-buttons").on("click", ".category-btn", function () {
+
+        $(".category-btn").removeClass("active");
+        $(this).addClass("active");
+
+        const selectedCategory = $(this).data("category");
+
+        if (selectedCategory === "All") {
+          $("#gamesContainer").fadeOut(150, function () {
+            renderGames(games);
+            $(".top-picks").show();
+            $(this).fadeIn(150);
+          });
+        } else {
+          const filteredGames = games.filter(game =>
+            game.category.includes(selectedCategory)
+          );
+
+          $("#gamesContainer").fadeOut(150, function () {
+            renderGames(filteredGames);
+            $(".top-picks").hide();
+            $(this).fadeIn(150);
+          });
+        }
       });
 
       const pickedGames = ["ludo", "rock-paper-scissors", "tic-tac-toe", "number-guessing"];
@@ -87,12 +116,14 @@ function initSlider() {
   let slideInterval;
 
   function showSlide(index) {
+    const slides = document.querySelectorAll(".slide");
     slides.forEach(slide => slide.classList.remove("active"));
     slides[index].classList.add("active");
   }
 
 
   function nextSlide() {
+    const slides = document.querySelectorAll(".slide");
     current++;
 
     if (current >= slides.length) {
@@ -104,6 +135,7 @@ function initSlider() {
 
 
   function prevSlide() {
+    const slides = document.querySelectorAll(".slide");
     current--;
 
     if (current < 0) {
@@ -135,5 +167,27 @@ function initSlider() {
 
   slider.addEventListener("mouseleave", () => {
     startAutoSlide();
+  });
+}
+
+function renderGames(gameList) {
+  const gamesContainer = $("#gamesContainer");
+  gamesContainer.empty();
+
+  gameList.forEach(game => {
+    const card = `
+    <div class="col-lg-3 col-md-4 col-sm-6">
+      <div class="game-card">
+        <img src="${game.image}" alt="${game.name}" class="card-image">
+        <div class="card-content">
+          <h3 class="game-title">${game.name}</h3>
+          <a href="game.html?id=${game.id}" class="text-decoration-none">
+            <button class="btn play-btn">Play</button>
+          </a>
+        </div>
+      </div>
+    </div>`;
+
+    gamesContainer.append(card);
   });
 }

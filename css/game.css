@@ -117,21 +117,30 @@ body {
 
 /* Small cards for sidebar */
 .other-games {
-  margin-top: 70px;
+  margin-top: 120px;
 }
 
 .related-card {
   display: flex;
-  gap: 10px;
+  align-items: center;
+  width: 15vw;
+  height: 12vh;
   background: var(--bg-card);
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
 }
 
 .related-card img {
   width: 80px;
-  height: 60px;
+  height: 80px;
   object-fit: cover;
   border-radius: 6px;
 }
+
+.related-card:hover {
+  transform: scale(1.05);
+}
+
+

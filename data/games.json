@@ -90,7 +90,7 @@
   {
     "id": "rock-paper-scissors",
     "name": "Rock Paper Scissors",
-    "category": ["Casual", "Action", "Multiplayer"],
+    "category": ["Casual", "Multiplayer"],
     "image": "assets/games_img/rps_img.png",
     "shortDescription": "A quick hand game where players simultaneously form one of three shapes to defeat their opponent.",
     "longDescription": "Rock Paper Scissors is a simple, universally known game usually played between two people. Players simultaneously choose one of three shapes: rock, paper, or scissors. It's often used as a quick decision-making tool, but can also be played competitively in rounds to test prediction and psychological tactics.",
@@ -164,7 +164,7 @@
 {
   "id":"number-guessing",
   "name":"Number Guessing",
-  "category": ["Logic Game", "Doubleplayer"],
+  "category": ["Logic Game", "Two Player"],
   "image": "assets/games_img/guessingimage.png",
   "shortDescription": "Guess the hidden number within a limited number of attempts.",
   "longDescription": "Number Guessing is a simple yet engaging single-player puzzle game where players must guess a hidden number within a specified range. Players receive feedback after each guess, indicating whether the guessed number is too high or too low. The game challenges players to use logic and deduction to find the correct number in the fewest attempts possible.",
