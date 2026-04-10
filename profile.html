@@ -201,6 +201,7 @@
       </aside>
 
       <main class="main-content">
+        <div class="sidebar-overlay" id="overlay"></div>
         <header class="topbar">
           <div class="search-bar">
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -211,6 +212,9 @@
           </div>
 
           <div class="topbar-actions">
+            <button class="menu-btn" id="menuBtn" style="display: none">
+              <i class="fa-solid fa-bars"></i>
+            </button>
             <button class="icon-btn notification-btn">
               <i class="fa-regular fa-bell"></i>
               <span class="notification-badge">3</span>
@@ -336,6 +340,29 @@
         </section>
 
         <section class="middle-grid">
+          <div class="card progress-card">
+            <div class="card-header">
+              <h3>Your Progress</h3>
+            </div>
+            <div class="progress-detailed">
+              <div class="level-shield-container">
+                <div class="level-shield">
+                  <span class="level-title">Level</span>
+                  <span class="level-number-big">23</span>
+                </div>
+                <p class="rank-title">Legend in the Making</p>
+              </div>
+              <div class="xp-detailed-bar">
+                <div class="xp-progress-fill" style="width: 70%"></div>
+              </div>
+              <p class="xp-detailed-text">6,240 / 8,500 XP</p>
+              <div class="next-reward">
+                <div class="reward-icon">24</div>
+                <p>Next Reward: <span>500 XP Boost</span></p>
+                <div class="reward-icon">24</div>
+              </div>
+            </div>
+          </div>
           <div class="card achievements-card">
             <div class="card-header">
               <h3>Achievements</h3>
@@ -349,8 +376,8 @@
                 <div class="achievement-info">
                   <div class="achievement-text">
                     <div class="d-flex flex-column">
-                    <p>First Blood</p>
-                    <span>Win your first game</span>
+                      <p>First Blood</p>
+                      <span>Win your first game</span>
                     </div>
                     <span>80%</span>
                   </div>
@@ -412,8 +439,8 @@
                 <div class="achievement-info">
                   <div class="achievement-text">
                     <div class="d-flex flex-column">
-                    <p>Night Owl</p>
-                    <span>Play 50 games at night</span>
+                      <p>Night Owl</p>
+                      <span>Play 50 games at night</span>
                     </div>
                     <span>90%</span>
                   </div>
@@ -424,30 +451,6 @@
                     ></div>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card progress-card">
-            <div class="card-header">
-              <h3>Your Progress</h3>
-            </div>
-            <div class="progress-detailed">
-              <div class="level-shield-container">
-                <div class="level-shield">
-                  <span class="level-title">Level</span>
-                  <span class="level-number-big">23</span>
-                </div>
-                <p class="rank-title">Legend in the Making</p>
-              </div>
-              <div class="xp-detailed-bar">
-                <div class="xp-progress-fill" style="width: 70%"></div>
-              </div>
-              <p class="xp-detailed-text">6,240 / 8,500 XP</p>
-              <div class="next-reward">
-                <div class="reward-icon">24</div>
-                <p>Next Reward: <span>500 XP Boost</span></p>
-                <div class="reward-icon">24</div>
               </div>
             </div>
           </div>
@@ -662,5 +665,7 @@
         </section>
       </main>
     </div>
+    <!-- Script -->
+    <script src="js/profile.js"></script>
   </body>
 </html>
