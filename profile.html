@@ -16,164 +16,180 @@
     />
 
     <link rel="stylesheet" href="css/profile.css" />
-    <link rel="stylesheet" href="css/nav.css"/>
+    <!-- <link rel="stylesheet" href="css/nav.css"/> -->
   </head>
   <body class="dark-theme">
     <div class="dashboard-container">
       <aside class="sidebar">
-        <div class="sidebar-header">
-          <a href="index.html" class="logo">
-            <img src="/assets/games_img/game_logo_bg.png" alt="Khelo Logo" class="logo-img" />
-          </a>
+        <div class="sidebar-top">
+          <div class="sidebar-header">
+            <a href="index.html" class="logo">
+              <img
+                src="/assets/games_img/game_logo_bg.png"
+                alt="Khelo Logo"
+                class="logo-img"
+              />
+            </a>
+          </div>
+
+          <nav class="sidebar-nav" id="sidebar">
+            <ul>
+              <li>
+                <a href="#"
+                  ><i
+                    class="fa-solid fa-house"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Home</a
+                >
+              </li>
+
+              <li>
+                <a href="#"
+                  ><i
+                    class="fa-solid fa-heart"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Favorites</a
+                >
+              </li>
+
+              <li>
+                <a href="#"
+                  ><i
+                    class="fa-solid fa-fire"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Popular Games</a
+                >
+              </li>
+              <hr />
+
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="All">
+                  <i
+                    class="fa-solid fa-gamepad"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  All
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Board">
+                  <i
+                    class="fa-solid fa-chess-board"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Board
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Strategy">
+                  <i
+                    class="fa-solid fa-chess-pawn"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Strategy
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="sidebar-cat-link"
+                  data-category="Multiplayer"
+                >
+                  <i
+                    class="fa-solid fa-people-group"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Multiplayer
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Card">
+                  <i
+                    class="fa-solid fa-diamond"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Card
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Puzzle">
+                  <i
+                    class="fa-solid fa-puzzle-piece"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Puzzle
+                </a>
+              </li>
+              <li>
+                <a
+                  href="#"
+                  class="sidebar-cat-link"
+                  data-category="Singleplayer"
+                >
+                  <i
+                    class="fa-solid fa-child-reaching"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Single Player
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Casual">
+                  <i
+                    class="fa-solid fa-chess-board"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Casual
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Word">
+                  <i
+                    class="fa-solid fa-w"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Word
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Two Player">
+                  <i
+                    class="fa-solid fa-user-group"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Two Player
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Adventure">
+                  <i
+                    class="fa-solid fa-space-awesome"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Adventure
+                </a>
+              </li>
+              <li>
+                <a href="#" class="sidebar-cat-link" data-category="Logic Game">
+                  <i
+                    class="fa-solid fa-brain"
+                    style="color: var(--accent-color)"
+                  ></i>
+                  Logic Game
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="sidebar-cta">
+            <h4>Play. Win. Level Up.</h4>
+            <p>Compete, earn XP, and unlock epic rewards!</p>
+            <button class="btn-primary">Explore Now</button>
+          </div>
         </div>
-
-        <nav class="sidebar" id="sidebar">
-          <ul>
-            <li>
-              <a href="#"
-                ><i
-                  class="fa-solid fa-house"
-                  style="color: var(--accent-color)"
-                ></i>
-                Home</a
-              >
-            </li>
-
-            <li>
-              <a href="#"
-                ><i
-                  class="fa-solid fa-heart"
-                  style="color: var(--accent-color)"
-                ></i>
-                Favorites</a
-              >
-            </li>
-
-            <li>
-              <a href="#"
-                ><i
-                  class="fa-solid fa-fire"
-                  style="color: var(--accent-color)"
-                ></i>
-                Popular Games</a
-              >
-            </li>
-            <hr />
-
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="All">
-                <i
-                  class="fa-solid fa-gamepad"
-                  style="color: var(--accent-color)"
-                ></i>
-                All
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Board">
-                <i
-                  class="fa-solid fa-chess-board"
-                  style="color: var(--accent-color)"
-                ></i>
-                Board
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Strategy">
-                <i
-                  class="fa-solid fa-chess-pawn"
-                  style="color: var(--accent-color)"
-                ></i>
-                Strategy
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
-                <i
-                  class="fa-solid fa-people-group"
-                  style="color: var(--accent-color)"
-                ></i>
-                Multiplayer
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Card">
-                <i
-                  class="fa-solid fa-diamond"
-                  style="color: var(--accent-color)"
-                ></i>
-                Card
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Puzzle">
-                <i
-                  class="fa-solid fa-puzzle-piece"
-                  style="color: var(--accent-color)"
-                ></i>
-                Puzzle
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
-                <i
-                  class="fa-solid fa-child-reaching"
-                  style="color: var(--accent-color)"
-                ></i>
-                Single Player
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Casual">
-                <i
-                  class="fa-solid fa-chess-board"
-                  style="color: var(--accent-color)"
-                ></i>
-                Casual
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Word">
-                <i class="fa-solid fa-w" style="color: var(--accent-color)"></i>
-                Word
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Two Player">
-                <i
-                  class="fa-solid fa-user-group"
-                  style="color: var(--accent-color)"
-                ></i>
-                Two Player
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Adventure">
-                <i
-                  class="fa-solid fa-space-awesome"
-                  style="color: var(--accent-color)"
-                ></i>
-                Adventure
-              </a>
-            </li>
-            <li>
-              <a href="#" class="sidebar-cat-link" data-category="Logic Game">
-                <i
-                  class="fa-solid fa-brain"
-                  style="color: var(--accent-color)"
-                ></i>
-                Logic Game
-              </a>
-            </li>
-          </ul>
-        </nav>
-
-        <div class="sidebar-cta">
-          <h4>Play. Win. Level Up.</h4>
-          <p>Compete, earn XP, and unlock epic rewards!</p>
-          <button class="btn-primary">Explore Now</button>
-        </div>
-
         <footer class="sidebar-footer nav-list">
           <li class="nav-item">
             <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
@@ -226,7 +242,10 @@
 
         <section class="profile-banner">
           <div class="banner-background">
-            <img src="assets/games_img/bg_banner.webp" alt="Profile Background" />
+            <img
+              src="assets/games_img/bg_banner.webp"
+              alt="Profile Background"
+            />
           </div>
           <div class="profile-header-content">
             <div class="avatar-container">
@@ -322,31 +341,89 @@
               <h3>Achievements</h3>
               <a href="#" class="view-all">View All</a>
             </div>
-            <div class="badges-container">
-              <div class="badge neon-gold">
-                <i class="fa-solid fa-trophy"></i>
-                <p>First Blood</p>
-                <span>Win your first game</span>
+            <div class="achievements-list">
+              <div class="achievement-item">
+                <div class="achievement-icon neon-gold">
+                  <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="achievement-info">
+                  <div class="achievement-text">
+                    <div class="d-flex flex-column">
+                    <p>First Blood</p>
+                    <span>Win your first game</span>
+                    </div>
+                    <span>80%</span>
+                  </div>
+                  <div class="achievement-progress">
+                    <div
+                      class="progress-fill"
+                      style="width: 80%; background: var(--accent-gold)"
+                    ></div>
+                  </div>
+                </div>
               </div>
-              <div class="badge neon-green">
-                <i class="fa-solid fa-fire"></i>
-                <p>Streak King</p>
-                <span>Win 10 games in a row</span>
+
+              <div class="achievement-item">
+                <div class="achievement-icon neon-green">
+                  <i class="fa-solid fa-fire"></i>
+                </div>
+                <div class="achievement-info">
+                  <div class="achievement-text">
+                    <div class="d-flex flex-column">
+                      <p>Streak King</p>
+                      <span>Win 10 games in a row</span>
+                    </div>
+                    <span>45%</span>
+                  </div>
+                  <div class="achievement-progress">
+                    <div
+                      class="progress-fill"
+                      style="width: 45%; background: var(--accent-green)"
+                    ></div>
+                  </div>
+                </div>
               </div>
-              <div class="badge neon-blue">
-                <i class="fa-solid fa-puzzle-piece"></i>
-                <p>Puzzle Master</p>
-                <span>Solve 500 puzzles</span>
+
+              <div class="achievement-item">
+                <div class="achievement-icon neon-blue">
+                  <i class="fa-solid fa-puzzle-piece"></i>
+                </div>
+                <div class="achievement-info">
+                  <div class="achievement-text">
+                    <div class="d-flex flex-column">
+                      <p>Puzzle Master</p>
+                      <span>Solve 500 puzzles</span>
+                    </div>
+                    <span>60%</span>
+                  </div>
+                  <div class="achievement-progress">
+                    <div
+                      class="progress-fill"
+                      style="width: 60%; background: var(--accent-blue)"
+                    ></div>
+                  </div>
+                </div>
               </div>
-              <div class="badge neon-cyan">
-                <i class="fa-solid fa-moon"></i>
-                <p>Night Owl</p>
-                <span>Play 50 games at night</span>
-              </div>
-              <div class="badge locked">
-                <i class="fa-solid fa-lock"></i>
-                <p>Veteran</p>
-                <span>Reach level 50</span>
+
+              <div class="achievement-item">
+                <div class="achievement-icon neon-cyan">
+                  <i class="fa-solid fa-moon"></i>
+                </div>
+                <div class="achievement-info">
+                  <div class="achievement-text">
+                    <div class="d-flex flex-column">
+                    <p>Night Owl</p>
+                    <span>Play 50 games at night</span>
+                    </div>
+                    <span>90%</span>
+                  </div>
+                  <div class="achievement-progress">
+                    <div
+                      class="progress-fill"
+                      style="width: 90%; background: var(--accent-cyan)"
+                    ></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
