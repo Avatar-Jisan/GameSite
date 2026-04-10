@@ -52,7 +52,9 @@ body {
   display: flex;
   gap: 15px;
 }
-
+.full-btn{
+  margin-right:10px;
+}
 .game-info-button button {
   position: relative;
   border: none;
@@ -146,6 +148,38 @@ body {
   transform: scale(1.05);
 }
 
+@media (max-width: 768px) {
+  .game-area {
+    margin-left: 0;
+  }
 
+  .game-player {
+   height: 80vh;/* slightly taller for mobile */
+    margin-top: 100px;
+  }
+  #gameFrame {
+    height: 93%;
+  }
+  .related-card {
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+  .game-table{
+    padding:0;
+  }
+}
+@media (max-width: 480px) {
+  .game-player {
+    height:100vh; /* even taller for small screens */
+  }
+  #gameFrame {
+    height: 93%;
+  }
+    .game-table{
+    padding:0 !important;
+    margin:0 !important;
+  }
+}
 
 
