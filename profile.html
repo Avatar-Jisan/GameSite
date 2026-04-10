@@ -1,0 +1,589 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Khelo Profile</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&family=Inter:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/nav.css"/>
+  </head>
+  <body class="dark-theme">
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <a href="index.html" class="logo">
+            <img src="/assets/games_img/game_logo_bg.png" alt="Khelo Logo" class="logo-img" />
+          </a>
+        </div>
+
+        <nav class="sidebar" id="sidebar">
+          <ul>
+            <li>
+              <a href="#"
+                ><i
+                  class="fa-solid fa-house"
+                  style="color: var(--accent-color)"
+                ></i>
+                Home</a
+              >
+            </li>
+
+            <li>
+              <a href="#"
+                ><i
+                  class="fa-solid fa-heart"
+                  style="color: var(--accent-color)"
+                ></i>
+                Favorites</a
+              >
+            </li>
+
+            <li>
+              <a href="#"
+                ><i
+                  class="fa-solid fa-fire"
+                  style="color: var(--accent-color)"
+                ></i>
+                Popular Games</a
+              >
+            </li>
+            <hr />
+
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="All">
+                <i
+                  class="fa-solid fa-gamepad"
+                  style="color: var(--accent-color)"
+                ></i>
+                All
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Board">
+                <i
+                  class="fa-solid fa-chess-board"
+                  style="color: var(--accent-color)"
+                ></i>
+                Board
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Strategy">
+                <i
+                  class="fa-solid fa-chess-pawn"
+                  style="color: var(--accent-color)"
+                ></i>
+                Strategy
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
+                <i
+                  class="fa-solid fa-people-group"
+                  style="color: var(--accent-color)"
+                ></i>
+                Multiplayer
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Card">
+                <i
+                  class="fa-solid fa-diamond"
+                  style="color: var(--accent-color)"
+                ></i>
+                Card
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Puzzle">
+                <i
+                  class="fa-solid fa-puzzle-piece"
+                  style="color: var(--accent-color)"
+                ></i>
+                Puzzle
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
+                <i
+                  class="fa-solid fa-child-reaching"
+                  style="color: var(--accent-color)"
+                ></i>
+                Single Player
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Casual">
+                <i
+                  class="fa-solid fa-chess-board"
+                  style="color: var(--accent-color)"
+                ></i>
+                Casual
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Word">
+                <i class="fa-solid fa-w" style="color: var(--accent-color)"></i>
+                Word
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Two Player">
+                <i
+                  class="fa-solid fa-user-group"
+                  style="color: var(--accent-color)"
+                ></i>
+                Two Player
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Adventure">
+                <i
+                  class="fa-solid fa-space-awesome"
+                  style="color: var(--accent-color)"
+                ></i>
+                Adventure
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Logic Game">
+                <i
+                  class="fa-solid fa-brain"
+                  style="color: var(--accent-color)"
+                ></i>
+                Logic Game
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-cta">
+          <h4>Play. Win. Level Up.</h4>
+          <p>Compete, earn XP, and unlock epic rewards!</p>
+          <button class="btn-primary">Explore Now</button>
+        </div>
+
+        <footer class="sidebar-footer nav-list">
+          <li class="nav-item">
+            <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+          </li>
+          <li class="nav-item">
+            <a href="#"><i class="fa-solid fa-circle-question"></i>Help</a>
+          </li>
+        </footer>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+              type="text"
+              placeholder="Search games, players, or categories... (Ctrl K)"
+            />
+          </div>
+
+          <div class="topbar-actions">
+            <button class="icon-btn notification-btn">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notification-badge">3</span>
+            </button>
+            <button class="icon-btn messages-btn">
+              <i class="fa-regular fa-comment-dots"></i>
+            </button>
+            <div class="theme-switch">
+              <i class="fa-solid fa-sun"></i>
+              <label class="switch">
+                <input type="checkbox" checked />
+                <span class="slider round"></span>
+              </label>
+              <i class="fa-solid fa-moon"></i>
+            </div>
+            <div class="user-profile-summary">
+              <img
+                src="assets/avatar_img.avif"
+                alt="Jisan Ahmed"
+                class="user-avatar-tiny"
+              />
+              <div class="user-name-dropdown">
+                <span>Jisan Ahmed</span>
+                <i class="fa-solid fa-chevron-down"></i>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <section class="profile-banner">
+          <div class="banner-background">
+            <img src="assets/games_img/bg_banner.webp" alt="Profile Background" />
+          </div>
+          <div class="profile-header-content">
+            <div class="avatar-container">
+              <img
+                src="assets/avatar_img.avif"
+                alt="Jisan Ahmed Avatar"
+                class="profile-avatar"
+              />
+              <button class="edit-avatar-btn">
+                <i class="fa-solid fa-pen"></i>
+              </button>
+            </div>
+            <div class="profile-main-info">
+              <h1>
+                Jisan Ahmed
+                <i class="fa-solid fa-circle-check verified-icon"></i>
+              </h1>
+              <p class="username">
+                @jisan_gamer <span class="flag-icon">🇧🇩</span> Bangladesh
+              </p>
+              <p class="bio">Play for fun. Win with passion. 🚀</p>
+              <p class="join-date">Member since May 2024</p>
+            </div>
+            <div class="profile-action-buttons">
+              <button class="btn-secondary edit-profile-btn">
+                <i class="fa-solid fa-pen"></i> Edit Profile
+              </button>
+              <button class="icon-btn settings-btn">
+                <i class="fa-solid fa-gear"></i>
+              </button>
+            </div>
+          </div>
+          <div class="profile-xp-section">
+            <div class="xp-level-display">
+              <span class="level-num">Level 23</span>
+              <div class="xp-progress-bar">
+                <div class="xp-progress-fill" style="width: 70%"></div>
+              </div>
+              <span class="xp-ratio">6,240 / 8,500 XP</span>
+            </div>
+            <p class="next-level-info">Next: Level 24 →</p>
+          </div>
+        </section>
+
+        <section class="stats-grid">
+          <div class="stat-card">
+            <i class="fa-solid fa-gamepad"></i>
+            <div class="stat-values">
+              <span class="stat-label">Games Played</span>
+              <span class="stat-number">142</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-clock"></i>
+            <div class="stat-values">
+              <span class="stat-label">Hours Played</span>
+              <span class="stat-number">320h</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-trophy"></i>
+            <div class="stat-values">
+              <span class="stat-label">Win Rate</span>
+              <span class="stat-number">68%</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-fire"></i>
+            <div class="stat-values">
+              <span class="stat-label">Longest Streak</span>
+              <span class="stat-number">12 Days</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-star"></i>
+            <div class="stat-values">
+              <span class="stat-label">Total XP</span>
+              <span class="stat-number">24,580</span>
+            </div>
+          </div>
+          <div class="stat-card">
+            <i class="fa-solid fa-award"></i>
+            <div class="stat-values">
+              <span class="stat-label">Achievements</span>
+              <span class="stat-number">28 / 45</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="middle-grid">
+          <div class="card achievements-card">
+            <div class="card-header">
+              <h3>Achievements</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <div class="badges-container">
+              <div class="badge neon-gold">
+                <i class="fa-solid fa-trophy"></i>
+                <p>First Blood</p>
+                <span>Win your first game</span>
+              </div>
+              <div class="badge neon-green">
+                <i class="fa-solid fa-fire"></i>
+                <p>Streak King</p>
+                <span>Win 10 games in a row</span>
+              </div>
+              <div class="badge neon-blue">
+                <i class="fa-solid fa-puzzle-piece"></i>
+                <p>Puzzle Master</p>
+                <span>Solve 500 puzzles</span>
+              </div>
+              <div class="badge neon-cyan">
+                <i class="fa-solid fa-moon"></i>
+                <p>Night Owl</p>
+                <span>Play 50 games at night</span>
+              </div>
+              <div class="badge locked">
+                <i class="fa-solid fa-lock"></i>
+                <p>Veteran</p>
+                <span>Reach level 50</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card progress-card">
+            <div class="card-header">
+              <h3>Your Progress</h3>
+            </div>
+            <div class="progress-detailed">
+              <div class="level-shield-container">
+                <div class="level-shield">
+                  <span class="level-title">Level</span>
+                  <span class="level-number-big">23</span>
+                </div>
+                <p class="rank-title">Legend in the Making</p>
+              </div>
+              <div class="xp-detailed-bar">
+                <div class="xp-progress-fill" style="width: 70%"></div>
+              </div>
+              <p class="xp-detailed-text">6,240 / 8,500 XP</p>
+              <div class="next-reward">
+                <div class="reward-icon">24</div>
+                <p>Next Reward: <span>500 XP Boost</span></p>
+                <div class="reward-icon">24</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card activity-card">
+            <div class="card-header">
+              <h3>Activity Feed</h3>
+              <a href="#" class="view-all">View All</a>
+            </div>
+            <ul class="activity-list">
+              <li>
+                <div class="activity-icon neon-red">
+                  <i class="fa-solid fa-trophy"></i>
+                </div>
+                <div class="activity-details">
+                  <p>Won a match in <span>Ludo</span></p>
+                  <span>2 hours ago</span>
+                </div>
+                <span class="xp-gain">+50 XP</span>
+              </li>
+              <li>
+                <div class="activity-icon neon-blue">
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <div class="activity-details">
+                  <p>Reached Level <span>23</span></p>
+                  <span>Yesterday</span>
+                </div>
+                <span class="xp-gain">+200 XP</span>
+              </li>
+              <li>
+                <div class="activity-icon neon-gold">
+                  <i class="fa-solid fa-puzzle-piece"></i>
+                </div>
+                <div class="activity-details">
+                  <p>Solved <span>100 puzzles</span></p>
+                  <span>2 days ago</span>
+                </div>
+                <span class="xp-gain">+75 XP</span>
+              </li>
+              <li>
+                <div class="activity-icon neon-purple">
+                  <i class="fa-solid fa-xmark"></i>
+                </div>
+                <div class="activity-details">
+                  <p>Played <span>Tic Tac Toe</span></p>
+                  <span>3 days ago</span>
+                </div>
+                <span class="xp-gain">+10 XP</span>
+              </li>
+              <li>
+                <div class="activity-icon neon-green">
+                  <i class="fa-solid fa-medal"></i>
+                </div>
+                <div class="activity-details">
+                  <p>Unlocked <span>Streak King</span></p>
+                  <span>5 days ago</span>
+                </div>
+                <span class="xp-gain">+150 XP</span>
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="bottom-grid">
+          <div class="left-bottom-col">
+            <div class="card favorite-game-card">
+              <div class="card-header">
+                <h3>Favorite Game</h3>
+              </div>
+              <img
+                src="assets/games_img/ludo_img.avif"
+                alt="Ludo"
+                class="game-thumbnail"
+              />
+              <div class="fav-game-info">
+                <h4>Ludo ❤️</h4>
+                <p>Played 45 times</p>
+                <div class="fav-game-stats">
+                  <span class="win-rate-positive">Win Rate 71%</span>
+                  <button class="btn-primary tiny-btn">View Game ></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="card leaderboard-card">
+              <div class="card-header">
+                <h3>Leaderboard</h3>
+                <a href="leaderboard.html" class="view-all">View All</a>
+              </div>
+              <ul class="leader-list">
+                <li>
+                  <span class="rank-num rank-1">1</span>
+                  <img
+                    src="assets/avatar_img.avif"
+                    alt="ShadowStrike"
+                    class="player-avatar-tiny"
+                  />
+                  <div class="player-info">
+                    <span class="player-name">ShadowStrike</span>
+                    <span class="player-xp">4,250 XP</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li class="you-row">
+                  <span class="rank-num rank-2">2</span>
+                  <img
+                    src="assets/avatar_img.avif"
+                    alt="You"
+                    class="player-avatar-tiny"
+                  />
+                  <div class="player-info">
+                    <span class="player-name">Jisan Ahmed</span>
+                    <span class="player-xp">2,580 XP</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </li>
+                <li>
+                  <span class="rank-num rank-3">3</span>
+                  <img
+                    src="assets/avatar_img.avif"
+                    alt="PixelMaster"
+                    class="player-avatar-tiny"
+                  />
+                  <div class="player-info">
+                    <span class="player-name">PixelMaster</span>
+                    <span class="player-xp">1,980 XP</span>
+                  </div>
+                  <i class="fa-solid fa-chevron-right"></i>
+                </li>
+              </ul>
+              <div class="your-rank-summary">
+                <span>Your Rank: <strong>#12</strong></span>
+                <span>620 XP</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card game-statistics-card">
+            <div class="card-header">
+              <h3>Game Statistics</h3>
+              <a href="#" class="view-all">View All Games</a>
+            </div>
+            <div class="game-stats-grid">
+              <div class="game-stat-item">
+                <img
+                  src="assets/games_img/ludo_img.avif"
+                  alt="Ludo"
+                  class="game-mini-thumb"
+                />
+                <div class="game-stat-details">
+                  <h4>Ludo</h4>
+                  <p>Played 45 times</p>
+                  <span class="win-rate-positive">Win Rate 71%</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+              <div class="game-stat-item">
+                <img
+                  src="assets/games_img/ludo_img.avif"
+                  alt="Tic Tac Toe"
+                  class="game-mini-thumb"
+                />
+                <div class="game-stat-details">
+                  <h4>Tic Tac Toe</h4>
+                  <p>Played 28 times</p>
+                  <span class="win-rate-positive">Win Rate 76%</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+              <div class="game-stat-item">
+                <img
+                  src="assets/games_img/ludo_img.avif"
+                  alt="Chess"
+                  class="game-mini-thumb"
+                />
+                <div class="game-stat-details">
+                  <h4>Chess</h4>
+                  <p>Played 25 times</p>
+                  <span class="win-rate-neutral">Win Rate 60%</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+              <div class="game-stat-item">
+                <img
+                  src="assets/games_img/ludo_img.avif"
+                  alt="Sudoku"
+                  class="game-mini-thumb"
+                />
+                <div class="game-stat-details">
+                  <h4>Sudoku</h4>
+                  <p>Played 20 times</p>
+                  <span class="win-rate-positive">Win Rate 65%</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+              <div class="game-stat-item">
+                <img
+                  src="assets/games_img/ludo_img.avif"
+                  alt="Callbreak"
+                  class="game-mini-thumb"
+                />
+                <div class="game-stat-details">
+                  <h4>Callbreak</h4>
+                  <p>Played 14 times</p>
+                  <span class="win-rate-negative">Win Rate 50%</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </body>
+</html>
