@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Avatar-Jisan/GameSite#readme",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "mongoose": "^9.4.1"
   }
 }
