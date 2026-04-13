@@ -1,297 +1,224 @@
 <!doctype html>
-<!--Name: Abdulla Al Jisan | id:1236-->
 <html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <!-- Bootstrap CSS v5.2.1 -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Honk:MORF@15&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/variable.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/game.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-  </head>
+<head>
+  <title>Khelo — Play Now</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="Play fun mini games online on Khelo. Enjoy puzzles, strategy, and more.">
 
-  <body>
-    <header class="navbar">
-      <div class="container-fluid">
-        <div
-          class="header-top-wrapper d-flex align-items-center justify-content-between w-100"
-        >
-          <div class="d-flex align-items-center">
-            <button class="menu-btn" id="menuBtn">
-              <i class="fa-solid fa-bars fa-lg" style="color: #97feed"></i>
-            </button>
-            <a href="index.html">
-              <img
-                src="assets/games_img/game_logo_bg.png"
-                alt="Logo"
-                class="logo"
-              />
-            </a>
-          </div>
-          <div class="search-section desktop-search">
-            <i class="fas fa-search" style="color: #97feed"></i>
-            <input type="text" placeholder="Search games..." />
-          </div>
-          <div class="login-area">
-            <button class="login-btn">
-              <a href="#"
-                ><i class="fa-solid fa-user" style="color: #97feed"></i>
-                <span>Login</span></a
-              >
-            </button>
-          </div>
-        </div>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-        <div class="header-bottom-wrapper w-100 mt-2">
-          <div class="search-section">
-            <i class="fas fa-search" style="color: #97feed"></i>
-            <input type="text" placeholder="Search games..." />
-          </div>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/variable.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/game.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+  <!-- Gaming Background System -->
+  <div class="aurora-bg"></div>
+  <div class="scanline-overlay"></div>
+  <canvas id="neonParticles" class="neon-particles"></canvas>
+
+    <header class="premium-nav">
+    <div class="nav-glass-backboard"></div>
+    <div class="header-container">
+      <div class="header-left">
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">
+          <svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#00ff87" stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="18" x2="16" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="navbar-brand text-decoration-none">
+          <img src="assets/games_img/game_logo_bg.png" alt="Khelo" class="brand-logo" height="38">
+        </a>
+      </div>
+
+      <div class="header-center">
+        <div class="search-section">
+          <svg class="anim-icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="Search games...">
         </div>
       </div>
-    </header>
+      
+      <div class="header-right">
+        <!-- Daily Streak System -->
+        <div class="user-streak tooltip-container">
+          <svg class="anim-icon streak-flame" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M8.5 14.5A2.5 2.5 0 0011 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 11-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 002.5 2.5z"></path>
+          </svg>
+          <span class="streak-count">12</span>
+        </div>
+        <div class="login-area">
+          <a href="#" class="premium-btn">
+            <svg class="anim-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            LOGIN
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
 
-    <nav class="sidebar" id="sidebar">
-      <ul>
-        <li>
-          <a href="index.html"
-            ><i
-              class="fa-solid fa-house"
-              style="color: var(--accent-color)"
-            ></i>
-            Home</a
-          >
-        </li>
+  <!-- Side Panel Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <ul>
+      <li>
+        <a href="index.html" class="sidebar-cat-link" data-category="All">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+          Home
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <ul>
+      <li><a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>All Games</a></li>
+      <li><a href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>About</a></li>
+    </ul>
+  </nav>
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-clock"
-              style="color: var(--accent-color)"
-            ></i>
-            Recently Played</a
-          >
-        </li>
+  <!-- Game Page Content -->
+  <main class="container-fluid px-4 px-md-5 game-page">
 
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-fire" style="color: var(--accent-color)"></i>
-            Popular Games</a
-          >
-        </li>
+    <div class="row g-4 game-area">
 
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-bolt" style="color: var(--accent-color)"></i>
-            Action</a
-          >
-        </li>
+      <!-- GAME AREA -->
+      <div class="col-lg-9 col-xl-10">
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-mountain"
-              style="color: var(--accent-color)"
-            ></i>
-            Adventure</a
-          >
-        </li>
-
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-car" style="color: var(--accent-color)"></i>
-            Car</a
-          >
-        </li>
-
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-basketball"
-              style="color: var(--accent-color)"
-            ></i>
-            Basketball</a
-          >
-        </li>
-
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-puzzle-piece"
-              style="color: var(--accent-color)"
-            ></i>
-            Puzzle</a
-          >
-        </li>
-
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-ghost"
-              style="color: var(--accent-color)"
-            ></i>
-            Horror</a
-          >
-        </li>
-      </ul>
-    </nav>
-    <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
-    <main class="container game-page">
-      <div class="row g-5 game-area">
-        <!-- GAME AREA -->
-        <div class="col-lg-10">
-          <div class="game-player">
-            <iframe id="gameFrame" frameborder="0" allow="fullscreen"> </iframe>
-            <div class="game-info-one">
-              <h2 id="gameTitle1">Game</h2>
-              <div class="game-info-button">
-                <button
-                  type="submit"
-                  class="fav-btn fa-regular fa-heart fa-lg"
-                  style="color: var(--bg-card)"
-                ></button>
-                <button
-                  type="submit"
-                  class="full-btn fa-solid fa-maximize fa-lg"
-                  style="color: var(--bg-card)"
-                ></button>
-              </div>
+        <div class="game-player anim-fade-up">
+          <iframe id="gameFrame" frameborder="0" allow="fullscreen"></iframe>
+          <div class="game-info-bar">
+            <h2 id="gameTitle1" class="game-info-title">Game</h2>
+            <div class="game-info-actions">
+              <button type="button" class="action-btn fav-btn" title="Add to Favorites">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+              </button>
+              <button type="button" class="action-btn full-btn" title="Fullscreen">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"></polyline><polyline points="9 21 3 21 3 15"></polyline><line x1="21" y1="3" x2="14" y2="10"></line><line x1="3" y1="21" x2="10" y2="14"></line></svg>
+              </button>
             </div>
           </div>
-          <div class="game-info mt-5">
-            <table class="table table-borderless game-table">
-              <tr>
-                <th>Name:</th>
-                <td id="gameTitle"></td>
-              </tr>
+        </div>
 
-              <tr>
-                <th>Developer:</th>
-                <td id="gameDeveloper"></td>
-              </tr>
+        <div class="game-details anim-fade-up" style="animation-delay: 0.15s;">
+          <div class="details-grid">
+            <div class="detail-card">
+              <span class="detail-label">Name</span>
+              <span class="detail-value" id="gameTitle"></span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">Developer</span>
+              <span class="detail-value" id="gameDeveloper"></span>
+            </div>
+            <div class="detail-card">
+              <span class="detail-label">Category</span>
+              <span class="detail-value" id="gameCategory"></span>
+            </div>
+          </div>
 
-              <tr>
-                <th>Category:</th>
-                <td id="gameCategory"></td>
-              </tr>
+          <div class="description-section">
+            <h4>About This Game</h4>
+            <p id="gameDescription"></p>
+          </div>
 
-              <tr>
-                <th>Description:</th>
-                <td id="gameDescription"></td>
-              </tr>
-            </table>
-
-            <h4 class="mt-4">How to Play</h4>
-
+          <div class="rules-section">
+            <h4>How to Play</h4>
             <ul id="gameRules"></ul>
           </div>
         </div>
 
-        <!-- SIDEBAR -->
-        <div class="col-lg-2 other-games">
-          <h4>Other Games</h4>
+      </div>
 
+      <!-- SIDEBAR -->
+      <div class="col-lg-3 col-xl-2">
+        <div class="related-section anim-fade-up" style="animation-delay: 0.3s;">
+          <h4 class="related-title">Other Games</h4>
           <div id="relatedGames"></div>
         </div>
       </div>
-    </main>
+
+    </div>
+
+  </main>
 
     <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-box">
-          <h2 class="logo">MiniGames</h2>
-          <p>
-            Play fun mini games online. Enjoy puzzles, memory games and more.
-          </p>
-        </div>
-
-        <div class="footer-box">
-          <h3>Explore Games</h3>
-          <ul>
-            <li><a href="#">Puzzle Game</a></li>
-            <li><a href="#">Memory Game</a></li>
-            <li><a href="#">Guess Number</a></li>
-            <li><a href="#">Tic Tac Toe</a></li>
-            <li><a href="#">Dice Game</a></li>
-            <li><a href="#">Ludo Game</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-box">
-          <h3>Overview</h3>
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-box">
-          <h3>Community</h3>
-          <ul>
-            <li><a href="#">Game Forum</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">Help Center</a></li>
-          </ul>
-        </div>
+    <div class="footer-container">
+      <div class="footer-box one">
+        <h2 class="logo">Khelo</h2>
+        <p>Play fun mini games online. Enjoy puzzles, memory games and more.</p>
       </div>
 
-      <div class="social">
-        <a href="#">Facebook</a>
-        <a href="#">YouTube</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+      <div class="footer-box two">
+        <h3>Explore Games</h3>
+        <ul>
+          <li><a href="#">Puzzle Game</a></li>
+          <li><a href="#">Memory Game</a></li>
+          <li><a href="#">Guess Number</a></li>
+          <li><a href="#">Tic Tac Toe</a></li>
+          <li><a href="#">Dice Game</a></li>
+          <li><a href="#">Ludo Game</a></li>
+        </ul>
       </div>
 
-      <div class="copyright">
-        <p>© 2026 MiniGames. All Rights Reserved.</p>
+      <div class="footer-box three">
+        <h3>Overview</h3>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
       </div>
-    </footer>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
+      <div class="footer-box four">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="#">Game Forum</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+    </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-      crossorigin="anonymous"
-    ></script>
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+    </div>
 
-    <script src="js/game.js"></script>
-    <script src="js/nav.js"></script>
-  </body>
+    <div class="copyright">
+      <p>&copy; 2026 Khelo. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <script src="js/game.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/nav.js"></script>
+
+</body>
+
 </html>

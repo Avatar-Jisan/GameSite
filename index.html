@@ -1,435 +1,253 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <title>Title</title>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
 
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
+<head>
+  <title>Khelo — Play Games Online</title>
+  <meta name="description" content="Play fun mini games online on Khelo. Enjoy puzzles, memory games and more.">
+  <meta name="theme-color" content="#0a0a0f">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link rel="stylesheet" href="css/nav.css" />
-    <link rel="stylesheet" href="css/variable.css" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Anton+SC&family=Honk:MORF@15&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Russo+One&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Bangers&family=Delius&family=Grand+Hotel&family=Protest+Riot&display=swap");
-    </style>
-  </head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
-  <body>
-    <header class="navbar">
-      <div class="container-fluid">
-        <div
-          class="header-top-wrapper d-flex align-items-center justify-content-between w-100"
-        >
-          <div class="d-flex align-items-center">
-            <button class="menu-btn" id="menuBtn">
-              <i class="fa-solid fa-bars fa-lg" style="color: #97feed"></i>
-            </button>
-            <a href="index.html">
-              <img
-                src="assets/games_img/game_logo_bg.png"
-                alt="Logo"
-                class="logo"
-              />
-            </a>
-          </div>
-          <div class="search-section desktop-search">
-            <i class="fas fa-search" style="color: #97feed"></i>
-            <input type="text" placeholder="Search games..." />
-          </div>
-          <div class="login-area">
-            <button class="login-btn">
-              <a href="#"
-                ><i class="fa-solid fa-user" style="color: #97feed"></i>
-                <span>Login</span></a
-              >
-            </button>
-          </div>
-        </div>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-        <div class="header-bottom-wrapper w-100 mt-2">
-          <div class="search-section">
-            <i class="fas fa-search" style="color: #97feed"></i>
-            <input type="text" placeholder="Search games..." />
-          </div>
-        </div>
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/variable.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/header.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+  <!-- Gaming Background System -->
+  <div class="aurora-bg"></div>
+  <div class="scanline-overlay"></div>
+  <canvas id="neonParticles" class="neon-particles"></canvas>
+
+
+  <header class="premium-nav">
+    <div class="nav-glass-backboard"></div>
+    <div class="header-container">
+      <div class="header-left">
+        <button class="menu-btn" id="menuBtn" aria-label="Menu">
+          <svg class="menu-icon" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#00ff87"
+            stroke-width="2" stroke-linecap="round">
+            <line x1="4" y1="6" x2="20" y2="6"></line>
+            <line x1="4" y1="12" x2="20" y2="12"></line>
+            <line x1="4" y1="18" x2="16" y2="18"></line>
+          </svg>
+        </button>
+        <a href="index.html" class="navbar-brand text-decoration-none">
+          <img src="assets/games_img/game_logo_bg.png" alt="Khelo" class="brand-logo" height="38">
+        </a>
       </div>
-    </header>
 
-    <!-- Togglebar & Menu button done by Sadek Manir Sayed. ID: 1237-->
-    <nav class="sidebar" id="sidebar">
-      <ul>
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-house"
-              style="color: var(--accent-color)"
-            ></i>
-            Home</a
-          >
-        </li>
-
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-heart"
-              style="color: var(--accent-color)"
-            ></i>
-            Favorites</a
-          >
-        </li>
-
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-fire" style="color: var(--accent-color)"></i>
-            Popular Games</a
-          >
-        </li>
-        <hr />
-
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="All">
-            <i
-              class="fa-solid fa-gamepad"
-              style="color: var(--accent-color)"
-            ></i>
-            All
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Board">
-            <i
-              class="fa-solid fa-chess-board"
-              style="color: var(--accent-color)"
-            ></i>
-            Board
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Strategy">
-            <i
-              class="fa-solid fa-chess-pawn"
-              style="color: var(--accent-color)"
-            ></i>
-            Strategy
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
-            <i
-              class="fa-solid fa-people-group"
-              style="color: var(--accent-color)"
-            ></i>
-            Multiplayer
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Card">
-            <i
-              class="fa-solid fa-diamond"
-              style="color: var(--accent-color)"
-            ></i>
-            Card
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Puzzle">
-            <i
-              class="fa-solid fa-puzzle-piece"
-              style="color: var(--accent-color)"
-            ></i>
-            Puzzle
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
-            <i
-              class="fa-solid fa-child-reaching"
-              style="color: var(--accent-color)"
-            ></i>
-            Single Player
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Casual">
-            <i
-              class="fa-solid fa-chess-board"
-              style="color: var(--accent-color)"
-            ></i>
-            Casual
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Word">
-            <i class="fa-solid fa-w" style="color: var(--accent-color)"></i>
-            Word
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Two Player">
-            <i
-              class="fa-solid fa-user-group"
-              style="color: var(--accent-color)"
-            ></i>
-            Two Player
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Adventure">
-            <i
-              class="fa-solid fa-space-awesome"
-              style="color: var(--accent-color)"
-            ></i>
-            Adventure
-          </a>
-        </li>
-        <li>
-          <a href="#" class="sidebar-cat-link" data-category="Logic Game">
-            <i class="fa-solid fa-brain" style="color: var(--accent-color)"></i>
-            Logic Game
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
-    <main class="container">
-      <section class="slider position-relative">
-        <button class="slide-nav prev">&#10094;</button>
-
-        <!-- Slide -->
-        <div class="slide active">
-          <div class="row g-0">
-            <!-- TEXT -->
-            <div class="col-md-5 slide-text">
-              <h1>Game Name</h1>
-              <p>
-                Short description about the game. You can write anything here
-                later.
-              </p>
-              <button class="btn play-btn">Play Now</button>
-            </div>
-
-            <!-- IMAGE -->
-            <div class="col-md-7 slide-image">
-              <img
-                src="assets/default_img.png"
-                class="img-fluid"
-                alt="game image"
-              />
-            </div>
-          </div>
-        </div>
-
-        <!-- Second Slide -->
-        <div class="slide">
-          <div class="row g-0">
-            <div class="col-md-5 slide-text">
-              <h1>Game 2</h1>
-              <p>Another description.</p>
-              <button class="btn play-btn">Play Now</button>
-            </div>
-
-            <div class="col-md-7 slide-image">
-              <img
-                src="assets/default_img.png"
-                class="img-fluid"
-                alt="game image"
-              />
-            </div>
-          </div>
-        </div>
-        <!--third slide-->
-        <div class="slide">
-          <div class="row g-0">
-            <div class="col-md-5 slide-text">
-              <h1>Game 3</h1>
-              <p>Another description.</p>
-              <button class="btn play-btn">Play Now</button>
-            </div>
-
-            <div class="col-md-7 slide-image">
-              <img
-                src="assets/default_img.png"
-                class="img-fluid"
-                alt="game image"
-              />
-            </div>
-          </div>
-        </div>
-
-        <button class="slide-nav next">&#10095;</button>
-      </section>
-      <section class="category">
-        <h2 class="section-title">Category</h2>
-
-        <div class="category-buttons">
-          <button class="btn category-btn active">All</button>
-          <button class="btn category-btn">Board</button>
-          <button class="btn category-btn">Card</button>
-          <button class="btn category-btn">Puzzle</button>
-        </div>
-      </section>
-      <section class="top-picks">
-        <h2 class="section-title">Top Picks</h2>
-
-        <div class="row g-5">
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="game-card">
-              <img
-                src="assets/default_img.png"
-                alt="Game Image"
-                class="card-image"
-              />
-
-              <div class="card-content">
-                <h3 class="game-title">Game Name</h3>
-                <button class="btn play-btn">Play</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="game-card">
-              <img
-                src="assets/default_img.png"
-                alt="Game Image"
-                class="card-image"
-              />
-
-              <div class="card-content">
-                <h3 class="game-title">Game Name</h3>
-                <button class="btn play-btn">Play</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="game-card">
-              <img
-                src="assets/default_img.png"
-                alt="Game Image"
-                class="card-image"
-              />
-
-              <div class="card-content">
-                <h3 class="game-title">Game Name</h3>
-                <button class="btn play-btn">Play</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="game-card">
-              <img
-                src="assets/default_img.png"
-                alt="Game Image"
-                class="card-image"
-              />
-
-              <div class="card-content">
-                <h3 class="game-title">Game Name</h3>
-                <button class="btn play-btn">Play</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      <section class="all-games">
-        <h2 class="section-title">All Games</h2>
-
-        <div class="row g-5 card-r" id="gamesContainer"></div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-box one">
-          <h2 class="logo">MiniGames</h2>
-          <p>
-            Play fun mini games online. Enjoy puzzles, memory games and more.
-          </p>
-        </div>
-
-        <div class="footer-box two">
-          <h3>Explore Games</h3>
-          <ul>
-            <li><a href="#">Puzzle Game</a></li>
-            <li><a href="#">Memory Game</a></li>
-            <li><a href="#">Guess Number</a></li>
-            <li><a href="#">Tic Tac Toe</a></li>
-            <li><a href="#">Dice Game</a></li>
-            <li><a href="#">Ludo Game</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-box three">
-          <h3>Overview</h3>
-          <ul>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Use</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-box four">
-          <h3>Community</h3>
-          <ul>
-            <li><a href="#">Game Forum</a></li>
-            <li><a href="#">Support</a></li>
-            <li><a href="#">Help Center</a></li>
-          </ul>
+      <div class="header-center">
+        <div class="search-section">
+          <!-- Animated search SVG -->
+          <svg class="anim-icon search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" placeholder="Search games...">
         </div>
       </div>
 
-      <div class="social">
-        <a href="#">Facebook</a>
-        <a href="#">YouTube</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+      <div class="header-right">
+
+        <div class="login-area">
+          <a href="#" class="premium-btn">
+            <!-- Animated User SVG -->
+            <svg class="anim-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            LOGIN
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Side Panel Navigation -->
+  <nav class="sidebar" id="sidebar">
+    <ul>
+      <li>
+        <a href="index.html" class="sidebar-cat-link active" data-category="All">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          Home
+        </a>
+      </li>
+    </ul>
+    <hr>
+    <ul>
+      <li><a href="#" class="sidebar-cat-link" data-category="Board"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>Board Games</a></li>
+      <li><a href="#" class="sidebar-cat-link" data-category="Puzzle"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>Puzzles</a></li>
+      <li><a href="#" class="sidebar-cat-link" data-category="Card"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <rect x="2" y="4" width="20" height="16" rx="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>Card Games</a></li>
+      <li><a href="#" class="sidebar-cat-link" data-category="Strategy"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <polygon
+              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+            </polygon>
+          </svg>Strategy</a></li>
+      <li><a href="#" class="sidebar-cat-link" data-category="Casual"><svg viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>Casual</a></li>
+    </ul>
+    <hr>
+    <ul>
+      <li><a href="about.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="16" x2="12" y2="12"></line>
+            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+          </svg>About</a></li>
+    </ul>
+  </nav>
+
+  <main class="container-fluid px-4 px-md-5">
+
+
+    <div class="hero-showcase-wrapper reveal mb-5">
+      <section class="hero-showcase" id="heroShowcase">
+        <!-- Main Featured Display -->
+        <div class="hero-main" id="heroMain">
+          <!-- Slides injected by JS -->
+        </div>
+
+        <!-- Sidebar Game Selector -->
+        <div class="hero-selector">
+          <div class="hero-selector-title">Featured Games</div>
+          <div class="hero-selector-list" id="heroSelectorList">
+            <!-- Selector items injected by JS -->
+          </div>
+          <div class="hero-progress">
+            <div class="hero-progress-bar" id="heroProgressBar"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+    <section class="category reveal">
+      <h2 class="section-title">Category</h2>
+
+      <div class="category-buttons">
+        <button class="btn category-btn active">All</button>
+        <button class="btn category-btn">Board</button>
+        <button class="btn category-btn">Card</button>
+        <button class="btn category-btn">Puzzle</button>
+      </div>
+    </section>
+    <section class="top-picks mt-5 reveal">
+      <h2 class="section-title">Top Picks</h2>
+      <div class="premium-grid" id="topPicksContainer">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+    <section class="all-games reveal">
+      <h2 class="section-title">All Games</h2>
+      <div class="premium-grid" id="gamesContainer">
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+
+    <div class="footer-container">
+
+      <div class="footer-box one">
+        <h2 class="logo">Khelo</h2>
+        <p>Play fun mini games online. Enjoy puzzles, memory games and more. Developed for gaming enthusiasts. Developed
+          by a team of passionate gamer who are students from Premier University, 46th batch, F section</p>
       </div>
 
-      <div class="copyright">
-        <p>© 2026 MiniGames. All Rights Reserved.</p>
+      <div class="footer-box two">
+        <h3>Explore Games</h3>
+        <ul>
+          <li><a href="#">Puzzle Game</a></li>
+          <li><a href="#">Memory Game</a></li>
+          <li><a href="#">Guess Number</a></li>
+          <li><a href="#">Tic Tac Toe</a></li>
+          <li><a href="#">Dice Game</a></li>
+          <li><a href="#">Ludo Game</a></li>
+        </ul>
       </div>
-    </footer>
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
-      integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/nav.js"></script>
 
-    <!-- Bootstrap JavaScript Libraries -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
-      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
-      crossorigin="anonymous"
-    ></script>
-  </body>
+      <div class="footer-box three">
+        <h3>Overview</h3>
+        <ul>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-box four">
+        <h3>Community</h3>
+        <ul>
+          <li><a href="#">Game Forum</a></li>
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Help Center</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="social">
+      <a href="#">Facebook</a>
+      <a href="#">YouTube</a>
+      <a href="#">Instagram</a>
+      <a href="#">LinkedIn</a>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2026 Khelo. All Rights Reserved.</p>
+    </div>
+
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"
+    integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+"
+    crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/nav.js"></script>
+
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+
+</body>
+
 </html>

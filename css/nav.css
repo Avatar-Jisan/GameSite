@@ -1,131 +1,114 @@
-/* Top Navbar */
-
-.navbar {
-    height: 8vh;
-    background: var(--bg-card);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    box-shadow: 0 2px 10px rgba(138, 136, 136, 0.1);
-    z-index: 1100;
-}
-
-
-/* Menu Button */
-
-.menu-btn {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    margin:auto 15px;
-}
-
-.menu-btn i:hover {
-    color: #ece8a9;
-}
-.menu-btn i{
-    transition: 0.4s ease-in-out;
-    display: inline-block;
-}
-.menu-btn.active i {
-    transform: rotateX(180deg); 
-}
-
-
-/* Sidebar */
-
 .sidebar {
-    position: fixed;
-    top: 80px;
-    left: -260px;
-    width: 260px;
-    height: 100%;
-    background: #020617;
-    transition: 0.3s ease;
-    border-right: 1px solid #1e293b;
-    overflow-y: auto;
-    z-index: 1000;
+  position: fixed;
+  top: 70px;
+  left: -280px;
+  width: 280px;
+  height: calc(100vh - 70px);
+  background: var(--bg-elevated);
+  border-right: 1px solid rgba(0, 255, 135, 0.06);
+  transition: left 0.4s var(--ease-smooth);
+  overflow-y: auto;
+  z-index: 1000;
+  padding: 24px 0;
 }
-
-
-/* Active sidebar */
 
 .sidebar.active {
-    left: 0;
+  left: 0;
+  box-shadow: 24px 0 60px rgba(0, 0, 0, 0.9), 0 0 50px rgba(0, 255, 135, 0.03);
 }
 
-
-/* Sidebar list */
+.sidebar::-webkit-scrollbar { display: none; }
 
 .sidebar ul {
-    list-style: none;
-    padding: 15px 10px;
+  list-style: none;
+  padding: 0 20px;
+  margin: 0;
 }
-
-
-/* Sidebar items */
 
 .sidebar li {
-    margin: 4px 0;
+  margin: 4px 0;
 }
-
-
-/* Sidebar links */
 
 .sidebar a {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    text-decoration: none;
-    color: #cbd5f5;
-    padding: 12px 14px;
-    border-radius: 8px;
-    font-size: 15px;
-    font-weight: 600;
-    transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  padding: 12px 16px;
+  border-radius: 0;
+  font-size: 13px;
+  font-weight: 600;
+  transition: all 0.25s var(--ease-smooth);
+  font-family: var(--font-main);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
 }
 
-
-/* Icon size */
-
-.sidebar a i {
-    width: 18px;
-    text-align: center;
-    font-size: 16px;
-}
-
-
-/* Hover effect */
-
-.sidebar a:hover {
-    background: #1e293b;
-    color: white;
-    transform: translateX(4px);
-}
-
-
-/* Active item example */
-
-.sidebar a.active {
-    background: #3b82f6;
-    color: white;
-}
-
-
-/* Active sidebar item for Highlight*/
-.sidebar ul li a.active {
-  background: rgba(151, 254, 237, 0.2);
-  color: #f1efef !important;
-  border-radius: 8px;
-  padding-left: 10px;
+.sidebar a svg {
+  width: 20px;
+  height: 20px;
+  text-align: center;
+  opacity: 0.6;
   transition: all 0.3s ease;
 }
 
-.sidebar ul li a:hover {
-  background: rgba(151, 254, 237, 0.2);
-  border-radius: 8px;
+.sidebar a:hover {
+  background: rgba(0, 255, 135, 0.06);
+  color: var(--accent-primary);
+}
+
+.sidebar a:hover svg path,
+.sidebar a:hover svg line,
+.sidebar a:hover svg circle,
+.sidebar a:hover svg polyline,
+.sidebar a:hover svg polygon {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawIcon 2s var(--ease-smooth) forwards;
+  filter: drop-shadow(0 0 6px var(--accent-primary));
+}
+
+.sidebar a.active {
+  background: var(--gradient-glow);
+  color: var(--accent-primary);
+  font-weight: 700;
+  border-left: 3px solid var(--accent-primary);
+  box-shadow: var(--border-glass-top), 0 0 20px rgba(0, 255, 135, 0.05);
+}
+
+.sidebar a.active svg {
+  color: var(--accent-primary);
+  opacity: 1;
+}
+
+.sidebar hr {
+  border-color: rgba(0, 255, 135, 0.06);
+  margin: 20px 0;
+}
+
+/* Header Toggle Button */
+.menu-btn {
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-radius: 0;
+}
+
+.menu-btn:hover {
+  background: rgba(0, 255, 135, 0.08);
+}
+
+.menu-btn svg {
+  transition: all 0.3s ease;
+}
+
+.menu-btn.active svg {
+  transform: rotate(90deg);
 }

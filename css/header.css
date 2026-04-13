@@ -1,157 +1,291 @@
-.search-section {
-  background: #d7dce4;
-  border-radius: 12px;
-  padding: 5px 15px;
+.premium-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background: transparent;
+  z-index: 1100;
   display: flex;
   align-items: center;
-  width: 30vw;
-  /* Default to full width of container */
+  transition: all 0.5s var(--ease-smooth);
+  transform: translateY(0);
+  animation: nav-drop-in 1s var(--ease-smooth);
+  will-change: transform;
+  border: none;
+  overflow: hidden;
 }
 
-header {
-  height: auto;
-  /* Allow header to grow with content */
-  min-height: 8vh;
-  padding: 10px;
-  background: var(--bg-card);
-  display: flex;
-  flex-direction: column;
-  /* Stack the wrappers */
+/* Glass Background — Dark Gaming Surface */
+.nav-glass-backboard {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(40px) saturate(160%);
+  -webkit-backdrop-filter: blur(40px) saturate(160%);
+  z-index: -2;
+  border-bottom: 1px solid rgba(0, 255, 135, 0.08);
+  box-shadow: var(--border-glass-top);
 }
 
-.header-top-wrapper {
-  display: flex;
+/* accent line at bottom */
+.nav-glass-backboard::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 135, 0.3), rgba(124, 58, 237, 0.2), transparent);
+}
+
+/* Load-In */
+@keyframes nav-drop-in {
+  0% { transform: translateY(-100%); opacity: 0; }
+  40% { opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Scrolled State */
+.premium-nav.scrolled {
+  padding-top: 12px;
+  height: 82px;
+}
+
+.premium-nav.scrolled .nav-glass-backboard {
+  background: rgba(10, 10, 15, 0.95);
+  left: 2%;
+  width: 96%;
+  border-radius: 0;
+  border: 1px solid rgba(0, 255, 135, 0.08);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 255, 135, 0.04);
+  height: 56px;
+  top: 12px;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+/* Auto-hide */
+.premium-nav.nav-hidden {
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Header Layout */
+.header-container {
+  position: relative;
+  z-index: 5;
   width: 100%;
-  margin-top: 15px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.header-bottom-wrapper {
-  display: none;
+.header-left, .header-center, .header-right {
+  display: flex;
+  align-items: center;
 }
 
-.logo {
-  height: 40px;
+.header-left {
+  flex: 1;
+  gap: 16px;
+  justify-content: flex-start;
+}
+
+.brand-logo {
+  height: 38px;
   width: auto;
+  display: block;
+  filter: brightness(1.1);
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover .brand-logo {
+  filter: brightness(1.4) drop-shadow(0 0 12px rgba(0, 255, 135, 0.5));
+}
+
+.header-center {
+  flex: 1.5;
+  justify-content: center;
+}
+
+.header-right {
+  flex: 1;
+  justify-content: flex-end;
+}
+
+/* Animated SVG Icons */
+.anim-icon {
+  width: 20px;
+  height: 20px;
+  transition: all 0.4s var(--ease-smooth);
+}
+
+.menu-btn:hover .anim-icon line,
+.premium-btn:hover .anim-icon path,
+.premium-btn:hover .anim-icon circle,
+.search-section:focus-within .anim-icon circle,
+.search-section:focus-within .anim-icon line {
+  stroke-dasharray: 60;
+  stroke-dashoffset: 60;
+  animation: drawIcon 2s var(--ease-smooth) forwards;
+  filter: drop-shadow(0 0 6px rgba(0, 255, 135, 0.6));
+}
+
+@keyframes drawIcon {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Search Bar — Gaming HUD Input */
+.search-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 450px;
+  background: rgba(15, 15, 25, 0.7);
+  border: 1px solid rgba(0, 255, 135, 0.06);
+  border-radius: 0;
+  padding: 8px 16px;
+  transition: all 0.35s var(--ease-smooth);
+  box-shadow: var(--border-glass-top);
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.search-section:focus-within {
+  background: rgba(15, 15, 25, 0.9);
+  border-color: rgba(0, 255, 135, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 255, 135, 0.08), 0 0 0 1px rgba(0, 255, 135, 0.1);
 }
 
 .search-section input {
   width: 100%;
-  max-width: 200px;
-  padding: 8px 20px;
-  border-radius: 12px;
   border: none;
   outline: none;
   background: transparent;
-  color: rgb(5, 5, 5);
+  color: var(--text-primary);
+  font-family: var(--font-main);
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
 
 .search-section input::placeholder {
-  color: #618bca;
-  font-weight: 600;
+  color: rgba(0, 255, 136, 0.733);
+  font-family: var(--font-display);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
 }
 
-.search-section i {
-  font-size: 16px;
+.search-icon {
+  color: var(--accent-primary);
+  opacity: 0.4;
 }
 
-.login-area button {
-  padding: 6px 10px;
-  border-radius: 18px;
+/* Login Button — Gaming CTA */
+.login-area .premium-btn {
+  background: var(--accent-primary);
+  color: #0a0a0f;
   border: none;
-  outline: none;
-  background: #066b8a;
-}
-
-.login-area button:hover {
-  background-color: transparent;
-  border: 2px solid var(--secondary-color);
-  color: var(--secondary-color);
-}
-
-.login-area a {
+  border-radius: 0;
+  padding: 8px 24px;
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.35s var(--ease-smooth);
   display: flex;
   align-items: center;
-  gap: 14px;
-  color: white;
-  cursor: pointer;
+  gap: 8px;
   text-decoration: none;
+  box-shadow: var(--shadow-btn);
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+}
+
+.login-area .premium-btn:hover {
+  transform: translateY(-2px);
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0, 255, 135, 0.4), 0 0 40px rgba(0, 255, 135, 0.2);
+  color: #0a0a0f;
+}
+
+.login-area .premium-btn .anim-icon,
+.login-area .premium-btn i {
+  color: #0a0a0f;
+}
+
+/* Daily Streak Badge — Gaming XP System */
+.user-streak {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(10, 10, 15, 0.9);
+  border: 1px solid rgba(255, 45, 117, 0.25);
+  padding: 6px 14px;
+  border-radius: 0;
+  margin-right: 16px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(255, 45, 117, 0.1);
+  transition: all 0.35s var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px));
+}
+
+.user-streak::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 45, 117, 0.1), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.user-streak:hover {
+  background: rgba(255, 45, 117, 0.1);
+  border-color: var(--accent-tertiary);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 16px rgba(255, 45, 117, 0.2);
+}
+
+.user-streak:hover::before {
+  transform: translateX(100%);
+}
+
+/* Flame — Hot magenta gaming fire */
+.streak-flame {
+  color: var(--accent-tertiary);
+  filter: drop-shadow(0 0 8px rgba(255, 45, 117, 0.6));
+  animation: flicker 2s infinite alternate;
+}
+
+.streak-count {
+  color: #fff;
+  font-weight: 800;
+  font-size: 15px;
+  letter-spacing: 1px;
+  font-family: var(--font-display);
+  text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; transform: scale(1); filter: drop-shadow(0 0 8px rgba(255, 45, 117, 0.7)); }
+  50% { opacity: 0.85; transform: scale(0.96); filter: drop-shadow(0 0 4px rgba(255, 45, 117, 0.3)); }
 }
 
 @media (max-width: 768px) {
-  header {
-    padding: 10px 5px;
-    height: auto !important;
-  }
-
-  .desktop-search {
+  .header-center {
     display: none;
   }
-
-  .header-bottom-wrapper {
-    display: block;
+  .header-container {
+    padding: 0 16px;
   }
-
-  header .row {
-    flex-wrap: wrap;
-    gap: 10px;
-  }
-
-  .search-section input {
-    width: 90%;
-
-  }
-
-  .header-top-wrapper {
-    margin-top: 10px;
-    margin-left: -15px;
-  }
-
-  .header-bottom-wrapper {
-    margin-top: 10px;
-    /* Space between rows */
-  }
-
-  .search-section {
-    width: 95%;
-    margin-bottom: 10px;
-  }
-
-  .login-area {
-    display: flex;
-    justify-content: center;
-  }
-
-  .login-btn {
-    width: 100%;
-    max-width: 200px;
-    border-radius: 50% !important;
-  }
-
-  .login-btn span {
-    display: none;
-    /* Hide 'Login' text on mobile, keep icon */
-  }
-
-  .logo {
-    height: 35px;
-    width: auto;
-  }
-}
-
-@media (min-width: 769px) {
-  header .container-fluid {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .header-top-wrapper {
-    width: auto;
-  }
-
-  .header-bottom-wrapper {
-    width: 300px;
-    margin-top: 0;
+  .user-streak {
+    margin-right: 8px;
+    padding: 4px 10px;
   }
 }
