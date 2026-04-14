@@ -104,7 +104,8 @@ input:checked + .slider:before {
 .sidebar-nav hr { border: none; height: 1px; background: #1f2937; margin: 10px 0; }
 .nav-divider { text-transform: uppercase; color: var(--text-muted); font-size: 11px; margin: 15px 0 10px 10px; font-weight: 600; }
 .sidebar-footer { border-top: 1px solid #1f2937; padding: 15px 10px; }
-
+.sidebar-footer li { padding: 8px;}
+.sidebar-footer li i { margin-right: 8px; margin-left: 8px;}
 /* --- MAIN CONTENT & TOPBAR --- */
 .main-content { padding: 30px; }
 .topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: rgba(15, 23, 42, 0.6); padding: 10px 20px; border-radius: 12px; }
@@ -162,6 +163,16 @@ input:checked + .slider:before {
 .col-winrate { width: 100px; color: var(--win-positive); }
 .col-played { width: 80px; color: var(--text-muted); text-align: right; }
 .list-avatar { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
+
+/* Highlight the logged-in user's row */
+.leaderboard-list li.you-row {
+  background-color: rgba(0, 255, 255, 0.05);
+  border-left: 3px solid var(--accent-cyan);
+}
+
+.leaderboard-list li.you-row .col-player span {
+  color: var(--accent-cyan);
+}
 
 /* --- RESPONSIVE --- */
 @media (max-width: 768px) {

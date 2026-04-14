@@ -27,15 +27,61 @@ const dummyData = [
 ];
 
 $(document).ready(function () {
-  // Initialize on load
-  renderLeaderboard("all");
+  // 1. Initialize the page by fetching the logged-in user
+  initLeaderboard();
 
   // Filter change event listener
   $("#gameFilter").on("change", function () {
     const selectedGame = $(this).val();
-    renderLeaderboard(selectedGame);
+    // Re-render, making sure we still pass the global currentUser variable
+    renderLeaderboard(selectedGame, window.currentUser);
   });
 });
+
+async function initLeaderboard() {
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) {
+    alert("Please login first");
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    // 2. Fetch the current logged-in user's data
+    // (Ensure this matches your actual Node.js API endpoint)
+    const res = await fetch(`http://localhost:3000/api/user/${userId}`);
+    const currentUser = await res.json();
+    
+    // Store globally so the filter dropdown can access it later
+    window.currentUser = currentUser;
+
+    // 3. Update the Topbar UI with their data
+    $(".user-name-dropdown span").text(currentUser.name || currentUser.username);
+    $(".user-avatar-tiny").attr("src", currentUser.profileImage || "assets/avatar_img.avif");
+
+    // 4. Render the leaderboard, passing the user so we can highlight them
+    renderLeaderboard("all", currentUser);
+
+  } catch (err) {
+    console.error("Error loading user for leaderboard:", err);
+    // If backend fails, render leaderboard anyway without highlighting
+    renderLeaderboard("all", null);
+  }
+}
+
+// Update your render function to accept the currentUser parameter
+function renderLeaderboard(gameKey, currentUser) {
+  // ... (Keep your existing sorting logic)
+  const sortedData = [...dummyData].sort((a, b) => b.stats[gameKey] - a.stats[gameKey]);
+
+  const top3 = sortedData.slice(0, 3);
+  const restList = sortedData.slice(3);
+
+  // Pass currentUser down to the list renderer
+  renderPodium(top3, gameKey);
+  renderList(restList, gameKey, 4, currentUser); 
+}
 
 function renderLeaderboard(gameKey) {
   // 1. Sort the data based on the selected game filter (descending order)
@@ -79,14 +125,25 @@ function renderPodium(top3, gameKey) {
   });
 }
 
-function renderList(players, gameKey, startRank) {
+function renderList(players, gameKey, startRank, currentUser) {
   const listContainer = $("#leaderboardList");
   listContainer.empty();
 
   players.forEach((player, index) => {
     const rank = startRank + index;
+    
+    // Check if this leaderboard entry matches our logged-in user.
+    // NOTE: Change 'player.name' to 'player.id' once you switch from dummy data to your real MongoDB data!
+    let isCurrentUser = false;
+    if (currentUser && (player.name === currentUser.username || player.name === currentUser.name)) {
+      isCurrentUser = true;
+    }
+
+    // Add a specific class if it's the current user
+    const rowClass = isCurrentUser ? "you-row" : "";
+
     listContainer.append(`
-      <li>
+      <li class="${rowClass}">
         <span class="col-rank">#${rank}</span>
         <div class="col-player">
           <img src="${player.avatar}" alt="${player.name}" class="list-avatar" />
@@ -99,3 +156,21 @@ function renderList(players, gameKey, startRank) {
     `);
   });
 }
+// --- AUTHENTICATION LOGIC ---
+function logout() {
+  // Clear session data from local storage
+  localStorage.removeItem("userId");
+  localStorage.removeItem("username");
+  
+  // Optional: If you use tokens (like JWT) later with Node/Mongo, clear them here too
+  // localStorage.removeItem("token");
+
+  // Redirect to home/login page
+  window.location.href = "index.html";
+}
+
+// Attach click event to the logout button
+$("#logoutItem").click(function (e) {
+  e.preventDefault(); // Prevent default link behavior
+  logout();
+});
