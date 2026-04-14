@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const User = require("./models/User");
-
+const bcrypt = require("bcrypt");
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -18,17 +18,49 @@ mongoose.connect("mongodb://abdullaaljisan_db_user:djaGgE8t1ZxtzBiF@ac-8ij9fpx-s
 app.post("/api/signup", async (req, res) => {
   try {
     const { username, email, password } = req.body;
-    const existingUser = await User.findOne({ $or: [{ email }, { username }] });
-    
+
+    const existingUser = await User.findOne({
+      $or: [{ email }, { username }]
+    });
+
     if (existingUser) {
-      return res.status(400).json({ success: false, message: "User Already" });
+      return res.status(400).json({
+        success: false,
+        message: "User already exists"
+      });
     }
 
-    const newUser = new User({ username, email, password });
+    // 🔐 HASH PASSWORD
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      username,
+      email,
+      password: hashedPassword,
+
+      // default fields (VERY IMPORTANT)
+      xp: 0,
+      maxXp: 100,
+      level: 1,
+      stats: {
+        gamesPlayed: 0,
+        hoursPlayed: 0,
+        winRate: 0,
+        streak: 0
+      },
+      games: [],
+      activities: []
+    });
+
     await newUser.save();
-    res.status(201).json({ success: true, message: "Registration Successful" });
+
+    res.json({
+      success: true,
+      message: "Registration successful"
+    });
+
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -36,15 +68,56 @@ app.post("/api/signup", async (req, res) => {
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
+
     const user = await User.findOne({ email });
 
-    if (!user || user.password !== password) {
-      return res.status(400).json({ success: false, message: "Wrong Password" });
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: "User not found"
+      });
     }
 
-    res.json({ success: true, message: "Login Success", user });
+    // 🔐 COMPARE PASSWORD
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(400).json({
+        success: false,
+        message: "Wrong password"
+      });
+    }
+
+    // ❗ NEVER SEND PASSWORD BACK
+    const userData = user.toObject();
+    delete userData.password;
+
+    res.json({
+      success: true,
+      message: "Login success",
+      user: userData
+    });
+
   } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
+    res.status(500).json({ error: err.message });
+  }
+});
+
+app.get("/api/user/:id", async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    const userData = user.toObject();
+    delete userData.password;
+
+    res.json(userData);
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
 
@@ -54,4 +127,76 @@ app.get("/", (req, res) => res.send("Backend running 🚀"));
 /* -------- START SERVER -------- */
 app.listen(3000, () => {
   console.log("Server running on http://localhost:3000");
+});
+
+app.post("/api/game-result", async (req, res) => {
+  try {
+    const data = req.body;
+
+    const user = await User.findById(data.userId);
+
+    if (!user) return res.json({ error: "User not found" });
+
+    /* -------- GLOBAL STATS -------- */
+
+    user.xp += data.xpEarned;
+
+    user.stats.gamesPlayed += 1;
+    user.stats.hoursPlayed += data.timePlayed / 3600;
+
+    /* -------- GAME-SPECIFIC -------- */
+
+    let game = user.games.find(g => g.name === data.game);
+
+    if (!game) {
+      game = {
+        name: data.game,
+        played: 0,
+        wins: 0,
+        score: 0
+      };
+      user.games.push(game);
+    }
+
+    game.played += 1;
+    game.score += data.score;
+
+    if (data.win) {
+      game.wins += 1;
+    }
+
+    /* -------- WIN RATE -------- */
+
+    game.winRate = Math.round((game.wins / game.played) * 100);
+
+    /* -------- ACTIVITY -------- */
+
+    user.activities.unshift({
+      text: `Played ${data.game} (Rank ${data.rank})`,
+      xp: data.xpEarned,
+      time: "Just now"
+    });
+
+    /* -------- STREAK SYSTEM (BASIC) -------- */
+
+    const today = new Date().toDateString();
+
+    if (user.lastPlayedDate === today) {
+      // same day → do nothing
+    } else {
+      user.streak = (user.streak || 0) + 1;
+      user.lastPlayedDate = today;
+    }
+
+    await user.save();
+
+    res.json({ success: true });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+app.get("/test-db", async (req, res) => {
+  const users = await User.find();
+  res.json(users);
 });

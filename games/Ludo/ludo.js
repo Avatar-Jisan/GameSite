@@ -15,7 +15,7 @@ let lastDiceValue = null;
 let activePlayers = [];
 let sixCount = 0;
 let finishedPlayers = [];
-
+let gameStartTime;
 const sounds = {
     dice: new Audio("../../assets/sounds/dice.mp3"),
     move: new Audio("../../assets/sounds/move.mp3"),
@@ -186,6 +186,7 @@ const homeCells = [
     [6, 1], [1, 8], [8, 13], [13, 6]
 ];
 function createdBoard() {
+    gameStartTime = Date.now();
     baseCoords.forEach(base => {
         for (let r = base.r; r < base.r + 6; r++) {
             for (let c = base.c; c < base.c + 6; c++) {
@@ -929,6 +930,7 @@ function playStepSound() {
 
 
 function resetGameState() {
+    gameStartTime = Date.now();
     boardCells.innerHTML = "";
     finishedPlayers = [];
     sixCount = 0;
@@ -991,16 +993,78 @@ function spawnConfetti() {
 function showResultModal() {
     const modal = document.getElementById("resultModal");
     const list = document.getElementById("resultList");
+    const timePlayed = Math.floor((Date.now() - gameStartTime) / 1000);
+    /* -------- RANK SYSTEM -------- */
+    const rankings = [...finishedPlayers];
+    const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
+    rankings.push(lastPlayer);
+
+    /* -------- USER RANK -------- */
+    const userColor = "blue"; // logged-in player
+    const rank = rankings.indexOf(userColor) + 1;
+
+    /* -------- REWARD SYSTEM -------- */
+    let score = 0;
+    let xp = 0;
+    const win = rank === 1;
+    if (rank === 1) {
+        score = 50;
+        xp = 30;
+    } else if (rank === 2) {
+        score = 30;
+        xp = 20;
+    } else if (rank === 3) {
+        score = 20;
+        xp = 15;
+    } else {
+        score = 10;
+        xp = 10;
+    }
+
+    $.ajax({
+        url: "http://localhost:3000/api/game-result",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify({
+            userId: localStorage.getItem("userId"),
+            game: "ludo",
+            timePlayed,
+            rank,
+            win,
+            score,
+            xpEarned: xp
+        }),
+        success: () => {
+            localStorage.setItem("refreshProfile", "true");
+        }
+    });
     $(modal).show();
     modal.style.display = "flex";
     list.innerHTML = ""; // Clear old content
     // const winTxt = document.getElementById("win-txt");
     // winTxt.innerText = `${finishedPlayers[0]} Wins!`;
+    /* -------- PLAYER XP & SCORE -------- */
+    const statsBox = document.getElementById("playerStatsBox");
 
-    const rankings = [...finishedPlayers];
-    const lastPlayer = activePlayers.find(p => !finishedPlayers.includes(p));
-    rankings.push(lastPlayer);
+    statsBox.innerHTML = `
+    🎯 Score: ${userScore} | ⚡ XP: +${userXP}
+`;
 
+    /* -------- WINNER TEXT FIX -------- */
+    const winTxt = document.getElementById("win-txt");
+
+    if (finishedPlayers.length > 0) {
+        const winner = finishedPlayers[0];
+
+        const nameMap = {
+            red: "Red Player",
+            green: "Green Player",
+            yellow: "Yellow Player",
+            blue: "You"
+        };
+
+        winTxt.innerText = `${nameMap[winner]} Wins 🏆`;
+    }
 
     players.forEach(color => {
         const p_indicator = document.getElementById(`player-${color}`);

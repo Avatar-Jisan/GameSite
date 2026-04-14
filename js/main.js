@@ -1,4 +1,26 @@
 $(document).ready(function () {
+  /* -------- LOGIN UI SWITCH -------- */
+
+const userId = localStorage.getItem("userId");
+const username = localStorage.getItem("username");
+
+const loginBtn = document.getElementById("loginBtn");
+const profileBtn = document.getElementById("profileBtn");
+const profileName = document.getElementById("profileName");
+
+if (userId) {
+  // ✅ USER LOGGED IN
+  loginBtn.style.display = "none";
+  profileBtn.style.display = "inline-block";
+
+  if (username) {
+    profileName.innerText = username;
+  }
+} else {
+  // ❌ NOT LOGGED IN
+  loginBtn.style.display = "inline-block";
+  profileBtn.style.display = "none";
+}
   // Sidebar Sidebar Category Click
   $(document).on("click", ".sidebar-cat-link", function (e) {
     e.preventDefault();

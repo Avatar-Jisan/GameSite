@@ -44,10 +44,16 @@ loginForm.querySelector('form').addEventListener('submit', async (e) => {
 
         const data = await res.json();
 
-        if (data.success) {
-            alert("Welcome " + data.user.username);
-            window.location.href = "index.html"; // Redirect to homepage
-        } else {
+if (data.success) {
+
+    // ✅ SAVE USER SESSION
+    localStorage.setItem("userId", data.user._id);
+    localStorage.setItem("username", data.user.username);
+
+    alert("Welcome " + data.user.username);
+
+    window.location.href = "index.html"; 
+} else {
             alert(data.message);
         }
     } catch (error) {

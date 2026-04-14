@@ -83,13 +83,44 @@
         </div>
     </section>
 
-    <div id="resultOverlay" class="result-overlay" style="display: none;">
-        <div class="result-box text-center">
-            <h2 id="resultTitle"></h2>
-            <p id="resultScore"></p>
-            <button class="btn btn-primary" onclick="restartGame()">Play Again</button>
-        </div>
+<div id="resultOverlay" class="result-overlay" style="display: none;">
+  <div class="result-box modern-result">
+
+    <!-- CLOSE -->
+    <i class="fa-solid fa-xmark close-icon" onclick="restartGame()"></i>
+
+    <!-- WINNER -->
+    <h2 id="resultTitle" class="result-title"></h2>
+
+    <!-- SCORE BOARD -->
+    <div class="score-board">
+      <div class="score-item blue">
+        <span>Player 1</span>
+        <strong id="p1Final"></strong>
+      </div>
+
+      <div class="score-item red">
+        <span>Player 2</span>
+        <strong id="p2Final"></strong>
+      </div>
     </div>
+
+    <!-- XP / SCORE GAIN -->
+    <div id="rewardBox" class="reward-box"></div>
+
+    <!-- XP PROGRESS -->
+    <div class="xp-progress-container">
+      <div class="xp-bar">
+        <div id="xpFillMemory" class="xp-fill"></div>
+      </div>
+      <span id="xpTextMemory"></span>
+    </div>
+
+    <!-- BUTTON -->
+    <button class="restart-btn" onclick="restartGame()">Play Again</button>
+
+  </div>
+</div>
 
     <div id="turnOverlay" class="turn-overlay">
         <h2 id="turnText"></h2>

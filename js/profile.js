@@ -11,7 +11,14 @@ overlay.addEventListener("click", () => {
   overlay.classList.remove("active");
 });
 $(document).ready(function () {
-  initProfile();
+
+  if (localStorage.getItem("refreshProfile")) {
+    localStorage.removeItem("refreshProfile");
+    initProfile(); // reload fresh data
+  } else {
+    initProfile();
+  }
+
 });
 let gameList = [];
 
@@ -21,7 +28,15 @@ async function loadGamesJSON() {
 async function initProfile() {
   try {
     await loadGamesJSON();
-    const user = await $.get("http://localhost:3000/api/user");
+    const userId = localStorage.getItem("userId");
+
+    if (!userId) {
+      alert("Please login first");
+      window.location.href = "login.html";
+      return;
+    }
+
+    const user = await $.get(`http://localhost:3000/api/user/${userId}`);
 
     console.log(user); // DEBUG
 

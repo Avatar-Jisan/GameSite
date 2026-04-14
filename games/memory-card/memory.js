@@ -284,20 +284,54 @@ function checkGameEnd() {
 function showGameResult() {
   const overlay = document.getElementById("resultOverlay");
   const title = document.getElementById("resultTitle");
-  const score = document.getElementById("resultScore");
-  playSound("winner");
-  let resultText = "";
 
+  const p1 = document.getElementById("p1Final");
+  const p2 = document.getElementById("p2Final");
+
+  const rewardBox = document.getElementById("rewardBox");
+
+  playSound("winner");
+
+  let resultText = "";
+  let xp = 0;
+  let score = 0;
+
+  /* RESULT */
   if (player1Score > player2Score) {
-    resultText = "Player 1 Wins! 🎉";
+    resultText = "You Win 🏆";
+    xp = 25;
+    score = 40;
   } else if (player2Score > player1Score) {
-    resultText = "Player 2 Wins! 🎉";
+    resultText = "You Lose 😢";
+    xp = 10;
+    score = 15;
   } else {
-    resultText = "It's a Tie! 🤝";
+    resultText = "It's a Tie 🤝";
+    xp = 15;
+    score = 20;
   }
 
-  title.textContent = resultText;
-  score.textContent = `Player 1: ${player1Score} | Player 2: ${player2Score}`;
+  title.innerText = resultText;
+
+  /* SCORE DISPLAY */
+  p1.innerText = player1Score;
+  p2.innerText = player2Score;
+
+  /* REWARD */
+  rewardBox.innerHTML = `
+    🎯 Score: +${score} <br>
+    ⚡ XP: +${xp}
+  `;
+
+  /* XP BAR (fetch from profile) */
+  $.get("http://localhost:3000/api/user", (user) => {
+    const percent = (user.xp / user.maxXp) * 100;
+
+    document.getElementById("xpFillMemory").style.width = percent + "%";
+
+    document.getElementById("xpTextMemory").innerText =
+      `${user.xp} / ${user.maxXp} XP`;
+  });
 
   overlay.style.display = "flex";
 }
