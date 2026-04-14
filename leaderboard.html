@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Global Leaderboard | Khelo</title>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/leaderboard.css" />
+</head>
+
+<body class="dark-theme">
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-header">
+          <a href="index.html" class="logo">
+            <img src="assets/games_img/game_logo_bg.png" alt="Khelo Logo" class="logo-img" />
+          </a>
+        </div>
+
+        <nav class="sidebar-nav" id="sidebar">
+          <ul>
+            <li>
+              <a href="index.html"><i class="fa-solid fa-house" style="color: var(--accent-color)"></i> Home</a>
+            </li>
+            <li>
+              <a href="profile.html"><i class="fa-solid fa-user" style="color: var(--accent-color)"></i> Profile</a>
+            </li>
+            <li>
+              <a href="leaderboard.html" class="active"><i class="fa-solid fa-trophy" style="color: var(--accent-color)"></i> Leaderboard</a>
+            </li>
+            <hr />
+            <div class="nav-divider">Categories</div>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="All"><i class="fa-solid fa-gamepad"></i> All Games</a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Board"><i class="fa-solid fa-chess-board"></i> Board</a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Puzzle"><i class="fa-solid fa-puzzle-piece"></i> Puzzle</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      
+      <footer class="sidebar-footer nav-list">
+        <li class="nav-item">
+          <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+        </li>
+        <li id="logoutItem">
+          <a href="#" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i>Logout</a>
+        </li>
+      </footer>
+    </aside>
+
+    <main class="main-content">
+      <div class="sidebar-overlay" id="overlay"></div>
+      
+      <header class="topbar">
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search players or ranks... (Ctrl K)" />
+        </div>
+
+        <div class="topbar-actions">
+          <button class="menu-btn" id="menuBtn" style="display: none">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <button class="icon-btn notification-btn">
+            <i class="fa-regular fa-bell"></i>
+            <span class="notification-badge">3</span>
+          </button>
+          <div class="theme-switch">
+            <i class="fa-solid fa-sun"></i>
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+            <i class="fa-solid fa-moon"></i>
+          </div>
+          <div class="user-profile-summary">
+            <img src="assets/avatar_img.avif" alt="User" class="user-avatar-tiny" />
+            <div class="user-name-dropdown">
+              <span>Jisan Ahmed</span>
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="leaderboard-top-section">
+        <div class="leaderboard-titles">
+          <h1>Global Rankings <i class="fa-solid fa-trophy neon-gold-text"></i></h1>
+          <p>Compete across all games and climb to the top.</p>
+        </div>
+
+        <div class="leaderboard-filters">
+          <div class="filter-group">
+            <i class="fa-solid fa-gamepad"></i>
+            <select id="gameFilter">
+              <option value="all">All Games (Total XP)</option>
+              <option value="ludo">Ludo</option>
+              <option value="tictactoe">Tic Tac Toe</option>
+              <option value="hangman">Hangman</option>
+              <option value="rps">Rock Paper Scissors</option>
+              <option value="guessing">Number Guessing</option>
+            </select>
+          </div>
+          <div class="filter-group">
+            <i class="fa-solid fa-calendar-days"></i>
+            <select id="timeFilter">
+              <option value="all-time">All Time</option>
+              <option value="monthly">This Month</option>
+              <option value="weekly">This Week</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="podium-section" id="podiumContainer">
+        </section>
+
+      <section class="leaderboard-table-section card">
+        <div class="table-header">
+          <span class="col-rank">Rank</span>
+          <span class="col-player">Player</span>
+          <span class="col-score">Score / XP</span>
+          <span class="col-winrate">Win Rate</span>
+          <span class="col-played">Games</span>
+        </div>
+        <ul class="leaderboard-list" id="leaderboardList">
+          </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/leaderboard.js"></script>
+</body>
+</html>
