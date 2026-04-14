@@ -97,6 +97,7 @@ body {
 .pink { color: var(--text-pink); }
 .orange { color: var(--text-orange); }
 .green { color: var(--text-green); }
+.white { color: var(--white); }
 
 /* === LANDING PAGE === */
 #landing-page {

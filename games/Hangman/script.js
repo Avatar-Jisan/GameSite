@@ -1,6 +1,24 @@
 /* script.js - Non-Repeating Words Update */
 
 $(document).ready(function() {
+    $('#fullscreen-btn').on('click', function() {
+    // Check if the browser is already in fullscreen mode
+    if (!document.fullscreenElement) {
+        // If not, request to enter fullscreen
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+        // Change the icon to 'compress'
+        $(this).html('<i class="fa-solid fa-compress"></i>');
+    } else {
+        // If already in fullscreen, exit it
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+            // Change the icon back to 'expand'
+            $(this).html('<i class="fa-solid fa-expand"></i>');
+        }
+    }
+});
     // --- Data Grouped by Category ---
     const wordLists = {
         easy: {
