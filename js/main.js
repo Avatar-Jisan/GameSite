@@ -1,225 +1,155 @@
-
 $(document).ready(function () {
-
-  //SIDEBAR -------------
-  $(".sidebar-cat-link").on("click", function (e) {
+  // Sidebar Sidebar Category Click
+  $(document).on("click", ".sidebar-cat-link", function (e) {
     e.preventDefault();
-
-    // REMOVE previous active
     $(".sidebar-cat-link").removeClass("active");
-
-    // ADD active to clicked one
     $(this).addClass("active");
-
-    // Get category
     const selectedCat = $(this).data("category");
-
-    // Trigger main category button
     $(`.category-btn[data-category="${selectedCat}"]`).click();
-
-    // Close sidebar
     $("#sidebar").removeClass("active");
     $("#menuBtn").removeClass("active");
-
-    // Scroll
-    document.querySelector('.category').scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
-    });
   });
-  //------------------------
 
+  // Fetch Games Data
   $.ajax({
     url: "data/games.json",
     method: "GET",
     dataType: "json",
     success: function (games) {
-      // Extract unique categories
+      
+      // 1. Setup Categories dynamically
       let categories = new Set();
-
-      games.forEach(game => {
-        game.category.forEach(cat => categories.add(cat));
-      });
-
-      const categoryContainer = $(".category-buttons");
-      categoryContainer.empty();
-
-      // Add "All" button first
-      categoryContainer.append(`<button class="btn category-btn active" data-category="All">All</button>`);
-
-      // Add dynamic categories
+      games.forEach(game => game.category.forEach(cat => categories.add(cat)));
+      
+      const catBtnContainer = $(".category-buttons");
+      const sidebarMenu = $("#sidebar ul");
+      catBtnContainer.empty();
+      catBtnContainer.append(`<button class="btn category-btn active" data-category="All">All</button>`);
+      
       categories.forEach(cat => {
-        categoryContainer.append(
-          `<button class="btn category-btn" data-category="${cat}">${cat}</button>`
-        );
+        catBtnContainer.append(`<button class="btn category-btn" data-category="${cat}">${cat}</button>`);
+        sidebarMenu.append(`<li><a href="#" class="sidebar-cat-link" data-category="${cat}">${cat}</a></li>`);
       });
 
       renderGames(games);
-      $(".top-picks").show();
-      $(".category-buttons").on("click", ".category-btn", function () {
 
+      // 2. Filter Logic
+      $(".category-buttons").on("click", ".category-btn", function () {
         $(".category-btn").removeClass("active");
         $(this).addClass("active");
+        const selected = $(this).data("category");
 
-        const selectedCategory = $(this).data("category");
-        $(".sidebar-cat-link").removeClass("active");
-        $(`.sidebar-cat-link[data-category="${selectedCategory}"]`).addClass("active");
-
-        if (selectedCategory === "All") {
-          $("#gamesContainer").fadeOut(150, function () {
+        $("#gamesContainer").fadeOut(200, function() {
+          if (selected === "All") {
             renderGames(games);
             $(".top-picks").show();
-            $(this).fadeIn(150);
-          });
-        } else {
-          const filteredGames = games.filter(game =>
-            game.category.includes(selectedCategory)
-          );
-
-          $("#gamesContainer").fadeOut(150, function () {
-            renderGames(filteredGames);
+          } else {
+            const filtered = games.filter(g => g.category.includes(selected));
+            renderGames(filtered);
             $(".top-picks").hide();
-            $(this).fadeIn(150);
-          });
-        }
+          }
+          $(this).fadeIn(200);
+        });
       });
 
-      const pickedGames = ["ludo", "rock-paper-scissors", "tic-tac-toe", "number-guessing"];
-
-      const selectedGames = games.filter(game =>
-        pickedGames.includes(game.id)
-      );
-
-      const topContainer = $(".top-picks .row");
-      topContainer.empty();
-
-      selectedGames.forEach(game => {
-        const card = `
-      <div class="col-lg-3 col-md-4 col-sm-6">
-        <div class="game-card">
-          <img src="${game.image}" class="card-image">
-          <div class="card-content">
-            <h3 class="game-title">${game.name}</h3>
-            <a href="game.html?id=${game.id}" class="text-decoration-none">
-              <button class="btn play-btn">Play</button>
-            </a>
-          </div>
-        </div>
-      </div>`;
-        topContainer.append(card);
-      });
-
+      // 3. Top Picks & Slider
+      const pickedIds = ["ludo", "rock-paper-scissors", "tic-tac-toe", "number-guessing"];
+      const featured = games.filter(g => pickedIds.includes(g.id));
+      
+      const topRow = $(".top-picks .row");
       const slider = $(".slider");
-      slider.find(".slide").remove(); // remove default slides
+      
+      featured.forEach((game, i) => {
+        // Render Top Picks
+        topRow.append(`
+          <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="game-card">
+              <img src="${game.image}" class="card-image">
+              <div class="card-content">
+                <h3 class="game-title">${game.name}</h3>
+                <a href="game.html?id=${game.id}" class="text-decoration-none">
+                  <button class="btn play-btn">Play</button>
+                </a>
+              </div>
+            </div>
+          </div>`);
 
-      selectedGames.forEach((game, index) => {
-        const activeClass = index === 0 ? "active" : "";
-
-        const slide = `
-      <div class="slide ${activeClass}">
-        <div class="row">
-          <div class="col-md-6 slide-text">
-            <h1>${game.name}</h1>
-            <p>${game.shortDescription}</p>
-            <a href="game.html?id=${game.id}" class="text-decoration-none">
-              <button class="btn play-btn">Play Now</button>
-            </a>
-          </div>
-
-          <div class="col-md-6 slide-image">
-            <img src="${game.image}" class="slide-img">
-          </div>
-        </div>
-      </div>`;
-
-        slider.append(slide);
+        // Render Slider
+        slider.append(`
+          <div class="slide ${i === 0 ? 'active' : ''}">
+            <div class="row g-0">
+              <div class="col-md-6 slide-text">
+                <h1>${game.name}</h1>
+                <p>${game.shortDescription}</p>
+                <a href="game.html?id=${game.id}" class="btn play-btn">Play Now</a>
+              </div>
+              <div class="col-md-6 slide-image">
+                <img src="${game.image}" class="img-fluid">
+              </div>
+            </div>
+          </div>`);
       });
       initSlider();
+
+      // 4. MAIN SEARCH LOGIC
+      $(".gameSearchInput").on("input", function () {
+        const query = $(this).val().toLowerCase();
+        const sBox = $(".suggestion-box");
+        sBox.empty();
+
+        if (query.length > 0) {
+          const matches = games.filter(g => g.name.toLowerCase().includes(query));
+          if (matches.length > 0) {
+            matches.forEach(g => {
+              const item = $(`
+                <div class="suggestion-item">
+                  <img src="${g.image}">
+                  <span>${g.name}</span>
+                </div>`);
+              item.on("click", () => window.location.href = `game.html?id=${g.id}`);
+              sBox.append(item);
+            });
+            sBox.show();
+          } else { sBox.hide(); }
+        } else { sBox.hide(); }
+      });
+
+      $(document).on("click", (e) => {
+        if (!$(e.target).closest(".search-section").length) $(".suggestion-box").hide();
+      });
     }
   });
 });
-function initSlider() {
-  const slides = document.querySelectorAll(".slide");
-  const nextBtn = document.querySelector(".next");
-  const prevBtn = document.querySelector(".prev");
-  const slider = document.querySelector(".slider");
 
-  let current = 0;
-  let slideInterval;
-
-  function showSlide(index) {
-    const slides = document.querySelectorAll(".slide");
-    slides.forEach(slide => slide.classList.remove("active"));
-    slides[index].classList.add("active");
-  }
-
-
-  function nextSlide() {
-    const slides = document.querySelectorAll(".slide");
-    current++;
-
-    if (current >= slides.length) {
-      current = 0;
-    }
-
-    showSlide(current);
-  }
-
-
-  function prevSlide() {
-    const slides = document.querySelectorAll(".slide");
-    current--;
-
-    if (current < 0) {
-      current = slides.length - 1;
-    }
-
-    showSlide(current);
-  }
-
-
-  nextBtn.addEventListener("click", nextSlide);
-  prevBtn.addEventListener("click", prevSlide);
-
-  /* Auto slide */
-
-  function startAutoSlide() {
-    slideInterval = setInterval(nextSlide, 5000); // 5 seconds
-  }
-
-  startAutoSlide();
-
-  /* Stop slider on mouse hover */
-
-  slider.addEventListener("mouseenter", () => {
-    clearInterval(slideInterval);
-  });
-
-  /* Resume slider when mouse leaves */
-
-  slider.addEventListener("mouseleave", () => {
-    startAutoSlide();
+function renderGames(list) {
+  const container = $("#gamesContainer");
+  container.empty();
+  list.forEach(g => {
+    container.append(`
+      <div class="col-lg-3 col-md-4 col-sm-6">
+        <div class="game-card">
+          <img src="${g.image}" class="card-image">
+          <div class="card-content">
+            <h3 class="game-title">${g.name}</h3>
+            <a href="game.html?id=${g.id}" class="btn play-btn">Play</a>
+          </div>
+        </div>
+      </div>`);
   });
 }
 
-function renderGames(gameList) {
-  const gamesContainer = $("#gamesContainer");
-  gamesContainer.empty();
-
-  gameList.forEach(game => {
-    const card = `
-    <div class="col-lg-3 col-md-4 col-sm-6">
-      <div class="game-card">
-        <img src="${game.image}" alt="${game.name}" class="card-image">
-        <div class="card-content">
-          <h3 class="game-title">${game.name}</h3>
-          <a href="game.html?id=${game.id}" class="text-decoration-none">
-            <button class="btn play-btn">Play</button>
-          </a>
-        </div>
-      </div>
-    </div>`;
-
-    gamesContainer.append(card);
+function initSlider() {
+  let current = 0;
+  $(".next").click(() => {
+    const slides = $(".slide");
+    slides.eq(current).removeClass("active");
+    current = (current + 1) % slides.length;
+    slides.eq(current).addClass("active");
+  });
+  $(".prev").click(() => {
+    const slides = $(".slide");
+    slides.eq(current).removeClass("active");
+    current = (current - 1 + slides.length) % slides.length;
+    slides.eq(current).addClass("active");
   });
 }
