@@ -228,14 +228,21 @@ app.post("/api/game-result", async (req, res) => {
       if (data.game === "ludo") user.ludoWins += 1;
     }
 
-    const today = new Date().toDateString();
+    const today = new Date();
+    const last = new Date(user.lastPlayedDate || 0);
 
-    if (user.lastPlayedDate === today) {
-      // same day → do nothing
-    } else {
-      user.stats.streak = (user.stats.streak || 0) + 1;
-      user.lastPlayedDate = today;
+    const diffDays = Math.floor((today - last) / (1000 * 60 * 60 * 24));
+
+    if (diffDays === 1) {
+      user.stats.streak += 1; // consecutive day
+    } else if (diffDays > 1) {
+      user.stats.streak = 1; // reset
     }
+    // same day → no change
+
+    user.lastPlayedDate = today;
+
+
     const totalWins = user.totalWins || 0;
     const totalGames = user.stats.gamesPlayed || 1;
 
