@@ -205,13 +205,14 @@ function openEditModal(user) {
 $(".edit-profile-btn, .settings-btn").click(function () {
   openEditModal(window.currentUser);
 });
-
 $(".edit-avatar-btn").click(function () {
-  openEditModal(window.currentUser);
+  triggerImageUpload();
 });
+
 $(".close-edit").click(() => {
   $("#editModal").hide();
 });
+
 function triggerImageUpload() {
   document.getElementById("imageUpload").click();
 }
@@ -247,6 +248,8 @@ async function saveProfile() {
     updatedData.password = password;
   }
 
+  console.log("Sending:", updatedData); // 🔥 DEBUG
+
   try {
     const res = await fetch(`http://localhost:3000/api/user/${userId}`, {
       method: "PUT",
@@ -258,13 +261,17 @@ async function saveProfile() {
 
     const data = await res.json();
 
+    console.log("Response:", data); // 🔥 DEBUG
+
     if (data.success) {
       alert("Profile Updated ✅");
       $("#editModal").hide();
       initProfile();
+    } else {
+      alert("Update failed");
     }
 
   } catch (err) {
-    console.error(err);
+    console.error("Error:", err);
   }
 }
