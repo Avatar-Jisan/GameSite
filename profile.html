@@ -116,12 +116,7 @@
                 Logic Game
               </a>
             </li>
-            <li id="logoutItem" style="display: none;">
-              <a href="#" onclick="logout()">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Logout
-              </a>
-            </li>
+
           </ul>
         </nav>
 
@@ -138,6 +133,12 @@
         <li class="nav-item">
           <a href="#"><i class="fa-solid fa-circle-question"></i>Help</a>
         </li>
+                    <li id="logoutItem" >
+              <a href="#" onclick="logout()">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+              </a>
+            </li>
       </footer>
     </aside>
 
@@ -451,6 +452,49 @@
       </section>
     </main>
   </div>
+  <div id="editModal" class="edit-modal" style="display:none;">
+  <div class="edit-container">
+
+    <div class="edit-header">
+      <h2>Edit Profile</h2>
+      <i class="fa-solid fa-xmark close-edit"></i>
+    </div>
+
+    <div class="edit-body">
+
+      <div class="edit-avatar-section">
+        <img id="previewImage" src="assets/avatar_img.avif" />
+        <input type="file" id="imageUpload" hidden />
+        <button onclick="triggerImageUpload()">Change Image</button>
+      </div>
+
+<div class="edit-fields">
+
+  <label>Name</label>
+  <input type="text" id="editName">
+
+  <label>Username</label>
+  <input type="text" id="editUsername">
+
+  <label>Email</label>
+  <input type="email" id="editEmail">
+
+  <label>Password</label>
+  <input type="password" id="editPassword">
+
+  <label>Bio</label>
+  <textarea id="editBio"></textarea>
+
+</div>
+
+    </div>
+
+    <div class="edit-footer">
+      <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+    </div>
+
+  </div>
+</div>
   <!-- Script -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/profile.js"></script>

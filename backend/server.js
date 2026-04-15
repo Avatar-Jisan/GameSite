@@ -133,6 +133,28 @@ app.get("/api/user/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+app.put("/api/user/:id", async (req, res) => {
+  try {
+    const updates = req.body;
+
+    // password hashing if updated
+    if (updates.password) {
+      const bcrypt = require("bcrypt");
+      updates.password = await bcrypt.hash(updates.password, 10);
+    }
+
+    const user = await User.findByIdAndUpdate(
+      req.params.id,
+      updates,
+      { new: true }
+    );
+
+    res.json({ success: true, user });
+
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 // 3.Test Route
 app.get("/", (req, res) => res.send("Backend running 🚀"));
@@ -153,6 +175,14 @@ app.post("/api/game-result", async (req, res) => {
     /* -------- GLOBAL STATS -------- */
 
     user.xp += data.xpEarned;
+    user.xp += data.xpEarned;
+
+    // 🔥 LEVEL UP SYSTEM
+    while (user.xp >= user.maxXp) {
+      user.xp -= user.maxXp;
+      user.level += 1;
+      user.maxXp = Math.floor(user.maxXp * 1.5); // increase difficulty
+    }
 
     user.stats.gamesPlayed += 1;
     user.stats.hoursPlayed += data.timePlayed / 3600;
@@ -224,7 +254,7 @@ app.post("/api/game-result", async (req, res) => {
     /* -------- ACTIVITY -------- */
 
     user.activities.unshift({
-      text: `Played ${data.game} (Rank ${data.rank})`,
+      text: `Played ${data.game} - ${data.result || `Rank ${data.rank}`}`,
       xp: data.xpEarned,
       time: "Just now"
     });

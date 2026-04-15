@@ -46,6 +46,7 @@ async function initProfile() {
     renderFavorite(user);
     renderProgress(user);
     renderAchievements(user);
+    window.currentUser=user;
   } catch (err) {
     console.error("Error loading profile:", err);
   }
@@ -181,7 +182,7 @@ function getActivityIcon(text) {
   return "fa-gamepad";
 }
 function logout() {
-  // ❌ Clear session
+  // Clear session
   localStorage.removeItem("userId");
   localStorage.removeItem("username");
 
@@ -191,3 +192,79 @@ function logout() {
 $("#logoutItem").click(function () {
   logout();
 });
+
+function openEditModal(user) {
+  $("#editModal").show();
+
+  $("#editName").val(user.name);
+  $("#editUsername").val(user.username);
+  $("#editEmail").val(user.email);
+  $("#editBio").val(user.bio);
+  $("#previewImage").attr("src", user.profileImage);
+}
+$(".edit-profile-btn, .settings-btn").click(function () {
+  openEditModal(window.currentUser);
+});
+
+$(".edit-avatar-btn").click(function () {
+  openEditModal(window.currentUser);
+});
+$(".close-edit").click(() => {
+  $("#editModal").hide();
+});
+function triggerImageUpload() {
+  document.getElementById("imageUpload").click();
+}
+
+$("#imageUpload").on("change", function (e) {
+  const file = e.target.files[0];
+
+  if (file) {
+    const reader = new FileReader();
+
+    reader.onload = function (e) {
+      $("#previewImage").attr("src", e.target.result);
+    };
+
+    reader.readAsDataURL(file);
+  }
+});
+
+async function saveProfile() {
+  const userId = localStorage.getItem("userId");
+
+  const updatedData = {
+    name: $("#editName").val(),
+    username: $("#editUsername").val(),
+    email: $("#editEmail").val(),
+    bio: $("#editBio").val(),
+    profileImage: $("#previewImage").attr("src")
+  };
+
+  const password = $("#editPassword").val();
+
+  if (password) {
+    updatedData.password = password;
+  }
+
+  try {
+    const res = await fetch(`http://localhost:3000/api/user/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(updatedData)
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Profile Updated ✅");
+      $("#editModal").hide();
+      initProfile();
+    }
+
+  } catch (err) {
+    console.error(err);
+  }
+}

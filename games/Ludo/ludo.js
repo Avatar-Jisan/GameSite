@@ -1047,7 +1047,7 @@ function showResultModal() {
     const statsBox = document.getElementById("playerStatsBox");
 
     statsBox.innerHTML = `
-    🎯 Score: ${userScore} | ⚡ XP: +${userXP}
+    🎯 Score: ${score} | ⚡ XP: +${xp}
 `;
 
     /* -------- WINNER TEXT FIX -------- */

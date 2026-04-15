@@ -296,8 +296,13 @@ function showGameResult() {
   let xp = 0;
   let score = 0;
   const timePlayed = Math.floor((Date.now() - gameStartTime) / 1000);
-  const rank = 1; // simple for now
   const win = player1Score > player2Score;
+  let rank;
+  if (win) {
+    rank = 1;
+  } else {
+    rank = 2;
+  }
 
   /* RESULT */
   if (player1Score > player2Score) {
@@ -325,7 +330,7 @@ function showGameResult() {
     🎯 Score: +${score} <br>
     ⚡ XP: +${xp}
   `;
-  sendGameResult(score, xp, timePlayed, rank, win);
+  sendGameResult(score, xp, timePlayed, resultText, win);
 
   /* XP BAR (fetch from profile) */
   const userId = localStorage.getItem("userId");
@@ -509,7 +514,7 @@ window.addEventListener("message", (event) => {
 
 });
 
-function sendGameResult(score, xp, timePlayed, rank, win) {
+function sendGameResult(score, xp, timePlayed, result, win) {
   const userId = localStorage.getItem("userId");
 
   if (!userId) {
@@ -528,7 +533,7 @@ function sendGameResult(score, xp, timePlayed, rank, win) {
       score,
       xpEarned: xp,
       timePlayed,
-      rank,
+      result,
       win
     })
   })
