@@ -330,6 +330,7 @@ function showGameResult() {
     🎯 Score: +${score} <br>
     ⚡ XP: +${xp}
   `;
+  $("#resultOverlay").show();
   sendGameResult(score, xp, timePlayed, resultText, win);
 
   /* XP BAR (fetch from profile) */
@@ -346,7 +347,6 @@ function showGameResult() {
       `${user.xp} / ${user.maxXp} XP`;
   });
 
-  overlay.style.display = "flex";
 }
 
 
