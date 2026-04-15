@@ -187,16 +187,55 @@ $(document).ready(function() {
     }
 
     function showResultModal() {
-        $('#stat-won').text(roundsWon);
-        $('#stat-tied').text(roundsTied);
-        $('#stat-lost').text(roundsLost);
+    // Display the basic stats
+    $('#stat-won').text(roundsWon);
+    $('#stat-tied').text(roundsTied);
+    $('#stat-lost').text(roundsLost);
 
-        if (playerScore === WINNING_SCORE) {
-            $('#final-result-title').text("VICTORY!").removeClass('pink').addClass('green');
-        } else {
-            $('#final-result-title').text("DEFEAT!").removeClass('green').addClass('pink');
-        }
+    // --- NEW SCORE CALCULATION ---
+    // Multiplies the number of rounds won by 10
+    const finalScore = roundsWon * 10; 
+    // Updates the score element in your modal
+    $('#stat-score').text(finalScore);
 
-        $('#result-modal').removeClass('hidden');
+    // Set the title based on who won the race to 10
+    if (playerScore === WINNING_SCORE) {
+        $('#final-result-title').text("VICTORY!").removeClass('pink').addClass('green');
+    } else {
+        $('#final-result-title').text("DEFEAT!").removeClass('green').addClass('pink');
     }
+
+    // Show the modal
+    $('#result-modal').removeClass('hidden');
+}
+
+    // --- FULLSCREEN LOGIC ---
+$('#fullscreen-btn').on('click', function() {
+    // Check if the browser is already in fullscreen mode
+    if (!document.fullscreenElement) {
+        // If not, request to enter fullscreen
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+        // Change the icon to 'compress'
+        $(this).html('<i class="fa-solid fa-compress"></i>');
+    } else {
+        // If already in fullscreen, exit it
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+            // Change the icon back to 'expand'
+            $(this).html('<i class="fa-solid fa-expand"></i>');
+        }
+    }
+});
+
+// Listener for the 'Esc' key or system-level exit
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        // Reset the button icon to 'expand' if fullscreen is closed via Esc key
+        $('#fullscreen-btn').html('<i class="fa-solid fa-expand"></i>');
+    }
+});
+
+
 });

@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rock Paper Scissors</title>
-    
+
     <link href="https://fonts.googleapis.com/css2?family=Bangers&display=swap" rel="stylesheet">
-    
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <link rel="stylesheet" href="rps.css">
 </head>
-<body>
 
+<body>
+    <button id="fullscreen-btn" class="btn-small"
+        style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; border-color: var(--white); box-shadow: 0 4px 0 var(--white);">
+        <i class="fa-solid fa-expand"></i>
+    </button>
     <div id="landing-page">
         <div class="logo-placeholder">
             <i class="fa-solid fa-hand-back-fist pink"></i>
@@ -31,14 +36,15 @@
 
     <div id="game-page" class="hidden">
         <div class="top-controls">
-            <button id="back-btn" class="btn-small" style="border-color: var(--text-orange); box-shadow: 0 4px 0 var(--text-orange);">
+            <button id="back-btn" class="btn-small"
+                style="border-color: var(--text-orange); box-shadow: 0 4px 0 var(--text-orange);">
                 <i class="fa-solid fa-arrow-left"></i> Back
             </button>
             <button id="music-btn" class="btn-small">
                 <i class="fa-solid fa-volume-xmark"></i> Music
             </button>
         </div>
-        
+
         <div class="scoreboard">
             <div class="score-box">
                 <h2>Player</h2>
@@ -80,25 +86,29 @@
 
     <div id="result-modal" class="hidden">
         <div class="modal-content">
-            <div class="title-text pink" id="final-result-title" style="font-size: 4rem; margin-bottom: 10px;">YOU WIN!</div>
-            <div class="modal-stats">
+            <div class="title-text white" id="final-result-title" style="font-size: 4rem; margin-bottom: 10px;">YOU WIN!
+            </div>
+            <div class="modal-stats" style="flex-wrap: wrap;">
                 <p style="color: var(--text-green)">Won: <span id="stat-won">0</span></p>
                 <p style="color: var(--text-orange)">Tied: <span id="stat-tied">0</span></p>
                 <p style="color: var(--text-pink)">Lost: <span id="stat-lost">0</span></p>
-            </div>
-            <div class="modal-btn-group">
-                <button class="btn" id="restart-btn">
-                    <i class="fa-solid fa-rotate-right"></i> Restart
-                </button>
-                <button class="btn secondary-btn" id="menu-btn">
-                    <i class="fa-solid fa-house"></i> Menu
-                </button>
+                <div style="width: 100%; margin-top: 10px; border-top: 2px solid var(--white); padding-top: 10px;">
+                    <p style="color: var(--bg-color); font-size: 2.5rem;">SCORE: <span id="stat-score">0</span></p>
+                </div>
+                <div class="modal-btn-group">
+                    <button class="btn" id="restart-btn">
+                        <i class="fa-solid fa-rotate-right"></i> Restart
+                    </button>
+                    <button class="btn secondary-btn" id="menu-btn">
+                        <i class="fa-solid fa-house"></i> Menu
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    
-    <script src="rps.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+        <script src="rps.js"></script>
 </body>
+
 </html>
