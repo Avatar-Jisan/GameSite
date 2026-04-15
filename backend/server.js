@@ -248,6 +248,19 @@ app.post("/api/game-result", async (req, res) => {
 
     user.stats.winRate = Math.round((totalWins / totalGames) * 100);
     /* -------- ACHIEVEMENTS -------- */
+    const achievementRewards = [
+      100, // First Blood
+      200, // Grinder
+      500, // Veteran
+      150, // Champion
+      300, // Unstoppable
+      500, // Legend
+      400, // Memory Master
+      400, // Ludo King
+      200, // Night Owl
+      250  // Daily Player
+    ];
+
     const ach = user.achievements;
 
     // 1. First Blood
@@ -287,11 +300,23 @@ app.post("/api/game-result", async (req, res) => {
     // 10. Daily Player (3 day streak)
     ach[9].progress = Math.min(100, (user.stats.streak / 3) * 100);
 
-    ach.forEach(a => {
-      if (a.progress >= 100) {
-        a.progress = 100;
-        a.completed = true;
+    ach.forEach((ach, index) => {
+
+      if (ach.progress >= 100 && !ach.completed) {
+
+        ach.completed = true;
+
+        // ✅ ADD XP REWARD
+        user.xp += achievementRewards[index];
+
+        // ✅ OPTIONAL: Add activity
+        user.activities.unshift({
+          text: `Achievement Unlocked: ${ach.name} 🏆`,
+          xp: achievementRewards[index],
+          time: "Just now"
+        });
       }
+
     });
     user.markModified("achievements");
 
