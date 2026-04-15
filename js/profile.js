@@ -5,6 +5,9 @@ menuBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
   overlay.classList.toggle("active");
 });
+$(".btn-save").click(function(e){
+  e.preventDefault();
+});
 
 overlay.addEventListener("click", () => {
   sidebar.classList.remove("active");
@@ -219,17 +222,40 @@ function triggerImageUpload() {
   document.getElementById("imageUpload").click();
 }
 
-$("#imageUpload").on("change", function (e) {
+$("#imageUpload").on("change", async function (e) {
   const file = e.target.files[0];
 
-  if (file) {
-    const reader = new FileReader();
+  if (!file) return;
 
-    reader.onload = function (e) {
-      $("#previewImage").attr("src", e.target.result);
-    };
+  const formData = new FormData();
+  formData.append("image", file);
 
-    reader.readAsDataURL(file);
+  try {
+    const res = await fetch("http://localhost:3000/api/upload", {
+      method: "POST",
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      const newImg = data.imagePath; // "/uploads/xxx.png"
+
+      // update UI
+      $("#previewImage").attr("src", "http://localhost:3000" + newImg);
+      $(".profile-avatar").attr("src", "http://localhost:3000" + newImg);
+      $(".user-avatar-tiny").attr("src", "http://localhost:3000" + newImg);
+
+      // store for saving
+      window.tempImagePath = newImg;
+
+      if (window.currentUser) {
+        window.currentUser.profileImage = newImg;
+      }
+    }
+
+  } catch (err) {
+    console.error("Upload error:", err);
   }
 });
 
@@ -241,7 +267,7 @@ async function saveProfile() {
     username: $("#editUsername").val(),
     email: $("#editEmail").val(),
     bio: $("#editBio").val(),
-    profileImage: $("#previewImage").attr("src")
+    profileImage: window.tempImagePath || window.currentUser.profileImage
   };
 
   const password = $("#editPassword").val();
@@ -250,7 +276,7 @@ async function saveProfile() {
     updatedData.password = password;
   }
 
-  console.log("Sending:", updatedData); // 🔥 DEBUG
+  console.log("Sending:", updatedData);
 
   try {
     const res = await fetch(`http://localhost:3000/api/user/${userId}`, {
@@ -277,3 +303,4 @@ async function saveProfile() {
     console.error("Error:", err);
   }
 }
+

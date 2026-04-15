@@ -133,12 +133,12 @@
         <li class="nav-item">
           <a href="#"><i class="fa-solid fa-circle-question"></i>Help</a>
         </li>
-                    <li id="logoutItem" >
-              <a href="#" onclick="logout()">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                Logout
-              </a>
-            </li>
+        <li id="logoutItem">
+          <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
+        </li>
       </footer>
     </aside>
 
@@ -186,9 +186,6 @@
         <div class="profile-header-content">
           <div class="avatar-container">
             <img src="assets/avatar_img.avif" alt="Jisan Ahmed Avatar" class="profile-avatar" />
-            <button class="edit-avatar-btn">
-              <i class="fa-solid fa-pen"></i>
-            </button>
           </div>
           <div class="profile-main-info">
             <h1>
@@ -453,48 +450,48 @@
     </main>
   </div>
   <div id="editModal" class="edit-modal" style="display:none;">
-  <div class="edit-container">
+    <div class="edit-container">
 
-    <div class="edit-header">
-      <h2>Edit Profile</h2>
-      <i class="fa-solid fa-xmark close-edit"></i>
-    </div>
-
-    <div class="edit-body">
-
-      <div class="edit-avatar-section">
-        <img id="previewImage" src="assets/avatar_img.avif" />
-        <input type="file" id="imageUpload" hidden />
-        <button onclick="triggerImageUpload()">Change Image</button>
+      <div class="edit-header">
+        <h2>Edit Profile</h2>
+        <i class="fa-solid fa-xmark close-edit"></i>
       </div>
 
-<div class="edit-fields">
+      <div class="edit-body">
 
-  <label>Name</label>
-  <input type="text" id="editName">
+        <!-- <div class="edit-avatar-section">
+          <img id="previewImage" src="assets/avatar_img.avif" />
+          <input type="file" id="imageUpload" hidden />
+          <button type="button" onclick="triggerImageUpload()">Change Image</button>
+        </div> -->
 
-  <label>Username</label>
-  <input type="text" id="editUsername">
+        <div class="edit-fields">
 
-  <label>Email</label>
-  <input type="email" id="editEmail">
+          <label>Name</label>
+          <input type="text" id="editName">
 
-  <label>Password</label>
-  <input type="password" id="editPassword">
+          <label>Username</label>
+          <input type="text" id="editUsername">
 
-  <label>Bio</label>
-  <textarea id="editBio"></textarea>
+          <label>Email</label>
+          <input type="email" id="editEmail">
 
-</div>
+          <label>Password</label>
+          <input type="password" id="editPassword">
+
+          <label>Bio</label>
+          <textarea id="editBio"></textarea>
+
+        </div>
+
+      </div>
+
+      <div class="edit-footer">
+        <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+      </div>
 
     </div>
-
-    <div class="edit-footer">
-      <button class="btn-save" onclick="saveProfile()">Save Changes</button>
-    </div>
-
   </div>
-</div>
   <!-- Script -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/profile.js"></script>

@@ -4,6 +4,20 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const app = express();
+const multer = require("multer");
+const path = require("path");
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, path.join(__dirname, "uploads"));
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + ".png");
+  }
+});
+
+const upload = multer({ storage });
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 app.use(express.json());
 
@@ -13,7 +27,16 @@ mongoose.connect("mongodb://abdullaaljisan_db_user:djaGgE8t1ZxtzBiF@ac-8ij9fpx-s
   .catch(err => console.log("DB Connection Error: ", err));
 
 /* -------- ROUTES -------- */
-
+app.post("/api/upload", upload.single("image"), (req, res) => {
+  try {
+    res.json({
+      success: true,
+      imagePath: `/uploads/${req.file.filename}`
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 // 1.Register
 app.post("/api/signup", async (req, res) => {
   try {
@@ -133,6 +156,18 @@ app.get("/api/user/:id", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
+    // 🔥 FIX LEVEL ON LOAD
+    let updated = false;
+
+    while (user.xp >= user.maxXp) {
+      user.xp -= user.maxXp;
+      user.level += 1;
+      user.maxXp = Math.floor(user.maxXp * 1.5);
+      updated = true;
+    }
+
+    if (updated) await user.save();
+
     const userData = user.toObject();
     delete userData.password;
 
@@ -151,12 +186,29 @@ app.put("/api/user/:id", async (req, res) => {
       const bcrypt = require("bcrypt");
       updates.password = await bcrypt.hash(updates.password, 10);
     }
+    const user = await User.findById(req.params.id);
 
-    const user = await User.findByIdAndUpdate(
-      req.params.id,
-      updates,
-      { new: true }
-    );
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+
+    // update fields manually
+    user.name = updates.name;
+    user.username = updates.username;
+    user.email = updates.email;
+    user.bio = updates.bio;
+
+    if (updates.profileImage) {
+      console.log("Updating image:", updates.profileImage);
+      user.profileImage = updates.profileImage;
+    }
+
+    if (updates.password) {
+      const bcrypt = require("bcrypt");
+      user.password = await bcrypt.hash(updates.password, 10);
+    }
+
+    await user.save();
 
     res.json({ success: true, user });
 
@@ -185,8 +237,6 @@ app.post("/api/game-result", async (req, res) => {
 
     user.xp += data.xpEarned;
 
-
-    // 🔥 LEVEL UP SYSTEM
     while (user.xp >= user.maxXp) {
       user.xp -= user.maxXp;
       user.level += 1;
@@ -244,9 +294,13 @@ app.post("/api/game-result", async (req, res) => {
 
 
     const totalWins = user.totalWins || 0;
-    const totalGames = user.stats.gamesPlayed || 1;
+    const totalGames = user.stats.gamesPlayed;
 
-    user.stats.winRate = Math.round((totalWins / totalGames) * 100);
+    if (totalGames > 0) {
+      user.stats.winRate = Math.round((totalWins / totalGames) * 100);
+    } else {
+      user.stats.winRate = 0;
+    }
     /* -------- ACHIEVEMENTS -------- */
     const achievementRewards = [
       100, // First Blood
@@ -306,10 +360,8 @@ app.post("/api/game-result", async (req, res) => {
 
         ach.completed = true;
 
-        // ✅ ADD XP REWARD
         user.xp += achievementRewards[index];
 
-        // ✅ OPTIONAL: Add activity
         user.activities.unshift({
           text: `Achievement Unlocked: ${ach.name} 🏆`,
           xp: achievementRewards[index],
@@ -318,6 +370,12 @@ app.post("/api/game-result", async (req, res) => {
       }
 
     });
+
+    while (user.xp >= user.maxXp) {
+      user.xp -= user.maxXp;
+      user.level += 1;
+      user.maxXp = Math.floor(user.maxXp * 1.5);
+    }
     user.markModified("achievements");
 
     /* -------- ACTIVITY -------- */
