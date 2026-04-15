@@ -58,11 +58,20 @@ app.post("/api/signup", async (req, res) => {
       activities: [],
 
       achievements: [
-        { name: "First Blood", progress: 0 },
-        { name: "Streak King", progress: 0 },
-        { name: "Puzzle Master", progress: 0 },
-        { name: "Night Owl", progress: 0 }
-      ]
+        { name: "First Blood", progress: 0, completed: false },
+        { name: "Grinder", progress: 0, completed: false },
+        { name: "Veteran", progress: 0, completed: false },
+        { name: "Champion", progress: 0, completed: false },
+        { name: "Unstoppable", progress: 0, completed: false },
+        { name: "Legend", progress: 0, completed: false },
+        { name: "Memory Master", progress: 0, completed: false },
+        { name: "Ludo King", progress: 0, completed: false },
+        { name: "Night Owl", progress: 0, completed: false },
+        { name: "Daily Player", progress: 0, completed: false }
+      ],
+      totalWins: 0,
+      memoryWins: 0,
+      ludoWins: 0,
     });
 
     await newUser.save();
@@ -175,7 +184,7 @@ app.post("/api/game-result", async (req, res) => {
     /* -------- GLOBAL STATS -------- */
 
     user.xp += data.xpEarned;
-    user.xp += data.xpEarned;
+
 
     // 🔥 LEVEL UP SYSTEM
     while (user.xp >= user.maxXp) {
@@ -212,44 +221,72 @@ app.post("/api/game-result", async (req, res) => {
 
     game.winRate = Math.round((game.wins / game.played) * 100);
 
+    if (data.win) {
+      user.totalWins += 1;
+
+      if (data.game === "memory") user.memoryWins += 1;
+      if (data.game === "ludo") user.ludoWins += 1;
+    }
+
+    const today = new Date().toDateString();
+
+    if (user.lastPlayedDate === today) {
+      // same day → do nothing
+    } else {
+      user.stats.streak = (user.stats.streak || 0) + 1;
+      user.lastPlayedDate = today;
+    }
+    const totalWins = user.totalWins || 0;
+    const totalGames = user.stats.gamesPlayed || 1;
+
+    user.stats.winRate = Math.round((totalWins / totalGames) * 100);
     /* -------- ACHIEVEMENTS -------- */
+    const ach = user.achievements;
 
-    if (!user.achievements || user.achievements.length === 0) {
-      user.achievements = [
-        { name: "First Blood", progress: 0 },
-        { name: "Streak King", progress: 0 },
-        { name: "Puzzle Master", progress: 0 },
-        { name: "Night Owl", progress: 0 }
-      ];
+    // 1. First Blood
+    if (user.stats.gamesPlayed >= 1) {
+      ach[0].progress = 100;
     }
 
-    // First Blood (play 1 game)
-    user.achievements[0].progress = Math.min(
-      100,
-      (user.stats.gamesPlayed / 1) * 100
-    );
+    // 2. Grinder (10 games)
+    ach[1].progress = Math.min(100, (user.stats.gamesPlayed / 10) * 100);
 
-    // Streak King (10 streak)
-    user.achievements[1].progress = Math.min(
-      100,
-      (user.stats.streak / 10) * 100
-    );
+    // 3. Veteran (100 games)
+    ach[2].progress = Math.min(100, (user.stats.gamesPlayed / 100) * 100);
 
-    // Puzzle Master (500 games)
-    user.achievements[2].progress = Math.min(
-      100,
-      (user.stats.gamesPlayed / 500) * 100
-    );
-    // 🌙 Night Owl (play at night)
+    // 4. Champion (1 win)
+    if (user.totalWins >= 1) {
+      ach[3].progress = 100;
+    }
+
+    // 5. Unstoppable (5 streak)
+    ach[4].progress = Math.min(100, (user.stats.streak / 5) * 100);
+
+    // 6. Legend (level 10)
+    ach[5].progress = Math.min(100, (user.level / 10) * 100);
+
+    // 7. Memory Master (20 wins)
+    ach[6].progress = Math.min(100, (user.memoryWins / 20) * 100);
+
+    // 8. Ludo King (10 wins)
+    ach[7].progress = Math.min(100, (user.ludoWins / 10) * 100);
+
+    // 9. Night Owl
     const hour = new Date().getHours();
-
-    if (hour >= 20 || hour <= 5) {
-      user.achievements[3].progress += 10;
-
-      if (user.achievements[3].progress > 100) {
-        user.achievements[3].progress = 100;
-      }
+    if (hour >= 22 || hour <= 5) {
+      ach[8].progress += 20;
     }
+
+    // 10. Daily Player (3 day streak)
+    ach[9].progress = Math.min(100, (user.stats.streak / 3) * 100);
+
+    ach.forEach(a => {
+      if (a.progress >= 100) {
+        a.progress = 100;
+        a.completed = true;
+      }
+    });
+    user.markModified("achievements");
 
     /* -------- ACTIVITY -------- */
 
@@ -258,17 +295,8 @@ app.post("/api/game-result", async (req, res) => {
       xp: data.xpEarned,
       time: "Just now"
     });
-
-    /* -------- STREAK SYSTEM (BASIC) -------- */
-
-    const today = new Date().toDateString();
-
-    if (user.lastPlayedDate === today) {
-      // same day → do nothing
-    } else {
-      user.streak = (user.streak || 0) + 1;
-      user.lastPlayedDate = today;
-    }
+    console.log("Games Played:", user.stats.gamesPlayed);
+    console.log("First Blood Progress:", ach[0].progress);
 
     await user.save();
 

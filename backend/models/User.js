@@ -25,16 +25,24 @@ const userSchema = new mongoose.Schema({
   games: { type: Array, default: [] },
   activities: { type: Array, default: [] },
 
-  // 🔥 ADD THIS (IMPORTANT)
   achievements: {
     type: Array,
     default: [
-      { name: "First Blood", progress: 0 },
-      { name: "Streak King", progress: 0 },
-      { name: "Puzzle Master", progress: 0 },
-      { name: "Night Owl", progress: 0 }
+      { name: "First Blood", progress: 0, completed: false },
+      { name: "Grinder", progress: 0, completed: false },
+      { name: "Veteran", progress: 0, completed: false },
+      { name: "Champion", progress: 0, completed: false },
+      { name: "Unstoppable", progress: 0, completed: false },
+      { name: "Legend", progress: 0, completed: false },
+      { name: "Memory Master", progress: 0, completed: false },
+      { name: "Ludo King", progress: 0, completed: false },
+      { name: "Night Owl", progress: 0, completed: false },
+      { name: "Daily Player", progress: 0, completed: false }
     ]
-  }
+  },
+  totalWins: { type: Number, default: 0 },
+  memoryWins: { type: Number, default: 0 },
+  ludoWins: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model("User", userSchema);

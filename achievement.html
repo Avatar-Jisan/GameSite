@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Achievements - Khelo</title>
+
+  <link rel="stylesheet" href="css/variable.css">
+  <link rel="stylesheet" href="css/achievement.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+
+<body>
+
+<!-- 🔷 NAVBAR -->
+<header class="navbar">
+  <div class="container-fluid d-flex justify-content-between align-items-center">
+    <a href="index.html" class="logo">
+        <img src="assets/games_img/game_logo_bg.png" alt="game_logo">
+    </a>
+
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="achievement.html" class="active">Achievements</a>
+    </div>
+  </div>
+</header>
+
+<!-- 🔷 BANNER -->
+<section class="achievement-banner">
+
+  <div class="banner-left">
+    <img src="assets/avatar_img.avif" class="banner-avatar" id="userAvatar">
+
+    <div>
+      <h2 id="userName">Player</h2>
+      <p id="userLevel">Level 1</p>
+    </div>
+  </div>
+
+  <div class="banner-right">
+
+    <div class="badge-icons">
+      <i class="fa-solid fa-trophy"></i>
+      <i class="fa-solid fa-medal"></i>
+      <i class="fa-solid fa-star"></i>
+    </div>
+
+    <h3>Achievement Progress</h3>
+
+    <div class="progress-bar">
+      <div class="progress-fill" id="achievementProgress"></div>
+    </div>
+
+    <p id="achievementText">0 / 10 Completed</p>
+
+  </div>
+
+</section>
+
+<!-- 🔷 ACHIEVEMENTS GRID -->
+<section class="achievement-section">
+  <h2 class="section-title">All Achievements</h2>
+
+  <div class="achievement-grid" id="achievementGrid"></div>
+</section>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/achievement.js"></script>
+
+</body>
+</html>

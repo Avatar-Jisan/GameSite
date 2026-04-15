@@ -46,7 +46,7 @@ async function initProfile() {
     renderFavorite(user);
     renderProgress(user);
     renderAchievements(user);
-    window.currentUser=user;
+    window.currentUser = user;
   } catch (err) {
     console.error("Error loading profile:", err);
   }
@@ -76,7 +76,7 @@ function renderProfile(user) {
   $(".stat-card")
     .eq(1)
     .find(".stat-number")
-    .text(user.stats.hoursPlayed + "h");
+    .text(user.stats.hoursPlayed.toFixed(3) + "h");
   $(".stat-card")
     .eq(2)
     .find(".stat-number")
@@ -86,7 +86,9 @@ function renderProfile(user) {
     .find(".stat-number")
     .text(user.stats.streak + " Days");
   $(".stat-card").eq(4).find(".stat-number").text(user.xp);
-  $(".stat-card").eq(5).find(".stat-number").text(user.activities.length);
+  const completedAchievements = user.achievements.filter(a => a.completed).length;
+
+  $(".stat-card").eq(5).find(".stat-number").text(completedAchievements);
 }
 function renderActivity(user) {
   const container = $(".activity-list");
