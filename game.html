@@ -59,14 +59,25 @@
             <i class="fas fa-search" style="color: #97feed"></i>
             <input type="text" placeholder="Search games..." />
           </div>
-          <div class="login-area">
-            <button class="login-btn">
-              <a href="#"
-                ><i class="fa-solid fa-user" style="color: #97feed"></i>
-                <span>Login</span></a
-              >
-            </button>
-          </div>
+        <div class="login-area">
+
+          <!-- LOGIN BUTTON -->
+          <button id="loginBtn" class="login-btn">
+            <a href="login.html">
+              <i class="fa-solid fa-user"></i>
+              <span>Login</span>
+            </a>
+          </button>
+
+          <!-- PROFILE BUTTON (HIDDEN INITIALLY) -->
+          <button id="profileBtn" class="login-btn" style="display: none;">
+            <a href="profile.html">
+              <i class="fa-solid fa-user-circle"></i>
+              <span id="profileName">Profile</span>
+            </a>
+          </button>
+
+        </div>
         </div>
 
       
@@ -156,6 +167,12 @@
             Horror</a
           >
         </li>
+                  <li id="logoutItem" >
+      <a href="#" onclick="logout()">
+        <i class="fa-solid fa-right-from-bracket" style="color: var(--accent-color)"></i>
+        Logout
+      </a>
+    </li>
       </ul>
     </nav>
     <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
@@ -289,5 +306,6 @@
 
     <script src="js/game.js"></script>
     <script src="js/nav.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>

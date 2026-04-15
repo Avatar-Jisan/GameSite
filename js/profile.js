@@ -53,10 +53,10 @@ async function initProfile() {
 
 function renderProfile(user) {
   /* -------- BASIC INFO -------- */
-  $(".bio").text(user.bio);
-  $(".join-date").text("Member since " + user.joinDate);
-  $(".user-name-dropdown span").text(user.name);
-  $(".profile-main-info h1").text(user.name);
+  $(".bio").text(user.bio || "No bio yet");
+  $(".join-date").text("Member since " + (user.joinDate || "Today"));
+  $(".user-name-dropdown span").text(user.name || user.username);
+  $(".profile-main-info h1").text(user.name || user.username);
   $(".username").text(user.username);
   $(".profile-avatar").attr("src", user.profileImage);
   $(".user-avatar-tiny").attr("src", user.profileImage);
@@ -158,10 +158,10 @@ function renderProgress(user) {
 }
 function renderAchievements(user) {
   $(".achievement-item").each(function (index) {
-    const ach = user.achievements[index];
+    const ach = user.achievements?.[index];
     if (!ach) return;
 
-    const percent = ach.progress;
+    const percent = ach?.progress ?? 0;
 
     $(this)
       .find(".achievement-text span")
@@ -180,3 +180,14 @@ function getActivityIcon(text) {
 
   return "fa-gamepad";
 }
+function logout() {
+  // ❌ Clear session
+  localStorage.removeItem("userId");
+  localStorage.removeItem("username");
+
+  // 🔄 Redirect
+  window.location.href = "index.html";
+}
+$("#logoutItem").click(function () {
+  logout();
+});

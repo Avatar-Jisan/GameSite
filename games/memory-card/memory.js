@@ -10,7 +10,7 @@ const startOverlay = document.getElementById("startOverlay");
 const gameBoard = document.getElementById("gameBoard");
 const exitBtn = document.getElementById("exitBtn");
 
-
+let gameStartTime;
 let selectedMode = null;
 let selectedDifficulty = null;
 let currentPlayer = 1;
@@ -118,7 +118,7 @@ function shuffle(array) {
 function createBoard(diff) {
   const board = document.getElementById("gameBoard");
   board.innerHTML = "";
-
+  gameStartTime = Date.now();
   let totalCards = getGridSize(diff);
   totalPairs = totalCards / 2;
 
@@ -180,8 +180,8 @@ function switchTurn() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   updateUI();
   showTurnOverlay();
-  if(!(selectedMode === "ai" && currentPlayer === 2)){
-    lockBoard=false;
+  if (!(selectedMode === "ai" && currentPlayer === 2)) {
+    lockBoard = false;
     gameBoard.classList.remove("no-click");
   }
 }
@@ -221,12 +221,12 @@ function handleMatch() {
   updateScore();
   checkGameEnd();
   resetTurn();
-  if(selectedMode === "ai" && currentPlayer === 2) {
-    lockBoard=true;
+  if (selectedMode === "ai" && currentPlayer === 2) {
+    lockBoard = true;
     aiTurn();
-  } else{
-    lockBoard=false;
-    aiTurnRunning=false;
+  } else {
+    lockBoard = false;
+    aiTurnRunning = false;
   }
 
 }
@@ -295,6 +295,9 @@ function showGameResult() {
   let resultText = "";
   let xp = 0;
   let score = 0;
+  const timePlayed = Math.floor((Date.now() - gameStartTime) / 1000);
+  const rank = 1; // simple for now
+  const win = player1Score > player2Score;
 
   /* RESULT */
   if (player1Score > player2Score) {
@@ -322,9 +325,14 @@ function showGameResult() {
     🎯 Score: +${score} <br>
     ⚡ XP: +${xp}
   `;
+  sendGameResult(score, xp, timePlayed, rank, win);
 
   /* XP BAR (fetch from profile) */
-  $.get("http://localhost:3000/api/user", (user) => {
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) return;
+
+  $.get(`http://localhost:3000/api/user/${userId}`, (user) => {
     const percent = (user.xp / user.maxXp) * 100;
 
     document.getElementById("xpFillMemory").style.width = percent + "%";
@@ -371,7 +379,7 @@ function saveAiMemory(card) {
 }
 
 async function aiTurn() {
-  if(matchedPairs === totalPairs) return;
+  if (matchedPairs === totalPairs) return;
   lockBoard = true;
   aiTurnRunning = true;
   gameBoard.classList.add("no-click");
@@ -500,3 +508,36 @@ window.addEventListener("message", (event) => {
   }
 
 });
+
+function sendGameResult(score, xp, timePlayed, rank, win) {
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) {
+    console.log("User not logged in");
+    return;
+  }
+
+  fetch("http://localhost:3000/api/game-result", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId,
+      game: "memory",
+      score,
+      xpEarned: xp,
+      timePlayed,
+      rank,
+      win
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Saved:", data);
+
+      // 🔥 refresh profile later
+      localStorage.setItem("refreshProfile", "true");
+    })
+    .catch(err => console.error(err));
+}

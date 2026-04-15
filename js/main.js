@@ -8,10 +8,26 @@ const loginBtn = document.getElementById("loginBtn");
 const profileBtn = document.getElementById("profileBtn");
 const profileName = document.getElementById("profileName");
 
+function logout() {
+  // ❌ Clear session
+  localStorage.removeItem("userId");
+  localStorage.removeItem("username");
+
+  // 🔄 Redirect
+  window.location.href = "index.html";
+}
+$("#logoutItem").click(function(){
+  logout();
+});
+
+const logoutItem = document.getElementById("logoutItem");
+
 if (userId) {
   // ✅ USER LOGGED IN
   loginBtn.style.display = "none";
   profileBtn.style.display = "inline-block";
+
+  if (logoutItem) logoutItem.style.display = "block";
 
   if (username) {
     profileName.innerText = username;
@@ -20,6 +36,8 @@ if (userId) {
   // ❌ NOT LOGGED IN
   loginBtn.style.display = "inline-block";
   profileBtn.style.display = "none";
+
+  if (logoutItem) logoutItem.style.display = "none";
 }
   // Sidebar Sidebar Category Click
   $(document).on("click", ".sidebar-cat-link", function (e) {

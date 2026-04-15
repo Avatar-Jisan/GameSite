@@ -38,18 +38,31 @@ app.post("/api/signup", async (req, res) => {
       email,
       password: hashedPassword,
 
-      // default fields (VERY IMPORTANT)
+      name: username, // 👈 IMPORTANT
+      bio: "Ready to play 🎮",
+      joinDate: new Date().toDateString(),
+      profileImage: "assets/avatar_img.avif",
+
       xp: 0,
       maxXp: 100,
       level: 1,
+
       stats: {
         gamesPlayed: 0,
         hoursPlayed: 0,
         winRate: 0,
         streak: 0
       },
+
       games: [],
-      activities: []
+      activities: [],
+
+      achievements: [
+        { name: "First Blood", progress: 0 },
+        { name: "Streak King", progress: 0 },
+        { name: "Puzzle Master", progress: 0 },
+        { name: "Night Owl", progress: 0 }
+      ]
     });
 
     await newUser.save();
@@ -168,6 +181,45 @@ app.post("/api/game-result", async (req, res) => {
     /* -------- WIN RATE -------- */
 
     game.winRate = Math.round((game.wins / game.played) * 100);
+
+    /* -------- ACHIEVEMENTS -------- */
+
+    if (!user.achievements || user.achievements.length === 0) {
+      user.achievements = [
+        { name: "First Blood", progress: 0 },
+        { name: "Streak King", progress: 0 },
+        { name: "Puzzle Master", progress: 0 },
+        { name: "Night Owl", progress: 0 }
+      ];
+    }
+
+    // First Blood (play 1 game)
+    user.achievements[0].progress = Math.min(
+      100,
+      (user.stats.gamesPlayed / 1) * 100
+    );
+
+    // Streak King (10 streak)
+    user.achievements[1].progress = Math.min(
+      100,
+      (user.stats.streak / 10) * 100
+    );
+
+    // Puzzle Master (500 games)
+    user.achievements[2].progress = Math.min(
+      100,
+      (user.stats.gamesPlayed / 500) * 100
+    );
+    // 🌙 Night Owl (play at night)
+    const hour = new Date().getHours();
+
+    if (hour >= 20 || hour <= 5) {
+      user.achievements[3].progress += 10;
+
+      if (user.achievements[3].progress > 100) {
+        user.achievements[3].progress = 100;
+      }
+    }
 
     /* -------- ACTIVITY -------- */
 
