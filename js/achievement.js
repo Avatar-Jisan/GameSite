@@ -44,7 +44,7 @@ $(document).ready(async function () {
           <div class="progress-bar">
             <div class="progress-fill" style="width:${progress}%"></div>
           </div>
-          <div class="progress-text">${progress}%</div>
+          <div class="progress-text">${Number(progress.toFixed(2))}%</div>
         </div>
 
         <div class="xp-reward">

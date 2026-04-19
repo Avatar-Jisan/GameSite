@@ -163,9 +163,12 @@ function renderFavorite(user) {
   if (!game) return;
 
   $(".game-thumbnail").attr("src", game.image);
-  $(".fav-game-info h4").text(game.name );
+  $(".fav-game-info h4").text(game.name);
   $(".fav-game-info p").text(`Played ${topGame.played} times`);
   $(".win-rate-positive").text(`Win Rate ${topGame.winRate}%`);
+  $("#viewGameBtn").off("click").on("click", function () {
+    window.location.href = `game.html?id=${game.id}`;
+  });
 
 }
 function renderProgress(user) {

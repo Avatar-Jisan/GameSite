@@ -23,6 +23,7 @@ const userSchema = new mongoose.Schema({
   },
 
   games: { type: Array, default: [] },
+  favorites: { type: Array, default: [] },
   activities: { type: Array, default: [] },
 
   achievements: {

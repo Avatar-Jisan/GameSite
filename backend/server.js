@@ -419,3 +419,28 @@ app.post("/api/favorite", async (req, res) => {
 
   res.json({ success: true });
 });
+
+app.post("/api/favorite/toggle", async (req, res) => {
+  const { userId, gameId } = req.body;
+
+  const user = await User.findById(userId);
+  if (!user) return res.json({ success: false });
+
+  if (!user.favorites) user.favorites = [];
+
+  const index = user.favorites.indexOf(gameId);
+
+  let isFavorite;
+
+  if (index === -1) {
+    user.favorites.push(gameId);
+    isFavorite = true;
+  } else {
+    user.favorites.splice(index, 1);
+    isFavorite = false;
+  }
+
+  await user.save();
+
+  res.json({ success: true, isFavorite });
+});
