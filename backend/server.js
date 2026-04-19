@@ -95,6 +95,7 @@ app.post("/api/signup", async (req, res) => {
       totalWins: 0,
       memoryWins: 0,
       ludoWins: 0,
+      totalscore: 0,
     });
 
     await newUser.save();
@@ -264,6 +265,9 @@ app.post("/api/game-result", async (req, res) => {
     game.played += 1;
     game.score += data.score;
 
+    // Update totalscore directly
+    user.totalscore = user.games.reduce((sum, g) => sum + (g.score || 0), 0);
+
     if (data.win) {
       game.wins += 1;
     }
@@ -432,8 +436,8 @@ app.get("/api/leaderboard", async (req, res) => {
       let score;
 
       if (gameFilter === "all") {
-        // Rank by TOTAL score across ALL games
-        score = (user.games || []).reduce((sum, g) => sum + (g.score || 0), 0);
+        // Rank by TOTAL score across ALL games (using totalscore key)
+        score = user.totalscore || (user.games || []).reduce((sum, g) => sum + (g.score || 0), 0);
       } else {
         // Rank by cumulative score for a specific game
         const gameEntry = (user.games || []).find(g => g.id === gameFilter);

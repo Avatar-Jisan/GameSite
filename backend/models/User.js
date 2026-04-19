@@ -43,7 +43,8 @@ const userSchema = new mongoose.Schema({
   },
   totalWins: { type: Number, default: 0 },
   memoryWins: { type: Number, default: 0 },
-  ludoWins: { type: Number, default: 0 }
+  ludoWins: { type: Number, default: 0 },
+  totalscore: { type: Number, default: 0 }
 });
 
 module.exports = mongoose.model("User", userSchema);
