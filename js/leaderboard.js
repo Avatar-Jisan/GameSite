@@ -73,9 +73,23 @@ async function fetchAndRenderLeaderboard(gameKey, currentUser) {
       : `http://localhost:3000/api/leaderboard?game=${backendGameId}`;
 
     const res = await fetch(url);
-    const players = await res.json();
+    const json = await res.json();
 
-    if (!Array.isArray(players)) throw new Error("Invalid leaderboard response");
+    // Handle both plain array and { success, data } wrapped responses
+    let players;
+    if (Array.isArray(json)) {
+      players = json;
+    } else if (json && Array.isArray(json.data)) {
+      players = json.data;
+    } else {
+      throw new Error("Invalid leaderboard response: " + JSON.stringify(json));
+    }
+
+    if (players.length === 0) {
+      $("#podiumContainer").empty();
+      $("#leaderboardList").html('<li style="padding:20px;text-align:center;color:var(--text-muted)">No players found yet. Be the first to play!</li>');
+      return;
+    }
 
     const top3 = players.slice(0, 3);
     const restList = players.slice(3);

@@ -420,71 +420,53 @@ app.post("/api/favorite", async (req, res) => {
   res.json({ success: true });
 });
 
-app.post("/api/favorite/toggle", async (req, res) => {
-  const { userId, gameId } = req.body;
-
-  const user = await User.findById(userId);
-  if (!user) return res.json({ success: false });
-
-  if (!user.favorites) user.favorites = [];
-
-  const index = user.favorites.indexOf(gameId);
-
-  let isFavorite;
-
-  if (index === -1) {
-    user.favorites.push(gameId);
-    isFavorite = true;
-  } else {
-    user.favorites.splice(index, 1);
-    isFavorite = false;
-  }
-
-  await user.save();
-
-  res.json({ success: true, isFavorite });
-});
-
-app.get('/api/leaderboard', async (req, res) => {
+/* -------- LEADERBOARD -------- */
+app.get("/api/leaderboard", async (req, res) => {
   try {
-    const game = req.query.game || 'all';
+    const gameFilter = req.query.game || "all"; // e.g. ?game=hangman
 
-    // 1. Determine sorting logic based on the query parameter
-    let sortQuery = {};
-    if (game === 'all') {
-      sortQuery = { xp: -1 }; // Sort by overall XP descending
-    } else {
-      // Assuming your schema has a field like gameScores.hangman
-      sortQuery = { [`gameScores.${game}`]: -1 };
-    }
+    const users = await User.find({}, { password: 0 }); // exclude passwords
 
-    // 2. Fetch users, sort them, and strictly select only public fields
-    const users = await User.find({})
-      .sort(sortQuery)
-      .select('_id name username profileImage xp level stats gameScores')
-      .lean(); // .lean() makes the result a plain JS object, which is faster
+    // Map users to a leaderboard-friendly shape
+    const ranked = users.map(user => {
+      let score;
 
-    // 3. Format the response
-    const leaderboardData = users.map(user => {
-      // Determine the specific score to display based on the filter
-      const displayScore = game === 'all' ? user.xp : (user.gameScores?.[game] || 0);
+      if (gameFilter === "all") {
+        // Rank by TOTAL XP earned across all levels
+        // Reconstruct total: each level threshold grows by 1.5x starting from 100
+        // Instead we approximate by summing xp spent on levels + current xp
+        let totalXp = user.xp || 0;
+        let threshold = 100;
+        for (let lvl = 1; lvl < (user.level || 1); lvl++) {
+          totalXp += threshold;
+          threshold = Math.floor(threshold * 1.5);
+        }
+        score = totalXp;
+      } else {
+        // Rank by cumulative score for a specific game
+        const gameEntry = (user.games || []).find(g => g.id === gameFilter);
+        score = gameEntry ? (gameEntry.score || 0) : 0;
+      }
 
       return {
         _id: user._id,
         name: user.name || user.username,
         username: user.username,
-        profileImage: user.profileImage,
+        profileImage: user.profileImage || "assets/avatar_img.avif",
         xp: user.xp,
         level: user.level,
-        winRate: user.stats?.winRate || 0,
-        gamesPlayed: user.stats?.gamesPlayed || 0,
-        score: displayScore
+        winRate: user.stats ? user.stats.winRate : 0,
+        gamesPlayed: user.stats ? user.stats.gamesPlayed : 0,
+        score
       };
     });
 
-    res.json({ success: true, data: leaderboardData });
-  } catch (error) {
-    console.error("Leaderboard Error:", error);
-    res.status(500).json({ success: false, message: "Server error fetching leaderboard" });
+    // Sort descending by score
+    ranked.sort((a, b) => b.score - a.score);
+
+    // Send a plain array (consistent response)
+    res.json(ranked);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
   }
 });
