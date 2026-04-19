@@ -125,7 +125,7 @@ function renderPodium(top3, gameKey) {
       ? `http://localhost:3000${player.profileImage}`
       : player.profileImage;
 
-    const scoreLabel = gameKey === "all" ? `${player.xp} XP` : `${player.score} pts`;
+    const scoreLabel = `${player.score} pts`;
 
     container.append(`
       <div class="podium-place ${player.class}">
@@ -162,7 +162,7 @@ function renderList(players, gameKey, startRank, currentUser) {
       ? `http://localhost:3000${player.profileImage}`
       : player.profileImage;
 
-    const scoreLabel = gameKey === "all" ? `${player.xp} XP` : `${player.score} pts`;
+    const scoreLabel = `${player.score} pts`;
 
     listContainer.append(`
       <li class="${rowClass}">
@@ -172,7 +172,6 @@ function renderList(players, gameKey, startRank, currentUser) {
           <span>${player.name}</span>
         </div>
         <span class="col-score">${scoreLabel}</span>
-        <span class="col-winrate">${player.winRate}%</span>
         <span class="col-played">${player.gamesPlayed}</span>
       </li>
     `);

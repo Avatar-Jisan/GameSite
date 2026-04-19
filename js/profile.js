@@ -236,7 +236,7 @@ async function renderLeaderboard(currentUser) {
           <img src="${imgSrc}" alt="${player.name}" class="player-avatar-tiny" onerror="this.src='assets/avatar_img.avif'" />
           <div class="player-info">
             <span class="player-name">${player.name}</span>
-            <span class="player-xp">${player.xp} XP</span>
+            <span class="player-xp">${player.score} pts</span>
           </div>
           <i class="fa-solid fa-chevron-right"></i>
         </li>
@@ -248,7 +248,7 @@ async function renderLeaderboard(currentUser) {
       const myData = players[myRank - 1];
       $(".your-rank-summary").html(`
         <span>Your Rank: <strong>#${myRank}</strong></span>
-        <span>${myData.xp} XP</span>
+        <span>${myData.score} pts</span>
       `);
     }
 

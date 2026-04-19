@@ -104,27 +104,7 @@
           <p>Compete across all games and climb to the top.</p>
         </div>
 
-        <div class="leaderboard-filters">
-          <div class="filter-group">
-            <i class="fa-solid fa-gamepad"></i>
-            <select id="gameFilter">
-              <option value="all">All Games (Total XP)</option>
-              <option value="ludo">Ludo</option>
-              <option value="tictactoe">Tic Tac Toe</option>
-              <option value="hangman">Hangman</option>
-              <option value="rps">Rock Paper Scissors</option>
-              <option value="guessing">Number Guessing</option>
-            </select>
-          </div>
-          <div class="filter-group">
-            <i class="fa-solid fa-calendar-days"></i>
-            <select id="timeFilter">
-              <option value="all-time">All Time</option>
-              <option value="monthly">This Month</option>
-              <option value="weekly">This Week</option>
-            </select>
-          </div>
-        </div>
+        
       </section>
 
       <section class="podium-section" id="podiumContainer">
@@ -134,9 +114,8 @@
         <div class="table-header">
           <span class="col-rank">Rank</span>
           <span class="col-player">Player</span>
-          <span class="col-score">Score / XP</span>
-          <span class="col-winrate">Win Rate</span>
-          <span class="col-played">Games</span>
+          <span class="col-score">Total Score</span>
+          <span class="col-played">Games Played</span>
         </div>
         <ul class="leaderboard-list" id="leaderboardList">
           </ul>
@@ -146,6 +125,7 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/theme.js"></script>
   <script src="js/leaderboard.js"></script>
 </body>
 </html>

@@ -159,9 +159,8 @@ input:checked + .slider:before {
 
 .col-rank { width: 60px; font-family: var(--font-header); font-weight: bold; color: var(--text-secondary); }
 .col-player { flex-grow: 1; display: flex; align-items: center; gap: 12px; font-weight: 600; }
-.col-score { width: 120px; color: var(--accent-cyan); font-weight: bold; }
-.col-winrate { width: 100px; color: var(--win-positive); }
-.col-played { width: 80px; color: var(--text-muted); text-align: right; }
+.col-score { width: 150px; color: var(--accent-cyan); font-weight: bold; }
+.col-played { width: 120px; color: var(--text-muted); text-align: right; }
 .list-avatar { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
 
 /* Highlight the logged-in user's row */

@@ -432,16 +432,8 @@ app.get("/api/leaderboard", async (req, res) => {
       let score;
 
       if (gameFilter === "all") {
-        // Rank by TOTAL XP earned across all levels
-        // Reconstruct total: each level threshold grows by 1.5x starting from 100
-        // Instead we approximate by summing xp spent on levels + current xp
-        let totalXp = user.xp || 0;
-        let threshold = 100;
-        for (let lvl = 1; lvl < (user.level || 1); lvl++) {
-          totalXp += threshold;
-          threshold = Math.floor(threshold * 1.5);
-        }
-        score = totalXp;
+        // Rank by TOTAL score across ALL games
+        score = (user.games || []).reduce((sum, g) => sum + (g.score || 0), 0);
       } else {
         // Rank by cumulative score for a specific game
         const gameEntry = (user.games || []).find(g => g.id === gameFilter);
@@ -455,7 +447,6 @@ app.get("/api/leaderboard", async (req, res) => {
         profileImage: user.profileImage || "assets/avatar_img.avif",
         xp: user.xp,
         level: user.level,
-        winRate: user.stats ? user.stats.winRate : 0,
         gamesPlayed: user.stats ? user.stats.gamesPlayed : 0,
         score
       };
