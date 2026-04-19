@@ -49,6 +49,8 @@ async function initProfile() {
     renderFavorite(user);
     renderProgress(user);
     renderAchievements(user);
+    renderLeaderboard(user);  // ← real leaderboard data
+
     window.currentUser = user;
   } catch (err) {
     console.error("Error loading profile:", err);
@@ -198,12 +200,80 @@ function renderAchievements(user) {
       .css("width", percent + "%");
   });
 }
-function getActivityIcon(text) {
-  if (text.includes("Ludo")) return "fa-dice";
-  if (text.includes("Level")) return "fa-star";
-  if (text.includes("puzzle")) return "fa-puzzle-piece";
-  if (text.includes("Tic Tac Toe")) return "fa-xmark";
 
+async function renderLeaderboard(currentUser) {
+  try {
+    const players = await $.get("http://localhost:3000/api/leaderboard");
+
+    if (!Array.isArray(players) || players.length === 0) return;
+
+    // Find the current user's rank (1-based)
+    const myRank = players.findIndex(p =>
+      p._id === currentUser._id || p._id?.toString() === currentUser._id?.toString()
+    ) + 1; // +1 because findIndex is 0-based
+
+    const leaderList = $(".leader-list");
+    leaderList.empty();
+
+    // Render top 3 players
+    const top3 = players.slice(0, 3);
+    const rankClasses = ["rank-1", "rank-2", "rank-3"];
+
+    top3.forEach((player, i) => {
+      const imgSrc = player.profileImage && player.profileImage.startsWith("/uploads")
+        ? `http://localhost:3000${player.profileImage}`
+        : player.profileImage || "assets/avatar_img.avif";
+
+      const isYou = currentUser && (
+        player._id === currentUser._id ||
+        player._id?.toString() === currentUser._id?.toString()
+      );
+      const rowClass = isYou ? "you-row" : "";
+
+      leaderList.append(`
+        <li class="${rowClass}">
+          <span class="rank-num ${rankClasses[i]}">${i + 1}</span>
+          <img src="${imgSrc}" alt="${player.name}" class="player-avatar-tiny" onerror="this.src='assets/avatar_img.avif'" />
+          <div class="player-info">
+            <span class="player-name">${player.name}</span>
+            <span class="player-xp">${player.xp} XP</span>
+          </div>
+          <i class="fa-solid fa-chevron-right"></i>
+        </li>
+      `);
+    });
+
+    // Update the "your rank" summary bar
+    if (myRank > 0) {
+      const myData = players[myRank - 1];
+      $(".your-rank-summary").html(`
+        <span>Your Rank: <strong>#${myRank}</strong></span>
+        <span>${myData.xp} XP</span>
+      `);
+    }
+
+  } catch (err) {
+    console.error("Error loading leaderboard on profile:", err);
+  }
+}
+
+function getActivityIcon(text) {
+  // Convert to lowercase for safer matching
+  const lowerText = text.toLowerCase();
+
+  // Specific Games
+  if (lowerText.includes("rock paper scissors") || lowerText.includes("rps")) return "fa-hand-back-fist";
+  if (lowerText.includes("hangman")) return "fa-person-falling-burst";
+  if (lowerText.includes("memory")) return "fa-brain";
+  if (lowerText.includes("ludo")) return "fa-dice";
+  if (lowerText.includes("tic tac toe")) return "fa-xmark";
+
+  // General Actions
+  if (lowerText.includes("achievement")) return "fa-trophy";
+  if (lowerText.includes("level")) return "fa-star";
+  if (lowerText.includes("puzzle")) return "fa-puzzle-piece";
+
+  // Default Fallback
   return "fa-gamepad";
 }
 function logout() {

@@ -51,7 +51,8 @@ $(document).ready(function() {
         currentWordObj: null,
         guessedLetters: [],
         correctGuessed: [],
-        availableWordsPool: {} // NEW: This will hold our temporary, shrinking list of words
+        availableWordsPool: {}, // NEW: This will hold our temporary, shrinking list of words
+        sessionStartTime: null  // Track when the game session started
     };
 
     // --- Screen Management ---
@@ -79,6 +80,8 @@ $(document).ready(function() {
         
         // NEW: When starting a brand new session from the menu, grab a fresh pool of words
         gameState.availableWordsPool = getFreshWordPool(selectedLevel);
+        gameState.sessionStartTime = Date.now(); // Record session start time
+        gameState.score = 0; // Reset score on new session
         
         startGameSession(selectedLevel);
     });
@@ -249,5 +252,40 @@ $(document).ready(function() {
     function showResultPopup() {
         $('#final-score').text(gameState.score);
         $('#result-popup').addClass('visible');
+        // Send score to backend (game over = loss)
+        sendScoreToBackend(gameState.score, false);
+    }
+
+    // --- BACKEND SCORE SUBMISSION ---
+    async function sendScoreToBackend(score, didWin) {
+        const userId = localStorage.getItem('userId');
+        if (!userId) return; // Not logged in, skip
+
+        const timePlayed = gameState.sessionStartTime
+            ? Math.floor((Date.now() - gameState.sessionStartTime) / 1000)
+            : 0;
+
+        // XP: 20 base + 5 per 10 score points for a win, or 5 flat for a loss
+        const xpEarned = didWin ? 20 + Math.floor(score / 10) * 5 : 5;
+        const result = didWin ? 'Won' : 'Game Over';
+
+        try {
+            await fetch('http://localhost:3000/api/game-result', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    game: 'hangman',
+                    score,
+                    win: didWin,
+                    xpEarned,
+                    timePlayed,
+                    result
+                })
+            });
+            console.log('Hangman score sent to backend ✅');
+        } catch (err) {
+            console.error('Failed to send Hangman score:', err);
+        }
     }
 });
