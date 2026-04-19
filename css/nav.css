@@ -12,6 +12,14 @@
     box-shadow: 0 2px 10px rgba(138, 136, 136, 0.1);
     z-index: 1100;
 }
+nav, .sidebar-footer{
+    padding-top: 15px;
+}
+#logoutItem a:hover{
+    background: rgba(255, 0, 0, 0.836);
+    border-radius: 20px;
+
+}
 
 .sidebar-nav li a {
   white-space: nowrap;

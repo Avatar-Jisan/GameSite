@@ -176,6 +176,9 @@ body {
   #gameFrame {
     height: 93%;
   }
+  .logo{
+    display: none;
+  }
     .game-table{
     padding:0 !important;
     margin:0 !important;

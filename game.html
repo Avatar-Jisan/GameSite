@@ -84,97 +84,147 @@
         </div>
       </div>
     </header>
+<aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-header">
+          <a href="index.html" class="logo">
+            <img src="assets/games_img/game_logo_bg.png" class="logo-img" />
+          </a>
+        </div>
 
-    <nav class="sidebar" id="sidebar">
-      <ul>
-        <li>
-          <a href="index.html"
-            ><i
-              class="fa-solid fa-house"
-              style="color: var(--accent-color)"
-            ></i>
-            Home</a
-          >
-        </li>
+        <nav class="sidebar-nav" id="sidebar">
+          <ul>
+            <!-- MAIN -->
+            <li>
+              <a href="index.html"> <i class="fa-solid fa-house"></i> Home </a>
+            </li>
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-clock"
-              style="color: var(--accent-color)"
-            ></i>
-            Recently Played</a
-          >
-        </li>
+            <li>
+              <a href="game-library.html">
+                <i class="fa-solid fa-heart"></i> Favorites
+              </a>
+            </li>
 
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-fire" style="color: var(--accent-color)"></i>
-            Popular Games</a
-          >
-        </li>
+            <li>
+              <a href="game-library.html#recentGames">
+                <i class="fa-solid fa-clock"></i> Recently Played
+              </a>
+            </li>
 
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-bolt" style="color: var(--accent-color)"></i>
-            Action</a
-          >
-        </li>
+            <hr />
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-mountain"
-              style="color: var(--accent-color)"
-            ></i>
-            Adventure</a
-          >
-        </li>
+            <!-- CATEGORIES (STATIC) -->
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="All">
+                <i class="fa-solid fa-gamepad"></i> All
+              </a>
+            </li>
 
-        <li>
-          <a href="#"
-            ><i class="fa-solid fa-car" style="color: var(--accent-color)"></i>
-            Car</a
-          >
-        </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Board">
+                <i class="fa-solid fa-chess-board"></i> Board
+              </a>
+            </li>
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-basketball"
-              style="color: var(--accent-color)"
-            ></i>
-            Basketball</a
-          >
-        </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Strategy">
+                <i
+                  class="fa-solid fa-chess-pawn"
+                ></i>
+                Strategy
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
+                <i
+                  class="fa-solid fa-people-group"
+                ></i>
+                Multiplayer
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Card">
+                <i
+                  class="fa-solid fa-diamond"
+                ></i>
+                Card
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Puzzle">
+                <i
+                  class="fa-solid fa-puzzle-piece"
+                ></i>
+                Puzzle
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
+                <i
+                  class="fa-solid fa-child-reaching"
+                ></i>
+                Single Player
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Casual">
+                <i
+                  class="fa-solid fa-chess-board"
+                ></i>
+                Casual
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Word">
+                <i class="fa-so></i>
+                Word
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Two Player">
+                <i
+                  class="fa-solid fa-user-group"
+                ></i>
+                Two Player
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Adventure">
+                <i
+                  class="fa-solid fa-space-awesome"
+                ></i>
+                Adventure
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Logic Game">
+                <i
+                  class="fa-solid fa-brain"
+                ></i>
+                Logic Game
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-puzzle-piece"
-              style="color: var(--accent-color)"
-            ></i>
-            Puzzle</a
-          >
+      <footer class="sidebar-footer nav-list">
+        <hr />
+        <li class="nav-item settings-btn">
+          <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
         </li>
+        <li class="nav-item">
+          <a href="about/index.html"><i class="fa-solid fa-circle-info"></i>About us</a>
+        </li>
+        <li id="logoutItem" class="nav-item">
+          <a href="#">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
+        </li>
+      </footer>
+    </aside>
 
-        <li>
-          <a href="#"
-            ><i
-              class="fa-solid fa-ghost"
-              style="color: var(--accent-color)"
-            ></i>
-            Horror</a
-          >
-        </li>
-                  <li id="logoutItem" >
-      <a href="#" onclick="logout()">
-        <i class="fa-solid fa-right-from-bracket" style="color: var(--accent-color)"></i>
-        Logout
-      </a>
-    </li>
-      </ul>
-    </nav>
     <!-- Main is done by name:Abdulla Al Jisan id:1236 -->
     <main class="container game-page">
       <div class="row g-5 game-area">
