@@ -62,13 +62,11 @@ if (userId) {
       games.forEach(game => game.category.forEach(cat => categories.add(cat)));
       
       const catBtnContainer = $(".category-buttons");
-      const sidebarMenu = $("#sidebar ul");
       catBtnContainer.empty();
       catBtnContainer.append(`<button class="btn category-btn active" data-category="All">All</button>`);
       
       categories.forEach(cat => {
         catBtnContainer.append(`<button class="btn category-btn" data-category="${cat}">${cat}</button>`);
-        sidebarMenu.append(`<li><a href="#" class="sidebar-cat-link" data-category="${cat}">${cat}</a></li>`);
       });
 
       renderGames(games);
@@ -180,16 +178,40 @@ function renderGames(list) {
 
 function initSlider() {
   let current = 0;
-  $(".next").click(() => {
+  let interval;
+
+  function showSlide(index) {
     const slides = $(".slide");
-    slides.eq(current).removeClass("active");
+    slides.removeClass("active");
+    slides.eq(index).addClass("active");
+  }
+
+  function nextSlide() {
+    const slides = $(".slide");
     current = (current + 1) % slides.length;
-    slides.eq(current).addClass("active");
-  });
-  $(".prev").click(() => {
+    showSlide(current);
+  }
+
+  function prevSlide() {
     const slides = $(".slide");
-    slides.eq(current).removeClass("active");
     current = (current - 1 + slides.length) % slides.length;
-    slides.eq(current).addClass("active");
-  });
+    showSlide(current);
+  }
+
+  $(".next").click(nextSlide);
+  $(".prev").click(prevSlide);
+
+  // 🔥 AUTO SLIDE BACK
+  function startAuto() {
+    interval = setInterval(nextSlide, 4000);
+  }
+
+  function stopAuto() {
+    clearInterval(interval);
+  }
+
+  startAuto();
+
+  $(".slider").on("mouseenter", stopAuto);
+  $(".slider").on("mouseleave", startAuto);
 }
