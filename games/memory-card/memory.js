@@ -529,7 +529,7 @@ function sendGameResult(score, xp, timePlayed, result, win) {
     },
     body: JSON.stringify({
       userId,
-      game: "memory",
+      game: "memory-card",
       score,
       xpEarned: xp,
       timePlayed,

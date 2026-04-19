@@ -248,14 +248,15 @@ app.post("/api/game-result", async (req, res) => {
 
     /* -------- GAME-SPECIFIC -------- */
 
-    let game = user.games.find(g => g.name === data.game);
+    let game = user.games.find(g => g.id === data.game);
 
     if (!game) {
       game = {
-        name: data.game,
+        id: data.game,
         played: 0,
         wins: 0,
-        score: 0
+        score: 0,
+        winRate: 0
       };
       user.games.push(game);
     }
@@ -274,7 +275,7 @@ app.post("/api/game-result", async (req, res) => {
     if (data.win) {
       user.totalWins += 1;
 
-      if (data.game === "memory") user.memoryWins += 1;
+      if (data.game === "memory-card") user.memoryWins += 1;
       if (data.game === "ludo") user.ludoWins += 1;
     }
 
@@ -399,4 +400,22 @@ app.post("/api/game-result", async (req, res) => {
 app.get("/test-db", async (req, res) => {
   const users = await User.find();
   res.json(users);
+});
+
+app.post("/api/favorite", async (req, res) => {
+  const { userId, gameId } = req.body;
+
+  const user = await User.findById(userId);
+
+  if (!user) return res.json({ success: false });
+
+  if (!user.favorites) user.favorites = [];
+
+  if (!user.favorites.includes(gameId)) {
+    user.favorites.push(gameId);
+  }
+
+  await user.save();
+
+  res.json({ success: true });
 });

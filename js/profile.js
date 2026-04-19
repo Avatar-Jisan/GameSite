@@ -5,7 +5,7 @@ menuBtn.addEventListener("click", () => {
   sidebar.classList.toggle("active");
   overlay.classList.toggle("active");
 });
-$(".btn-save").click(function(e){
+$(".btn-save").click(function (e) {
   e.preventDefault();
 });
 
@@ -118,38 +118,55 @@ function renderGameStats(user) {
   const container = $(".game-stats-grid");
   container.empty();
 
-  gameList.forEach((game) => {
-    const userGame = user.games.find((g) => g.name === game.name);
+  if (!user.games || user.games.length === 0) {
+    container.html(`
+    <div class="no-games-msg">
+      <i class="fa-solid fa-gamepad"></i>
+      <p>No games played yet</p>
+      <span>Start playing to see your stats 🚀</span>
+    </div>
+  `);
+    return;
+  }
+  user.games.forEach((userGame) => {
 
-    if (!userGame) return; // skip if user didn't play
+    const game = gameList.find(g => g.id === userGame.id);
 
     container.append(`
       <div class="game-stat-item">
-        <img src="${game.image}" class="game-mini-thumb" />
+        <img src="${game ? game.image : 'assets/games_img/default.png'}" class="game-mini-thumb" />
 
         <div class="game-stat-details">
-          <h4>${game.name}</h4>
-          <p>Played ${userGame.played} times</p>
-          <span class="win-rate-positive">
-            Win Rate ${userGame.winRate}%
-          </span>
+          <h4>${game ? game.name : userGame.id}</h4>
+          <div class="game-stat-values">
+            <p>Played ${userGame.played} times</p>
+            <span class="win-rate-positive">
+              Win Rate ${userGame.winRate || 0}%
+            </span>
+          </div>
         </div>
-
-        <i class="fa-solid fa-chevron-right"></i>
       </div>
     `);
   });
 }
 function renderFavorite(user) {
-  const fav = gameList.find((g) => g.name === user.favoriteGame);
-  const stats = user.games.find((g) => g.name === user.favoriteGame);
 
-  if (!fav || !stats) return;
+  if (!user.games || user.games.length === 0) return;
 
-  $(".game-thumbnail").attr("src", fav.image);
-  $(".fav-game-info h4").text(fav.name);
-  $(".fav-game-info p").text(`Played ${stats.played} times`);
-  $(".win-rate-positive").text(`Win Rate ${stats.winRate}%`);
+  // 🔥 find most played game
+  const topGame = [...user.games].sort((a, b) => b.played - a.played)[0];
+
+  if (!topGame) return;
+
+  const game = gameList.find(g => g.id === topGame.id);
+
+  if (!game) return;
+
+  $(".game-thumbnail").attr("src", game.image);
+  $(".fav-game-info h4").text(game.name );
+  $(".fav-game-info p").text(`Played ${topGame.played} times`);
+  $(".win-rate-positive").text(`Win Rate ${topGame.winRate}%`);
+
 }
 function renderProgress(user) {
   $(".level-number-big").text(user.level);

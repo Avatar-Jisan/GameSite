@@ -65,3 +65,38 @@ document.addEventListener("fullscreenchange", () => {
     }
 
 });
+
+$(".fav-btn").click(async function () {
+
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) {
+    alert("Login first");
+    return;
+  }
+
+  const parameter = new URLSearchParams(window.location.search);
+  const gameId = parameter.get("id");
+
+  try {
+    const res = await fetch("http://localhost:3000/api/favorite", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userId,
+        gameId
+      })
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      alert("Added to favorites ❤️");
+    }
+
+  } catch (err) {
+    console.error(err);
+  }
+});

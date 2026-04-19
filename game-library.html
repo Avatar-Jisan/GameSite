@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game Library</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- YOUR EXISTING PROFILE CSS -->
+  <link rel="stylesheet" href="css/profile.css">
+
+  <!-- NEW CSS -->
+  <link rel="stylesheet" href="css/library.css">
+</head>
+
+<body class="dark-theme">
+
+<div class="dashboard-container">
+
+  <!-- 🔥 SAME SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-top">
+      <a href="index.html" class="logo">
+        <img src="assets/games_img/game_logo_bg.png" class="logo-img">
+      </a>
+
+      <nav class="sidebar-nav">
+        <ul>
+          <li><a href="index.html"><i class="fa-solid fa-house"></i> Home</a></li>
+          <li><a href="game-library.html"><i class="fa-solid fa-clock"></i> Recently Played</a></li>
+          <li><a href="#"><i class="fa-solid fa-heart"></i> Favorites</a></li>
+        </ul>
+      </nav>
+    </div>
+
+    <footer class="sidebar-footer nav-list">
+      <li class="nav-item"><a href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
+      <li class="nav-item" id="logoutItem"><a href="#"><i class="fa-solid fa-right-from-bracket"></i>Logout</a></li>
+    </footer>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <h2 class="page-title">🎮 Game Library</h2>
+    </header>
+
+    <!-- RECENT -->
+    <section class="library-section">
+      <div class="section-header">
+        <h3><i class="fa-solid fa-clock"></i> Recently Played</h3>
+      </div>
+      <div id="recentGames" class="game-grid"></div>
+    </section>
+
+    <!-- FAVORITES -->
+    <section class="library-section">
+      <div class="section-header">
+        <h3><i class="fa-solid fa-heart"></i> Favorites</h3>
+      </div>
+      <div id="favoriteGames" class="game-grid"></div>
+    </section>
+
+  </main>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="js/library.js"></script>
+
+</body>
+</html>
