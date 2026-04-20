@@ -1,621 +1,520 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Khelo Profile</title>
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&family=Inter:wght@300;400;600&display=swap"
-      rel="stylesheet"
-    />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khelo Profile</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;500;700&family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet" />
 
-    <link rel="stylesheet" href="css/profile.css" />
-    <!-- <link rel="stylesheet" href="css/nav.css"/> -->
-  </head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <body class="dark-theme">
-    <div class="dashboard-container">
-      <aside class="sidebar">
-        <div class="sidebar-top">
-          <div class="sidebar-header">
-            <a href="index.html" class="logo">
-              <img
-                src="/assets/games_img/game_logo_bg.png"
-                alt="Khelo Logo"
-                class="logo-img"
-              />
-            </a>
-          </div>
+  <link rel="stylesheet" href="css/profile.css" />
+  <!-- <link rel="stylesheet" href="css/nav.css"/> -->
+</head>
 
-          <nav class="sidebar-nav" id="sidebar">
-            <ul>
-              <li>
-                <a href="index.html"
-                  ><i
-                    class="fa-solid fa-house"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Home</a
-                >
-              </li>
-
-              <li>
-                <a href="game-library.html"
-                  ><i
-                    class="fa-solid fa-heart"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Favorites</a
-                >
-              </li>
-
-              <li>
-                <a href="game-library.html#recentGames"
-                  ><i
-                    class="fa-solid fa-clock"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Recently Played</a
-                >
-              </li>
-              <hr />
-
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="All">
-                  <i
-                    class="fa-solid fa-gamepad"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  All
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Board">
-                  <i
-                    class="fa-solid fa-chess-board"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Board
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Strategy">
-                  <i
-                    class="fa-solid fa-chess-pawn"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Strategy
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="sidebar-cat-link"
-                  data-category="Multiplayer"
-                >
-                  <i
-                    class="fa-solid fa-people-group"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Multiplayer
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Card">
-                  <i
-                    class="fa-solid fa-diamond"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Card
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Puzzle">
-                  <i
-                    class="fa-solid fa-puzzle-piece"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Puzzle
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#"
-                  class="sidebar-cat-link"
-                  data-category="Singleplayer"
-                >
-                  <i
-                    class="fa-solid fa-child-reaching"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Single Player
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Casual">
-                  <i
-                    class="fa-solid fa-chess-board"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Casual
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Word">
-                  <i
-                    class="fa-solid fa-w"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Word
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Two Player">
-                  <i
-                    class="fa-solid fa-user-group"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Two Player
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Adventure">
-                  <i
-                    class="fa-solid fa-space-awesome"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Adventure
-                </a>
-              </li>
-              <li>
-                <a href="#" class="sidebar-cat-link" data-category="Logic Game">
-                  <i
-                    class="fa-solid fa-brain"
-                    style="color: var(--accent-color)"
-                  ></i>
-                  Logic Game
-                </a>
-              </li>
-            </ul>
-          </nav>
-
-          <div class="sidebar-cta">
-            <h4>Play. Win. Level Up.</h4>
-            <p>Compete, earn XP, and unlock epic rewards!</p>
-            <button class="btn-primary">Explore Now</button>
-          </div>
+<body class="dark-theme">
+  <div class="dashboard-container">
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-header">
+          <a href="index.html" class="logo">
+            <img src="/assets/games_img/game_logo_bg.png" alt="Khelo Logo" class="logo-img" />
+          </a>
         </div>
-        <footer class="sidebar-footer nav-list">
-          <li class="nav-item settings-btn">
-            <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
-          </li>
-          <li class="nav-item">
-            <a href="about/index.html"><i class="fa-solid fa-circle-info"></i>About us</a>
-          </li>
-          <li id="logoutItem" class="nav-item">
-            <a href="#" onclick="logout()">
-              <i class="fa-solid fa-right-from-bracket"></i>
-              Logout
-            </a>
-          </li>
-        </footer>
-      </aside>
 
-      <main class="main-content">
-        <div class="sidebar-overlay" id="overlay"></div>
-        <header class="topbar">
-          <div class="search-bar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input
-              type="text"
-              placeholder="Search games, players, or categories... (Ctrl K)"
-            />
-          </div>
+        <nav class="sidebar-nav" id="sidebar">
+          <ul>
+            <li>
+              <a href="index.html"><i class="fa-solid fa-house" style="color: var(--accent-color)"></i>
+                Home</a>
+            </li>
 
-          <div class="topbar-actions">
-            <button class="menu-btn" id="menuBtn" style="display: none">
-              <i class="fa-solid fa-bars"></i>
-            </button>
-            <!-- <button class="icon-btn notification-btn">
+            <li>
+              <a href="game-library.html"><i class="fa-solid fa-heart" style="color: var(--accent-color)"></i>
+                Favorites</a>
+            </li>
+
+            <li>
+              <a href="game-library.html#recentGames"><i class="fa-solid fa-clock"
+                  style="color: var(--accent-color)"></i>
+                Recently Played</a>
+            </li>
+            <hr />
+
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="All">
+                <i class="fa-solid fa-gamepad" style="color: var(--accent-color)"></i>
+                All
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Board">
+                <i class="fa-solid fa-chess-board" style="color: var(--accent-color)"></i>
+                Board
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Strategy">
+                <i class="fa-solid fa-chess-pawn" style="color: var(--accent-color)"></i>
+                Strategy
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Multiplayer">
+                <i class="fa-solid fa-people-group" style="color: var(--accent-color)"></i>
+                Multiplayer
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Card">
+                <i class="fa-solid fa-diamond" style="color: var(--accent-color)"></i>
+                Card
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Puzzle">
+                <i class="fa-solid fa-puzzle-piece" style="color: var(--accent-color)"></i>
+                Puzzle
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Singleplayer">
+                <i class="fa-solid fa-child-reaching" style="color: var(--accent-color)"></i>
+                Single Player
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Casual">
+                <i class="fa-solid fa-chess-board" style="color: var(--accent-color)"></i>
+                Casual
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Word">
+                <i class="fa-solid fa-w" style="color: var(--accent-color)"></i>
+                Word
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Two Player">
+                <i class="fa-solid fa-user-group" style="color: var(--accent-color)"></i>
+                Two Player
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Adventure">
+                <i class="fa-solid fa-space-awesome" style="color: var(--accent-color)"></i>
+                Adventure
+              </a>
+            </li>
+            <li>
+              <a href="#" class="sidebar-cat-link" data-category="Logic Game">
+                <i class="fa-solid fa-brain" style="color: var(--accent-color)"></i>
+                Logic Game
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="sidebar-cta">
+          <h4>Play. Win. Level Up.</h4>
+          <p>Compete, earn XP, and unlock epic rewards!</p>
+          <a href="index.html"><button class="btn-primary">Explore Now</button></a>
+        </div>
+      </div>
+      <footer class="sidebar-footer nav-list">
+        <li class="nav-item settings-btn">
+          <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+        </li>
+        <li class="nav-item">
+          <a href="about/index.html"><i class="fa-solid fa-circle-info"></i>About us</a>
+        </li>
+        <li id="logoutItem" class="nav-item">
+          <a href="#" onclick="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            Logout
+          </a>
+        </li>
+      </footer>
+    </aside>
+
+    <main class="main-content">
+      <div class="sidebar-overlay" id="overlay"></div>
+      <header class="topbar">
+        <div class="search-bar">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" placeholder="Search games" />
+        </div>
+
+        <div class="topbar-actions">
+          <button class="menu-btn" id="menuBtn" style="display: none">
+            <i class="fa-solid fa-bars"></i>
+          </button>
+          <!-- <button class="icon-btn notification-btn">
               <i class="fa-regular fa-bell"></i>
               <span class="notification-badge">3</span>
             </button> -->
-            
-            <div class="theme-switch">
-              <i class="fa-solid fa-sun"></i>
-              <label class="switch">
-                <input type="checkbox" checked />
-                <span class="slider round"></span>
-              </label>
-              <i class="fa-solid fa-moon"></i>
-            </div>
-            <a href="profile.html"></a>
-            <div class="user-profile-summary">
-              <img
-                src="assets/avatar_img.avif"
-                alt="Jisan Ahmed"
-                class="user-avatar-tiny"
-              />
-              <div class="user-name-dropdown">
-                <span>Jisan Ahmed</span>
-              </div>
-            </div>
-            </a>
-          </div>
-        </header>
 
-        <section class="profile-banner">
-          <div class="banner-background">
-            <img
-              src="assets/games_img/bg_banner.webp"
-              alt="Profile Background"
-            />
+          <div class="theme-switch">
+            <i class="fa-solid fa-sun"></i>
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="slider round"></span>
+            </label>
+            <i class="fa-solid fa-moon"></i>
           </div>
-          <div class="profile-header-content">
-            <div class="avatar-container">
-              <img
-                src="assets/avatar_img.avif"
-                alt="Jisan Ahmed Avatar"
-                class="profile-avatar"
-              />
-            </div>
-            <div class="profile-main-info">
-              <h1>
-                <i class="fa-solid fa-circle-check verified-icon"></i>
-              </h1>
-              <p class="username">
-                <span class="flag-icon">🇧🇩</span> Bangladesh
-              </p>
-              <p class="bio">Play for fun. Win with passion. 🚀</p>
-              <p class="join-date">Member since May 2024</p>
-            </div>
-            <div class="profile-action-buttons">
-              <button class="btn-secondary edit-profile-btn">
-                <i class="fa-solid fa-pen"></i> Edit Profile
-              </button>
-              <button class="icon-btn settings-btn">
-                <i class="fa-solid fa-gear"></i>
-              </button>
+          <a href="profile.html"></a>
+          <div class="user-profile-summary">
+            <img src="assets/avatar_img.avif" alt="Jisan Ahmed" class="user-avatar-tiny" />
+            <div class="user-name-dropdown">
+              <span>Jisan Ahmed</span>
             </div>
           </div>
-          <div class="profile-xp-section">
-            <div class="xp-level-display">
-              <span class="level-num"></span>
-              <div class="xp-progress-bar">
-                <div class="xp-progress-fill"></div>
-              </div>
-              <span class="xp-ratio"></span>
-            </div>
-          </div>
-        </section>
+          </a>
+        </div>
+      </header>
 
-        <section class="stats-grid">
-          <div class="stat-card">
-            <i class="fa-solid fa-gamepad"></i>
-            <div class="stat-values">
-              <span class="stat-label">Games Played</span>
-              <span class="stat-number"></span>
-            </div>
+      <section class="profile-banner">
+        <div class="banner-background">
+          <img src="assets/games_img/bg_banner.webp" alt="Profile Background" />
+        </div>
+        <div class="profile-header-content">
+          <div class="avatar-container">
+            <img src="assets/avatar_img.avif" alt="Jisan Ahmed Avatar" class="profile-avatar" />
           </div>
-          <div class="stat-card">
-            <i class="fa-solid fa-clock"></i>
-            <div class="stat-values">
-              <span class="stat-label">Hours Played</span>
-              <span class="stat-number"></span>
-            </div>
+          <div class="profile-main-info">
+            <h1>
+              <i class="fa-solid fa-circle-check verified-icon"></i>
+            </h1>
+            <p class="username">
+              <span class="flag-icon">🇧🇩</span> Bangladesh
+            </p>
+            <p class="bio">Play for fun. Win with passion. 🚀</p>
+            <p class="join-date">Member since May 2024</p>
           </div>
-          <div class="stat-card">
-            <i class="fa-solid fa-trophy"></i>
-            <div class="stat-values">
-              <span class="stat-label">Win Rate</span>
-              <span class="stat-number"></span>
-            </div>
+          <div class="profile-action-buttons">
+            <button class="btn-secondary edit-profile-btn">
+              <i class="fa-solid fa-pen"></i> Edit Profile
+            </button>
+            <button class="icon-btn settings-btn">
+              <i class="fa-solid fa-gear"></i>
+            </button>
           </div>
-          <div class="stat-card">
-            <i class="fa-solid fa-fire"></i>
-            <div class="stat-values">
-              <span class="stat-label">Longest Streak</span>
-              <span class="stat-number"></span>
+        </div>
+        <div class="profile-xp-section">
+          <div class="xp-level-display">
+            <span class="level-num"></span>
+            <div class="xp-progress-bar">
+              <div class="xp-progress-fill"></div>
             </div>
+            <span class="xp-ratio"></span>
           </div>
-          <div class="stat-card">
-            <i class="fa-solid fa-star"></i>
-            <div class="stat-values">
-              <span class="stat-label">Total Score</span>
-              <span class="stat-number"></span>
-            </div>
-          </div>
-          <div class="stat-card">
-            <i class="fa-solid fa-award"></i>
-            <div class="stat-values">
-              <span class="stat-label">Achievements</span>
-              <span class="stat-number"></span>
-            </div>
-          </div>
-        </section>
+        </div>
+      </section>
 
-        <section class="middle-grid">
-          <div class="card progress-card">
-            <div class="card-header">
-              <h3>Your Progress</h3>
+      <section class="stats-grid">
+        <div class="stat-card">
+          <i class="fa-solid fa-gamepad"></i>
+          <div class="stat-values">
+            <span class="stat-label">Games Played</span>
+            <span class="stat-number"></span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-clock"></i>
+          <div class="stat-values">
+            <span class="stat-label">Hours Played</span>
+            <span class="stat-number"></span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-trophy"></i>
+          <div class="stat-values">
+            <span class="stat-label">Win Rate</span>
+            <span class="stat-number"></span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-fire"></i>
+          <div class="stat-values">
+            <span class="stat-label">Longest Streak</span>
+            <span class="stat-number"></span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-star"></i>
+          <div class="stat-values">
+            <span class="stat-label">Total Score</span>
+            <span class="stat-number"></span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <i class="fa-solid fa-award"></i>
+          <div class="stat-values">
+            <span class="stat-label">Achievements</span>
+            <span class="stat-number"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="middle-grid">
+        <div class="card progress-card">
+          <div class="card-header">
+            <h3>Your Progress</h3>
+          </div>
+          <div class="progress-detailed">
+            <div class="level-shield-container">
+              <div class="level-shield">
+                <span class="level-title">Level</span>
+                <span class="level-number-big"></span>
+              </div>
+              <p class="rank-title">Legend in the Making</p>
             </div>
-            <div class="progress-detailed">
-              <div class="level-shield-container">
-                <div class="level-shield">
-                  <span class="level-title">Level</span>
-                  <span class="level-number-big"></span>
-                </div>
-                <p class="rank-title">Legend in the Making</p>
+            <div class="xp-detailed-bar">
+              <div class="xp-progress-fill"></div>
+            </div>
+            <p class="xp-detailed-text"></p>
+            <div class="next-reward">
+              <div class="reward-icon">
+                <i class="fa-solid fa-award" style="color: rgb(116, 192, 252)"></i>
               </div>
-              <div class="xp-detailed-bar">
-                <div class="xp-progress-fill"></div>
-              </div>
-              <p class="xp-detailed-text"></p>
-              <div class="next-reward">
-                <div class="reward-icon">
-                  <i
-                    class="fa-solid fa-award"
-                    style="color: rgb(116, 192, 252)"
-                  ></i>
-                </div>
-                <p>Next Reward: <span></span></p>
-                <div class="reward-icon">
-                  <i
-                    class="fa-solid fa-award"
-                    style="color: rgb(116, 192, 252)"
-                  ></i>
-                </div>
+              <p>Next Reward: <span></span></p>
+              <div class="reward-icon">
+                <i class="fa-solid fa-award" style="color: rgb(116, 192, 252)"></i>
               </div>
             </div>
           </div>
-          <div class="card achievements-card">
-            <div class="card-header">
-              <h3>Achievements</h3>
-              <a href="achievement.html" id="achView" class="view-all"
-                >View All</a
-              >
-            </div>
-            <div class="achievements-list">
-              <div class="achievement-item">
-                <div class="achievement-icon neon-gold">
-                  <i class="fa-solid fa-trophy"></i>
-                </div>
-                <div class="achievement-info">
-                  <div class="achievement-text">
-                    <div class="d-flex flex-column">
-                      <p>First Blood</p>
-                      <span>Win your first game</span>
-                    </div>
-                    <span></span>
-                  </div>
-                  <div class="achievement-progress">
-                    <div
-                      class="progress-fill"
-                      style="background: var(--accent-gold)"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon neon-green">
-                  <i class="fa-solid fa-fire"></i>
-                </div>
-                <div class="achievement-info">
-                  <div class="achievement-text">
-                    <div class="d-flex flex-column">
-                      <p>Streak King</p>
-                      <span>Win 10 games in a row</span>
-                    </div>
-                    <span></span>
-                  </div>
-                  <div class="achievement-progress">
-                    <div
-                      class="progress-fill"
-                      style="background: var(--accent-green)"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon neon-blue">
-                  <i class="fa-solid fa-puzzle-piece"></i>
-                </div>
-                <div class="achievement-info">
-                  <div class="achievement-text">
-                    <div class="d-flex flex-column">
-                      <p>Puzzle Master</p>
-                      <span>Solve 500 puzzles</span>
-                    </div>
-                    <span></span>
-                  </div>
-                  <div class="achievement-progress">
-                    <div
-                      class="progress-fill"
-                      style="background: var(--accent-blue)"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="achievement-item">
-                <div class="achievement-icon neon-cyan">
-                  <i class="fa-solid fa-moon"></i>
-                </div>
-                <div class="achievement-info">
-                  <div class="achievement-text">
-                    <div class="d-flex flex-column">
-                      <p>Night Owl</p>
-                      <span>Play 50 games at night</span>
-                    </div>
-                    <span></span>
-                  </div>
-                  <div class="achievement-progress">
-                    <div
-                      class="progress-fill"
-                      style="background: var(--accent-cyan)"
-                    ></div>
-                  </div>
-                </div>
-              </div>
-            </div>
+        </div>
+        <div class="card achievements-card">
+          <div class="card-header">
+            <h3>Achievements</h3>
+            <a href="achievement.html" id="achView" class="view-all">View All</a>
           </div>
-
-          <div class="card activity-card">
-            <div class="card-header">
-              <h3>Activity Feed</h3>
-              <a href="#" class="view-all">View All</a>
-            </div>
-            <ul class="activity-list"></ul>
-          </div>
-        </section>
-
-        <section class="bottom-grid">
-          <div class="left-bottom-col">
-            <div class="card favorite-game-card">
-              <div class="card-header">
-                <h3>Favorite Game</h3>
+          <div class="achievements-list">
+            <div class="achievement-item">
+              <div class="achievement-icon neon-gold">
+                <i class="fa-solid fa-trophy"></i>
               </div>
-              <img
-                src="assets/games_img/ludo_img.avif"
-                alt="Ludo"
-                class="game-thumbnail"
-              />
-              <div class="fav-game-info">
-                <h4>Ludo ❤️</h4>
-                <p>Played 45 times</p>
-                <div class="fav-game-stats">
-                  <span class="win-rate-positive">Win Rate 71%</span>
-                  <button id="viewGameBtn" class="btn-primary tiny-btn">View Game ></button>
+              <div class="achievement-info">
+                <div class="achievement-text">
+                  <div class="d-flex flex-column">
+                    <p>First Blood</p>
+                    <span>Win your first game</span>
+                  </div>
+                  <span></span>
+                </div>
+                <div class="achievement-progress">
+                  <div class="progress-fill" style="background: var(--accent-gold)"></div>
                 </div>
               </div>
             </div>
 
-            <div class="card leaderboard-card">
-              <div class="card-header">
-                <h3>Leaderboard</h3>
-                <a href="leaderboard.html" class="view-all">View All</a>
+            <div class="achievement-item">
+              <div class="achievement-icon neon-green">
+                <i class="fa-solid fa-fire"></i>
               </div>
-              <ul class="leader-list">
-                <li>
-                  <span class="rank-num rank-1">1</span>
-                  <img
-                    src="assets/avatar_img.avif"
-                    alt="ShadowStrike"
-                    class="player-avatar-tiny"
-                  />
-                  <div class="player-info">
-                    <span class="player-name">ShadowStrike</span>
-                    <span class="player-xp">4,250 XP</span>
+              <div class="achievement-info">
+                <div class="achievement-text">
+                  <div class="d-flex flex-column">
+                    <p>Streak King</p>
+                    <span>Win 10 games in a row</span>
                   </div>
-                  <i class="fa-solid fa-chevron-right"></i>
-                </li>
-                <li class="you-row">
-                  <span class="rank-num rank-2">2</span>
-                  <img
-                    src="assets/avatar_img.avif"
-                    alt="You"
-                    class="player-avatar-tiny"
-                  />
-                  <div class="player-info">
-                    <span class="player-name">Jisan Ahmed</span>
-                    <span class="player-xp">2,580 XP</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right"></i>
-                </li>
-                <li>
-                  <span class="rank-num rank-3">3</span>
-                  <img
-                    src="assets/avatar_img.avif"
-                    alt="PixelMaster"
-                    class="player-avatar-tiny"
-                  />
-                  <div class="player-info">
-                    <span class="player-name">PixelMaster</span>
-                    <span class="player-xp">1,980 XP</span>
-                  </div>
-                  <i class="fa-solid fa-chevron-right"></i>
-                </li>
-              </ul>
-              <div class="your-rank-summary">
-                <span>Your Rank: <strong>#12</strong></span>
-                <span>620 XP</span>
+                  <span></span>
+                </div>
+                <div class="achievement-progress">
+                  <div class="progress-fill" style="background: var(--accent-green)"></div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div class="card game-statistics-card">
-            <div class="card-header">
-              <h3>Game Statistics</h3>
+            <div class="achievement-item">
+              <div class="achievement-icon neon-blue">
+                <i class="fa-solid fa-puzzle-piece"></i>
+              </div>
+              <div class="achievement-info">
+                <div class="achievement-text">
+                  <div class="d-flex flex-column">
+                    <p>Puzzle Master</p>
+                    <span>Solve 500 puzzles</span>
+                  </div>
+                  <span></span>
+                </div>
+                <div class="achievement-progress">
+                  <div class="progress-fill" style="background: var(--accent-blue)"></div>
+                </div>
+              </div>
             </div>
-            <div class="game-stats-grid">
-              <div class="no-games-msg">
-                <i class="fa-solid fa-gamepad"></i>
-                <p>No games played yet</p>
-                <span>Start playing to see your stats 🚀</span>
+
+            <div class="achievement-item">
+              <div class="achievement-icon neon-cyan">
+                <i class="fa-solid fa-moon"></i>
+              </div>
+              <div class="achievement-info">
+                <div class="achievement-text">
+                  <div class="d-flex flex-column">
+                    <p>Night Owl</p>
+                    <span>Play 50 games at night</span>
+                  </div>
+                  <span></span>
+                </div>
+                <div class="achievement-progress">
+                  <div class="progress-fill" style="background: var(--accent-cyan)"></div>
+                </div>
               </div>
             </div>
           </div>
-        </section>
-      </main>
-    </div>
-    <div id="editModal" class="edit-modal" style="display: none">
-      <div class="edit-container">
-        <div class="edit-header">
-          <h2>Edit Profile</h2>
-          <i class="fa-solid fa-xmark close-edit"></i>
         </div>
 
-        <div class="edit-body">
-          <!-- <div class="edit-avatar-section">
+        <div class="card activity-card">
+          <div class="card-header">
+            <h3>Activity Feed</h3>
+            <a href="#" id="activityViewAll" class="view-all">View All</a>
+          </div>
+          <ul class="activity-list"></ul>
+        </div>
+      </section>
+
+      <section class="bottom-grid">
+        <div class="left-bottom-col">
+          <div class="card favorite-game-card">
+            <div class="card-header">
+              <h3>Favorite Game</h3>
+            </div>
+            <img src="assets/games_img/ludo_img.avif" alt="Ludo" class="game-thumbnail" />
+            <div class="fav-game-info">
+              <h4>Ludo ❤️</h4>
+              <p>Played 45 times</p>
+              <div class="fav-game-stats">
+                <span class="win-rate-positive">Win Rate 71%</span>
+                <button id="viewGameBtn" class="btn-primary tiny-btn">View Game ></button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card leaderboard-card">
+            <div class="card-header">
+              <h3>Leaderboard</h3>
+              <a href="leaderboard.html" class="view-all">View All</a>
+            </div>
+            <ul class="leader-list">
+              <li>
+                <span class="rank-num rank-1">1</span>
+                <img src="assets/avatar_img.avif" alt="ShadowStrike" class="player-avatar-tiny" />
+                <div class="player-info">
+                  <span class="player-name">ShadowStrike</span>
+                  <span class="player-xp">4,250 XP</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </li>
+              <li class="you-row">
+                <span class="rank-num rank-2">2</span>
+                <img src="assets/avatar_img.avif" alt="You" class="player-avatar-tiny" />
+                <div class="player-info">
+                  <span class="player-name">Jisan Ahmed</span>
+                  <span class="player-xp">2,580 XP</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </li>
+              <li>
+                <span class="rank-num rank-3">3</span>
+                <img src="assets/avatar_img.avif" alt="PixelMaster" class="player-avatar-tiny" />
+                <div class="player-info">
+                  <span class="player-name">PixelMaster</span>
+                  <span class="player-xp">1,980 XP</span>
+                </div>
+                <i class="fa-solid fa-chevron-right"></i>
+              </li>
+            </ul>
+            <div class="your-rank-summary">
+              <span>Your Rank: <strong>#12</strong></span>
+              <span>620 XP</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card game-statistics-card">
+          <div class="card-header">
+            <h3>Game Statistics</h3>
+          </div>
+          <div class="game-stats-grid">
+            <div class="no-games-msg">
+              <i class="fa-solid fa-gamepad"></i>
+              <p>No games played yet</p>
+              <span>Start playing to see your stats 🚀</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+  <div id="editModal" class="edit-modal" style="display: none">
+    <div class="edit-container">
+      <div class="edit-header">
+        <h2>Edit Profile</h2>
+        <i class="fa-solid fa-xmark close-edit"></i>
+      </div>
+
+      <div class="edit-body">
+        <!-- <div class="edit-avatar-section">
           <img id="previewImage" src="assets/avatar_img.avif" />
           <input type="file" id="imageUpload" hidden />
           <button type="button" onclick="triggerImageUpload()">Change Image</button>
         </div> -->
 
-          <div class="edit-fields">
-            <label>Name</label>
-            <input type="text" id="editName" />
+        <div class="edit-fields">
+          <label>Name</label>
+          <input type="text" id="editName" />
 
-            <label>Username</label>
-            <input type="text" id="editUsername" />
+          <label>Username</label>
+          <input type="text" id="editUsername" />
 
-            <label>Email</label>
-            <input type="email" id="editEmail" />
+          <label>Email</label>
+          <input type="email" id="editEmail" />
 
-            <label>Password</label>
-            <input type="password" id="editPassword" />
+          <label>Password</label>
+          <input type="password" id="editPassword" />
 
-            <label>Bio</label>
-            <textarea id="editBio"></textarea>
-          </div>
-        </div>
-
-        <div class="edit-footer">
-          <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+          <label>Bio</label>
+          <textarea id="editBio"></textarea>
         </div>
       </div>
+
+      <div class="edit-footer">
+        <button class="btn-save" onclick="saveProfile()">Save Changes</button>
+      </div>
     </div>
-    <!-- Script -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="js/profile.js"></script>
-    
-    <!-- Cross-page category navigation -->
-    <script>
-      document.querySelectorAll('.sidebar-cat-link').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          var cat = this.getAttribute('data-category');
-          window.location.href = 'index.html?category=' + encodeURIComponent(cat);
-        });
+  </div>
+  <!-- Activity Modal -->
+  <div id="activityModal" class="activity-modal" style="display:none;">
+    <div class="activity-modal-content">
+
+      <div class="activity-modal-header">
+        <h3>All Activities</h3>
+        <i class="fa-solid fa-xmark close-activity"></i>
+      </div>
+
+      <ul class="activity-list activity-modal-list"></ul>
+
+    </div>
+  </div>
+  <!-- Script -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="js/profile.js"></script>
+
+  <!-- Cross-page category navigation -->
+  <script>
+    document.querySelectorAll('.sidebar-cat-link').forEach(function (link) {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+        var cat = this.getAttribute('data-category');
+        window.location.href = 'index.html?category=' + encodeURIComponent(cat);
       });
-    </script>
-  </body>
+    });
+  </script>
+</body>
+
 </html>

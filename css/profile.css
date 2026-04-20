@@ -33,8 +33,8 @@
   --win-negative: #ef4444;
 
   /* Fonts */
-  --font-body: 'Inter', sans-serif;
-  --font-header: 'Orbitron', sans-serif;
+  --font-body: "Inter", sans-serif;
+  --font-header: "Orbitron", sans-serif;
 }
 
 body {
@@ -378,7 +378,7 @@ aside {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap:10px;
+  gap: 10px;
   padding-left: 15px;
   border-left: 1px solid #1f2937;
 }
@@ -424,7 +424,7 @@ aside {
   right: 0;
   bottom: 0;
   background-color: #1f2937;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -435,14 +435,14 @@ aside {
   left: 3px;
   bottom: 3px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
 }
 
-input:checked+.slider {
+input:checked + .slider {
   background-color: var(--accent-cyan);
 }
 
-input:checked+.slider:before {
+input:checked + .slider:before {
   transform: translateX(20px);
 }
 
@@ -979,7 +979,7 @@ input:checked+.slider:before {
   font-weight: 600;
 }
 
-.activity-details>span {
+.activity-details > span {
   color: var(--text-muted);
   font-size: 11px;
 }
@@ -1189,7 +1189,7 @@ input:checked+.slider:before {
 .edit-modal {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(12px);
   display: flex;
   justify-content: center;
@@ -1202,7 +1202,7 @@ input:checked+.slider:before {
   background: linear-gradient(145deg, #0f172a, #020617);
   border-radius: 16px;
   padding: 30px;
-  box-shadow: 0 0 30px rgba(0,255,255,0.2);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
   animation: fadeIn 0.3s ease;
 }
 
@@ -1213,7 +1213,7 @@ input:checked+.slider:before {
 }
 
 .edit-header h2 {
-  font-family: 'Orbitron';
+  font-family: "Orbitron";
   color: #00f7ff;
 }
 
@@ -1310,9 +1310,65 @@ input:checked+.slider:before {
   color: var(--text-muted);
   margin-top: 4px;
 }
-.game-stat-values{
+.game-stat-values {
   display: flex;
   justify-content: space-between;
+}
+/* 🔥 ACTIVITY MODAL */
+.activity-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.activity-modal-content {
+  width: 500px;
+  max-height: 80vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border-radius: 14px;
+  padding: 20px;
+
+  border: 1px solid #1f2937;
+  box-shadow: 0 0 25px rgba(0, 255, 255, 0.1);
+}
+.activity-modal-list {
+  overflow-y: auto;
+  max-height: 60vh;
+  padding-right: 5px;
+}
+
+/* Header */
+.activity-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.activity-modal-header h3 {
+  font-family: var(--font-header);
+}
+
+.close-activity {
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Scroll */
+.activity-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+.activity-modal-content::-webkit-scrollbar-thumb {
+  background: var(--accent-cyan);
+  border-radius: 10px;
 }
 
 @media (max-width: 768px) {
@@ -1422,7 +1478,6 @@ input:checked+.slider:before {
 }
 
 @media (max-width: 500px) {
-
   .stats-grid {
     grid-template-columns: 1fr;
   }
