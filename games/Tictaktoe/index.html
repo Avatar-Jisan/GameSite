@@ -11,6 +11,34 @@
 
 <h1 class="main-title">Tic Tac Toe</h1>
 
+<!-- HUD -->
+<div id="hud">
+  <div class="hud-stat">
+    <span class="hud-label">⭐ Score</span>
+    <span class="hud-value" id="hudScore">0</span>
+  </div>
+  <div class="hud-stat">
+    <span class="hud-label">⚡ XP</span>
+    <span class="hud-xp-wrap">
+      <span class="hud-value" id="hudXP">0</span>
+      <span class="hud-level" id="hudLevel">Lv.1</span>
+    </span>
+  </div>
+  <div class="hud-stat">
+    <span class="hud-label">🏆 Wins</span>
+    <span class="hud-value" id="hudWins">0</span>
+  </div>
+  <div class="hud-stat">
+    <span class="hud-label">⏱️ Time</span>
+    <span class="hud-value" id="hudTimer">0s</span>
+  </div>
+</div>
+
+<!-- XP bar -->
+<div id="xpBarWrap">
+  <div id="xpBar"></div>
+</div>
+
 <div id="game-board">
   <div data-cell-index="0" class="game-cell"></div>
   <div data-cell-index="1" class="game-cell"></div>
@@ -24,31 +52,45 @@
 </div>
 
 <button id="game-restart-button">Restart Game</button>
+<button id="stats-btn" onclick="showStats()">📊 My Stats</button>
 
 <!-- START OVERLAY -->
 <div id="game-overlay">
   <div class="overlay-card">
-
     <img src="tictactoe.png" class="game-logo">
-
     <h1>Tic Tac Toe</h1>
-
-    <p>
-      Play the classic Tic Tac Toe game! Challenge your friend or test your skills 
-      against AI. Get three in a row to win!
-    </p>
-
+    <p>Play the classic Tic Tac Toe! Challenge a friend or test your skills against AI.</p>
     <button id="pvp-btn" class="mode-btn">👤 Player vs Player</button>
     <button id="ai-btn" class="mode-btn">🤖 Player vs AI</button>
-
+    <button class="mode-btn stats-menu-btn" onclick="showStats()">📊 My Stats</button>
   </div>
 </div>
 
 <!-- RESULT MODAL -->
 <div id="result-modal">
   <div class="modal-content">
-    <h2 id="result-text"></h2>
-    <button id="play-again-btn">Play Again</button>
+    <div id="result-icon" class="result-icon"></div>
+    <h2 id="result-title" class="result-title"></h2>
+    <p id="result-sub" class="result-sub"></p>
+    <div id="result-stats" class="result-stats"></div>
+    <div id="result-total" class="total-row"></div>
+    <div class="xp-section">
+      <span id="xp-label" class="xp-label"></span>
+      <div class="xp-track"><div id="xp-fill" class="xp-fill"></div></div>
+    </div>
+    <div class="result-btns">
+      <button id="play-again-btn" class="btn-primary">Play Again</button>
+      <button onclick="backToMenu()" class="btn-outline">Menu</button>
+    </div>
+  </div>
+</div>
+
+<!-- STATS SCREEN -->
+<div id="stats-screen" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:2000;justify-content:center;align-items:center;">
+  <div class="overlay-card" style="max-width:420px;width:90vw;max-height:85vh;overflow-y:auto">
+    <h2 style="margin:0 0 12px">📊 My Stats</h2>
+    <div id="stats-content"></div>
+    <button class="mode-btn" style="margin-top:14px" onclick="closeStats()">⬅ Back</button>
   </div>
 </div>
 
@@ -58,6 +100,5 @@
 <audio id="win-sound" src="win.mp3"></audio>
 
 <script src="game.js"></script>
-
 </body>
 </html>

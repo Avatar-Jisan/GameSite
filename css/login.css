@@ -16,7 +16,6 @@ body {
     background: #000;
 }
 
-/* Background blurred layer */
 body::before {
     content: "";
     position: absolute;
@@ -24,17 +23,15 @@ body::before {
     left: 0;
     width: 100%;
     height: 100%;
-    /* Added fallback color in case image fails to load */
-background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
-            url('../assets/games_img/login cover.jpg') center/cover no-repeat fixed;
-    filter: blur(10px); 
-    /* Using scale(1.1) is smart—it prevents white edges caused by the blur */
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), 
+                url('../assets/games_img/login cover.jpg') center/cover no-repeat fixed;
+    filter: blur(10px);
     transform: scale(1.1);
     z-index: -1;
-    will-change: transform; /* Performance optimization for older hardware */
+    will-change: transform;
 }
 
-/* --- Premium Glassy Navbar --- */
+/* --- Navbar --- */
 .navbar {
     display: flex;
     align-items: center;
@@ -42,7 +39,7 @@ background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     z-index: 100;
     background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px); /* Safari support */
+    -webkit-backdrop-filter: blur(15px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
@@ -111,7 +108,7 @@ nav a:hover, nav a.active {
     width: 420px;
     padding: 40px;
     text-align: center;
-    background: rgba(10, 10, 25, 0.8); /* Adjusted for better contrast */
+    background: rgba(10, 10, 25, 0.8);
     border-radius: 24px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(25px);
@@ -122,14 +119,13 @@ nav a:hover, nav a.active {
 
 .hidden { display: none; }
 
-/* Futuristic Text Gradient - FIXED WARNING */
 h1 {
     font-size: 36px;
     margin-bottom: 25px;
     font-weight: 700;
     background: linear-gradient(to right, #ffffff, #00d2ff);
     -webkit-background-clip: text;
-    background-clip: text; /* Added standard property */
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -150,7 +146,7 @@ h1 {
     text-shadow: 0 0 8px #00d2ff;
 }
 
-/* --- Inputs with Glow Effect --- */
+/* --- Input Groups --- */
 .input-group {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -183,7 +179,21 @@ h1 {
     font-size: 14px;
 }
 
-/* --- Button with Shine Sweep Effect --- */
+/* --- Show Password Toggle --- */
+.toggle-pw {
+    cursor: pointer;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.3s ease;
+    flex-shrink: 0;
+    width: auto !important;  /* override .input-group i width */
+}
+
+.toggle-pw:hover {
+    color: #00d2ff;
+}
+
+/* --- Submit Button --- */
 .btn-main {
     width: 100%;
     padding: 16px;
@@ -243,7 +253,7 @@ h1 {
 
 .form-footer a:hover { color: #00d2ff; }
 
-/* --- GitHub Hover Glow --- */
+/* --- GitHub Icon --- */
 .subscribe-icon {
     position: fixed;
     bottom: 30px;

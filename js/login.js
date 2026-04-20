@@ -1,8 +1,18 @@
-// Selecting DOM elements
 const loginForm = document.getElementById('loginForm');
 const signupForm = document.getElementById('signupForm');
 const navSignIn = document.getElementById('navSignIn');
 const navSignUp = document.getElementById('navSignUp');
+
+/**
+ * Toggle password visibility
+ */
+function togglePassword(inputId, icon) {
+    const input = document.getElementById(inputId);
+    const isHidden = input.type === 'password';
+    input.type = isHidden ? 'text' : 'password';
+    icon.classList.toggle('fa-eye', !isHidden);
+    icon.classList.toggle('fa-eye-slash', isHidden);
+}
 
 /**
  * UI Toggle: Switch to Signup Form
@@ -27,15 +37,13 @@ function showLogin() {
 /**
  * Login Form Submission Handler
  */
-loginForm.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Stop page refresh
+document.getElementById('loginFormEl').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    // Extracting input values
-    const email = e.target.elements[0].value;
-    const password = e.target.elements[1].value;
+    const email = document.getElementById('loginEmail').value;
+    const password = document.getElementById('loginPassword').value;
 
     try {
-        // API Call to Backend
         const res = await fetch('http://localhost:3000/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -44,16 +52,12 @@ loginForm.querySelector('form').addEventListener('submit', async (e) => {
 
         const data = await res.json();
 
-if (data.success) {
-
-    // ✅ SAVE USER SESSION
-    localStorage.setItem("userId", data.user._id);
-    localStorage.setItem("username", data.user.username);
-
-    alert("Welcome " + data.user.username);
-
-    window.location.href = "index.html"; 
-} else {
+        if (data.success) {
+            localStorage.setItem("userId", data.user._id);
+            localStorage.setItem("username", data.user.username);
+            alert("Welcome " + data.user.username);
+            window.location.href = "index.html";
+        } else {
             alert(data.message);
         }
     } catch (error) {
@@ -65,16 +69,20 @@ if (data.success) {
 /**
  * Signup Form Submission Handler
  */
-signupForm.querySelector('form').addEventListener('submit', async (e) => {
-    e.preventDefault(); // Stop page refresh
+document.getElementById('signupFormEl').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-    // Extracting input values
-    const username = e.target.elements[0].value;
-    const email = e.target.elements[1].value;
-    const password = e.target.elements[2].value;
+    const username = document.getElementById('signupUsername').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
 
     try {
-        // API Call to Backend
         const res = await fetch('http://localhost:3000/api/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -85,7 +93,7 @@ signupForm.querySelector('form').addEventListener('submit', async (e) => {
 
         if (data.success) {
             alert("Registration successful! Please login.");
-            showLogin(); // Switch back to login view
+            showLogin();
         } else {
             alert(data.message);
         }
