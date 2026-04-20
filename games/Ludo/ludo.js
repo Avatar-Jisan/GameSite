@@ -353,7 +353,10 @@ async function handleMove(color, diceValue) {
         const index = pin.dataset.index;
         const state = gameState[color][index];
         let canMove = false;
-
+        const homeStep = state.homeStep;
+        if(homeStep===3 && diceValue===2){
+            canMove = true;
+        }
         // 🟢 BASE
         if (state.position === -1) {
             canMove = (diceValue === 6);
@@ -387,11 +390,10 @@ async function handleMove(color, diceValue) {
         // ❌ block invalid
         if (!canMove) return;
 
-        const homeStep = state.homeStep;
-
+        
 
         // ARROW → CENTER CONDITION
-        if (state.position === 50 && diceValue === 6) {
+        if ((state.position === 50 && diceValue === 6)|| (homeStep===3 && diceValue===2)) {
 
             pin.classList.add("active");
             selectablePins.push(pin);
@@ -929,6 +931,17 @@ function debugDice(color, value) {
 
     lastDiceValue = value;
 
+    // 🎯 update dice UI
+    const player = document.getElementById(`player-${color}`);
+    const dice = player.querySelector(".dice");
+    dice.setAttribute("data-value", value);
+
+    // 🎯 force turn
+    currentTurn = activePlayers.indexOf(color);
+
+    updateTurnUI();
+
+    // 🎯 trigger move
     handleMove(color, value);
 }
 
