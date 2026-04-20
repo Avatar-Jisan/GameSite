@@ -309,22 +309,19 @@ body {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Image */
 
-.card-image {
+ /* .card-image {
   width: 100%;
   height: 180px;
   object-fit: cover;
-}
+} */
 
-/* Card Content */
-
-.card-content {
+/* .card-content {
   padding: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */ 
 
 .game-title {
   font-family: "Anton SC", cursive;
@@ -349,11 +346,11 @@ body {
   font-family: "Noto Sans", cursive;
 }
 
-.card-content button {
+/* .card-content button {
   font-size: 14px;
   width: 75px;
   border-radius: 20px;
-}
+} */
 
 .section-title {
   margin-top: 40px;
@@ -361,6 +358,111 @@ body {
 
 .card-r {
   margin-top: 15px;
+}
+/* 🔥 MODERN GAME CARD */
+
+.game-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  height: 260px; /* 🔥 taller */
+  cursor: pointer;
+
+  background: var(--bg-card);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+
+  transition: all 0.35s ease;
+}
+
+/* FULL IMAGE */
+.game-card img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform 0.5s ease;
+}
+
+/* 🔥 DARK GRADIENT OVERLAY */
+.game-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0,0,0,0.9) 20%,
+    rgba(0,0,0,0.5) 50%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+/* CONTENT ON TOP */
+.card-content {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+
+  padding: 16px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* TITLE */
+.game-title {
+  color: white;
+  font-size: 20px;
+  font-family: "Anton SC", cursive;
+}
+
+/* PLAY BUTTON */
+.play-btn {
+  padding: 6px 14px;
+  font-size: 14px;
+  border-radius: 20px;
+  background: var(--accent-color);
+  border: none;
+  color: black;
+  transition: 0.3s;
+}
+
+.play-btn:hover {
+  background: white;
+  transform: scale(1.05);
+}
+
+/* 🔥 HOVER EFFECT */
+.game-card:hover img {
+  transform: scale(1.1);
+}
+
+.game-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+}
+
+
+.game-card:hover::after {
+  opacity: 1;
+}
+
+.game-card .play-btn {
+  width: 8vw !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  border-radius: 16px;
+}
+.top-picks .game-card,
+.all-games .game-card {
+  height: 360px;
+}
+.game-card img {
+  display: block;
 }
 
 @media (max-width: 524px) {
@@ -384,6 +486,7 @@ body {
     height: 40px;
   }
 }
+
 
 @media (max-width: 768px) {
   main {

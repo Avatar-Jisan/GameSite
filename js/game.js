@@ -54,7 +54,7 @@ $(document).ready(function () {
 
         if (user.favorites && user.favorites.includes(gameId)) {
             setFavUI(true);
-        } else{
+        } else {
             setFavUI(false);
         }
     }
@@ -113,14 +113,10 @@ $(document).ready(function () {
 
         if (isFav) {
             btn.removeClass("fa-regular").addClass("fa-solid");
-            btn.css({
-                background: "#ef4444",
-            });
+            btn.css("background", "#ef4444");
         } else {
             btn.removeClass("fa-solid").addClass("fa-regular");
-            btn.css({
-                background: "var(--accent-color)",
-            });
+            btn.css("background", "var(--accent-color)");
         }
     }
 });

@@ -370,7 +370,7 @@ app.post("/api/game-result", async (req, res) => {
         user.activities.unshift({
           text: `Achievement Unlocked: ${ach.name} 🏆`,
           xp: achievementRewards[index],
-          time: "Just now"
+          time: new Date()
         });
       }
 
@@ -388,7 +388,7 @@ app.post("/api/game-result", async (req, res) => {
     user.activities.unshift({
       text: `Played ${data.game} - ${data.result || `Rank ${data.rank}`}`,
       xp: data.xpEarned,
-      time: "Just now"
+      time: new Date()
     });
     console.log("Games Played:", user.stats.gamesPlayed);
     console.log("First Blood Progress:", ach[0].progress);
@@ -422,6 +422,31 @@ app.post("/api/favorite", async (req, res) => {
   await user.save();
 
   res.json({ success: true });
+});
+
+app.post("/api/favorite/toggle", async (req, res) => {
+  const { userId, gameId } = req.body;
+
+  const user = await User.findById(userId);
+  if (!user) return res.json({ success: false });
+
+  if (!user.favorites) user.favorites = [];
+
+  const index = user.favorites.indexOf(gameId);
+
+  let isFavorite;
+
+  if (index === -1) {
+    user.favorites.push(gameId);
+    isFavorite = true;
+  } else {
+    user.favorites.splice(index, 1);
+    isFavorite = false;
+  }
+
+  await user.save();
+
+  res.json({ success: true, isFavorite });
 });
 
 /* -------- LEADERBOARD -------- */

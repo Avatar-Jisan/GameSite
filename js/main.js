@@ -102,7 +102,7 @@ if (userId) {
         topRow.append(`
           <div class="col-lg-3 col-md-4 col-sm-6">
             <div class="game-card">
-              <img src="${game.image}" class="card-image">
+              <img src="${game.image}">
               <div class="card-content">
                 <h3 class="game-title">${game.name}</h3>
                 <a href="game.html?id=${game.id}" class="text-decoration-none">
@@ -166,7 +166,7 @@ function renderGames(list) {
     container.append(`
       <div class="col-lg-3 col-md-4 col-sm-6">
         <div class="game-card">
-          <img src="${g.image}" class="card-image">
+          <img src="${g.image}" >
           <div class="card-content">
             <h3 class="game-title">${g.name}</h3>
             <a href="game.html?id=${g.id}" class="btn play-btn">Play</a>
