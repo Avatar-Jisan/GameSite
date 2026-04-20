@@ -127,34 +127,8 @@ if (userId) {
             </div>
           </div>`);
       });
+
       initSlider();
-
-      // 4. MAIN SEARCH LOGIC
-      $(".gameSearchInput").on("input", function () {
-        const query = $(this).val().toLowerCase();
-        const sBox = $(".suggestion-box");
-        sBox.empty();
-
-        if (query.length > 0) {
-          const matches = games.filter(g => g.name.toLowerCase().includes(query));
-          if (matches.length > 0) {
-            matches.forEach(g => {
-              const item = $(`
-                <div class="suggestion-item">
-                  <img src="${g.image}">
-                  <span>${g.name}</span>
-                </div>`);
-              item.on("click", () => window.location.href = `game.html?id=${g.id}`);
-              sBox.append(item);
-            });
-            sBox.show();
-          } else { sBox.hide(); }
-        } else { sBox.hide(); }
-      });
-
-      $(document).on("click", (e) => {
-        if (!$(e.target).closest(".search-section").length) $(".suggestion-box").hide();
-      });
     }
   });
 });

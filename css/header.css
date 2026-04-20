@@ -91,9 +91,6 @@ header {
   gap: 8px;
 }
 
-.game-page .search-section {
-    display: none !important;
-}
 
 @media (max-width: 768px) {
   .search-section {

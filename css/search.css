@@ -1,0 +1,168 @@
+/* =============================
+   SEARCH SECTION - search.css
+   ============================= */
+
+/* Search wrapper */
+.search-section {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(151, 254, 237, 0.3);
+  border-radius: 12px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 600px;
+  margin: 0 20px;
+  position: relative;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-section:focus-within {
+  border-color: #97feed;
+  box-shadow: 0 0 12px rgba(151, 254, 237, 0.25);
+}
+
+/* Search icon */
+.search-section .fa-search {
+  color: #97feed;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+/* Search input */
+.search-section input.gameSearchInput {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 14px;
+  letter-spacing: 0.3px;
+}
+
+.search-section input.gameSearchInput::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* =============================
+   SUGGESTION BOX
+   ============================= */
+
+.suggestion-box {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: #161b22;
+  border: 1px solid #97feed;
+  border-radius: 10px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+  animation: suggestionFadeIn 0.15s ease;
+}
+
+@keyframes suggestionFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scrollbar styling */
+.suggestion-box::-webkit-scrollbar {
+  width: 5px;
+}
+
+.suggestion-box::-webkit-scrollbar-track {
+  background: #0d1117;
+  border-radius: 10px;
+}
+
+.suggestion-box::-webkit-scrollbar-thumb {
+  background: #97feed;
+  border-radius: 10px;
+}
+
+/* Each suggestion item */
+.suggestion-item {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+  gap: 12px;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover {
+  background: rgba(151, 254, 237, 0.1);
+}
+
+.suggestion-item img {
+  width: 42px;
+  height: 42px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  border: 1px solid rgba(151, 254, 237, 0.2);
+}
+
+.suggestion-item span {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2px;
+}
+
+/* No results message */
+.suggestion-no-result {
+  padding: 14px 15px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 13px;
+  text-align: center;
+}
+
+/* =============================
+   RESPONSIVE
+   ============================= */
+
+@media (max-width: 768px) {
+  .search-section {
+    margin: 0 8px;
+    max-width: 100%;
+    padding: 4px 12px;
+  }
+
+  .search-section input.gameSearchInput {
+    font-size: 13px;
+    padding: 7px 8px;
+  }
+
+  .suggestion-item img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .suggestion-item span {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-section {
+    margin: 0 4px;
+  }
+}
