@@ -1,0 +1,240 @@
+/* 🔥 GLOBAL */
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: #0f172a;
+  color: white;
+}
+
+/* 🔥 NAVBAR */
+.about-nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid #1f2937;
+}
+
+.about-nav a {
+  color: #94a3b8;
+  margin-left: 20px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.about-nav a:hover {
+  color: #22c55e;
+}
+
+/* 🔥 HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 40px;
+  font-weight: 600;
+}
+
+.hero p {
+  color: #94a3b8;
+  margin-top: 10px;
+}
+
+/* 🔥 CARD GRID */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
+  padding: 40px;
+}
+
+/* 🔥 FLIP CARD */
+.flip-card {
+  perspective: 1200px;
+}
+
+.flip-inner {
+  position: relative;
+  height: 300px;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card:hover .flip-inner {
+  transform: rotateY(180deg);
+}
+
+/* 🔥 CARD STYLE */
+.flip-front,
+.flip-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  backface-visibility: hidden;
+
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.05);
+
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* FRONT */
+.flip-front img {
+  width: 100%;
+  height: 70%;
+  object-fit: cover;
+}
+
+.flip-front h2 {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* BACK */
+.flip-back {
+  transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  text-align: center;
+  font-size: 15px;
+  color: #e2e8f0;
+}
+
+/* 🔥 HOVER EFFECT */
+.flip-card:hover {
+  transform: translateY(-5px);
+}
+
+/* 🔥 TEAM SECTION */
+.team {
+  padding: 60px 20px;
+}
+
+.team-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* 🔥 TEAM CARD */
+
+/* 🔥 TEAM GRID */
+.team-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px;
+}
+
+/* 🔥 CARD */
+.member-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(20px);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.05);
+
+  transition: 0.35s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* 🔥 HOVER */
+.member-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(34,197,94,0.3);
+}
+
+/* 🔥 IMAGE */
+.member-img {
+  height: 50vh;
+  overflow: hidden;
+}
+
+.member-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.member-card:hover img {
+  transform: scale(1.1);
+}
+
+/* 🔥 CONTENT */
+.member-content {
+  padding: 18px;
+}
+
+/* NAME */
+.member-name {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+/* ROLE */
+.member-role {
+  font-size: 13px;
+  color: #22c55e;
+  display: block;
+  margin-bottom: 12px;
+}
+
+/* 🔥 TABLE STYLE */
+.member-table {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.member-table .row {
+  display: flex;
+  flex-direction: column;
+}
+
+.member-table .label {
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.member-table .value {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* 🔥 SOCIAL ICONS */
+.member-socials {
+  margin-top: 15px;
+  display: flex;
+  gap: 15px;
+}
+
+.member-socials a {
+  font-size: 18px;
+  color: #94a3b8;
+  transition: 0.3s;
+}
+
+.member-socials a:hover {
+  color: #22c55e;
+  transform: scale(1.2);
+}
+
+.hero h1 {
+  text-shadow: 0 0 15px rgba(34,197,94,0.5);
+}
+.logo {
+  width: auto;
+  height: 40px;
+  object-fit: cover;
+}

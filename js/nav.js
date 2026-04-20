@@ -1,8 +1,5 @@
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.getElementById("sidebar");
 
-menuBtn.addEventListener("click", () => {
-
-    sidebar.classList.toggle("active");
-    menuBtn.classList.toggle("active");
+$("#menuBtn").click(function () {
+  $(".sidebar").toggleClass("active");
+  $(".sidebar-overlay").toggleClass("active");
 });

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khelo - Login & Sign Up</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="navbar">
+        <a href="index.html">
+        <div class="logo">
+            <img src="assets/games_img/game_logo_bg.png" alt="Khelo Logo">
+        </div>
+        </a>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="about/index.html">About</a>
+        </nav>
+
+        <div class="nav-buttons">
+            <button id="navSignIn" class="btn-nav" onclick="showLogin()">Sign In</button>
+            <button id="navSignUp" class="btn-nav" onclick="showSignup()">Sign Up</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Login Form -->
+        <div class="form-box" id="loginForm">
+            <p class="toggle-text">Don't have an account? <span onclick="showSignup()">Sign Up</span></p>
+            <h1>Login</h1>
+            <form id="loginFormEl">
+                <div class="input-group">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="loginEmail" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="Password" required>
+                    <i class="fa-regular fa-eye toggle-pw" onclick="togglePassword('loginPassword', this)"></i>
+                </div>
+                <button type="submit" class="btn-main">Sign In</button>
+            </form>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="form-box hidden" id="signupForm">
+            <p class="toggle-text">Have an account? <span onclick="showLogin()">Login</span></p>
+            <h1>Sign Up</h1>
+            <form id="signupFormEl">
+                <div class="input-group">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" id="signupUsername" placeholder="Username" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="email" id="signupEmail" placeholder="Email" required>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="signupPassword" placeholder="Password" required>
+                    <i class="fa-regular fa-eye toggle-pw" onclick="togglePassword('signupPassword', this)"></i>
+                </div>
+                <div class="input-group">
+                    <i class="fa-solid fa-shield-halved"></i>
+                    <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                    <i class="fa-regular fa-eye toggle-pw" onclick="togglePassword('confirmPassword', this)"></i>
+                </div>
+                <button type="submit" class="btn-main">Register</button>
+                <div class="form-footer">
+                    <a href="#">Terms & conditions</a>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <a href="https://github.com/your-profile" target="_blank" class="subscribe-icon">
+        <i class="fa-brands fa-github"></i>
+        <span>GitHub</span>
+    </a>
+
+    <script src="js/login.js"></script>
+</body>
+</html>

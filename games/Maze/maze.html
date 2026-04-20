@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Maze Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===== MENU ===== -->
+<div id="menu" class="container">
+  <div class="card">
+    <div class="logo">
+      <img src="maze.png" alt="Maze Game Logo">
+    </div>
+    <h1>Maze Game</h1>
+
+    <p>
+      Welcome to the Maze Challenge! Choose your difficulty and find your way
+      through the maze to reach the exit.
+    </p>
+
+    <div class="buttons">
+      <button onclick="startGame('easy')">🟢 Easy</button>
+      <button onclick="startGame('medium')">🟡 Medium</button>
+      <button onclick="startGame('hard')">🔴 Hard</button>
+      <button onclick="showStats()" id="statsBtn">📊 My Stats</button>
+    </div>
+  </div>
+</div>
+
+<!-- ===== STATS PANEL ===== -->
+<div id="statsScreen" class="hidden container">
+  <div class="card" style="max-width:460px;width:100%">
+    <h2>📊 Your Stats</h2>
+    <div id="statsContent"></div>
+    <button onclick="closeStats()" style="margin-top:16px;">⬅ Back</button>
+  </div>
+</div>
+
+<!-- ===== GAME ===== -->
+<div id="gameScreen" class="hidden">
+
+  <!-- HUD -->
+  <div id="hud">
+    <div class="hud-stat">
+      <span class="hud-label">⭐ Score</span>
+      <span class="hud-value" id="hudScore">0</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">⚡ XP</span>
+      <span class="hud-xp-wrap">
+        <span class="hud-value" id="hudXP">0</span>
+        <span class="hud-level" id="hudLevel">Lv.1</span>
+      </span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">🏆 Best</span>
+      <span class="hud-value" id="hudBest">—</span>
+    </div>
+    <div class="hud-stat">
+      <span class="hud-label">⏱️ Time</span>
+      <span class="hud-value" id="hudTimer">0s</span>
+    </div>
+  </div>
+
+  <!-- XP bar -->
+  <div id="xpBarWrap">
+    <div id="xpBar"></div>
+  </div>
+
+  <div id="message"></div>
+  <div id="game"></div>
+
+  <div id="controls">
+    <div></div>
+    <button onclick="movePlayer(0,-1)">⬆️</button>
+    <div></div>
+
+    <button onclick="movePlayer(-1,0)">⬅️</button>
+    <div></div>
+    <button onclick="movePlayer(1,0)">➡️</button>
+
+    <div></div>
+    <button onclick="movePlayer(0,1)">⬇️</button>
+    <div></div>
+  </div>
+
+  <button class="backBtn" onclick="goBack()">⬅ Back</button>
+</div>
+
+
+<!-- 🔊 SOUND FILES (FIXED PATH) -->
+<audio id="moveSound" src="click.wav"></audio>
+<audio id="winSound" src="win.mp3"></audio>
+<audio id="clickSound" src="click.wav"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>

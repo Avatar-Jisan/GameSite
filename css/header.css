@@ -1,50 +1,102 @@
-.search-section{
-    display:flex;
-    align-items:center;
-    gap:18px;
-    width:100%;
+header {
+  background: #0d1117;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(151, 254, 237, 0.1);
 }
 
-.search-section input{
-    width:100%;
-    padding:8px 20px;
-    border-radius:12px;
-    border:none;
-    outline:none;
-    background:#d7dce4;
-    color:rgb(5, 5, 5);
+.header-wrapper {
+  gap: 15px;
 }
 
-.search-section input::placeholder{
-    color:#618bca;
-    font-weight: 600;
+.logo {
+  height: 40px;
+  margin-left: 10px;
 }
 
-.search-section i{
-    font-size:16px;
+/* Single Search Section */
+.search-section {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(151, 254, 237, 0.3);
+  border-radius: 12px;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  max-width: 600px;
+  margin: 0 20px;
 }
 
-.login-area button{
-    padding:6px 10px;
-    border-radius:18px;
-    border:none;
-    outline:none;
-    background: #066b8a;
-}
-.login-area button:hover{
-    background-color: transparent;
-    border:2px solid var(--secondary-color);
-    color:var(--secondary-color);
+.search-section input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  width: 100%;
+  padding: 8px 10px;
 }
 
-.login-area a{
-    display:flex;
-    align-items:center;
-    gap:14px;
-    color:white;
-    cursor:pointer;
-    text-decoration: none;
-    font-family: Delius, cursive;
-    font-weight: 600;
+.search-section input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
 }
 
+/* Suggestion Box */
+.suggestion-box {
+  position: absolute;
+  top: 110%;
+  left: 0;
+  right: 0;
+  background: #161b22;
+  border: 1px solid #97feed;
+  border-radius: 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 9999;
+  display: none;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.suggestion-item {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  color: white;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+.suggestion-item:hover {
+  background: rgba(151, 254, 237, 0.1);
+}
+
+.suggestion-item img {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-right: 12px;
+}
+
+.login-btn {
+  background: #066b8a;
+  border: none;
+  border-radius: 20px;
+  padding: 6px 15px;
+}
+
+.login-btn a {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+@media (max-width: 768px) {
+  .search-section {
+    margin: 0 10px;
+    max-width: 100%;
+  }
+  .login-btn span { display: none; }
+  .logo { height: 30px; }
+}

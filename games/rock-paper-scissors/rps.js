@@ -7,6 +7,7 @@ $(document).ready(function() {
     let roundsTied = 0;
     let roundsLost = 0;
     let isAnimating = false;
+    let gameStartTime = null; // Track when the game session started
 
     // FontAwesome classes for the hands
     const icons = {
@@ -41,6 +42,7 @@ $(document).ready(function() {
     }
 
     function playSFX(type) {
+        if (!isMusicPlaying) return;
         initAudio();
         if(type === 'shake') {
             playTone(200, 'triangle', 0.1, 0.1); 
@@ -58,7 +60,14 @@ $(document).ready(function() {
     $('#start-btn').on('click', function() {
         $('#landing-page').addClass('hidden');
         $('#game-page').removeClass('hidden');
-        initAudio(); 
+        initAudio();
+        gameStartTime = Date.now(); // Record start time
+        resetStats();
+    });
+    // this listener for the Back button
+    $('#back-btn').on('click', function() {
+        $('#result-modal, #game-page').addClass('hidden');
+        $('#landing-page').removeClass('hidden');
         resetStats();
     });
 
@@ -153,7 +162,7 @@ $(document).ready(function() {
         let statusElement = $('#game-status');
         
         if (player === computer) {
-            statusElement.text("It's a TIE!").css('color', 'var(--white)');
+            statusElement.text("It's a TIE!").css('color', 'var(--dark-blue)');
             roundsTied++;
             playSFX('tie');
         } else if (
@@ -180,16 +189,87 @@ $(document).ready(function() {
     }
 
     function showResultModal() {
-        $('#stat-won').text(roundsWon);
-        $('#stat-tied').text(roundsTied);
-        $('#stat-lost').text(roundsLost);
+    // Display the basic stats
+    $('#stat-won').text(roundsWon);
+    $('#stat-tied').text(roundsTied);
+    $('#stat-lost').text(roundsLost);
 
-        if (playerScore === WINNING_SCORE) {
-            $('#final-result-title').text("VICTORY!").removeClass('pink').addClass('green');
-        } else {
-            $('#final-result-title').text("DEFEAT!").removeClass('green').addClass('pink');
-        }
+    // --- SCORE CALCULATION ---
+    const finalScore = roundsWon * 10;
+    $('#stat-score').text(finalScore);
 
-        $('#result-modal').removeClass('hidden');
+    const didWin = playerScore === WINNING_SCORE;
+
+    // Set the title based on who won the race to 10
+    if (didWin) {
+        $('#final-result-title').text("VICTORY!").removeClass('pink').addClass('green');
+    } else {
+        $('#final-result-title').text("DEFEAT!").removeClass('green').addClass('pink');
     }
+
+    // Send result to backend
+    sendScoreToBackend(finalScore, didWin);
+
+    // Show the modal
+    $('#result-modal').removeClass('hidden');
+}
+
+    // --- BACKEND SCORE SUBMISSION ---
+    async function sendScoreToBackend(score, didWin) {
+        const userId = localStorage.getItem('userId');
+        if (!userId) return; // Not logged in, skip
+
+        const timePlayed = gameStartTime ? Math.floor((Date.now() - gameStartTime) / 1000) : 0;
+        const xpEarned = didWin ? 50 + Math.floor(score / 2) : 10;
+        const result = didWin ? 'Victory' : 'Defeat';
+
+        try {
+            await fetch('http://localhost:3000/api/game-result', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    game: 'rock-paper-scissors',
+                    score,
+                    win: didWin,
+                    xpEarned,
+                    timePlayed,
+                    result
+                })
+            });
+            console.log('RPS score sent to backend ✅');
+        } catch (err) {
+            console.error('Failed to send RPS score:', err);
+        }
+    }
+
+    // --- FULLSCREEN LOGIC ---
+$('#fullscreen-btn').on('click', function() {
+    // Check if the browser is already in fullscreen mode
+    if (!document.fullscreenElement) {
+        // If not, request to enter fullscreen
+        document.documentElement.requestFullscreen().catch(err => {
+            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+        });
+        // Change the icon to 'compress'
+        $(this).html('<i class="fa-solid fa-compress"></i>');
+    } else {
+        // If already in fullscreen, exit it
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+            // Change the icon back to 'expand'
+            $(this).html('<i class="fa-solid fa-expand"></i>');
+        }
+    }
+});
+
+// Listener for the 'Esc' key or system-level exit
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        // Reset the button icon to 'expand' if fullscreen is closed via Esc key
+        $('#fullscreen-btn').html('<i class="fa-solid fa-expand"></i>');
+    }
+});
+
+
 });

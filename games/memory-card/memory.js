@@ -10,7 +10,7 @@ const startOverlay = document.getElementById("startOverlay");
 const gameBoard = document.getElementById("gameBoard");
 const exitBtn = document.getElementById("exitBtn");
 
-
+let gameStartTime;
 let selectedMode = null;
 let selectedDifficulty = null;
 let currentPlayer = 1;
@@ -118,7 +118,7 @@ function shuffle(array) {
 function createBoard(diff) {
   const board = document.getElementById("gameBoard");
   board.innerHTML = "";
-
+  gameStartTime = Date.now();
   let totalCards = getGridSize(diff);
   totalPairs = totalCards / 2;
 
@@ -180,8 +180,8 @@ function switchTurn() {
   currentPlayer = currentPlayer === 1 ? 2 : 1;
   updateUI();
   showTurnOverlay();
-  if(!(selectedMode === "ai" && currentPlayer === 2)){
-    lockBoard=false;
+  if (!(selectedMode === "ai" && currentPlayer === 2)) {
+    lockBoard = false;
     gameBoard.classList.remove("no-click");
   }
 }
@@ -221,12 +221,12 @@ function handleMatch() {
   updateScore();
   checkGameEnd();
   resetTurn();
-  if(selectedMode === "ai" && currentPlayer === 2) {
-    lockBoard=true;
+  if (selectedMode === "ai" && currentPlayer === 2) {
+    lockBoard = true;
     aiTurn();
-  } else{
-    lockBoard=false;
-    aiTurnRunning=false;
+  } else {
+    lockBoard = false;
+    aiTurnRunning = false;
   }
 
 }
@@ -284,22 +284,69 @@ function checkGameEnd() {
 function showGameResult() {
   const overlay = document.getElementById("resultOverlay");
   const title = document.getElementById("resultTitle");
-  const score = document.getElementById("resultScore");
-  playSound("winner");
-  let resultText = "";
 
-  if (player1Score > player2Score) {
-    resultText = "Player 1 Wins! 🎉";
-  } else if (player2Score > player1Score) {
-    resultText = "Player 2 Wins! 🎉";
+  const p1 = document.getElementById("p1Final");
+  const p2 = document.getElementById("p2Final");
+
+  const rewardBox = document.getElementById("rewardBox");
+
+  playSound("winner");
+
+  let resultText = "";
+  let xp = 0;
+  let score = 0;
+  const timePlayed = Math.floor((Date.now() - gameStartTime) / 1000);
+  const win = player1Score > player2Score;
+  let rank;
+  if (win) {
+    rank = 1;
   } else {
-    resultText = "It's a Tie! 🤝";
+    rank = 2;
   }
 
-  title.textContent = resultText;
-  score.textContent = `Player 1: ${player1Score} | Player 2: ${player2Score}`;
+  /* RESULT */
+  if (player1Score > player2Score) {
+    resultText = "You Win 🏆";
+    xp = 25;
+    score = 40;
+  } else if (player2Score > player1Score) {
+    resultText = "You Lose 😢";
+    xp = 10;
+    score = 15;
+  } else {
+    resultText = "It's a Tie 🤝";
+    xp = 15;
+    score = 20;
+  }
 
-  overlay.style.display = "flex";
+  title.innerText = resultText;
+
+  /* SCORE DISPLAY */
+  p1.innerText = player1Score;
+  p2.innerText = player2Score;
+
+  /* REWARD */
+  rewardBox.innerHTML = `
+    🎯 Score: +${score} <br>
+    ⚡ XP: +${xp}
+  `;
+  $("#resultOverlay").show();
+  sendGameResult(score, xp, timePlayed, resultText, win);
+
+  /* XP BAR (fetch from profile) */
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) return;
+
+  $.get(`http://localhost:3000/api/user/${userId}`, (user) => {
+    const percent = (user.xp / user.maxXp) * 100;
+
+    document.getElementById("xpFillMemory").style.width = percent + "%";
+
+    document.getElementById("xpTextMemory").innerText =
+      `${user.xp} / ${user.maxXp} XP`;
+  });
+
 }
 
 
@@ -337,7 +384,7 @@ function saveAiMemory(card) {
 }
 
 async function aiTurn() {
-  if(matchedPairs === totalPairs) return;
+  if (matchedPairs === totalPairs) return;
   lockBoard = true;
   aiTurnRunning = true;
   gameBoard.classList.add("no-click");
@@ -442,11 +489,11 @@ soundBtn.addEventListener("click", () => {
   soundEnabled = !soundEnabled;
   const icon = document.getElementById("volume-icon");
   if (soundEnabled) {
-    icon.classList.remove("fa-volume-slash");
+    icon.classList.remove("fa-volume-xmark");
     icon.classList.add("fa-volume-high");
   } else {
     icon.classList.remove("fa-volume-high");
-    icon.classList.add("fa-volume-slash");
+    icon.classList.add("fa-volume-xmark");
   }
 });
 exitBtn.addEventListener("click", () => {
@@ -466,3 +513,36 @@ window.addEventListener("message", (event) => {
   }
 
 });
+
+function sendGameResult(score, xp, timePlayed, result, win) {
+  const userId = localStorage.getItem("userId");
+
+  if (!userId) {
+    console.log("User not logged in");
+    return;
+  }
+
+  fetch("http://localhost:3000/api/game-result", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      userId,
+      game: "memory-card",
+      score,
+      xpEarned: xp,
+      timePlayed,
+      result,
+      win
+    })
+  })
+    .then(res => res.json())
+    .then(data => {
+      console.log("Saved:", data);
+
+      // 🔥 refresh profile later
+      localStorage.setItem("refreshProfile", "true");
+    })
+    .catch(err => console.error(err));
+}

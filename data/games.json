@@ -17,56 +17,7 @@
     ],
     "path": "games/Ludo/ludo.html"
   },
-  {
-    "id":"snake-ladder",
-    "name":"Snake and Ladder",
-    "category": ["Board", "Casual", "Multiplayer"],
-    "image": "assets/games_img/snake-ladder_img.avif",
-    "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
-    "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
-    "developer": "Abdulla Al Jisan",
-    "rules":[
-        "Each player starts at the bottom of the board.",
-        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
-        "If a player lands on the bottom of a ladder, they climb up to the top.",
-        "If a player lands on the head of a snake, they slide down to the tail.",
-        "The first player to reach the end of the board wins the game."
-    ],
-    "path": "snake-ladder"
-  },
-  {
-    "id":"Adventure-Path",
-    "name":"Adventure Path",
-    "category": ["Board", "Adventure", "Multiplayer"],
-    "image": "assets/games_img/adventure-path_img.avif",
-    "shortDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles.",
-    "longDescription": "Adventure Path is an exciting board game that takes players on a journey through various challenges and obstacles. The game is played on a board with a series of interconnected paths, each presenting unique challenges and opportunities. Players must navigate their way through the board, collecting treasures and overcoming obstacles along the way. The objective of the game is to reach the end of the path with the most treasures.",
-    "developer": "Abdulla Al Jisan",
-    "rules":[
-        "Each player starts at the beginning of the path.",
-        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
-        "If a player lands on a space with a treasure, they collect it.",
-        "If a player lands on a space with an obstacle, they must overcome it before continuing.",
-        "The first player to reach the end of the path wins the game."
-    ],
-    "path": "adventure-path"
-  },
-  {
-    "id":"card-battle",
-    "name":"Card Battle",
-    "category": ["Card", "Strategy", "Multiplayer"],
-    "image": "assets/games_img/card-battle_img.avif",
-    "shortDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves.",
-    "longDescription": "Card Battle is a strategic card game where players compete to defeat their opponents using carefully planned moves. The game is played with a deck of cards, each representing a different unit or ability. Players must use their cards wisely to outmaneuver their opponents and achieve victory.",
-    "developer": "Abdulla Al Jisan",
-    "rules":[
-        "Each player starts with a hand of cards.",
-        "Players take turns playing cards from their hand.",
-        "Cards have different effects and can be used to attack or defend.",
-        "The first player to reduce their opponent's health to zero wins the game."
-    ],
-    "path": "card-battle"
-  },
+
   {
     "id":"memory-card",
     "name":"Memory Card",
@@ -83,6 +34,23 @@
         "The first player to find all the pairs wins the game."
     ],
     "path": "games/memory-card/memory.html"
+  },
+    {
+    "id":"snake-ladder",
+    "name":"Snake and Ladder",
+    "category": ["Board", "Casual", "Multiplayer"],
+    "image": "assets/games_img/snake-ladder_img.avif",
+    "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
+    "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts at the bottom of the board.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "If a player lands on the bottom of a ladder, they climb up to the top.",
+        "If a player lands on the head of a snake, they slide down to the tail.",
+        "The first player to reach the end of the board wins the game."
+    ],
+    "path": "snake-ladder"
   },
   {
     "id": "bead-16",
@@ -117,12 +85,12 @@
       "The player wins by guessing the entire word before the hangman is fully drawn.",
       "The player loses if the hangman is completed before the word is guessed."
     ],
-    "path": "hangman"
+    "path": "games/Hangman/index.html"
   },
   {
     "id": "rock-paper-scissors",
     "name": "Rock Paper Scissors",
-    "category": ["Casual", "Action", "Multiplayer"],
+    "category": ["Casual", "Multiplayer"],
     "image": "assets/games_img/rps_img.png",
     "shortDescription": "A quick hand game where players simultaneously form one of three shapes to defeat their opponent.",
     "longDescription": "Rock Paper Scissors is a simple, universally known game usually played between two people. Players simultaneously choose one of three shapes: rock, paper, or scissors. It's often used as a quick decision-making tool, but can also be played competitively in rounds to test prediction and psychological tactics.",
@@ -171,8 +139,46 @@
     "If all 9 cells are filled and no player has three in a row, the game ends in a draw.",
     "Players must place their symbol in an empty cell only."
   ],
-  "path": "tic-tac-toe"
+  "path": "games/Tictaktoe/index.html"
 }
+,
+{
+  "id": "maze-game",
+  "name": "Maze Game",
+  "category": ["Puzzle", "Adventure", "Strategy"],
+  "image": "assets/games_img/maze.png",
+  "shortDescription": "Navigate through challenging mazes and find your way to the exit.",
+  "longDescription": "Maze Game is an engaging puzzle adventure where players must navigate through complex labyrinths to reach the exit point. Each level increases in difficulty, featuring intricate paths, misleading turns, and dead ends that challenge memory, logic, and decision-making skills. Players must carefully explore, avoid traps, and find the correct route to escape the maze.",
+  "developer": "Shahria Karim Siam",
+  "rules": [
+    "The player starts at the green cell and must reach the red exit.",
+    "Use arrow keys or on-screen buttons to move the player.",
+    "You cannot move through walls (black cells).",
+    "Choose a difficulty level: Easy, Medium, or Hard.",
+    "Hard levels contain misleading paths and dead ends.",
+    "The goal is to reach the exit in the shortest path possible.",
+    "You can restart or go back to the menu anytime."
+  ],
+  "path": "games/maze/maze.html"
+},
+{
+  "id":"number-guessing",
+  "name":"Number Guessing",
+  "category": ["Logic Game", "Two Player"],
+  "image": "assets/games_img/guessingimage.png",
+  "shortDescription": "Guess the hidden number within a limited number of attempts.",
+  "longDescription": "Number Guessing is a simple yet engaging single-player puzzle game where players must guess a hidden number within a specified range. Players receive feedback after each guess, indicating whether the guessed number is too high or too low. The game challenges players to use logic and deduction to find the correct number in the fewest attempts possible.",
+  "developer": "Chayanika Nath",
+  "rules": [
+    "1.Start the game.",
+    "2.The computer randomly selects a hidden number within a specified range (e.g., 1 to 100).",
+    "3.Enter your guess in the input box.",
+    "4.After each guess, the game will provide feedback: 'Too High', 'Too Low', or 'Correct'.",
+    "5.Continue guessing until you find the correct number or exhaust your attempts.",
+    "6.You can choose to play again after the game ends."
+  ],
+  "path": "games/Number-Guessing/number.html"
 
+}
  
 ]

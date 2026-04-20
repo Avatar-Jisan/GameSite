@@ -1,77 +1,106 @@
-
-
-.footer{
-background: var(--footer-color);
-color:white;
-padding:40px 0;
-margin-top: 50px;
+.footer {
+    background: var(--footer-color);
+    color: white;
+    padding: 40px 0;
+    margin-top: 50px;
 }
 
-.footer-container{
-width:90%;
-margin:auto;
-display:grid;
-grid-template-columns: repeat(5,1fr);
-gap:30px;
+.footer-container {
+    width: 100%;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-left: 10px;
 }
 
-.footer-box h3{
-margin-bottom:15px;
+.four,
+.two {
+    margin-left: 0;
 }
 
-.footer-box ul{
-list-style:none;
-padding:0;
+.footer-box h3 {
+    margin-bottom: 15px;
 }
 
-.footer-box ul li{
-margin:8px 0;
+.footer-box ul {
+    list-style: none;
+    padding: 0;
 }
 
-.footer-box ul li a{
-color:#b5eaea;
-text-decoration:none;
+.footer-box ul li {
+    margin: 8px 0;
 }
 
-.footer-box ul li a:hover{
-color:white;
+.footer-box ul li a {
+    color: #b5eaea;
+    text-decoration: none;
 }
 
-.logo{
-color:#00ffff;
+.footer-box ul li a:hover {
+    color: white;
 }
 
-
-.btn{
-display:block;
-margin:8px 0;
-padding:8px 12px;
-border:none;
-cursor:pointer;
-
-}
- 
-
-
-.social{
-text-align:center;
-margin-top:30px;
-}
-
-.social a{
-margin:0 10px;
-color:#b5eaea;
-text-decoration:none;
-}
-
-.social a:hover{
-color:white;
+.logo {
+    color: #00ffff;
 }
 
 
-.copyright{
-text-align:center;
-margin-top:15px;
-font-size:14px;
-color: #cfcfcf;;
+.btn {
+    display: block;
+    margin: 8px 0;
+    padding: 8px 12px;
+    border: none;
+    cursor: pointer;
+
+}
+
+
+
+.social {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.social a {
+    margin: 0 10px;
+    color: #b5eaea;
+    text-decoration: none;
+}
+
+.social a:hover {
+    color: white;
+}
+
+
+.copyright {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+    color: #cfcfcf;
+    ;
+}
+
+@media (max-width: 768px) {
+    .footer {
+        padding: 30px 15px;
+    }
+
+    .footer-box {
+        text-align: center;
+    }
+
+    .footer-box ul {
+        padding: 0;
+    }
+
+    .footer-box ul li {
+        margin: 6px 0;
+    }
+
+    .social {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }

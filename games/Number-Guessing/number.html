@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>2-Player Number Guessing Pro</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Start Screen -->
+<div id="startScreen">
+    <div class="start-content">
+        <img src="../../assets/games_img/start-screen.png" 
+             alt="Start Game" class="start-image">
+        <h1>🎯 2-Player Guess The Number</h1>
+        <button onclick="startGame()">Start Game</button>
+    </div>
+</div>
+
+<!-- Main Game Container -->
+<div class="container" id="gameContainer" style="display:none;">
+    <h1>🎯 2-Player Guess The Number</h1>
+
+    <div class="player-inputs">
+        <input type="text" id="player1Name" placeholder="Player 1 Name">
+        <input type="text" id="player2Name" placeholder="Player 2 Name">
+    </div>
+
+    <select id="difficulty" onchange="setDifficulty()">
+        <option value="easy">Easy (1-50)</option>
+        <option value="medium" selected>Medium (1-100)</option>
+        <option value="hard">Hard (1-200)</option>
+    </select>
+
+    <p id="rangeText">Guess a number between 1 and 100</p>
+
+    <input type="number" id="guessInput" placeholder="Enter number">
+    <div class="buttons">
+        <button onclick="checkGuess()">Guess</button>
+        <button onclick="restartGame()">Restart</button>
+    </div>
+
+    <p id="message"></p>
+    <p id="attempts"></p>
+
+    <h2>🏆 Leaderboard</h2>
+    <ul id="leaderboard"></ul>
+</div>
+
+<!-- Result Overlay -->
+<div id="resultOverlay">
+    <div class="overlay-content">
+        <h2 id="resultMessage"></h2>
+        <p id="resultInfo"></p>
+        <button onclick="closeResultOverlay()">Close</button>
+    </div>
+</div>
+
+<!-- Timer Overlay -->
+<div id="timeOverlay">⏱ Time Left: <span id="overlayTimer">60s</span></div>
+
+<!-- Confetti Canvas -->
+<canvas id="confettiCanvas"></canvas>
+
+<!-- Sounds -->
+<audio id="winSound" src="https://actions.google.com/sounds/v1/cartoon/clang_and_wobble.ogg"></audio>
+<audio id="loseSound" src="https://actions.google.com/sounds/v1/cartoon/cartoon_boing.ogg"></audio>
+<audio id="wrongSound" src="https://actions.google.com/sounds/v1/cartoon/pop.ogg"></audio>
+
+<script src="script.js"></script>
+</body>
+</html>

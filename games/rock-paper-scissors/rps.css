@@ -57,11 +57,16 @@ body {
     background: var(--dark-blue); 
     border-color: var(--text-orange);
 }
-
-.btn-small {
+.top-controls {
     position: absolute;
     top: 20px;
     left: 20px;
+    display: flex;
+    gap: 15px;
+    z-index: 20;
+}
+
+.btn-small {
     background: var(--dark-blue);
     color: var(--white);
     font-size: 1.2rem;
@@ -76,6 +81,11 @@ body {
     gap: 10px;
 }
 
+.btn-small:active {
+    transform: translateY(4px);
+    box-shadow: 0 0px 0 var(--text-pink) !important;
+}
+
 .title-text {
     font-size: 5rem;
     line-height: 0.9;
@@ -87,6 +97,7 @@ body {
 .pink { color: var(--text-pink); }
 .orange { color: var(--text-orange); }
 .green { color: var(--text-green); }
+.white { color: var(--white); }
 
 /* === LANDING PAGE === */
 #landing-page {
@@ -132,7 +143,7 @@ body {
     text-align: center;
 }
 
-.score-box h2 { font-size: 2rem; color: var(--text-orange); }
+.score-box h2 { font-size: 2rem; color: var(--text-orange); font-weight: 300; }
 .score-box p { font-size: 4rem; color: var(--text-green); line-height: 1; }
 
 .game-area {
@@ -180,6 +191,7 @@ body {
     font-size: 3rem;
     color: var(--dark-blue);
     text-shadow: 2px 2px 0 var(--white);
+    margin-top: 30px;
     margin-bottom: 20px;
     height: 4rem;
 }
