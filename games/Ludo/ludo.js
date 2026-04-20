@@ -352,13 +352,43 @@ async function handleMove(color, diceValue) {
         pin.classList.remove("active");
         const index = pin.dataset.index;
         const state = gameState[color][index];
-        const homeStep = state.homeStep;
-        const targetHomeStep = homeStep >= 0 ? homeStep + diceValue : null;
-        if (targetHomeStep !== null && targetHomeStep > 5) {
-            pin.classList.remove("active");
-            pin.onclick = null;
-            return;
+        let canMove = false;
+
+        // 🟢 BASE
+        if (state.position === -1) {
+            canMove = (diceValue === 6);
         }
+
+        // 🔵 MAIN PATH
+        else if (state.position >= 0) {
+
+            const targetPos = state.position + diceValue;
+
+            if (targetPos <= 56) {
+                canMove = true;
+            }
+        }
+
+        // 🟡 HOME PATH
+        else if (state.homeStep >= 0) {
+
+            const targetHome = state.homeStep + diceValue;
+
+            if (targetHome <= 5) {
+                canMove = true;
+            }
+
+            // EXACT CENTER ENTRY
+            if (state.homeStep === 5 && diceValue === 1) {
+                canMove = true;
+            }
+        }
+
+        // ❌ block invalid
+        if (!canMove) return;
+
+        const homeStep = state.homeStep;
+
 
         // ARROW → CENTER CONDITION
         if (state.position === 50 && diceValue === 6) {
@@ -418,7 +448,10 @@ async function handleMove(color, diceValue) {
         }
 
         // normal move (later)
-        else if ((state.position >= 0 || state.homeStep >= 0) && state.homeStep !== 5) {
+        else if (
+            (state.position >= 0 && state.position < 56) ||
+            (state.homeStep >= 0 && state.homeStep < 5)
+        ) {
             pin.classList.add("active");
             selectablePins.push(pin);
             pin.onclick = () => {
@@ -427,6 +460,11 @@ async function handleMove(color, diceValue) {
             };
         }
     });
+    if (selectablePins.length === 0) {
+        await sleep(500);
+        nextTurn();
+        return;
+    }
     if (selectablePins.length === 1) {
         await sleep(300);
         selectablePins[0].click();
@@ -438,13 +476,37 @@ function canPlayerMove(color, diceValue) {
     const pieces = gameState[color];
 
     return pieces.some(p => {
-        // allow arrow → center
-        if (p.position === 51 && diceValue === 6) return true;
-        if (p.position === -1 && diceValue === 6) return true; // unlock
-        if (p.position >= 0) return true; // already on board
-        if (p.homeStep >= 0 && p.homeStep < 5 && p.homeStep + diceValue <= 5) {
+
+        // unlock
+        if (p.position === -1 && diceValue === 6) return true;
+
+        // normal path
+        if (p.position >= 0 && p.position < 50) {
+
+            const targetPos = p.position + diceValue;
+
+            // entering home → must be exact
+            if (targetPos >= 50) {
+                const stepsIntoHome = targetPos - 50;
+                return stepsIntoHome <= 5;
+            }
+
             return true;
         }
+
+        // entering home path
+        if (p.position >= 50) {
+            const stepsIntoHome = (p.position + diceValue) - 50;
+
+            // MUST be exact (0–5 only)
+            return stepsIntoHome >= 0 && stepsIntoHome <= 5;
+        }
+
+        // already in home path
+        if (p.homeStep >= 0) {
+            return (p.homeStep + diceValue) <= 5;
+        }
+
         return false;
     });
 }
@@ -468,6 +530,26 @@ function moveOut(pin, color, index) {
 async function movePin(pin, color, index, steps) {
     if (pin.dataset.centered === "true") return;
     const state = gameState[color][index];
+    // 🟡 HOME PATH MOVEMENT
+    if (state.homeStep >= 0) {
+
+        const targetHome = state.homeStep + steps;
+
+        if (targetHome > 5) return;
+
+        await animateMove(pin, color, index, steps);
+
+        if (targetHome === 5) {
+            state.homeStep = 5;
+            state.position = 56;
+        } else {
+            state.homeStep = targetHome;
+        }
+
+        clearSelection();
+        nextTurn();
+        return;
+    }
     let oldPos = state.position;
     let targetPos = oldPos + steps;
     // DEBUG LOG
@@ -479,25 +561,17 @@ async function movePin(pin, color, index, steps) {
     });
     console.log("STATE:", gameState[color][index]);
 
-    if (targetPos > 50) {
-
-        const stepsIntoHome = targetPos - 50;
-
-        // must be exact
-        if (stepsIntoHome > 6) {
-            console.log("Invalid move: cannot overshoot center");
-            return;
-        }
-        const homeStep = stepsIntoHome - 1;
-        if (homeStep >= 5) {
-            console.log("Invalid move: homeStep out of bounds", homeStep);
-            return;
-        }
+    if (targetPos <= 56) {
 
         await animateMove(pin, color, index, steps);
 
-        state.position = -2;
-        state.homeStep = homeStep;
+        // update state AFTER animation
+        if (targetPos === 56) {
+            state.position = 56;
+            state.homeStep = 5;
+        } else {
+            state.position = targetPos;
+        }
 
         clearSelection();
         nextTurn();
@@ -728,7 +802,8 @@ async function animateMove(pin, color, index, steps) {
                 nextPos,
                 homeStep: nextPos > 50 ? nextPos - 51 : null
             });
-            if (homeStep === 5) {
+            if (nextPos === 56) {
+                await sleep(100);
                 moveToCenter(pin, color);
                 return;
             }
