@@ -1,6 +1,6 @@
 /* Game Page Layout */
 body {
-  background: var(--bg-dark);
+  background: radial-gradient(circle at top, #0b0f1a, #05080e);
   color: var(--text-primary);
 
 }
@@ -18,16 +18,21 @@ body {
 .game-player {
   width: 100%;
   height: 80vh;
-  background: var(--bg-card);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(151, 254, 237, 0.1);
   border-radius: 12px;
   overflow: hidden;
   margin-top: 80px;
+  display: flex;
+  flex-direction: column;
 }
 
 #gameFrame {
   border: none;
   width: 100%;
-  height: 93%;
+  flex-grow: 1;
+  height: auto;
 }
 
 /* iframe styling */
@@ -35,7 +40,7 @@ body {
 .game-player iframe {
   width: 100%;
   height: 100%;
-  background: var(--footer-color);
+  background: #05080e;
 
 }
 
@@ -43,7 +48,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 20px;
+  padding: 15px 20px;
+  flex-shrink: 0;
 }
 #gameTitle1{
   font-family: "Anton SC", cursive;
@@ -57,26 +63,30 @@ body {
 }
 .game-info-button button {
   position: relative;
-  border: none;
-  padding: 20px;
-  background-color: var(--accent-color);
-  border-radius: 30px;
+  border: 1px solid rgba(0, 238, 238, 0.4);
+  background-color: rgba(0, 238, 238, 0.1);
+  color: #0ee;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
-.game-info-button button::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: 30px;
-  background-color: rgba(255, 255, 255, 0.5);
-  opacity: 0;
-  transition: opacity 0.25s ease;
-  pointer-events: none;
+.game-info-button button i {
+  font-size: 16px;
 }
 
-.game-info-button button:hover::after {
-  opacity: 0.5;
+.game-info-button button:hover {
+  background-color: rgba(0, 238, 238, 0.2);
+  border-color: rgba(0, 238, 238, 0.8);
+  box-shadow: 0 0 15px rgba(0, 238, 238, 0.3);
+  transform: translateY(-2px);
+  color: #fff;
 }
 
 
@@ -84,7 +94,9 @@ body {
 /* Game information section */
 
 .game-info {
-  background: var(--bg-card);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(151, 254, 237, 0.1);
   padding: 20px;
   border-radius: 12px;
 }
@@ -129,12 +141,14 @@ body {
   align-items: center;
   width: auto;
   height: 12vh;
-  background: var(--bg-card);
-  box-shadow: 0 2px 10px rgba(179, 177, 177, 0.2);
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(151, 254, 237, 0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 12px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .related-card img {
@@ -145,7 +159,10 @@ body {
 }
 
 .related-card:hover {
-  transform: scale(1.05);
+  background: rgba(15, 23, 42, 0.8);
+  border-color: rgba(0, 238, 238, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0, 255, 255, 0.1);
 }
 
 @media (max-width: 768px) {
@@ -158,7 +175,7 @@ body {
     margin-top: 100px;
   }
   #gameFrame {
-    height: 93%;
+    height: auto;
   }
   .related-card {
     width: 100%;
@@ -174,7 +191,7 @@ body {
     height:100vh; /* even taller for small screens */
   }
   #gameFrame {
-    height: 93%;
+    height: auto;
   }
   .logo{
     display: none;

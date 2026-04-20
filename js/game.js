@@ -110,13 +110,20 @@ $(document).ready(function () {
     });
     function setFavUI(isFav) {
         const btn = $(".fav-btn");
+        
+        // Remove any old inline background styles to allow CSS glassmorphism to show
+        btn.css("background", "");
 
         if (isFav) {
             btn.removeClass("fa-regular").addClass("fa-solid");
-            btn.css("background", "#ef4444");
+            btn.css("color", "#ef4444");
+            btn.css("border-color", "rgba(239, 68, 68, 0.5)");
+            btn.css("box-shadow", "0 0 10px rgba(239, 68, 68, 0.2)");
         } else {
             btn.removeClass("fa-solid").addClass("fa-regular");
-            btn.css("background", "var(--accent-color)");
+            btn.css("color", ""); 
+            btn.css("border-color", "");
+            btn.css("box-shadow", "");
         }
     }
 });

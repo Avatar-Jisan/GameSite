@@ -1,15 +1,16 @@
 /* Top Navbar */
 
 .navbar {
-    height: 8vh;
-    background: var(--bg-card);
+    height: 70px;
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(151, 254, 237, 0.1);
     display: flex;
     align-items: center;
     padding: 0 20px;
     position: fixed;
     width: 100%;
     top: 0;
-    box-shadow: 0 2px 10px rgba(138, 136, 136, 0.1);
     z-index: 1100;
 }
 nav, .sidebar-footer{
@@ -50,15 +51,31 @@ nav, .sidebar-footer{
 
 .sidebar {
     position: fixed;
-    top: 80px;
+    top: 70px; /* adjusted to match new navbar height */
     left: -260px;
     width: 260px;
     height: 100%;
-    background: #020617;
+    background: rgba(11, 15, 26, 0.85); /* glassmorphism */
+    backdrop-filter: blur(12px);
     transition: 0.3s ease;
-    border-right: 1px solid #1e293b;
+    border-right: 1px solid rgba(151, 254, 237, 0.1);
     overflow-y: auto;
     z-index: 1000;
+}
+
+/* Custom scrollbar for sidebar */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+.sidebar::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
 }
 
 
