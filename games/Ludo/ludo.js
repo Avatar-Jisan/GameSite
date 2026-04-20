@@ -354,7 +354,11 @@ async function handleMove(color, diceValue) {
         const state = gameState[color][index];
         let canMove = false;
         const homeStep = state.homeStep;
-        if(homeStep===3 && diceValue===2){
+        if (
+            state.homeStep >= 3 &&
+            state.homeStep <= 4 &&
+            diceValue === (5 - state.homeStep)
+        ) {
             canMove = true;
         }
         // 🟢 BASE
@@ -390,10 +394,14 @@ async function handleMove(color, diceValue) {
         // ❌ block invalid
         if (!canMove) return;
 
-        
+
 
         // ARROW → CENTER CONDITION
-        if ((state.position === 50 && diceValue === 6)|| (homeStep===3 && diceValue===2)) {
+        if (
+            (state.position === 50 && diceValue === 6) ||
+            (state.homeStep >= 3 &&
+                state.homeStep <= 4 && diceValue === (5 - state.homeStep))
+        ) {
 
             pin.classList.add("active");
             selectablePins.push(pin);
@@ -1142,7 +1150,7 @@ function showResultModal() {
     const winTxt = document.getElementById("win-txt");
 
     if (finishedPlayers.length > 0) {
-        const winner = finishedPlayers[0];
+        s[0];
 
         const nameMap = {
             red: "Red Player",
@@ -1150,8 +1158,11 @@ function showResultModal() {
             yellow: "Yellow Player",
             blue: "You"
         };
-
-        winTxt.innerText = `${nameMap[winner]} Wins 🏆`;
+        if (finishedPlayers[0] === "blue") {
+            winTxt.innerText = `You Win! 🏆`;
+        } else {
+            winTxt.innerText = `${nameMap[winner]} Wins 🏆`;
+        }
     }
 
     players.forEach(color => {
