@@ -39,7 +39,7 @@ if (userId) {
 
   if (logoutItem) logoutItem.style.display = "none";
 }
-  // Sidebar Sidebar Category Click
+  // Sidebar Category Click (index.html — filter + scroll)
   $(document).on("click", ".sidebar-cat-link", function (e) {
     e.preventDefault();
     $(".sidebar-cat-link").removeClass("active");
@@ -48,6 +48,11 @@ if (userId) {
     $(`.category-btn[data-category="${selectedCat}"]`).click();
     $("#sidebar").removeClass("active");
     $("#menuBtn").removeClass("active");
+    // Smooth scroll to category section
+    const catSection = document.querySelector(".category");
+    if (catSection) {
+      catSection.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   });
 
   // Fetch Games Data
@@ -129,6 +134,25 @@ if (userId) {
       });
 
       initSlider();
+
+      // ---- Cross-page category navigation via ?category= URL param ----
+      const urlParams = new URLSearchParams(window.location.search);
+      const targetCat = urlParams.get("category");
+      if (targetCat) {
+        // Click the matching category button (triggers filter)
+        const matchBtn = $(`.category-btn[data-category="${targetCat}"]`);
+        if (matchBtn.length) {
+          matchBtn.click();
+        }
+        // Smooth scroll to the category section after a short delay
+        setTimeout(function () {
+          const catSection = document.querySelector(".category");
+          if (catSection) {
+            catSection.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+        }, 300);
+      }
+      // ---------------------------------------------------------------
     }
   });
 });

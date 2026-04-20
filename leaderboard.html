@@ -197,6 +197,17 @@
   <script src="js/theme.js"></script>
   <script src="js/leaderboard.js"></script>
   <script src="js/search.js"></script>
+  
+  <!-- Cross-page category navigation -->
+  <script>
+    document.querySelectorAll('.sidebar-cat-link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var cat = this.getAttribute('data-category');
+        window.location.href = 'index.html?category=' + encodeURIComponent(cat);
+      });
+    });
+  </script>
 </body>
 
 </html>
