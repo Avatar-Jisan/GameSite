@@ -43,7 +43,7 @@ button { cursor: pointer; border: none; background: none; transition: 0.3s; }
   display: none;
 }
 
-.slider {
+.theme-slider {
   position: absolute;
   cursor: pointer;
   top: 0;
@@ -54,7 +54,7 @@ button { cursor: pointer; border: none; background: none; transition: 0.3s; }
   transition: .4s;
 }
 
-.slider:before {
+.theme-slider:before {
   position: absolute;
   content: "";
   height: 14px;
@@ -65,19 +65,19 @@ button { cursor: pointer; border: none; background: none; transition: 0.3s; }
   transition: .4s;
 }
 
-input:checked + .slider {
+input:checked + .theme-slider {
   background-color: var(--accent-cyan);
 }
 
-input:checked + .slider:before {
+input:checked + .theme-slider:before {
   transform: translateX(20px);
 }
 
-.slider.round {
+.theme-slider.round {
   border-radius: 20px;
 }
 
-.slider.round:before {
+.theme-slider.round:before {
   border-radius: 50%;
 }
 /* --- REUSABLE COMPONENTS --- */

@@ -1,0 +1,255 @@
+/* css/theme.css */
+
+/* Switch styles for pages that don't have it locally */
+.theme-switch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #cbd5f5;
+  font-size: 14px;
+}
+
+.theme-switch i {
+  color: inherit;
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 20px;
+}
+
+.switch input {
+  display: none;
+}
+
+.switch .theme-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #1f2937;
+  transition: 0.4s;
+  border-radius: 20px;
+}
+
+.switch .theme-slider:before {
+  position: absolute;
+  content: "";
+  height: 14px;
+  width: 14px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.switch input:checked + .theme-slider {
+  background-color: #0ff; /* cyan */
+}
+
+.switch input:checked + .theme-slider:before {
+  transform: translateX(20px);
+}
+
+/* --- Light Theme Variables & Overrides --- */
+body.light-theme {
+  background: #ffffff !important;
+  color: #000000 !important;
+}
+
+/* Navigation and Headers */
+body.light-theme header,
+body.light-theme .navbar,
+body.light-theme .topbar,
+body.light-theme .sidebar,
+body.light-theme .sidebar-top,
+body.light-theme .sidebar-header,
+body.light-theme .sidebar-nav,
+body.light-theme .sidebar-cta,
+body.light-theme .sidebar-footer {
+  background: #ffeb3b !important; /* Yellow as requested */
+  color: #000000 !important;
+  border-color: #fbc02d !important;
+}
+
+/* Links and Icons in yellow areas */
+body.light-theme .sidebar-nav li a,
+body.light-theme .sidebar-nav li a i,
+body.light-theme .nav-item a,
+body.light-theme .nav-item a i,
+body.light-theme .logo,
+body.light-theme .theme-switch i {
+  color: #000000 !important;
+}
+
+body.light-theme .sidebar-nav li a:hover,
+body.light-theme .sidebar-nav li a:hover i,
+body.light-theme .nav-item a:hover,
+body.light-theme .nav-item a:hover i,
+body.light-theme .nav-item.active a,
+body.light-theme .nav-item.active a i {
+  color: #ffffff !important;
+}
+
+body.light-theme .theme-switch {
+  color: #000 !important;
+}
+
+/* Main Section */
+body.light-theme main {
+  background: #ffffff !important;
+}
+
+/* Search */
+body.light-theme .search-section,
+body.light-theme .search-bar {
+  background: #ffffff !important;
+  border: 1px solid #ccc !important;
+}
+
+body.light-theme .search-section input,
+body.light-theme .search-bar input,
+body.light-theme .search-section i,
+body.light-theme .search-bar i {
+  color: #000000 !important;
+}
+
+body.light-theme .search-section input::placeholder,
+body.light-theme .search-bar input::placeholder {
+  color: #666 !important;
+}
+
+/* Buttons in Header */
+body.light-theme .login-btn {
+  background: #ffffff !important;
+  border: 1px solid #ccc !important;
+}
+
+body.light-theme .login-btn a,
+body.light-theme .login-btn i {
+  color: #000 !important;
+}
+
+body.light-theme .menu-btn i {
+  color: #000 !important;
+}
+
+/* Cards */
+body.light-theme .card,
+body.light-theme .game-card,
+body.light-theme .stat-card,
+body.light-theme .activity-card,
+body.light-theme .profile-banner,
+body.light-theme .profile-xp-section {
+  background: #f9f9f9 !important;
+  border: 1px solid #e0e0e0 !important;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1) !important;
+}
+
+/* Text in Cards */
+body.light-theme .card-header h3,
+body.light-theme .stat-number,
+body.light-theme .section-title,
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme p,
+body.light-theme span,
+body.light-theme .stat-label {
+  color: #000000 !important;
+}
+
+/* Keep game titles inside game card white because of the dark gradient overlay */
+body.light-theme .game-card .game-title,
+body.light-theme .slide-text h1,
+body.light-theme .slide-text p {
+  color: #ffffff !important;
+}
+
+/* Other Specific Fixes */
+body.light-theme .footer {
+  background: #ffeb3b !important;
+  color: #000 !important;
+}
+body.light-theme .footer h2,
+body.light-theme .footer h3,
+body.light-theme .footer p,
+body.light-theme .footer a,
+body.light-theme .copyright p {
+  color: #000 !important;
+}
+
+body.light-theme .category-btn {
+  background: #ffffff !important;
+  color: #000 !important;
+  border: 1px solid #000 !important; /* Made border visible */
+}
+body.light-theme .category-btn.active {
+  background: #ffeb3b !important;
+  color: #000 !important;
+  border: 1px solid #000 !important;
+}
+body.light-theme .slider {
+  background: #ffffff !important;
+}
+
+/* Fix Profile.html specific dark backgrounds */
+body.light-theme .achievement-icon,
+body.light-theme .badge,
+body.light-theme .level-shield,
+body.light-theme .next-reward,
+body.light-theme .activity-icon,
+body.light-theme .leader-list li.you-row,
+body.light-theme .game-stat-item {
+  background-color: #ffffff !important;
+  border-color: #ccc !important;
+  color: #000000 !important;
+}
+
+/* Ensure text inside these elements is black in light mode */
+body.light-theme .achievement-icon i,
+body.light-theme .badge i,
+body.light-theme .level-shield span,
+body.light-theme .next-reward p,
+body.light-theme .next-reward span,
+body.light-theme .activity-icon i,
+body.light-theme .you-row .player-name,
+body.light-theme .you-row .player-xp,
+body.light-theme .you-row .rank-num,
+body.light-theme .game-stat-item p,
+body.light-theme .game-stat-item span {
+  color: #000000 !important;
+}
+body.light-theme .profile-main-info h1 {
+  color: #8d8b8b !important;
+}
+body.light-theme .activity-modal-content {
+  background-color: #f3f3f3 !important;
+}
+body.light-theme .podium-block span {
+  color: #ffffff !important;
+}
+body.light-theme .leaderboard-list li:hover {
+  background-color: #e0dfdf !important;
+}
+body.light-theme .game-info-one h2 {
+  color: #f3f3f3 !important;
+}
+body.light-theme .sidebar-nav ul li{
+  border-radius: 10px !important;
+}
+body.light-theme .sidebar-nav ul li:hover {
+  background-color: #040314 !important;
+}
+body.light-theme .sidebar-footer li#logoutItem{
+  border-radius: 10px !important;
+}
+body.light-theme .sidebar-footer li#logoutItem:hover {
+  background-color: #f02424 !important;
+}

@@ -145,7 +145,7 @@ nav, .sidebar-footer{
 
 /* Active sidebar item for Highlight*/
 .sidebar ul li a.active {
-  background: rgba(151, 254, 237, 0.2);
+  background: rgba(189, 194, 236, 0.61);
   color: #f1efef !important;
   border-radius: 8px;
   padding-left: 10px;
@@ -153,6 +153,6 @@ nav, .sidebar-footer{
 }
 
 .sidebar ul li a:hover {
-  background: rgba(151, 254, 237, 0.2);
+  background: rgba(19, 23, 68, 0.829);
   border-radius: 8px;
 }
