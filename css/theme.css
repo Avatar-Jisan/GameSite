@@ -259,3 +259,6 @@ body.light-theme .xp-gain {
 body.light-theme .view-all {
   color: #0d6ddb !important;
 }
+body.light-theme .suggestion-box {
+  background-color: #eaebec !important;
+}
