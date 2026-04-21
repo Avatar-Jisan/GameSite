@@ -180,6 +180,23 @@
       "The game ends when the board is full and no valid moves or merges are possible."
     ],
     "path": "2048"
-  }
+  },
+  {
+  "id": "Memory and Number Game",
+  "name": "Memory and Number Game",
+  "category": ["Puzzle", "Casual", "Brain"],
+  "image": "assets/games_img/game.png",
+  "shortDescription": "Play a fun memory matching game and test your luck with number guessing.",
+  "longDescription": "Memory & Number Game is a simple yet engaging mini-game collection that challenges both your memory and guessing skills.",
+  "developer": "Tarequl Islam Chowdhury",
+  "rules": [
+    "Memory Game: Click on cards to reveal their symbols.",
+    "Match two identical cards to keep them revealed.",
+    "If cards do not match, they will flip back.",
+    "Number Guess Game: Enter a number between 1 and 10.",
+    "Click the Guess button to check your answer."
+  ],
+  "path": "games/Memory and Number/index.html"
+}
  
 ]
