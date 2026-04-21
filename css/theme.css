@@ -227,7 +227,7 @@ body.light-theme .game-stat-item span {
   color: #000000 !important;
 }
 body.light-theme .profile-main-info h1 {
-  color: #8d8b8b !important;
+  color: #00f8f8 !important;
 }
 body.light-theme .activity-modal-content {
   background-color: #f3f3f3 !important;
@@ -252,4 +252,10 @@ body.light-theme .sidebar-footer li#logoutItem{
 }
 body.light-theme .sidebar-footer li#logoutItem:hover {
   background-color: #f02424 !important;
+}
+body.light-theme .xp-gain {
+  color: #db0d52 !important;
+}
+body.light-theme .view-all {
+  color: #0d6ddb !important;
 }
