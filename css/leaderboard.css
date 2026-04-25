@@ -1,7 +1,7 @@
 /* --- RESET & BASICS --- */
 * { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
-  --bg-body: radial-gradient(circle at top, #0b0f1a, #05080e); /* Fixed this line! */
+  --bg-body: radial-gradient(circle at top, #0b0f1a, #05080e);
   --bg-sidebar: #080c14;
   --bg-card: #0b101a;
   --bg-card-hover: #101624;
@@ -80,6 +80,7 @@ input:checked + .theme-slider:before {
 .theme-slider.round:before {
   border-radius: 50%;
 }
+
 /* --- REUSABLE COMPONENTS --- */
 .card {
   background-color: var(--bg-card);
@@ -104,13 +105,114 @@ input:checked + .theme-slider:before {
 .sidebar-nav hr { border: none; height: 1px; background: #1f2937; margin: 10px 0; }
 .nav-divider { text-transform: uppercase; color: var(--text-muted); font-size: 11px; margin: 15px 0 10px 10px; font-weight: 600; }
 .sidebar-footer { border-top: 1px solid #1f2937; padding: 15px 10px; }
+.sidebar-footer li i { margin-right: 8px; }
 
-.sidebar-footer li i { margin-right: 8px}
 /* --- MAIN CONTENT & TOPBAR --- */
 .main-content { padding: 30px; }
-.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; background: rgba(15, 23, 42, 0.6); padding: 10px 20px; border-radius: 12px; }
-.search-bar { background-color: var(--bg-input); border: 1px solid #1f2937; border-radius: 10px; padding: 10px 15px; display: flex; align-items: center; gap: 10px; width: 400px; }
-.search-bar input { background: transparent; border: none; outline: none; color: var(--text-primary); width: 100%; }
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  background: rgba(15, 23, 42, 0.6);
+  padding: 10px 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 100;
+}
+
+/* ✅ FIXED: search-section sits inside topbar properly */
+.search-section {
+  position: relative;
+  z-index: 100;
+  flex: 1;
+  max-width: 400px;
+}
+
+.search-bar {
+  background-color: var(--bg-input);
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.search-bar i {
+  color: var(--text-muted);
+}
+
+.search-bar input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-primary);
+  width: 100%;
+  font-size: 13px;
+}
+
+/* ✅ FIXED: suggestion box z-index above everything */
+.suggestion-box {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 99999;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.focused {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.suggestion-item img {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  margin-right: 15px;
+  object-fit: cover;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.suggestion-item span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+.suggestion-box::-webkit-scrollbar { width: 6px; }
+.suggestion-box::-webkit-scrollbar-thumb { background: var(--accent-cyan); border-radius: 10px; }
+
+.suggestion-no-result {
+  padding: 20px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 0.9rem;
+}
+
 .topbar-actions { display: flex; align-items: center; gap: 15px; }
 .user-profile-summary { display: flex; align-items: center; gap: 10px; padding-left: 15px; border-left: 1px solid #1f2937; }
 .user-avatar-tiny { width: 35px; height: 35px; border-radius: 50%; }
@@ -163,7 +265,6 @@ input:checked + .theme-slider:before {
 .col-played { width: 120px; color: var(--text-muted); text-align: right; }
 .list-avatar { width: 35px; height: 35px; border-radius: 50%; object-fit: cover; }
 
-/* Highlight the logged-in user's row */
 .leaderboard-list li.you-row {
   background-color: rgba(0, 255, 255, 0.05);
   border-left: 3px solid var(--accent-cyan);
@@ -180,4 +281,6 @@ input:checked + .theme-slider:before {
   .sidebar.active { transform: translateX(0); }
   .menu-btn { display: block !important; color: var(--accent-cyan); }
   .table-header .col-winrate, .table-header .col-played, .leaderboard-list .col-winrate, .leaderboard-list .col-played { display: none; }
+  .search-section { max-width: 100%; }
+  .search-bar { width: 100%; }
 }

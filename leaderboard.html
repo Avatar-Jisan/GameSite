@@ -125,7 +125,6 @@
             Logout
           </a>
         </li>
-
       </footer>
     </aside>
 
@@ -133,9 +132,13 @@
       <div class="sidebar-overlay" id="overlay"></div>
 
       <header class="topbar">
-        <div class="search-bar">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Search players or ranks... (Ctrl K)" />
+
+        <div class="search-section">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="gameSearchInput" placeholder="Search players or ranks... (Ctrl K)" autocomplete="off" />
+          </div>
+          <div class="suggestion-box" style="display: none;"></div>
         </div>
 
         <div class="topbar-actions">
@@ -165,40 +168,38 @@
             </a>
           </div>
         </div>
-  </div>
-  </header>
+      </div>
+      </header>
 
-  <section class="leaderboard-top-section">
-    <div class="leaderboard-titles">
-      <h1>Global Rankings <i class="fa-solid fa-trophy neon-gold-text"></i></h1>
-      <p>Compete across all games and climb to the top.</p>
-    </div>
+      <section class="leaderboard-top-section">
+        <div class="leaderboard-titles">
+          <h1>Global Rankings <i class="fa-solid fa-trophy neon-gold-text"></i></h1>
+          <p>Compete across all games and climb to the top.</p>
+        </div>
+      </section>
 
+      <section class="podium-section" id="podiumContainer">
+      </section>
 
-  </section>
+      <section class="leaderboard-table-section card">
+        <div class="table-header">
+          <span class="col-rank">Rank</span>
+          <span class="col-player">Player</span>
+          <span class="col-score">Total Score</span>
+          <span class="col-played">Games Played</span>
+        </div>
+        <ul class="leaderboard-list" id="leaderboardList">
+        </ul>
+      </section>
 
-  <section class="podium-section" id="podiumContainer">
-  </section>
-
-  <section class="leaderboard-table-section card">
-    <div class="table-header">
-      <span class="col-rank">Rank</span>
-      <span class="col-player">Player</span>
-      <span class="col-score">Total Score</span>
-      <span class="col-played">Games Played</span>
-    </div>
-    <ul class="leaderboard-list" id="leaderboardList">
-    </ul>
-  </section>
-
-  </main>
+    </main>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/theme.js"></script>
   <script src="js/leaderboard.js"></script>
   <script src="js/search.js"></script>
-  
+
   <!-- Cross-page category navigation -->
   <script>
     document.querySelectorAll('.sidebar-cat-link').forEach(function(link) {

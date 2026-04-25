@@ -312,7 +312,6 @@ aside {
   padding: 30px;
 }
 
-/* --- TOPBAR --- */
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -322,6 +321,8 @@ aside {
   padding: 10px 20px;
   border-radius: 12px;
   backdrop-filter: blur(10px);
+  position: relative;
+  z-index: 100;
 }
 
 .search-bar {
@@ -1498,4 +1499,73 @@ input:checked + .theme-slider:before {
   .leader-list li {
     flex-wrap: wrap;
   }
+}
+
+/* ✅ ADDED: SEARCH SUGGESTIONS DROPDOWN */
+.search-section {
+  position: relative;
+}
+
+.suggestion-box {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--accent-cyan);
+  border-radius: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 10000;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 12px 15px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.2s ease;
+}
+
+.suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.suggestion-item:hover,
+.suggestion-item.focused {
+  background: rgba(0, 255, 255, 0.1);
+}
+
+.suggestion-item img {
+  width: 42px;
+  height: 42px;
+  border-radius: 4px;
+  margin-right: 15px;
+  object-fit: cover;
+  border: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.suggestion-item span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--text-primary);
+}
+
+/* Custom Scrollbar for Suggestions */
+.suggestion-box::-webkit-scrollbar {
+  width: 6px;
+}
+
+.suggestion-box::-webkit-scrollbar-thumb {
+  background: var(--accent-cyan);
+  border-radius: 10px;
+}
+
+.suggestion-no-result {
+  padding: 20px;
+  color: var(--text-secondary);
+  text-align: center;
+  font-size: 0.9rem;
 }

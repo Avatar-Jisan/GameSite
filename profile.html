@@ -146,9 +146,14 @@
     <main class="main-content">
       <div class="sidebar-overlay" id="overlay"></div>
       <header class="topbar">
-        <div class="search-bar">
-          <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" placeholder="Search games" />
+
+        <!-- ✅ UPDATED: search with gameSearchInput + suggestion-box -->
+        <div class="search-section" style="position: relative; flex: 1; max-width: 400px;">
+          <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" class="gameSearchInput" placeholder="Search games" autocomplete="off" />
+          </div>
+          <div class="suggestion-box" style="display: none;"></div>
         </div>
 
         <div class="topbar-actions">
@@ -505,6 +510,7 @@
   <!-- Script -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="js/profile.js"></script>
+  <script src="js/search.js"></script>
   <script src="js/theme.js"></script>
 
   <!-- Cross-page category navigation -->
