@@ -1,0 +1,156 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mini Games - </title><style>
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#667eea,#764ba2);
+margin:0;
+padding:0;
+text-align:center;
+color:white;
+}
+
+header{
+padding:20px;
+font-size:28px;
+font-weight:bold;
+}
+
+.container{
+padding:20px;
+}
+
+button{
+padding:12px 20px;
+border:none;
+border-radius:8px;
+margin:10px;
+cursor:pointer;
+font-size:16px;
+}
+
+.game-box{
+display:none;
+margin-top:20px;
+padding:20px;
+background:white;
+color:black;
+border-radius:10px;
+max-width:500px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.card{
+width:80px;
+height:80px;
+background:#667eea;
+display:inline-block;
+margin:5px;
+line-height:80px;
+font-size:24px;
+color:white;
+cursor:pointer;
+border-radius:8px;
+}
+
+.show{
+background:#4CAF50;
+}
+
+footer{
+margin-top:30px;
+padding:20px;
+}
+</style></head><body><header>
+🎮 Mini Games Website - Made by tareq 
+</header><div class="container"><button onclick="showGame('memory')">Memory Game</button> <button onclick="showGame('guess')">Number Guess Game</button>
+
+<div id="memory" class="game-box">
+<h2>Memory Game</h2>
+<div id="memoryBoard"></div>
+<p id="memoryResult"></p>
+<button onclick="startMemory()">Restart</button>
+</div><div id="guess" class="game-box">
+<h2>Number Guess Game</h2>
+<p>Guess number between 1‑10</p>
+<input type="number" id="guessInput">
+<button onclick="checkGuess()">Guess</button>
+<p id="guessResult"></p>
+</div></div><footer>
+Made with HTML CSS JavaScript | 
+</footer><script>
+function showGame(game){
+document.getElementById('memory').style.display='none';
+document.getElementById('guess').style.display='none';
+document.getElementById(game).style.display='block';
+}
+
+
+// Memory Game
+let cards=['A','A','B','B','C','C'];
+let firstCard=null;
+let secondCard=null;
+
+function startMemory(){
+let board=document.getElementById('memoryBoard');
+board.innerHTML='';
+cards.sort(()=>0.5-Math.random());
+
+cards.forEach((card,index)=>{
+let div=document.createElement('div');
+div.classList.add('card');
+div.dataset.value=card;
+div.innerHTML='?';
+div.onclick=function(){flipCard(this)};
+board.appendChild(div);
+});
+}
+
+function flipCard(card){
+card.innerHTML=card.dataset.value;
+
+if(!firstCard){
+firstCard=card;
+}
+else{
+secondCard=card;
+
+if(firstCard.dataset.value===secondCard.dataset.value){
+firstCard=null;
+secondCard=null;
+}
+else{
+setTimeout(()=>{
+firstCard.innerHTML='?';
+secondCard.innerHTML='?';
+firstCard=null;
+secondCard=null;
+},800);
+}
+}
+}
+
+startMemory();
+
+
+// Guess Game
+let randomNumber=Math.floor(Math.random()*10)+1;
+
+function checkGuess(){
+let guess=document.getElementById('guessInput').value;
+let result=document.getElementById('guessResult');
+
+if(guess==randomNumber){
+result.innerHTML="🎉 Correct!";
+randomNumber=Math.floor(Math.random()*10)+1;
+}
+else{
+result.innerHTML="❌ Try Again";
+}
+}
+
+</script></body>
+</html>

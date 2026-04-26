@@ -35,40 +35,6 @@
     ],
     "path": "games/memory-card/memory.html"
   },
-    {
-    "id":"snake-ladder",
-    "name":"Snake and Ladder",
-    "category": ["Board", "Casual", "Multiplayer"],
-    "image": "assets/games_img/snake-ladder_img.avif",
-    "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
-    "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
-    "developer": "Abdulla Al Jisan",
-    "rules":[
-        "Each player starts at the bottom of the board.",
-        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
-        "If a player lands on the bottom of a ladder, they climb up to the top.",
-        "If a player lands on the head of a snake, they slide down to the tail.",
-        "The first player to reach the end of the board wins the game."
-    ],
-    "path": "snake-ladder"
-  },
-  {
-    "id": "bead-16",
-    "name": "Bead 16",
-    "category": ["Board", "Strategy", "Multiplayer"],
-    "image": "assets/games_img/bead-16_img.png",
-    "shortDescription": "A traditional strategy board game where you capture your opponent's pieces by jumping over them.",
-    "longDescription": "Bead 16, also known as Sholo Guti, is a traditional and highly popular two-player strategy board game. Each player has 16 pieces (beads) and the goal is to capture all of the opponent's pieces by jumping over them on the game board's intersecting lines. It requires careful planning and tactical foresight to corner your opponent.",
-    "developer": "Sadek Manir Sayed",
-    "rules": [
-      "Each player starts with 16 beads placed on their respective sides of the board.",
-      "Players take turns moving one bead to an adjacent empty intersection along the lines.",
-      "A player can capture an opponent's bead by jumping over it into an empty space immediately beyond it.",
-      "Multiple captures in a single turn are allowed if consecutive jumps are possible.",
-      "The game ends when one player captures all 16 of the opponent's beads."
-    ],
-    "path": "bead-16"
-  },
   {
     "id": "hangman",
     "name": "Hangman",
@@ -105,24 +71,7 @@
     ],
     "path": "games/rock-paper-scissors/rps.html"
   },
-  {
-    "id": "2048",
-    "name": "2048",
-    "category": ["Puzzle", "Strategy", "Singleplayer"],
-    "image": "assets/games_img/2048_img.png",
-    "shortDescription": "A sliding tile puzzle game where you combine matching numbers to reach the 2048 tile.",
-    "longDescription": "2048 is an addictive single-player sliding block puzzle game. The objective is to slide numbered tiles on a 4x4 grid to combine them and create a tile with the number 2048. When two tiles with the same number touch, they merge into one tile with double the value, requiring deep strategic planning as the board fills up.",
-    "developer": "Sadek Manir Sayed",
-    "rules": [
-      "The game is played on a 4x4 grid.",
-      "Use swipe gestures or arrow keys to slide all tiles in a specific direction.",
-      "When two tiles with the same number collide during a move, they merge into a single tile with the sum of their values.",
-      "After every move, a new tile (valued 2 or 4) randomly appears in an empty spot on the board.",
-      "The player wins upon creating a tile with the value 2048.",
-      "The game ends when the board is full and no valid moves or merges are possible."
-    ],
-    "path": "2048"
-  },
+  
   {
   "id": "tic-tac-toe",
   "name": "Tic Tac Toe",
@@ -179,6 +128,75 @@
   ],
   "path": "games/Number-Guessing/number.html"
 
+},
+ {
+    "id":"snake-ladder",
+    "name":"Snake and Ladder",
+    "category": ["Board", "Casual", "Multiplayer"],
+    "image": "assets/games_img/snake-ladder_img.avif",
+    "shortDescription": "Snake and Ladder is a classic board game. It is played on a board with a grid of squares, some of which contain snakes and ladders.",
+    "longDescription": "Snake and Ladder is a classic board game that has been enjoyed by people of all ages for generations. The game is played on a board with a grid of squares, some of which contain snakes and ladders. Players take turns rolling a dice to determine how many spaces they can move their pieces. If a player lands on the bottom of a ladder, they climb up to the top. If they land on the head of a snake, they slide down to the tail. The objective of the game is to be the first player to reach the end of the board.",
+    "developer": "Abdulla Al Jisan",
+    "rules":[
+        "Each player starts at the bottom of the board.",
+        "Players take turns rolling a six-sided dice to determine how many spaces they can move their pieces.",
+        "If a player lands on the bottom of a ladder, they climb up to the top.",
+        "If a player lands on the head of a snake, they slide down to the tail.",
+        "The first player to reach the end of the board wins the game."
+    ],
+    "path": "snake-ladder"
+  },
+  {
+    "id": "bead-16",
+    "name": "Bead 16",
+    "category": ["Board", "Strategy", "Multiplayer"],
+    "image": "assets/games_img/bead-16_img.png",
+    "shortDescription": "A traditional strategy board game where you capture your opponent's pieces by jumping over them.",
+    "longDescription": "Bead 16, also known as Sholo Guti, is a traditional and highly popular two-player strategy board game. Each player has 16 pieces (beads) and the goal is to capture all of the opponent's pieces by jumping over them on the game board's intersecting lines. It requires careful planning and tactical foresight to corner your opponent.",
+    "developer": "Sadek Manir Sayed",
+    "rules": [
+      "Each player starts with 16 beads placed on their respective sides of the board.",
+      "Players take turns moving one bead to an adjacent empty intersection along the lines.",
+      "A player can capture an opponent's bead by jumping over it into an empty space immediately beyond it.",
+      "Multiple captures in a single turn are allowed if consecutive jumps are possible.",
+      "The game ends when one player captures all 16 of the opponent's beads."
+    ],
+    "path": "bead-16"
+  },
+  {
+    "id": "2048",
+    "name": "2048",
+    "category": ["Puzzle", "Strategy", "Singleplayer"],
+    "image": "assets/games_img/2048_img.png",
+    "shortDescription": "A sliding tile puzzle game where you combine matching numbers to reach the 2048 tile.",
+    "longDescription": "2048 is an addictive single-player sliding block puzzle game. The objective is to slide numbered tiles on a 4x4 grid to combine them and create a tile with the number 2048. When two tiles with the same number touch, they merge into one tile with double the value, requiring deep strategic planning as the board fills up.",
+    "developer": "Sadek Manir Sayed",
+    "rules": [
+      "The game is played on a 4x4 grid.",
+      "Use swipe gestures or arrow keys to slide all tiles in a specific direction.",
+      "When two tiles with the same number collide during a move, they merge into a single tile with the sum of their values.",
+      "After every move, a new tile (valued 2 or 4) randomly appears in an empty spot on the board.",
+      "The player wins upon creating a tile with the value 2048.",
+      "The game ends when the board is full and no valid moves or merges are possible."
+    ],
+    "path": "2048"
+  },
+  {
+  "id": "Memory and Number Game",
+  "name": "Memory and Number Mini Game",
+  "category": ["Puzzle", "Casual", "Brain"],
+  "image": "assets/games_img/game.png",
+  "shortDescription": "Play a fun memory matching game and test your luck with number guessing.",
+  "longDescription": "Memory & Number Game is a simple yet engaging mini-game collection that challenges both your memory and guessing skills.",
+  "developer": "Tarequl Islam Chowdhury",
+  "rules": [
+    "Memory Game: Click on cards to reveal their symbols.",
+    "Match two identical cards to keep them revealed.",
+    "If cards do not match, they will flip back.",
+    "Number Guess Game: Enter a number between 1 and 10.",
+    "Click the Guess button to check your answer."
+  ],
+  "path": "games/Memory and Number/index.html"
 }
  
 ]

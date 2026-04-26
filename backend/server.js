@@ -392,7 +392,8 @@ app.post("/api/game-result", async (req, res) => {
     });
     console.log("Games Played:", user.stats.gamesPlayed);
     console.log("First Blood Progress:", ach[0].progress);
-
+    
+    user.markModified("games");
     await user.save();
 
     res.json({ success: true });

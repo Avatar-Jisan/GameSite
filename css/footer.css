@@ -1,5 +1,7 @@
 .footer {
-    background: var(--footer-color);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(151, 254, 237, 0.1);
     color: white;
     padding: 40px 0;
     margin-top: 50px;

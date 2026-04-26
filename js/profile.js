@@ -21,6 +21,30 @@ $(document).ready(function () {
   } else {
     initProfile();
   }
+  // Open modal
+  $("#activityViewAll").click(function (e) {
+    e.preventDefault();
+
+    if (!window.currentUser) return;
+
+    renderActivityModal(window.currentUser);
+    $("body").css("overflow", "hidden");
+    $("#activityModal").fadeIn(200);
+  });
+
+  // Close modal
+  function closeActivityModal() {
+    $("#activityModal").fadeOut(200);
+    $("body").css("overflow", "auto");
+  }
+
+  $(".close-activity").click(closeActivityModal);
+
+  $("#activityModal").click(function (e) {
+    if (e.target.id === "activityModal") {
+      closeActivityModal();
+    }
+  });
 
 });
 let gameList = [];
@@ -99,7 +123,9 @@ function renderActivity(user) {
   const container = $(".activity-list");
   container.empty();
 
-  user.activities.forEach((item) => {
+  const recentActivities = user.activities.slice(0, 5);
+
+  recentActivities.forEach((item) => {
     container.append(`
     <li>
     <div class="activity-icon">
@@ -421,5 +447,27 @@ async function saveProfile() {
   } catch (err) {
     console.error("Error:", err);
   }
+}
+
+function renderActivityModal(user) {
+  const container = $(".activity-modal-list");
+  container.empty();
+
+  user.activities.forEach((item) => {
+    container.append(`
+      <li>
+        <div class="activity-icon">
+          <i class="fa-solid ${getActivityIcon(item.text)}"></i>
+        </div>
+
+        <div class="activity-details">
+          <p>${item.text}</p>
+          <span>${formatTime(item.time)}</span>
+        </div>
+
+        <div class="xp-gain">+${item.xp} XP</div>
+      </li>
+    `);
+  });
 }
 

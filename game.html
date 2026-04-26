@@ -35,6 +35,7 @@
     <link rel="stylesheet" href="css/game.css" />
     <link rel="stylesheet" href="css/header.css" />
     <link rel="stylesheet" href="css/footer.css" />
+    <link rel="stylesheet" href="css/theme.css" />
   </head>
 
   <body>
@@ -62,7 +63,15 @@
     <div class="suggestion-box"></div>
 </div>
 
-        <div class="login-area">
+        <div class="login-area" style="display: flex; align-items: center; gap: 15px;">
+          <div class="theme-switch">
+            <i class="fa-solid fa-sun" style="color: #cbd5f5;"></i>
+            <label class="switch">
+              <input type="checkbox" checked />
+              <span class="theme-slider round"></span>
+            </label>
+            <i class="fa-solid fa-moon" style="color: #cbd5f5;"></i>
+          </div>
           <!-- LOGIN BUTTON -->
           <button id="loginBtn" class="login-btn">
             <a href="login.html">
@@ -178,7 +187,7 @@
             </li>
             <li>
               <a href="#" class="sidebar-cat-link" data-category="Word">
-                <i class="fa-so></i>
+                <i class="fa-solid fa-spell-check"></i>
                 Word
               </a>
             </li>
@@ -193,7 +202,7 @@
             <li>
               <a href="#" class="sidebar-cat-link" data-category="Adventure">
                 <i
-                  class="fa-solid fa-space-awesome"
+                  class="fa-solid fa-tree"
                 ></i>
                 Adventure
               </a>
@@ -213,7 +222,7 @@
       <footer class="sidebar-footer nav-list">
         <hr />
         <li class="nav-item settings-btn">
-          <a href="#"><i class="fa-solid fa-gear"></i>Settings</a>
+          <a href="profile.html"><i class="fa-solid fa-user"></i>Profile</a>
         </li>
         <li class="nav-item">
           <a href="about/index.html"><i class="fa-solid fa-circle-info"></i>About us</a>
@@ -240,12 +249,10 @@
                 <button
                   type="submit"
                   class="fav-btn fa-regular fa-heart fa-lg"
-                  style="color: var(--bg-card)"
                 ></button>
                 <button
                   type="submit"
                   class="full-btn fa-solid fa-maximize fa-lg"
-                  style="color: var(--bg-card)"
                 ></button>
               </div>
             </div>
@@ -323,16 +330,16 @@
           <h3>Community</h3>
           <ul>
             <li><a href="about/index.html">About Us</a></li>
-            <li><a href="contact/index.html">Contact Us</a></li>
+            <!-- <li><a href="contact/index.html">Contact Us</a></li> -->
           </ul>
         </div>
       </div>
 
       <div class="social">
-        <a href="#">Facebook</a>
-        <a href="#">YouTube</a>
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+        <a href="https://www.facebook.com/share/1Dd8yjaxbK/" target="_blank">Facebook</a>
+        <a href="https://github.com/Avatar-Jisan/GameSite" target="_blank">GitHub</a>
+        <a href="https://www.instagram.com/avatar__jisan?igsh=MW5hMWw5eG5uN28zbQ==" target="_blank">Instagram</a>
+        <a href="https://www.linkedin.com/in/md-shahria-karim-siam/" target="_blank">LinkedIn</a>
       </div>
 
       <div class="copyright">
@@ -357,7 +364,19 @@
 
     <script src="js/game.js"></script>
     <script src="js/nav.js"></script>
-  
     <script src="js/search.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/theme.js"></script>
+    
+  <!-- Cross-page category navigation -->
+  <script>
+    document.querySelectorAll('.sidebar-cat-link').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        var cat = this.getAttribute('data-category');
+        window.location.href = 'index.html?category=' + encodeURIComponent(cat);
+      });
+    });
+  </script>
   </body>
 </html>
