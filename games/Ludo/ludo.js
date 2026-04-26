@@ -514,7 +514,16 @@ function canPlayerMove(color, diceValue) {
 
         // already in home path
         if (p.homeStep >= 0) {
-            return (p.homeStep + diceValue) <= 5;
+
+            const targetHome = p.homeStep + diceValue;
+
+            // normal move
+            if (targetHome <= 5) return true;
+
+            
+            if (targetHome === 6) return true;
+
+            return false;
         }
 
         return false;
@@ -575,7 +584,10 @@ async function movePin(pin, color, index, steps) {
 
         await animateMove(pin, color, index, steps);
 
-        // update state AFTER animation
+        if (pin.dataset.centered === "true") {
+            return;
+        }
+
         if (targetPos === 56) {
             state.position = 56;
             state.homeStep = 5;
@@ -1150,7 +1162,8 @@ function showResultModal() {
     const winTxt = document.getElementById("win-txt");
 
     if (finishedPlayers.length > 0) {
-        s[0];
+
+        const winner = finishedPlayers[0];
 
         const nameMap = {
             red: "Red Player",
@@ -1158,10 +1171,11 @@ function showResultModal() {
             yellow: "Yellow Player",
             blue: "You"
         };
-        if (finishedPlayers[0] === "blue") {
-            winTxt.innerText = `You Win! 🏆`;
+
+        if (winner === "blue") {
+            winTxt.innerText = `You Win!`;
         } else {
-            winTxt.innerText = `${nameMap[winner]} Wins 🏆`;
+            winTxt.innerText = `${nameMap[winner]} Wins `;
         }
     }
 
