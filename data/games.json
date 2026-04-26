@@ -183,7 +183,7 @@
   },
   {
   "id": "Memory and Number Game",
-  "name": "Memory and Number Game",
+  "name": "Memory and Number Mini Game",
   "category": ["Puzzle", "Casual", "Brain"],
   "image": "assets/games_img/game.png",
   "shortDescription": "Play a fun memory matching game and test your luck with number guessing.",
