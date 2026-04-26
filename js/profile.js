@@ -33,18 +33,18 @@ $(document).ready(function () {
   });
 
   // Close modal
-function closeActivityModal() {
-  $("#activityModal").fadeOut(200);
-  $("body").css("overflow", "auto"); 
-}
-
-$(".close-activity").click(closeActivityModal);
-
-$("#activityModal").click(function (e) {
-  if (e.target.id === "activityModal") {
-    closeActivityModal();
+  function closeActivityModal() {
+    $("#activityModal").fadeOut(200);
+    $("body").css("overflow", "auto");
   }
-});
+
+  $(".close-activity").click(closeActivityModal);
+
+  $("#activityModal").click(function (e) {
+    if (e.target.id === "activityModal") {
+      closeActivityModal();
+    }
+  });
 
 });
 let gameList = [];
@@ -123,7 +123,9 @@ function renderActivity(user) {
   const container = $(".activity-list");
   container.empty();
 
-  user.activities.forEach((item) => {
+  const recentActivities = user.activities.slice(0, 5);
+
+  recentActivities.forEach((item) => {
     container.append(`
     <li>
     <div class="activity-icon">
