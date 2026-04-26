@@ -263,3 +263,18 @@ body.light-theme .view-all {
 body.light-theme .suggestion-box {
   background-color: #eaebec !important;
 }
+body.light-theme .edit-container{
+  background: linear-gradient(145deg, #eff0f1, #f8f8fa);
+  border: 1px solid #ccc !important;
+  border-radius: 10px !important  ;
+}
+body.light-theme .btn-save{
+  background-color: #f1f512 !important;
+  color: #0b0ea5 !important;
+  border: none !important;
+  border-radius: 5px !important;
+}
+body.light-theme .edit-fields input, .edit-fields textarea{
+  background: white !important;
+  color: black !important;
+}
