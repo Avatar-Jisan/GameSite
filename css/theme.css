@@ -110,6 +110,7 @@ body.light-theme .search-section,
 body.light-theme .search-bar {
   background: #ffffff !important;
   border: 1px solid #ccc !important;
+  border-radius: 10px !important;
 }
 
 body.light-theme .search-section input,
