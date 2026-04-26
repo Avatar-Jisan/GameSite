@@ -72,9 +72,9 @@ body.light-theme .sidebar-header,
 body.light-theme .sidebar-nav,
 body.light-theme .sidebar-cta,
 body.light-theme .sidebar-footer {
-  background: #ffeb3b !important; /* Yellow as requested */
+  background: #088F8F!important; /* Yellow as requested */
   color: #000000 !important;
-  border-color: #fbc02d !important;
+  border-color: #097969 !important;
 }
 
 /* Links and Icons in yellow areas */
@@ -175,7 +175,7 @@ body.light-theme .slide-text p {
 
 /* Other Specific Fixes */
 body.light-theme .footer {
-  background: #ffeb3b !important;
+  background: #088F8F !important;
   color: #000 !important;
 }
 body.light-theme .footer h2,
