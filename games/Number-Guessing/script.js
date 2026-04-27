@@ -1,6 +1,7 @@
 let randomNumber, attempts, maxAttempts, maxRange;
 let currentPlayer=1;
 let startTime, timerInterval, timeLeft=60;
+let confettiRunning = false;
 
 const canvas=document.getElementById("confettiCanvas");
 const ctx=canvas.getContext("2d");
@@ -125,7 +126,9 @@ function showLeaderboard(){
 // Confetti
 function startConfetti(){
     resizeCanvas();
-    confettiParticles=[];
+    confettiParticles = [];
+    confettiRunning = true; // start
+
     for(let i=0;i<200;i++){
         confettiParticles.push({
             x:Math.random()*canvas.width,
@@ -136,11 +139,22 @@ function startConfetti(){
             tilt:Math.random()*10-10
         });
     }
-    requestAnimationFrame(updateConfetti);
+
+    updateConfetti();
+
+    
+    setTimeout(() => {
+        confettiRunning = false;
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+    }, 8000);
 }
+
 function resizeCanvas(){ canvas.width=window.innerWidth; canvas.height=window.innerHeight;}
 function updateConfetti(){
+    if (!confettiRunning) return; 
+
     ctx.clearRect(0,0,canvas.width,canvas.height);
+
     confettiParticles.forEach(p=>{
         ctx.beginPath();
         ctx.lineWidth=p.r;
@@ -148,9 +162,16 @@ function updateConfetti(){
         ctx.moveTo(p.x+p.tilt+p.r/2,p.y);
         ctx.lineTo(p.x+p.tilt,p.y+p.tilt+p.r/2);
         ctx.stroke();
-        p.y+=2; p.tilt+=0.1;
-        if(p.y>canvas.height){ p.y=0; p.x=Math.random()*canvas.width;}
+
+        p.y += 2;
+        p.tilt += 0.1;
+
+        if(p.y > canvas.height){
+            p.y = 0;
+            p.x = Math.random()*canvas.width;
+        }
     });
+
     requestAnimationFrame(updateConfetti);
 }
 

@@ -4,20 +4,10 @@ const mongoose = require("mongoose");
 const User = require("./models/User");
 const bcrypt = require("bcrypt");
 const app = express();
-const multer = require("multer");
+
 const path = require("path");
 require("dotenv").config();
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, "uploads"));
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + ".png");
-  }
-});
 
-const upload = multer({ storage });
-app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 app.use(cors());
 app.use(express.json());
 
@@ -27,16 +17,7 @@ mongoose.connect(process.env.MONGO_URI)
   .catch(err => console.log("DB Connection Error: ", err));
 
 /* -------- ROUTES -------- */
-app.post("/api/upload", upload.single("image"), (req, res) => {
-  try {
-    res.json({
-      success: true,
-      imagePath: `/uploads/${req.file.filename}`
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
+
 // 1.Register
 app.post("/api/signup", async (req, res) => {
   try {
@@ -53,7 +34,6 @@ app.post("/api/signup", async (req, res) => {
       });
     }
 
-    // 🔐 HASH PASSWORD
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = new User({
@@ -124,7 +104,6 @@ app.post("/api/login", async (req, res) => {
       });
     }
 
-    // 🔐 COMPARE PASSWORD
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
@@ -134,7 +113,6 @@ app.post("/api/login", async (req, res) => {
       });
     }
 
-    // ❗ NEVER SEND PASSWORD BACK
     const userData = user.toObject();
     delete userData.password;
 
@@ -157,7 +135,6 @@ app.get("/api/user/:id", async (req, res) => {
       return res.status(404).json({ error: "User not found" });
     }
 
-    // 🔥 FIX LEVEL ON LOAD
     let updated = false;
 
     while (user.xp >= user.maxXp) {

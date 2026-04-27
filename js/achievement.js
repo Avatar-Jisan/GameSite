@@ -56,7 +56,6 @@ $(document).ready(async function () {
     grid.append(card);
   });
 
-  // 🔷 BANNER PROGRESS
   const percent = (completed / achievementList.length) * 100;
 
   $("#achievementProgress").css("width", percent + "%");
