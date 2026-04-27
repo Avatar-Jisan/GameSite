@@ -50,7 +50,7 @@ $(document).ready(function () {
         const userId = localStorage.getItem("userId");
         if (!userId) return;
 
-        const user = await $.get(`http://localhost:3000/api/user/${userId}`);
+        const user = await $.get(`https://gamesite-y5iw.onrender.com/api/user/${userId}`);
 
         if (user.favorites && user.favorites.includes(gameId)) {
             setFavUI(true);
@@ -93,7 +93,7 @@ $(document).ready(function () {
         const parameter = new URLSearchParams(window.location.search);
         const gameId = parameter.get("id");
 
-        const res = await fetch("http://localhost:3000/api/favorite/toggle", {
+        const res = await fetch("https://gamesite-y5iw.onrender.com/api/favorite/toggle", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

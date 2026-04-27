@@ -14,7 +14,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
     message: document.getElementById("message").value
   };
 
-  const res = await fetch("http://localhost:3000/send", {
+  const res = await fetch("https://gamesite-y5iw.onrender.com/send", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"

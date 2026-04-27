@@ -338,7 +338,7 @@ function showGameResult() {
 
   if (!userId) return;
 
-  $.get(`http://localhost:3000/api/user/${userId}`, (user) => {
+  $.get(`https://gamesite-y5iw.onrender.com/api/user/${userId}`, (user) => {
     const percent = (user.xp / user.maxXp) * 100;
 
     document.getElementById("xpFillMemory").style.width = percent + "%";
@@ -522,7 +522,7 @@ function sendGameResult(score, xp, timePlayed, result, win) {
     return;
   }
 
-  fetch("http://localhost:3000/api/game-result", {
+  fetch("https://gamesite-y5iw.onrender.com/api/game-result", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
