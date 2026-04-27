@@ -63,7 +63,7 @@ async function initProfile() {
       return;
     }
 
-    const user = await $.get(`http://localhost:3000/api/user/${userId}`);
+    const user = await $.get(`https://gamesite-y5iw.onrender.com/api/user/${userId}`);
 
     console.log(user); // DEBUG
 
@@ -258,7 +258,7 @@ function renderAchievements(user) {
 
 async function renderLeaderboard(currentUser) {
   try {
-    const players = await $.get("http://localhost:3000/api/leaderboard");
+    const players = await $.get("https://gamesite-y5iw.onrender.com/api/leaderboard");
 
     if (!Array.isArray(players) || players.length === 0) return;
 
@@ -276,7 +276,7 @@ async function renderLeaderboard(currentUser) {
 
     top3.forEach((player, i) => {
       const imgSrc = player.profileImage && player.profileImage.startsWith("/uploads")
-        ? `http://localhost:3000${player.profileImage}`
+        ? `https://gamesite-y5iw.onrender.com${player.profileImage}`
         : player.profileImage || "assets/avatar_img.avif";
 
       const isYou = currentUser && (
@@ -376,7 +376,7 @@ $("#imageUpload").on("change", async function (e) {
   formData.append("image", file);
 
   try {
-    const res = await fetch("http://localhost:3000/api/upload", {
+    const res = await fetch("https://gamesite-y5iw.onrender.com/api/upload", {
       method: "POST",
       body: formData
     });
@@ -387,9 +387,9 @@ $("#imageUpload").on("change", async function (e) {
       const newImg = data.imagePath; // "/uploads/xxx.png"
 
       // update UI
-      $("#previewImage").attr("src", "http://localhost:3000" + newImg);
-      $(".profile-avatar").attr("src", "http://localhost:3000" + newImg);
-      $(".user-avatar-tiny").attr("src", "http://localhost:3000" + newImg);
+      $("#previewImage").attr("src", "https://gamesite-y5iw.onrender.com" + newImg);
+      $(".profile-avatar").attr("src", "https://gamesite-y5iw.onrender.com" + newImg);
+      $(".user-avatar-tiny").attr("src", "https://gamesite-y5iw.onrender.com" + newImg);
 
       // store for saving
       window.tempImagePath = newImg;
@@ -424,7 +424,7 @@ async function saveProfile() {
   console.log("Sending:", updatedData);
 
   try {
-    const res = await fetch(`http://localhost:3000/api/user/${userId}`, {
+    const res = await fetch(`https://gamesite-y5iw.onrender.com/api/user/${userId}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json"

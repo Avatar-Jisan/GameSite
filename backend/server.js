@@ -223,7 +223,7 @@ app.get("/", (req, res) => res.send("Backend running 🚀"));
 
 /* -------- START SERVER -------- */
 app.listen(3000, () => {
-  console.log("Server running on http://localhost:3000");
+  console.log("Server running on https://gamesite-y5iw.onrender.com");
 });
 
 app.post("/api/game-result", async (req, res) => {

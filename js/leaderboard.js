@@ -37,7 +37,7 @@ async function initLeaderboard() {
 
   try {
     // Fetch the logged-in user to update topbar and highlight "you" row
-    const res = await fetch(`http://localhost:3000/api/user/${userId}`);
+    const res = await fetch(`https://gamesite-y5iw.onrender.com/api/user/${userId}`);
     const currentUser = await res.json();
 
     window.currentUser = currentUser;
@@ -69,8 +69,8 @@ async function fetchAndRenderLeaderboard(gameKey, currentUser) {
   try {
     const backendGameId = gameFilterMap[gameKey] || "all";
     const url = backendGameId === "all"
-      ? "http://localhost:3000/api/leaderboard"
-      : `http://localhost:3000/api/leaderboard?game=${backendGameId}`;
+      ? "https://gamesite-y5iw.onrender.com/api/leaderboard"
+      : `https://gamesite-y5iw.onrender.com/api/leaderboard?game=${backendGameId}`;
 
     const res = await fetch(url);
     const json = await res.json();
@@ -122,7 +122,7 @@ function renderPodium(top3, gameKey) {
     if (!player) return; // Safeguard if fewer than 3 players exist
 
     const imgSrc = player.profileImage && player.profileImage.startsWith("/uploads")
-      ? `http://localhost:3000${player.profileImage}`
+      ? `https://gamesite-y5iw.onrender.com${player.profileImage}`
       : player.profileImage;
 
     const scoreLabel = `${player.score} pts`;
@@ -159,7 +159,7 @@ function renderList(players, gameKey, startRank, currentUser) {
     const rowClass = isCurrentUser ? "you-row" : "";
 
     const imgSrc = player.profileImage && player.profileImage.startsWith("/uploads")
-      ? `http://localhost:3000${player.profileImage}`
+      ? `https://gamesite-y5iw.onrender.com${player.profileImage}`
       : player.profileImage;
 
     const scoreLabel = `${player.score} pts`;

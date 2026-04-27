@@ -12,7 +12,7 @@ async function loadLibrary() {
     return;
   }
 
-  const user = await $.get(`http://localhost:3000/api/user/${userId}`);
+  const user = await $.get(`https://gamesite-y5iw.onrender.com/api/user/${userId}`);
   const games = await $.getJSON("data/games.json");
 
   renderRecent(user, games);
