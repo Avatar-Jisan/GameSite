@@ -72,9 +72,9 @@ body.light-theme .sidebar-header,
 body.light-theme .sidebar-nav,
 body.light-theme .sidebar-cta,
 body.light-theme .sidebar-footer {
-  background: #ffeb3b !important; /* Yellow as requested */
+  background: #088F8F!important; /* Yellow as requested */
   color: #000000 !important;
-  border-color: #fbc02d !important;
+  border-color: #097969 !important;
 }
 
 /* Links and Icons in yellow areas */
@@ -110,6 +110,7 @@ body.light-theme .search-section,
 body.light-theme .search-bar {
   background: #ffffff !important;
   border: 1px solid #ccc !important;
+  border-radius: 10px !important;
 }
 
 body.light-theme .search-section input,
@@ -174,7 +175,7 @@ body.light-theme .slide-text p {
 
 /* Other Specific Fixes */
 body.light-theme .footer {
-  background: #ffeb3b !important;
+  background: #088F8F !important;
   color: #000 !important;
 }
 body.light-theme .footer h2,
@@ -261,4 +262,19 @@ body.light-theme .view-all {
 }
 body.light-theme .suggestion-box {
   background-color: #eaebec !important;
+}
+body.light-theme .edit-container{
+  background: linear-gradient(145deg, #eff0f1, #f8f8fa);
+  border: 1px solid #ccc !important;
+  border-radius: 10px !important  ;
+}
+body.light-theme .btn-save{
+  background-color: #f1f512 !important;
+  color: #0b0ea5 !important;
+  border: none !important;
+  border-radius: 5px !important;
+}
+body.light-theme .edit-fields input, .edit-fields textarea{
+  background: white !important;
+  color: black !important;
 }
