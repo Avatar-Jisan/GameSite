@@ -242,16 +242,16 @@ function updateScore() {
 
 }
 
-function handleMismatch() {
+async function handleMismatch() {
   lockBoard = true;
   gameBoard.classList.add("no-click");
-  setTimeout(() => {
+  await delay(400);
     playSound("wrong");
     firstCard.classList.add("wrong");
     secondCard.classList.add("wrong");
-  }, 400);
+  
 
-  setTimeout(() => {
+  await delay(500);
     firstCard.classList.remove("wrong");
     secondCard.classList.remove("wrong");
     firstCard.classList.remove("flip");
@@ -263,7 +263,7 @@ function handleMismatch() {
     if (selectedMode === "ai" && currentPlayer === 2) {
       aiTurn();
     }
-  }, 1000);
+  
 
 }
 
@@ -394,6 +394,7 @@ async function aiTurn() {
     lockBoard = false;
     aiTurnRunning = false;
     gameBoard.classList.remove("no-click");
+    showGameResult();
     return;
   }
   await delay(1000); // small delay before AI makes its move
@@ -401,7 +402,7 @@ async function aiTurn() {
   clickHandler.call(card1, true);
 
 
-  await delay(1200); // delay between first and second card flip
+  await delay(1000); // delay between first and second card flip
   let updatedCards = document.querySelectorAll(".memory-card:not(.flip)");
   let card2 = getSmartChoice(updatedCards, card1);
 
@@ -412,7 +413,7 @@ async function aiTurn() {
 function getSmartChoice(allCards, card1 = null) {
   for (let icon in aiMemory) {
     let knownCards = aiMemory[icon].filter(c => !c.classList.contains("flip"));
-    if (knownCards.length >= 2) {
+    if (knownCards.length === 2) {
       return knownCards[0];
     }
   }
@@ -430,7 +431,7 @@ function getSmartChoice(allCards, card1 = null) {
 }
 
 // Turn Overlay Logic
-function showTurnOverlay() {
+async function showTurnOverlay() {
   lockBoard = true;
   gameBoard.classList.add("no-click");
   const overlay = document.getElementById("turnOverlay");
@@ -453,7 +454,7 @@ function showTurnOverlay() {
 
   overlay.classList.add("show");
 
-  setTimeout(() => {
+  await delay(600);
     overlay.classList.remove("show");
     if (currentPlayer === 1 || (selectedMode !== "ai" && currentPlayer === 2)) {
       if (!aiTurnRunning) {
@@ -461,7 +462,7 @@ function showTurnOverlay() {
         gameBoard.classList.remove("no-click");
       }
     }
-  }, 800);
+  
 }
 
 // Event Listeners for  top controls
@@ -513,6 +514,9 @@ window.addEventListener("message", (event) => {
   }
 
 });
+$(".close-icon").click(() => {
+  window.location.reload();
+});
 
 function sendGameResult(score, xp, timePlayed, result, win) {
   const userId = localStorage.getItem("userId");
@@ -541,7 +545,6 @@ function sendGameResult(score, xp, timePlayed, result, win) {
     .then(data => {
       console.log("Saved:", data);
 
-      // 🔥 refresh profile later
       localStorage.setItem("refreshProfile", "true");
     })
     .catch(err => console.error(err));

@@ -358,12 +358,12 @@ async function handleMove(color, diceValue) {
         ) {
             canMove = true;
         }
-        
+
         if (state.position === -1) {
             canMove = (diceValue === 6);
         }
 
-        
+
         else if (state.position >= 0) {
 
             const targetPos = state.position + diceValue;
@@ -373,7 +373,7 @@ async function handleMove(color, diceValue) {
             }
         }
 
-        
+
         else if (state.homeStep >= 0) {
 
             const targetHome = state.homeStep + diceValue;
@@ -387,7 +387,7 @@ async function handleMove(color, diceValue) {
                 canMove = true;
             }
         }
- 
+
         if (!canMove) return;
 
         // ARROW → CENTER CONDITION
@@ -589,7 +589,7 @@ async function movePin(pin, color, index, steps) {
     const [r, c] = mainPath[realIndex];
     const cell = getCell(r, c);
 
-    
+
     if (!cell.classList.contains("safe") &&
         !cell.classList.contains("home-red") &&
         !cell.classList.contains("home-green") &&
@@ -657,10 +657,7 @@ async function moveToCenter(pin, color) {
 
         activePlayers = activePlayers.filter(p => p !== color);
 
-
-        if (currentTurn >= activePlayers.length) {
-            currentTurn = 0;
-        }
+        currentTurn = currentTurn % activePlayers.length;
 
         await celebrationWin(color);
 
@@ -785,11 +782,6 @@ async function animateMove(pin, color, index, steps) {
         await sleep(150); // speed control
 
         let nextPos = currentPos + 1;
-        console.log({
-            currentPos,
-            nextPos,
-            homeStep: nextPos > 50 ? nextPos - 51 : null
-        });
         // ENTER HOME
         if (nextPos > 50) {
 
@@ -798,13 +790,8 @@ async function animateMove(pin, color, index, steps) {
                 console.log("INVALID HOME STEP:", homeStep);
                 break;
             }
-            console.log("ANIMATE DEBUG:", {
-                state,
-                currentPos,
-                nextPos,
-                homeStep: nextPos > 50 ? nextPos - 51 : null
-            });
-            if (nextPos === 56) {
+
+            if (nextPos === 56 && i === steps) {
                 await sleep(100);
                 moveToCenter(pin, color);
                 return;
@@ -931,17 +918,14 @@ function debugDice(color, value) {
 
     lastDiceValue = value;
 
-    // 🎯 update dice UI
     const player = document.getElementById(`player-${color}`);
     const dice = player.querySelector(".dice");
     dice.setAttribute("data-value", value);
 
-    // 🎯 force turn
     currentTurn = activePlayers.indexOf(color);
 
     updateTurnUI();
 
-    // 🎯 trigger move
     handleMove(color, value);
 }
 
@@ -1032,10 +1016,7 @@ function resetGameState() {
     }
 }
 
-function startGameWithSameSettings() {
-    createdBoard();
-    updateTurnUI();
-}
+
 
 async function celebrationWin(color) {
     playSound("win");
