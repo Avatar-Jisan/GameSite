@@ -9,11 +9,11 @@ const profileBtn = document.getElementById("profileBtn");
 const profileName = document.getElementById("profileName");
 
 function logout() {
-  // ❌ Clear session
+  
   localStorage.removeItem("userId");
   localStorage.removeItem("username");
 
-  // 🔄 Redirect
+  
   window.location.href = "index.html";
 }
 $("#logoutItem").click(function(){
@@ -23,7 +23,7 @@ $("#logoutItem").click(function(){
 const logoutItem = document.getElementById("logoutItem");
 
 if (userId) {
-  // ✅ USER LOGGED IN
+  
   loginBtn.style.display = "none";
   profileBtn.style.display = "inline-block";
 
@@ -33,7 +33,7 @@ if (userId) {
     profileName.innerText = username;
   }
 } else {
-  // ❌ NOT LOGGED IN
+  
   loginBtn.style.display = "inline-block";
   profileBtn.style.display = "none";
 

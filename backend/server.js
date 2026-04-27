@@ -6,7 +6,7 @@ const bcrypt = require("bcrypt");
 const app = express();
 const multer = require("multer");
 const path = require("path");
-
+require("dotenv").config();
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, path.join(__dirname, "uploads"));
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(express.json());
 
 /* -------- CONNECT MONGODB -------- */
-mongoose.connect("mongodb://abdullaaljisan_db_user:djaGgE8t1ZxtzBiF@ac-8ij9fpx-shard-00-00.lcl9fhm.mongodb.net:27017,ac-8ij9fpx-shard-00-01.lcl9fhm.mongodb.net:27017,ac-8ij9fpx-shard-00-02.lcl9fhm.mongodb.net:27017/KheloDataBase?ssl=true&replicaSet=atlas-3wjbfu-shard-0&authSource=admin&appName=Cluster0")
+mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB Connected ✅"))
   .catch(err => console.log("DB Connection Error: ", err));
 
