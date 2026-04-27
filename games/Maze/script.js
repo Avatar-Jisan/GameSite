@@ -250,7 +250,7 @@ function applyAndShowResult() {
   const userId = localStorage.getItem("userId");
   if (userId) {
     try {
-      $.ajax({ url:"http://localhost:3000/api/game-result", method:"POST",
+      $.ajax({ url:"https://gamesite-y5iw.onrender.com/api/game-result", method:"POST",
         contentType:"application/json",
         data: JSON.stringify({ userId, game:"maze-game", timePlayed, rank:1, win:true,
           score:totalScore, xpEarned:totalXP }),

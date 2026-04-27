@@ -1130,7 +1130,7 @@ function showResultModal() {
     }
 
     $.ajax({
-        url: "http://localhost:3000/api/game-result",
+        url: "https://gamesite-y5iw.onrender.com/api/game-result",
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify({

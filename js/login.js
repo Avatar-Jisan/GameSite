@@ -44,7 +44,7 @@ document.getElementById('loginFormEl').addEventListener('submit', async (e) => {
     const password = document.getElementById('loginPassword').value;
 
     try {
-        const res = await fetch('http://localhost:3000/api/login', {
+        const res = await fetch('https://gamesite-y5iw.onrender.com/api/login', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email, password })
@@ -83,7 +83,7 @@ document.getElementById('signupFormEl').addEventListener('submit', async (e) => 
     }
 
     try {
-        const res = await fetch('http://localhost:3000/api/signup', {
+        const res = await fetch('https://gamesite-y5iw.onrender.com/api/signup', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, email, password })

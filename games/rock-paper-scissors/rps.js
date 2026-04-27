@@ -224,7 +224,7 @@ $(document).ready(function() {
         const result = didWin ? 'Victory' : 'Defeat';
 
         try {
-            await fetch('http://localhost:3000/api/game-result', {
+            await fetch('https://gamesite-y5iw.onrender.com/api/game-result', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
