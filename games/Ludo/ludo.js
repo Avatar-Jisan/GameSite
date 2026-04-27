@@ -101,9 +101,6 @@ function playSound(type) {
     }
 }
 
-function shouldEnterHome(color, pos) {
-    return pos >= 51;
-}
 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -361,12 +358,12 @@ async function handleMove(color, diceValue) {
         ) {
             canMove = true;
         }
-        // 🟢 BASE
+        
         if (state.position === -1) {
             canMove = (diceValue === 6);
         }
 
-        // 🔵 MAIN PATH
+        
         else if (state.position >= 0) {
 
             const targetPos = state.position + diceValue;
@@ -376,7 +373,7 @@ async function handleMove(color, diceValue) {
             }
         }
 
-        // 🟡 HOME PATH
+        
         else if (state.homeStep >= 0) {
 
             const targetHome = state.homeStep + diceValue;
@@ -390,11 +387,8 @@ async function handleMove(color, diceValue) {
                 canMove = true;
             }
         }
-
-        // ❌ block invalid
+ 
         if (!canMove) return;
-
-
 
         // ARROW → CENTER CONDITION
         if (
@@ -520,8 +514,7 @@ function canPlayerMove(color, diceValue) {
             // normal move
             if (targetHome <= 5) return true;
 
-            
-            if (targetHome === 6) return true;
+            // if (targetHome === 6) return true;
 
             return false;
         }
@@ -548,12 +541,15 @@ function moveOut(pin, color, index) {
 
 async function movePin(pin, color, index, steps) {
     if (pin.dataset.centered === "true") return;
+
     const state = gameState[color][index];
-    // 🟡 HOME PATH MOVEMENT
+
+    let oldPos = state.position;
+    let targetPos = oldPos + steps;
+
+    //  INVALID HOME MOVE
     if (state.homeStep >= 0) {
-
         const targetHome = state.homeStep + steps;
-
         if (targetHome > 5) return;
 
         await animateMove(pin, color, index, steps);
@@ -569,55 +565,39 @@ async function movePin(pin, color, index, steps) {
         nextTurn();
         return;
     }
-    let oldPos = state.position;
-    let targetPos = oldPos + steps;
-    // DEBUG LOG
-    console.log("HOME DEBUG:", {
-        oldPos,
-        steps,
-        targetPos,
-        stepsIntoHome: targetPos - 50
-    });
-    console.log("STATE:", gameState[color][index]);
 
-    if (targetPos <= 56) {
+    //  INVALID MOVE
+    if (targetPos > 56) return;
 
-        await animateMove(pin, color, index, steps);
+    //  ANIMATE FIRST
+    await animateMove(pin, color, index, steps);
 
-        if (pin.dataset.centered === "true") {
-            return;
-        }
+    // If piece already finished during animation
+    if (pin.dataset.centered === "true") return;
 
-        if (targetPos === 56) {
-            state.position = 56;
-            state.homeStep = 5;
-        } else {
-            state.position = targetPos;
-        }
-
-        clearSelection();
-        nextTurn();
-        return;
+    //  UPDATE STATE
+    if (targetPos === 56) {
+        state.position = 56;
+        state.homeStep = 5;
+    } else {
+        state.position = targetPos;
     }
 
+    // GET FINAL CELL
     const start = startIndex[color];
-    const realIndex = (start + targetPos) % 52;
+    const realIndex = (start + state.position) % 52;
     const [r, c] = mainPath[realIndex];
     const cell = getCell(r, c);
-    await animateMove(pin, color, index, steps);
-    if (!cell.classList.contains("home-red") &&
+
+    
+    if (!cell.classList.contains("safe") &&
+        !cell.classList.contains("home-red") &&
         !cell.classList.contains("home-green") &&
         !cell.classList.contains("home-yellow") &&
         !cell.classList.contains("home-blue")) {
 
         checkKill(r, c, color);
-        if (lastDiceValue === 6) {
-            clearSelection();
-            nextTurn();
-            return;
-        }
     }
-    state.position = targetPos;
 
     clearSelection();
     nextTurn();

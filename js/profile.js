@@ -147,7 +147,6 @@ function formatTime(time) {
 
   const past = new Date(time);
 
-  // ❗ HANDLE INVALID DATE
   if (isNaN(past.getTime())) return "Just now";
 
   const now = new Date();
@@ -355,17 +354,17 @@ function openEditModal(user) {
 $(".edit-profile-btn, .settings-btn").click(function () {
   openEditModal(window.currentUser);
 });
-$(".edit-avatar-btn").click(function () {
-  triggerImageUpload();
-});
+// $(".edit-avatar-btn").click(function () {
+//   triggerImageUpload();
+// });
 
 $(".close-edit").click(() => {
   $("#editModal").hide();
 });
 
-function triggerImageUpload() {
-  document.getElementById("imageUpload").click();
-}
+// function triggerImageUpload() {
+//   document.getElementById("imageUpload").click();
+// }
 
 $("#imageUpload").on("change", async function (e) {
   const file = e.target.files[0];
@@ -434,7 +433,7 @@ async function saveProfile() {
 
     const data = await res.json();
 
-    console.log("Response:", data); // 🔥 DEBUG
+    console.log("Response:", data); 
 
     if (data.success) {
       alert("Profile Updated ✅");
