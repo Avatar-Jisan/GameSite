@@ -40,8 +40,10 @@ body {
 }
 
 #scaling-container {
-    width: 900px;
-    height: 900px;
+    width: 100vw;
+    height: 100vh;
+    max-width: 900px;
+    max-height: 900px;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -1079,4 +1081,84 @@ body {
 /* --- Ensure other overlays don't clash --- */
 #ludoStartOverlay {
     z-index: 2000; /* Game start on top of board */
+}
+@media (max-width:500px){
+    body{
+        padding:0;
+        margin: 0;
+    }
+    #board{
+        width: 100vw;
+        height: auto;
+    }
+}
+@media (max-width: 768px) {
+
+    body {
+        overflow: auto; /* allow scrolling if needed */
+    }
+
+    .ludo-board {
+        width: 95vw;
+        height: 95vh;
+    }
+
+    .player-indicator {
+        transform: scale(0.85);
+        gap: 10px;
+    }
+
+    #player-red {
+        top: -10%;
+    }
+
+    #player-green {
+        top: -10%;
+    }
+
+    #player-blue {
+        bottom: -10%;
+    }
+
+    #player-yellow {
+        bottom: -10%;
+    }
+
+    .dice-holder {
+        width: 55px;
+        height: 55px;
+    }
+
+    .dice {
+        width: 45px;
+        height: 45px;
+    }
+
+    .control-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 16px;
+    }
+
+    .exit-btn {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+}
+@media (max-width: 768px) {
+    #board{
+        position: relative;
+    }
+    .player-indicator{
+        position: absolute;
+        z-index: 1000;
+    }
+
+    #player-red { top: -90px; left: 0px; }
+    #player-green { top: -90px; right: 0px; }
+    #player-blue { bottom: -90px; left: 0px; }
+    #player-yellow { bottom: -90px; right: 0px; }
+}
+.pin {
+    touch-action: manipulation;
 }

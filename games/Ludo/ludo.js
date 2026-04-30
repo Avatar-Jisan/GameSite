@@ -951,17 +951,19 @@ window.addEventListener("message", (event) => {
 function autoScale() {
     const container = document.getElementById('scaling-container');
 
-    const baseWidth = 900;
-    const baseHeight = 900;
+    const baseSize = 900;
 
     const scale = Math.min(
-        window.innerWidth / baseWidth,
-        window.innerHeight / baseHeight
+        window.innerWidth / baseSize,
+        window.innerHeight / baseSize
     );
 
+    // prevent too small UI
+    const finalScale = Math.max(scale, 0.6);
+
     container.style.transform = `
-        translate(-50%, -50%) scale(${scale})
-    `;
+    translate(-50%, -50%) scale(${finalScale})
+`;
 }
 
 // Call on load and whenever the window/iframe resizes
